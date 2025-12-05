@@ -1,5 +1,5 @@
 # handpaint_visualiser
-A quick tool to visualise colour applied to monochrome photographs, initially developed for the Van Der Zee applied media project at he Metropolitan Museum of Art
+A quick tool to visualise colour applied to monochrome photographs, initially developed for the Van Der Zee applied media project at The Metropolitan Museum of Art
 
 The program, as is, utilizes statistical color analysis to separate faint pigments, washes, and residues from substrates (paper, parchment, canvas).
 Unlike standard saturation sliders, this tool algorithmically calculates the "Noise Floor" of the substrate to isolate legitimate color signals, creating high-contrast visualizations that reveal details invisible to the naked eye.
