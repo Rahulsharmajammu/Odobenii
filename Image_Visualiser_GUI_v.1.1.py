@@ -15,7 +15,7 @@ import cv2
 import numpy as np
 from PIL import Image, ImageDraw, ImageFont, ImageOps
 
-# --- 1. Logging Infrastructure (GUI Compatible) ---
+# --- 1. Logging Infrastructure---
 
 class QueueHandler(logging.Handler):
     """Sends log records to a queue so the GUI can read them safely."""
@@ -26,7 +26,7 @@ class QueueHandler(logging.Handler):
     def emit(self, record):
         self.log_queue.put(record)
 
-# --- 2. Configuration Object (Updated) ---
+# --- 2. Configuration Object ---
 @dataclass
 class VisualizerConfig:
     input_dir: Path
@@ -35,14 +35,14 @@ class VisualizerConfig:
     chroma_boost_factor: float = 3.0 
     use_adaptive_threshold: bool = True
     manual_threshold: float = 5.0
-    threshold_bias: float = 0.0      # <--- NEW: User adjustment (+/-)
+    threshold_bias: float = 0.0     
     font_size: int = 24              
     
     def __post_init__(self):
         self.input_dir = Path(self.input_dir)
         self.output_dir = Path(self.output_dir)
 
-# --- 3. The Engine (Updated logic to support GUI) ---
+# --- 3. The Engine ---
 
 class ImageProcessor:
     def __init__(self, config: VisualizerConfig):
@@ -276,7 +276,7 @@ class ProcessingThread(threading.Thread):
         
         self.logger_queue.put(("DONE", total, total, "Processing Complete."))
 
-# --- 5. The GUI Application ---
+# --- 5. GUI Application ---
 
 class VisualizerApp:
     def __init__(self, root):
@@ -433,4 +433,5 @@ if __name__ == "__main__":
 
     root = tk.Tk()
     app = VisualizerApp(root)
+
     root.mainloop()
