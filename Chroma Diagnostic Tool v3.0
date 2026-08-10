@@ -1,0 +1,1302 @@
+from pathlib import Path
+
+code = r'''#!/usr/bin/env python3
+"""
+Chroma Diagnostic Tool v3.0
+===========================
+
+Scientific batch chroma analysis and segmentation.
+
+Design goals
+------------
+1. Analyze at native image resolution; resize only for presentation outputs.
+2. Make color-management and source-fidelity assumptions explicit.
+3. Preserve numerical CIELAB chroma and categorical masks as lossless TIFF.
+4. Record per-image provenance and a batch-level run manifest.
+5. Quantify threshold sensitivity and mask stability.
+6. Produce auditable threshold histograms and a CSV summary.
+7. Keep the processing core independent of GUI/CLI concerns.
+
+Important scientific scope
+--------------------------
+This tool detects regions of elevated CIELAB chroma. It does NOT identify
+pigments, dyes, binders, or other materials. A chroma-positive region is a
+diagnostic image feature and requires independent material evidence for
+interpretation.
+
+Python 3.9+
+"""
+
+from __future__ import annotations
+
+import concurrent.futures
+import csv
+import hashlib
+import json
+import os
+import platform
+import struct
+import subprocess
+import sys
+import traceback
+from dataclasses import dataclass, field, asdict
+from datetime import datetime, timezone
+from pathlib import Path
+from typing import Optional, Tuple
+
+import cv2
+import numpy as np
+from PIL import Image, ImageCms, ImageDraw, ImageFont, ImageOps, TiffImagePlugin
+
+
+# -----------------------------------------------------------------------------
+# CONFIG
+# -----------------------------------------------------------------------------
+
+INPUT_DIR = r"/path/to/input"
+OUTPUT_DIR = r"/path/to/output"
+
+# Scientific analysis
+ANALYSIS_SCALE = 1.0          # 1.0 = native resolution; do not reduce for analysis.
+DETECTION_SENSITIVITY = 3.0   # Higher = lower adaptive threshold = more sensitive.
+USE_ADAPTIVE_THRESHOLD = True
+MANUAL_THRESHOLD = 5.0
+THRESHOLD_BIAS = 0.0
+
+# Optional visual enhancement. This does NOT define the chroma mask.
+CHROMA_BOOST_FACTOR = 3.0
+CLAHE_ENABLED = True
+CLAHE_CLIP_LIMIT = 3.0
+CLAHE_GRID_SIZE = (8, 8)
+
+# Presentation
+OUTPUT_SCALE = 0.5            # Only affects PNG diagnostic images.
+OUTPUT_FORMAT = "png"         # PNG recommended; presentation JPEG is allowed.
+OUTPUT_QUALITY = 95
+FONT_SIZE = 24
+
+# Batch
+MAX_WORKERS = None            # None = ProcessPoolExecutor default.
+WARN_ON_LOW_FIDELITY = True
+
+# Scientific diagnostics
+RUN_SENSITIVITY_ANALYSIS = True
+SENSITIVITY_FACTORS = (0.90, 0.95, 1.00, 1.05, 1.10)
+SAVE_HISTOGRAMS = True
+SAVE_NUMERICAL_TIFF = True
+SAVE_PER_IMAGE_JSON = True
+MIN_COMPONENT_AREA_PIXELS = 0  # 0 = report all components; no filtering.
+
+VERSION = "3.0.0"
+
+VALID_EXTENSIONS = {
+    ".jpg", ".jpeg", ".png", ".tif", ".tiff",
+    ".bmp", ".webp", ".gif"
+}
+HEIC_EXTENSIONS = {".heic", ".heif"}
+
+FOOTER_HEIGHT = 50
+MONTAGE_FOOTER_HEIGHT = 80
+
+Image.MAX_IMAGE_PIXELS = 100_000_000
+
+# -----------------------------------------------------------------------------
+# Optional HEIF support
+# -----------------------------------------------------------------------------
+
+HEIC_SUPPORTED = False
+try:
+    import pillow_heif
+    pillow_heif.register_heif_opener()
+    HEIC_SUPPORTED = True
+except ImportError:
+    pass
+
+
+# -----------------------------------------------------------------------------
+# Fonts
+# -----------------------------------------------------------------------------
+
+def _find_system_fonts() -> list[Path]:
+    candidates = []
+    system = platform.system()
+
+    if system == "Windows":
+        font_dirs = [Path(os.environ.get("WINDIR", r"C:\Windows")) / "Fonts"]
+        font_names = ["arial.ttf", "calibri.ttf", "segoeui.ttf"]
+    elif system == "Darwin":
+        font_dirs = [
+            Path("/System/Library/Fonts"),
+            Path("/Library/Fonts"),
+            Path.home() / "Library/Fonts",
+        ]
+        font_names = ["Arial.ttf", "Helvetica.ttc", "SFPro.ttf"]
+    else:
+        font_dirs = [
+            Path("/usr/share/fonts"),
+            Path("/usr/local/share/fonts"),
+            Path.home() / ".fonts",
+            Path.home() / ".local/share/fonts",
+        ]
+        font_names = [
+            "DejaVuSans.ttf", "LiberationSans-Regular.ttf",
+            "FreeSans.ttf", "NotoSans-Regular.ttf", "Ubuntu-R.ttf",
+        ]
+
+    if system != "Windows":
+        try:
+            result = subprocess.run(
+                ["fc-list", ":file", "-f", "%{file}\n"],
+                capture_output=True, text=True, timeout=5, check=False,
+            )
+            if result.returncode == 0:
+                for line in result.stdout.splitlines():
+                    p = Path(line.strip())
+                    if p.exists():
+                        candidates.append(p)
+        except (FileNotFoundError, subprocess.TimeoutExpired):
+            pass
+
+    for d in font_dirs:
+        if not d.exists():
+            continue
+        for name in font_names:
+            for found in d.rglob(name):
+                if found.is_file():
+                    candidates.append(found)
+
+    return candidates
+
+
+def _load_font(size: int) -> ImageFont.ImageFont:
+    for font_path in _find_system_fonts():
+        try:
+            return ImageFont.truetype(str(font_path), size)
+        except (OSError, IOError):
+            continue
+    return ImageFont.load_default()
+
+
+# -----------------------------------------------------------------------------
+# Source inspection
+# -----------------------------------------------------------------------------
+
+def _parse_jpeg_sof(path: Path) -> Optional[dict]:
+    try:
+        with open(path, "rb") as f:
+            data = f.read(262144)
+    except OSError:
+        return None
+
+    if not data.startswith(b"\xff\xd8"):
+        return None
+
+    i = 2
+    while i < len(data) - 1:
+        if data[i] != 0xFF:
+            i += 1
+            continue
+
+        marker = data[i + 1]
+        if marker == 0xD9:
+            break
+        if marker in (0xD8, 0x00, 0x01):
+            i += 2
+            continue
+        if 0xD0 <= marker <= 0xD9 or marker == 0xFF:
+            i += 2
+            continue
+
+        if i + 3 >= len(data):
+            break
+
+        length = struct.unpack(">H", data[i + 2:i + 4])[0]
+        segment_end = i + 2 + length
+
+        if marker in (
+            0xC0, 0xC1, 0xC2, 0xC3, 0xC5, 0xC6, 0xC7,
+            0xC9, 0xCA, 0xCB, 0xCD, 0xCE, 0xCF
+        ):
+            if segment_end > len(data):
+                break
+
+            num_components = data[i + 9]
+            sampling = {}
+            for c in range(num_components):
+                off = i + 10 + c * 3
+                comp_id = data[off]
+                samp = data[off + 1]
+                sampling[comp_id] = ((samp >> 4) & 0x0F, samp & 0x0F)
+
+            y_samp = sampling.get(1, (0, 0))
+            cb_samp = sampling.get(2, (0, 0))
+            cr_samp = sampling.get(3, (0, 0))
+
+            if y_samp == (2, 2) and cb_samp == (1, 1) and cr_samp == (1, 1):
+                subsampling = "4:2:0"
+            elif y_samp == (2, 1) and cb_samp == (1, 1) and cr_samp == (1, 1):
+                subsampling = "4:2:2"
+            elif y_samp == (1, 1) and cb_samp == (1, 1) and cr_samp == (1, 1):
+                subsampling = "4:4:4"
+            elif y_samp == (4, 1) and cb_samp == (1, 1) and cr_samp == (1, 1):
+                subsampling = "4:1:1"
+            else:
+                subsampling = f"Y{y_samp} Cb{cb_samp} Cr{cr_samp}"
+
+            return {"subsampling": subsampling}
+
+        i = segment_end
+
+    return None
+
+
+def _profile_name(img: Image.Image) -> Optional[str]:
+    icc = img.info.get("icc_profile")
+    if not icc:
+        return None
+    try:
+        profile = ImageCms.ImageCmsProfile(icc)
+        name = ImageCms.getProfileName(profile).strip()
+        return name or "embedded ICC profile"
+    except Exception:
+        return "embedded ICC profile (name unavailable)"
+
+
+def _source_bit_depth(img: Image.Image) -> Optional[int]:
+    if img.mode in ("I;16", "I;16L", "I;16B"):
+        return 16
+    if img.mode == "I":
+        return 32
+    if img.mode in ("RGB", "RGBA", "L", "P", "CMYK", "YCbCr"):
+        return 8
+    return None
+
+
+def assess_source(img_path: Path) -> dict:
+    suffix = img_path.suffix.lower()
+
+    info = {
+        "format": suffix.lstrip(".").upper(),
+        "compression_label": "unknown",
+        "compression_warning": None,
+        "chroma_subsampling": None,
+        "icc_profile": None,
+        "source_mode": None,
+        "source_bit_depth": None,
+        "source_dimensions": None,
+        "color_management": "No embedded ICC profile detected; input interpreted as sRGB.",
+    }
+
+    try:
+        with Image.open(img_path) as img:
+            info["source_mode"] = img.mode
+            info["source_bit_depth"] = _source_bit_depth(img)
+            info["source_dimensions"] = [img.width, img.height]
+            info["icc_profile"] = _profile_name(img)
+
+            if info["icc_profile"]:
+                info["color_management"] = (
+                    "Embedded ICC profile detected; image is converted to the "
+                    "defined sRGB working space before Lab analysis when possible."
+                )
+    except Exception as exc:
+        info["compression_warning"] = f"Could not inspect image metadata: {exc}"
+        return info
+
+    if suffix == ".png":
+        info["compression_label"] = "PNG lossless"
+    elif suffix == ".bmp":
+        info["compression_label"] = "BMP (typically uncompressed)"
+    elif suffix == ".gif":
+        info["compression_label"] = "GIF indexed/paletted"
+        info["compression_warning"] = (
+            "GIF uses an indexed palette of up to 256 colors; colorimetric "
+            "fidelity may be lower than the original RGB source."
+        )
+    elif suffix in (".tif", ".tiff"):
+        try:
+            with Image.open(img_path) as im:
+                compression = str(im.info.get("compression", "unknown")).lower()
+        except Exception:
+            compression = "unknown"
+
+        if compression in ("jpeg", "old-jpeg"):
+            info["compression_label"] = "TIFF with JPEG compression"
+            info["compression_warning"] = (
+                "This TIFF contains JPEG compression; chroma fidelity may be reduced."
+            )
+        elif compression == "unknown":
+            info["compression_label"] = "TIFF compression unknown"
+            info["compression_warning"] = "TIFF compression could not be determined."
+        else:
+            info["compression_label"] = f"TIFF ({compression})"
+    elif suffix == ".webp":
+        try:
+            with Image.open(img_path) as im:
+                lossless = im.info.get("lossless")
+        except Exception:
+            lossless = None
+
+        if lossless is True:
+            info["compression_label"] = "WebP lossless"
+        elif lossless is False:
+            info["compression_label"] = "WebP lossy"
+            info["compression_warning"] = (
+                "Lossy WebP compression may reduce chromatic fidelity."
+            )
+        else:
+            info["compression_label"] = "WebP compression mode unknown"
+            info["compression_warning"] = (
+                "Could not determine whether this WebP is lossy or lossless."
+            )
+    elif suffix in HEIC_EXTENSIONS:
+        info["compression_label"] = "HEIC/HEIF"
+        info["compression_warning"] = (
+            "HEIC/HEIF compression characteristics were not independently "
+            "decoded by this tool; encoder settings determine fidelity."
+        )
+    elif suffix in (".jpg", ".jpeg"):
+        sof = _parse_jpeg_sof(img_path)
+        if sof is None:
+            info["compression_label"] = "JPEG; subsampling unknown"
+            info["compression_warning"] = (
+                "JPEG is lossy; chroma subsampling could not be determined."
+            )
+        else:
+            sub = sof["subsampling"]
+            info["chroma_subsampling"] = sub
+            info["compression_label"] = f"JPEG {sub}"
+            if sub == "4:4:4":
+                info["compression_warning"] = (
+                    "No chroma subsampling, but JPEG DCT quantization remains lossy."
+                )
+            elif sub == "4:2:2":
+                info["compression_warning"] = (
+                    "Horizontal chroma resolution is reduced; fine color boundaries "
+                    "may be blurred."
+                )
+            elif sub == "4:2:0":
+                info["compression_warning"] = (
+                    "Chroma resolution is substantially reduced in both dimensions; "
+                    "fine color-boundary segmentation may be affected."
+                )
+            else:
+                info["compression_warning"] = (
+                    "Non-standard chroma subsampling detected."
+                )
+
+    return info
+
+
+# -----------------------------------------------------------------------------
+# Configuration
+# -----------------------------------------------------------------------------
+
+@dataclass
+class VisualizerConfig:
+    input_dir: Path
+    output_dir: Path
+    analysis_scale: float = 1.0
+    output_scale: float = 0.5
+    chroma_boost_factor: float = 3.0
+    detection_sensitivity: float = 3.0
+    use_adaptive_threshold: bool = True
+    manual_threshold: float = 5.0
+    threshold_bias: float = 0.0
+    clahe_enabled: bool = True
+    clahe_clip_limit: float = 3.0
+    clahe_grid_size: Tuple[int, int] = (8, 8)
+    font_size: int = 24
+    max_workers: Optional[int] = None
+    output_format: str = "png"
+    quality: int = 95
+    warn_on_low_fidelity: bool = True
+    run_sensitivity_analysis: bool = True
+    sensitivity_factors: Tuple[float, ...] = (
+        0.90, 0.95, 1.00, 1.05, 1.10
+    )
+    save_histograms: bool = True
+    save_numerical_tiff: bool = True
+    save_per_image_json: bool = True
+    min_component_area_pixels: int = 0
+    formats: set = field(default_factory=lambda: set(VALID_EXTENSIONS))
+
+    def __post_init__(self):
+        self.input_dir = Path(self.input_dir).resolve()
+        self.output_dir = Path(self.output_dir).resolve()
+
+        if not self.input_dir.is_dir():
+            raise ValueError(f"Input path is not a directory: {self.input_dir}")
+        if self.output_dir.exists() and not self.output_dir.is_dir():
+            raise ValueError(f"Output path is not a directory: {self.output_dir}")
+
+        self.output_dir.mkdir(parents=True, exist_ok=True)
+
+        if not (0 < self.analysis_scale <= 1.0):
+            raise ValueError("analysis_scale must be > 0 and <= 1.0")
+        if not (0 < self.output_scale <= 1.0):
+            raise ValueError("output_scale must be > 0 and <= 1.0")
+        if self.detection_sensitivity <= 0:
+            raise ValueError("detection_sensitivity must be > 0")
+        if not (1 <= self.quality <= 100):
+            raise ValueError("quality must be 1-100")
+        if self.output_format not in ("png", "jpg"):
+            raise ValueError("output_format must be 'png' or 'jpg'")
+        if self.clahe_clip_limit <= 0:
+            raise ValueError("clahe_clip_limit must be > 0")
+        if any(f <= 0 for f in self.sensitivity_factors):
+            raise ValueError("All sensitivity factors must be > 0")
+
+        if HEIC_SUPPORTED:
+            self.formats |= HEIC_EXTENSIONS
+
+
+# -----------------------------------------------------------------------------
+# Core processor
+# -----------------------------------------------------------------------------
+
+class ImageProcessor:
+    def __init__(self, config: VisualizerConfig):
+        self.cfg = config
+        self.font = _load_font(self.cfg.font_size)
+
+        self.clahe = None
+        if self.cfg.clahe_enabled:
+            self.clahe = cv2.createCLAHE(
+                clipLimit=self.cfg.clahe_clip_limit,
+                tileGridSize=self.cfg.clahe_grid_size,
+            )
+
+    def _open_working_rgb(self, image_path: Path) -> Tuple[np.ndarray, dict]:
+        try:
+            with Image.open(image_path) as img:
+                img = ImageOps.exif_transpose(img)
+                source_mode = img.mode
+                source_bit_depth = _source_bit_depth(img)
+                icc_name = _profile_name(img)
+                original_size = [img.width, img.height]
+
+                # Convert embedded-profile RGB/CMYK/other inputs into a defined
+                # sRGB working space when an ICC profile is present.
+                if img.info.get("icc_profile"):
+                    try:
+                        src_profile = ImageCms.ImageCmsProfile(img.info["icc_profile"])
+                        dst_profile = ImageCms.createProfile("sRGB")
+                        transform = ImageCms.buildTransformFromOpenProfiles(
+                            src_profile, dst_profile, img.mode, "RGB"
+                        )
+                        img = ImageCms.applyTransform(img, transform)
+                        color_management = "ICC-managed to sRGB working space"
+                    except Exception:
+                        img = img.convert("RGB")
+                        color_management = (
+                            "Embedded ICC profile present but conversion failed; "
+                            "Pillow RGB conversion used as fallback"
+                        )
+                else:
+                    img = img.convert("RGB")
+                    color_management = "No embedded ICC profile; interpreted as sRGB"
+
+                rgb = np.asarray(img, dtype=np.uint8)
+
+                if self.cfg.analysis_scale != 1.0:
+                    h, w = rgb.shape[:2]
+                    new_size = (
+                        max(1, int(round(w * self.cfg.analysis_scale))),
+                        max(1, int(round(h * self.cfg.analysis_scale))),
+                    )
+                    pil = Image.fromarray(rgb)
+                    pil = pil.resize(new_size, Image.Resampling.LANCZOS)
+                    rgb = np.asarray(pil, dtype=np.uint8)
+
+                metadata = {
+                    "source_mode": source_mode,
+                    "source_bit_depth": source_bit_depth,
+                    "source_dimensions": original_size,
+                    "analysis_dimensions": [int(rgb.shape[1]), int(rgb.shape[0])],
+                    "icc_profile": icc_name,
+                    "color_management": color_management,
+                }
+                return rgb, metadata
+
+        except Exception as exc:
+            raise RuntimeError(f"File load/color-management error: {exc}") from exc
+
+    @staticmethod
+    def _rgb_to_lab(rgb: np.ndarray) -> np.ndarray:
+        # Use float32 RGB in [0,1] so OpenCV returns L* approximately [0,100]
+        # and a*/b* in their conventional signed ranges. This avoids the
+        # 8-bit Lab scaling (L 0..255; a/b 0..255) used in the older version.
+        rgb_float = rgb.astype(np.float32) / 255.0
+        return cv2.cvtColor(rgb_float, cv2.COLOR_RGB2LAB)
+
+    @staticmethod
+    def _chroma_from_lab(lab: np.ndarray) -> np.ndarray:
+        a = lab[:, :, 1]
+        b = lab[:, :, 2]
+        return np.sqrt(a * a + b * b).astype(np.float32)
+
+    def calculate_adaptive_threshold(self, chroma: np.ndarray) -> float:
+        flat = chroma.ravel()
+        max_val = max(100.0, float(np.nanmax(flat)))
+
+        counts, bin_edges = np.histogram(
+            flat, bins=np.linspace(0, max_val, 200)
+        )
+        peak_idx = int(np.argmax(counts))
+        peak_val = float(bin_edges[peak_idx])
+
+        # Pathological case: dominant high-chroma population. The histogram
+        # tail model is then not trustworthy.
+        if peak_idx > len(counts) * 0.90:
+            return float(np.percentile(flat, 75))
+
+        sensitivity = float(np.clip(
+            self.cfg.detection_sensitivity, 0.1, 10.0
+        ))
+
+        # Reference sensitivity = 3.0, matching the prior default behavior.
+        # Higher sensitivity means a larger tolerated histogram tail count,
+        # therefore the cutoff is reached earlier and the threshold decreases.
+        noise_fraction = 0.01 * (sensitivity / 3.0)
+        noise_cutoff = counts[peak_idx] * noise_fraction
+
+        cutoff_val = peak_val + 10.0
+        for i in range(peak_idx, len(counts)):
+            if counts[i] < noise_cutoff:
+                cutoff_val = float(bin_edges[i])
+                break
+
+        return max(cutoff_val + self.cfg.threshold_bias, 1.0)
+
+    def _threshold_for_sensitivity(self, chroma: np.ndarray, factor: float) -> float:
+        original = self.cfg.detection_sensitivity
+        try:
+            self.cfg.detection_sensitivity = original * factor
+            return self.calculate_adaptive_threshold(chroma)
+        finally:
+            self.cfg.detection_sensitivity = original
+
+    @staticmethod
+    def _jaccard(a: np.ndarray, b: np.ndarray) -> float:
+        a = a.astype(bool)
+        b = b.astype(bool)
+        union = np.logical_or(a, b).sum()
+        if union == 0:
+            return 1.0
+        return float(np.logical_and(a, b).sum() / union)
+
+    def _sensitivity_metrics(
+        self, chroma: np.ndarray, threshold: float
+    ) -> dict:
+        factors = self.cfg.sensitivity_factors
+        thresholds = []
+
+        if self.cfg.use_adaptive_threshold:
+            for factor in factors:
+                thresholds.append(
+                    self._threshold_for_sensitivity(chroma, float(factor))
+                )
+        else:
+            thresholds = [float(threshold)] * len(factors)
+
+        masks = [chroma > t for t in thresholds]
+        center_idx = min(
+            range(len(factors)),
+            key=lambda i: abs(factors[i] - 1.0)
+        )
+        center_mask = masks[center_idx]
+
+        jaccards = [
+            self._jaccard(center_mask, mask)
+            for mask in masks
+        ]
+
+        area_percentages = [
+            float(mask.mean() * 100.0)
+            for mask in masks
+        ]
+
+        return {
+            "factors": [float(x) for x in factors],
+            "thresholds": [float(x) for x in thresholds],
+            "chromatic_area_percent": area_percentages,
+            "jaccard_to_nominal": jaccards,
+            "nominal_index": center_idx,
+            "min_jaccard_to_nominal": float(min(jaccards)),
+            "sensitivity_interpretation": (
+                "Higher Jaccard indicates a more stable chroma mask "
+                "under small threshold perturbations."
+            ),
+        }
+
+    def _threshold_and_map(self, chroma: np.ndarray) -> Tuple[float, np.ndarray, dict]:
+        if self.cfg.use_adaptive_threshold:
+            threshold = self.calculate_adaptive_threshold(chroma)
+            method = "adaptive_histogram"
+        else:
+            threshold = float(self.cfg.manual_threshold + self.cfg.threshold_bias)
+            method = "manual"
+
+        threshold = max(threshold, 1.0)
+
+        valid = chroma[chroma > threshold]
+        if valid.size == 0:
+            mid = threshold + 5.0
+            high = threshold + 15.0
+        else:
+            mid = max(float(np.percentile(valid, 50)), threshold + 2.0)
+            high = max(float(np.percentile(valid, 85)), mid + 2.0)
+
+        high_ramp = max(5.0, (high - threshold) * 0.25)
+
+        faint = np.clip(
+            (chroma - threshold) / max(mid - threshold, 1e-6), 0, 1
+        )
+        medium = np.clip(
+            (chroma - mid) / max(high - mid, 1e-6), 0, 1
+        )
+        strong = np.clip(
+            (chroma - high) / high_ramp, 0, 1
+        )
+
+        alpha = np.maximum.reduce([
+            faint * 0.4,
+            medium * 0.8,
+            strong,
+        ])
+
+        metrics = {
+            "threshold_method": method,
+            "threshold": float(threshold),
+            "mid_threshold": float(mid),
+            "high_threshold": float(high),
+            "chromatic_area_percent": float((chroma > threshold).mean() * 100),
+            "faint_area_percent": float(
+                ((chroma > threshold) & (chroma <= mid)).mean() * 100
+            ),
+            "medium_area_percent": float(
+                ((chroma > mid) & (chroma <= high)).mean() * 100
+            ),
+            "high_area_percent": float((chroma > high).mean() * 100),
+            "mean_chroma": float(np.mean(chroma)),
+            "median_chroma": float(np.median(chroma)),
+            "max_chroma": float(np.max(chroma)),
+        }
+
+        return threshold, alpha, metrics
+
+    def _boost_chroma(self, rgb: np.ndarray) -> Image.Image:
+        lab = self._rgb_to_lab(rgb)
+        l, a, b = cv2.split(lab)
+
+        factor = self.cfg.chroma_boost_factor
+        a2 = a * factor
+        b2 = b * factor
+
+        boosted = cv2.merge([l, a2, b2])
+        return Image.fromarray(
+            np.clip(cv2.cvtColor(boosted, cv2.COLOR_LAB2RGB) * 255.0, 0, 255)
+            .astype(np.uint8)
+        )
+
+    def _create_segmented_visual(
+        self, rgb: np.ndarray, chroma: np.ndarray, alpha: np.ndarray
+    ) -> Image.Image:
+        lab = self._rgb_to_lab(rgb)
+        l, a, b = cv2.split(lab)
+
+        if self.clahe is not None:
+            l8 = np.clip(l / 100.0 * 255.0, 0, 255).astype(np.uint8)
+            l_enhanced = self.clahe.apply(l8).astype(np.float32) / 255.0 * 100.0
+        else:
+            l_enhanced = l
+
+        factor = self.cfg.chroma_boost_factor
+        boosted_lab = cv2.merge([l_enhanced, a * factor, b * factor])
+        foreground = np.clip(
+            cv2.cvtColor(boosted_lab, cv2.COLOR_LAB2RGB) * 255.0,
+            0, 255
+        ).astype(np.float32)
+
+        gray = cv2.cvtColor(rgb, cv2.COLOR_RGB2GRAY).astype(np.float32)
+        background = cv2.cvtColor(
+            (gray * 0.15).astype(np.uint8), cv2.COLOR_GRAY2RGB
+        ).astype(np.float32)
+
+        alpha3 = np.repeat(alpha[:, :, None], 3, axis=2)
+        final = background * (1.0 - alpha3) + foreground * alpha3
+        return Image.fromarray(np.clip(final, 0, 255).astype(np.uint8))
+
+    @staticmethod
+    def _categorical_mask(chroma: np.ndarray, threshold: float, mid: float, high: float) -> np.ndarray:
+        mask = np.zeros(chroma.shape, dtype=np.uint8)
+        mask[(chroma > threshold) & (chroma <= mid)] = 1
+        mask[(chroma > mid) & (chroma <= high)] = 2
+        mask[chroma > high] = 3
+        return mask
+
+    @staticmethod
+    def _component_statistics(mask: np.ndarray, minimum_area: int = 0) -> dict:
+        binary = (mask > 0).astype(np.uint8)
+        n_labels, labels, stats, _ = cv2.connectedComponentsWithStats(
+            binary, connectivity=8
+        )
+
+        areas = stats[1:, cv2.CC_STAT_AREA].astype(int)
+        if minimum_area > 0:
+            areas = areas[areas >= minimum_area]
+
+        if areas.size == 0:
+            return {
+                "component_count": 0,
+                "largest_component_pixels": 0,
+                "median_component_pixels": 0.0,
+            }
+
+        return {
+            "component_count": int(len(areas)),
+            "largest_component_pixels": int(areas.max()),
+            "median_component_pixels": float(np.median(areas)),
+        }
+
+    def _save_histogram(
+        self, chroma: np.ndarray, threshold: float, mid: float, high: float, path: Path
+    ):
+        import matplotlib
+        matplotlib.use("Agg")
+        import matplotlib.pyplot as plt
+
+        fig = plt.figure(figsize=(9, 5))
+        ax = fig.add_subplot(111)
+        flat = chroma.ravel()
+        ax.hist(flat, bins=200)
+        ax.axvline(threshold, linestyle="--", label=f"Threshold {threshold:.2f}")
+        ax.axvline(mid, linestyle="--", label=f"Mid {mid:.2f}")
+        ax.axvline(high, linestyle="--", label=f"High {high:.2f}")
+        ax.set_xlabel("CIELAB chroma C*ab")
+        ax.set_ylabel("Pixel count")
+        ax.set_title("Chroma distribution and segmentation thresholds")
+        ax.legend()
+        fig.tight_layout()
+        fig.savefig(path, dpi=150)
+        plt.close(fig)
+
+    def _save_footer(self, img: Image.Image, left: str, right: str = "") -> Image.Image:
+        w, h = img.size
+        out = Image.new("RGB", (w, h + FOOTER_HEIGHT), "white")
+        out.paste(img, (0, 0))
+        draw = ImageDraw.Draw(out)
+        draw.text((10, h + 12), left, font=self.font, fill="black")
+
+        if right:
+            bbox = draw.textbbox((0, 0), right, font=self.font)
+            draw.text(
+                (w - (bbox[2] - bbox[0]) - 10, h + 12),
+                right,
+                font=self.font,
+                fill="black",
+            )
+        return out
+
+    def _create_montage(
+        self,
+        original: Image.Image,
+        chroma: Image.Image,
+        segmented: Image.Image,
+        fname: str,
+        footer: str,
+    ) -> Image.Image:
+        w, h = original.size
+        montage = Image.new(
+            "RGB", (w * 3, h + MONTAGE_FOOTER_HEIGHT), "white"
+        )
+        montage.paste(original, (0, 0))
+        montage.paste(chroma, (w, 0))
+        montage.paste(segmented, (w * 2, 0))
+
+        draw = ImageDraw.Draw(montage)
+        for i, text in enumerate([
+            "Original", "Chroma Boosted", "Segmented Chroma"
+        ]):
+            bbox = draw.textbbox((0, 0), text, font=self.font)
+            draw.text(
+                ((i * w) + (w - (bbox[2] - bbox[0])) / 2, h + 5),
+                text,
+                font=self.font,
+                fill="black",
+            )
+
+        draw.line([(0, h + 40), (w * 3, h + 40)], fill="black", width=1)
+        draw.text((20, h + 48), fname, font=self.font, fill="black")
+
+        bbox = draw.textbbox((0, 0), footer, font=self.font)
+        draw.text(
+            ((w * 3) - (bbox[2] - bbox[0]) - 20, h + 48),
+            footer,
+            font=self.font,
+            fill="black",
+        )
+        return montage
+
+    def process_image(self, img_path: Path) -> Tuple[bool, str, dict]:
+        try:
+            source = assess_source(img_path)
+            rgb, working_meta = self._open_working_rgb(img_path)
+
+            lab = self._rgb_to_lab(rgb)
+            chroma = self._chroma_from_lab(lab)
+
+            threshold, alpha, metrics = self._threshold_and_map(chroma)
+            categorical = self._categorical_mask(
+                chroma,
+                threshold,
+                metrics["mid_threshold"],
+                metrics["high_threshold"],
+            )
+
+            metrics["component_statistics"] = self._component_statistics(
+                categorical,
+                self.cfg.min_component_area_pixels,
+            )
+
+            sensitivity = None
+            if self.cfg.run_sensitivity_analysis:
+                sensitivity = self._sensitivity_metrics(chroma, threshold)
+                metrics["sensitivity"] = sensitivity
+
+            rel_path = img_path.relative_to(self.cfg.input_dir)
+            rel_string = str(rel_path).replace(os.sep, "/")
+            digest = hashlib.sha1(rel_string.encode("utf-8")).hexdigest()[:8]
+            base_name = img_path.stem
+            out_prefix = f"{base_name}__{digest}"
+
+            # Numerical outputs are generated from the native analysis grid.
+            numerical_dir = self.cfg.output_dir / "numerical"
+            diagnostics_dir = self.cfg.output_dir / "diagnostics"
+            metadata_dir = self.cfg.output_dir / "metadata"
+
+            numerical_dir.mkdir(exist_ok=True)
+            diagnostics_dir.mkdir(exist_ok=True)
+            metadata_dir.mkdir(exist_ok=True)
+
+            if self.cfg.save_numerical_tiff:
+                chroma_path = numerical_dir / f"{out_prefix}_chroma.tif"
+                mask_path = numerical_dir / f"{out_prefix}_mask.tif"
+
+                Image.fromarray(chroma.astype(np.float32), mode="F").save(
+                    chroma_path,
+                    compression="tiff_deflate",
+                )
+                Image.fromarray(categorical, mode="L").save(
+                    mask_path,
+                    compression="tiff_deflate",
+                )
+
+            # Presentation images are resized only after all numerical analysis.
+            original_pil = Image.fromarray(rgb)
+            if self.cfg.output_scale != 1.0:
+                w, h = original_pil.size
+                display_size = (
+                    max(1, int(round(w * self.cfg.output_scale))),
+                    max(1, int(round(h * self.cfg.output_scale))),
+                )
+                display_original = original_pil.resize(
+                    display_size, Image.Resampling.LANCZOS
+                )
+                display_rgb = np.asarray(display_original)
+            else:
+                display_original = original_pil
+                display_rgb = rgb
+
+            chroma_pil = self._boost_chroma(display_rgb)
+            segmented_pil = self._create_segmented_visual(
+                display_rgb,
+                cv2.resize(
+                    chroma,
+                    (display_rgb.shape[1], display_rgb.shape[0]),
+                    interpolation=cv2.INTER_AREA,
+                ),
+                cv2.resize(
+                    alpha,
+                    (display_rgb.shape[1], display_rgb.shape[0]),
+                    interpolation=cv2.INTER_AREA,
+                ),
+            )
+
+            fidelity_tag = f"[{source['compression_label']}]"
+            threshold_label = (
+                f"{'Adaptive' if self.cfg.use_adaptive_threshold else 'Manual'}:"
+                f"{threshold:.2f}"
+            )
+            map_data = (
+                f"Thr:{threshold:.2f} Mid:{metrics['mid_threshold']:.2f} "
+                f"High:{metrics['high_threshold']:.2f} "
+                f"Area:{metrics['chromatic_area_percent']:.2f}%"
+            )
+
+            chroma_saved = self._save_footer(
+                chroma_pil,
+                base_name,
+                f"Chroma Boost {self.cfg.chroma_boost_factor:g}x {fidelity_tag}",
+            )
+            segmented_saved = self._save_footer(
+                segmented_pil,
+                base_name,
+                f"Segmented | {map_data} {fidelity_tag}",
+            )
+
+            suffix = "jpg" if self.cfg.output_format == "jpg" else "png"
+            save_kwargs = {"quality": self.cfg.quality} if suffix == "jpg" else {}
+
+            chroma_saved.save(
+                diagnostics_dir / f"{out_prefix}_chroma.{suffix}",
+                **save_kwargs,
+            )
+            segmented_saved.save(
+                diagnostics_dir / f"{out_prefix}_segmented.{suffix}",
+                **save_kwargs,
+            )
+
+            montage = self._create_montage(
+                display_original,
+                chroma_pil,
+                segmented_pil,
+                base_name,
+                f"{threshold_label} | {map_data} {fidelity_tag}",
+            )
+            montage.save(
+                diagnostics_dir / f"{out_prefix}_montage.{suffix}",
+                **save_kwargs,
+            )
+
+            if self.cfg.save_histograms:
+                self._save_histogram(
+                    chroma,
+                    threshold,
+                    metrics["mid_threshold"],
+                    metrics["high_threshold"],
+                    diagnostics_dir / f"{out_prefix}_histogram.png",
+                )
+
+            record = {
+                "software_version": VERSION,
+                "timestamp_utc": datetime.now(timezone.utc).isoformat(),
+                "source": {
+                    "path_relative": rel_string,
+                    "sha256": _sha256_file(img_path),
+                    **source,
+                    **working_meta,
+                },
+                "analysis": {
+                    "analysis_scale": self.cfg.analysis_scale,
+                    "output_scale": self.cfg.output_scale,
+                    "lab_method": (
+                        "OpenCV cvtColor RGB float32 [0,1] -> CIELAB"
+                    ),
+                    "chroma_definition": "sqrt(a*^2 + b*^2)",
+                    "chroma_boost_factor": self.cfg.chroma_boost_factor,
+                    "clahe_enabled": self.cfg.clahe_enabled,
+                    "clahe_clip_limit": self.cfg.clahe_clip_limit,
+                    "clahe_grid_size": list(self.cfg.clahe_grid_size),
+                    "detection_sensitivity": self.cfg.detection_sensitivity,
+                    "use_adaptive_threshold": self.cfg.use_adaptive_threshold,
+                    "manual_threshold": self.cfg.manual_threshold,
+                    "threshold_bias": self.cfg.threshold_bias,
+                },
+                "results": metrics,
+                "outputs": {
+                    "numerical_chroma_tiff": (
+                        str((numerical_dir / f"{out_prefix}_chroma.tif").relative_to(
+                            self.cfg.output_dir
+                        )) if self.cfg.save_numerical_tiff else None
+                    ),
+                    "numerical_mask_tiff": (
+                        str((numerical_dir / f"{out_prefix}_mask.tif").relative_to(
+                            self.cfg.output_dir
+                        )) if self.cfg.save_numerical_tiff else None
+                    ),
+                    "diagnostic_directory": str(
+                        diagnostics_dir.relative_to(self.cfg.output_dir)
+                    ),
+                },
+            }
+
+            if self.cfg.save_per_image_json:
+                with open(
+                    metadata_dir / f"{out_prefix}.json",
+                    "w",
+                    encoding="utf-8",
+                ) as f:
+                    json.dump(record, f, indent=2, default=str)
+
+            msg = (
+                f"Processed {out_prefix} | "
+                f"Threshold={threshold:.2f} | "
+                f"Chroma={metrics['chromatic_area_percent']:.2f}% | "
+                f"{source['compression_label']}"
+            )
+            if source["compression_warning"] and self.cfg.warn_on_low_fidelity:
+                msg += f" | NOTE: {source['compression_warning']}"
+
+            return True, msg, record
+
+        except Exception as exc:
+            return False, f"Failed {img_path.name}: {exc}", {
+                "error": str(exc),
+                "traceback": traceback.format_exc(),
+            }
+
+
+# -----------------------------------------------------------------------------
+# Worker / batch functions
+# -----------------------------------------------------------------------------
+
+_proc: Optional[ImageProcessor] = None
+
+
+def _init_worker(config: VisualizerConfig):
+    global _proc
+    cv2.setNumThreads(1)
+    _proc = ImageProcessor(config)
+
+
+def _worker_task(path: Path) -> Tuple[bool, str, dict]:
+    if _proc is None:
+        raise RuntimeError("Worker processor was not initialized.")
+    return _proc.process_image(path)
+
+
+def collect_images(input_dir: Path, formats: set) -> list[Path]:
+    images = []
+    for p in input_dir.rglob("*"):
+        if p.suffix.lower() not in formats or not p.is_file():
+            continue
+        try:
+            resolved = p.resolve()
+        except OSError:
+            continue
+        if resolved.is_relative_to(input_dir):
+            images.append(p)
+    return sorted(images)
+
+
+def _sha256_file(path: Path, chunk_size: int = 1024 * 1024) -> str:
+    digest = hashlib.sha256()
+    with open(path, "rb") as f:
+        while True:
+            chunk = f.read(chunk_size)
+            if not chunk:
+                break
+            digest.update(chunk)
+    return digest.hexdigest()
+
+
+def _write_manifest(config: VisualizerConfig) -> Path:
+    metadata_dir = config.output_dir / "metadata"
+    metadata_dir.mkdir(exist_ok=True)
+
+    manifest = {
+        "software_version": VERSION,
+        "run_timestamp_utc": datetime.now(timezone.utc).isoformat(),
+        "python_version": sys.version,
+        "platform": platform.platform(),
+        "opencv_version": cv2.__version__,
+        "numpy_version": np.__version__,
+        "pillow_version": Image.__version__,
+        "pillow_heif_supported": HEIC_SUPPORTED,
+        "configuration": {
+            "analysis_scale": config.analysis_scale,
+            "output_scale": config.output_scale,
+            "chroma_boost_factor": config.chroma_boost_factor,
+            "detection_sensitivity": config.detection_sensitivity,
+            "use_adaptive_threshold": config.use_adaptive_threshold,
+            "manual_threshold": config.manual_threshold,
+            "threshold_bias": config.threshold_bias,
+            "clahe_enabled": config.clahe_enabled,
+            "clahe_clip_limit": config.clahe_clip_limit,
+            "clahe_grid_size": list(config.clahe_grid_size),
+            "output_format": config.output_format,
+            "output_quality": config.quality,
+            "sensitivity_factors": list(config.sensitivity_factors),
+            "min_component_area_pixels": config.min_component_area_pixels,
+        },
+    }
+
+    path = metadata_dir / "run_manifest.json"
+    with open(path, "w", encoding="utf-8") as f:
+        json.dump(manifest, f, indent=2, default=str)
+    return path
+
+
+def _write_summary(config: VisualizerConfig, records: list[dict]) -> Path:
+    summary_dir = config.output_dir / "summary"
+    summary_dir.mkdir(exist_ok=True)
+    path = summary_dir / "batch_summary.csv"
+
+    fields = [
+        "path_relative",
+        "compression_label",
+        "source_bit_depth",
+        "source_dimensions",
+        "analysis_dimensions",
+        "threshold_method",
+        "threshold",
+        "mid_threshold",
+        "high_threshold",
+        "chromatic_area_percent",
+        "faint_area_percent",
+        "medium_area_percent",
+        "high_area_percent",
+        "mean_chroma",
+        "median_chroma",
+        "max_chroma",
+        "component_count",
+        "largest_component_pixels",
+        "median_component_pixels",
+        "min_jaccard_to_nominal",
+    ]
+
+    with open(path, "w", newline="", encoding="utf-8") as f:
+        writer = csv.DictWriter(f, fieldnames=fields)
+        writer.writeheader()
+
+        for r in records:
+            if "error" in r:
+                continue
+            row = {
+                "path_relative": r["source"]["path_relative"],
+                "compression_label": r["source"]["compression_label"],
+                "source_bit_depth": r["source"]["source_bit_depth"],
+                "source_dimensions": r["source"]["source_dimensions"],
+                "analysis_dimensions": r["source"]["analysis_dimensions"],
+                **r["results"],
+            }
+            component = row.pop("component_statistics", {})
+            row.update(component)
+
+            sensitivity = row.pop("sensitivity", {})
+            row["min_jaccard_to_nominal"] = sensitivity.get(
+                "min_jaccard_to_nominal", ""
+            )
+
+            writer.writerow({
+                key: row.get(key, "") for key in fields
+            })
+
+    return path
+
+
+def run_batch(config: VisualizerConfig) -> list[tuple[bool, str]]:
+    _write_manifest(config)
+
+    images = collect_images(config.input_dir, config.formats)
+    total = len(images)
+
+    if not images:
+        print("Warning: No valid images found in", config.input_dir)
+        return []
+
+    print(f"Found {total} images.")
+    print(f"Analysis scale: {config.analysis_scale}")
+    print(f"Output scale:   {config.output_scale}")
+    print(f"Sensitivity:    {config.detection_sensitivity}")
+    print(f"Workers:        {config.max_workers or 'auto'}")
+
+    results = []
+    records = []
+    completed = 0
+
+    with concurrent.futures.ProcessPoolExecutor(
+        max_workers=config.max_workers,
+        initializer=_init_worker,
+        initargs=(config,),
+    ) as executor:
+        futures = {
+            executor.submit(_worker_task, path): path
+            for path in images
+        }
+
+        for future in concurrent.futures.as_completed(futures):
+            path = futures[future]
+            try:
+                success, msg, record = future.result()
+            except Exception as exc:
+                success = False
+                msg = f"Worker failure for {path.name}: {exc}"
+                record = {
+                    "error": str(exc),
+                    "traceback": traceback.format_exc(),
+                    "source": {"path_relative": str(path.relative_to(config.input_dir))},
+                }
+
+            completed += 1
+            results.append((success, msg))
+            if record:
+                records.append(record)
+
+            pct = completed / total * 100.0
+            print(f"[{completed}/{total} | {pct:.1f}%] {msg}")
+
+    _write_summary(config, records)
+    return results
+
+
+# -----------------------------------------------------------------------------
+# Entry point
+# -----------------------------------------------------------------------------
+
+def main():
+    from multiprocessing import freeze_support
+    freeze_support()
+
+    config = VisualizerConfig(
+        input_dir=INPUT_DIR,
+        output_dir=OUTPUT_DIR,
+        analysis_scale=ANALYSIS_SCALE,
+        output_scale=OUTPUT_SCALE,
+        chroma_boost_factor=CHROMA_BOOST_FACTOR,
+        detection_sensitivity=DETECTION_SENSITIVITY,
+        use_adaptive_threshold=USE_ADAPTIVE_THRESHOLD,
+        manual_threshold=MANUAL_THRESHOLD,
+        threshold_bias=THRESHOLD_BIAS,
+        clahe_enabled=CLAHE_ENABLED,
+        clahe_clip_limit=CLAHE_CLIP_LIMIT,
+        clahe_grid_size=CLAHE_GRID_SIZE,
+        max_workers=MAX_WORKERS,
+        output_format=OUTPUT_FORMAT,
+        quality=OUTPUT_QUALITY,
+        font_size=FONT_SIZE,
+        warn_on_low_fidelity=WARN_ON_LOW_FIDELITY,
+        run_sensitivity_analysis=RUN_SENSITIVITY_ANALYSIS,
+        sensitivity_factors=SENSITIVITY_FACTORS,
+        save_histograms=SAVE_HISTOGRAMS,
+        save_numerical_tiff=SAVE_NUMERICAL_TIFF,
+        save_per_image_json=SAVE_PER_IMAGE_JSON,
+        min_component_area_pixels=MIN_COMPONENT_AREA_PIXELS,
+    )
+
+    print(f"Chroma Diagnostic Tool v{VERSION}")
+    print(f"Input:  {config.input_dir}")
+    print(f"Output: {config.output_dir}")
+    print("Scientific scope: elevated CIELAB chroma diagnostics, not material identification.")
+
+    if HEIC_SUPPORTED:
+        print("HEIC/HEIF support: enabled")
+
+    results = run_batch(config)
+
+    if results:
+        successes = sum(ok for ok, _ in results)
+        print(f"\nDone. {successes}/{len(results)} images processed successfully.")
+        if successes < len(results):
+            sys.exit(1)
+
+
+if __name__ == "__main__":
+    main()
+'''
+
+path = Path("/mnt/data/chroma_diagnostic_tool_v3.py")
+path.write_text(code, encoding="utf-8")
+print(path)
