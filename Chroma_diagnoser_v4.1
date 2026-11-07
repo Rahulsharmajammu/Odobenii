@@ -2,6 +2,26 @@
 Chroma Diagnostic Tool v4.1
 =================================
 
+Fixes in 4.1.1
+--------------
+- Script parses again (placeholder INPUT_DIR/OUTPUT_DIR were invalid syntax).
+- RGB->XYZ no longer scales by the white point twice; neutral grey now has
+  C*ab = 0 (it previously read ~6-10).
+- Pixels converted by an ICC transform are no longer re-decoded with the
+  source space's gamma/primaries.  Standard profiles (sRGB / Adobe RGB /
+  ProPhoto) are decoded analytically at full precision instead.
+- ICC profile names and EXIF ColorSpace are actually read now (bytes were
+  passed to ImageCmsProfile; EXIF was read after exif_transpose dropped it).
+- Untagged images default to sRGB (--default-colorspace to override).
+- 16-bit RGB TIFF/PNG are read at 16 bits; 16-bit greyscale no longer
+  saturates to white.
+- Segmented-map background is dark greyscale instead of solid black.
+- New default threshold mode "noise_floor" (substrate histogram peak +
+  noise cutoff, as described in the README); percentile/otsu/fixed remain.
+- Sensitivity masks use the same clamp and spatial filter as the output mask.
+- output_dir inside input_dir is not re-ingested; montage text no longer
+  clipped; u16 sidecar scaling recorded and guarded against divide-by-zero.
+
 Refactored batch chroma analysis with corrected LRC interpolation,
 bit-depth preservation, vectorized spatial filtering, and FADGI-compliant
 color-space management.
@@ -9,8 +29,8 @@ color-space management.
 Key fixes from v4.0
 ---------------------
 1. Color-space awareness: detects EXIF ColorSpace tag and ICC profile name;
-   defaults to ProPhoto RGB per FADGI 3rd-edition recommendations when no
-   space is declared.  Custom RGB->XYZ->LAB pipeline replaces OpenCV's
+   defaulted to ProPhoto RGB when no space was declared (sRGB since 4.1.1).
+   Custom RGB->XYZ->LAB pipeline replaces OpenCV's
    hard-coded sRGB assumption.
 2. Critical bug fixes:
    - FOOTER_HEIGHT / MONTAGE_FOOTER_HEIGHT now defined.
@@ -29,6 +49,7 @@ import argparse
 import concurrent.futures
 import csv
 import hashlib
+import io
 import json
 import os
 import platform
@@ -51,10 +72,11 @@ from PIL import Image, ImageCms, ImageDraw, ImageFont, ImageOps, TiffImagePlugin
 # CONFIG
 # -----------------------------------------------------------------------------
 
-VERSION = "4.1.0"
+VERSION = "4.1.1"
 
-INPUT_DIR = <INPUT PATH HERE>
-OUTPUT_DIR = <OUTPUT PATH HERE>
+# Defaults used when no paths are given on the command line.
+INPUT_DIR = r"/path/to/input"
+OUTPUT_DIR = r"/path/to/output"
 
 VALID_EXTENSIONS = {
     ".jpg", ".jpeg", ".png", ".tif", ".tiff",
@@ -129,53 +151,74 @@ except ImportError:
 # Color-space detection
 # -----------------------------------------------------------------------------
 
-def _detect_colorspace(img: Image.Image, img_path: Path) -> Tuple[str, str]:
+SUPPORTED_COLORSPACES = ("sRGB", "Adobe RGB", "ProPhoto RGB")
+
+
+def _colorspace_from_profile_name(name: str) -> Optional[str]:
+    """Map an ICC profile description to one of the analytic working spaces."""
+    name = name.lower()
+    if "prophoto" in name or "romm" in name:
+        return "ProPhoto RGB"
+    if "adobe" in name and "rgb" in name:
+        return "Adobe RGB"
+    if "srgb" in name or "iec61966-2" in name or "iec 61966-2" in name:
+        return "sRGB"
+    return None
+
+
+def _exif_colorspace_tag(img: Image.Image) -> Optional[int]:
+    """Read EXIF ColorSpace (0xA001) from the Exif sub-IFD, for any format."""
+    try:
+        exif = img.getexif()
+        tag = exif.get_ifd(0x8769).get(0xA001)
+        if tag is None:
+            tag = exif.get(0xA001)
+        return tag
+    except Exception:
+        return None
+
+
+def _detect_colorspace(
+    img: Image.Image, img_path: Path, default: str = "sRGB"
+) -> Tuple[str, str]:
     """
-    Detect color space from EXIF ColorSpace tag and/or ICC profile name.
+    Detect the colour space from the ICC profile name and/or EXIF ColorSpace.
     Returns (canonical_name, provenance_description).
 
-    Canonical names: "sRGB", "Adobe RGB", "ProPhoto RGB"
-    Default (FADGI-compliant): "ProPhoto RGB"
+    Must be called on the image as opened (before ImageOps.exif_transpose,
+    which returns a copy without the format-specific metadata accessors).
     """
-    # 1. EXIF ColorSpace tag (0xA001)
-    exif = img._getexif() if hasattr(img, "_getexif") else None
-    if exif:
-        cs_tag = exif.get(0xA001)
-        if cs_tag == 1:
-            return "sRGB", "EXIF ColorSpace=1 (sRGB)"
-        elif cs_tag == 2:
-            return "Adobe RGB", "EXIF ColorSpace=2 (Adobe RGB)"
-        elif cs_tag == 65535:
-            # Uncalibrated – fall through to ICC probe
-            pass
-
-    # 2. ICC profile description
+    # 1. ICC profile description (most specific)
     icc = img.info.get("icc_profile")
     if icc:
         try:
-            profile = ImageCms.ImageCmsProfile(icc)
-            name = ImageCms.getProfileName(profile).strip().lower()
-            if "prophoto" in name or "romm" in name:
-                return "ProPhoto RGB", f"ICC profile: {name}"
-            elif "adobe" in name and "rgb" in name:
-                return "Adobe RGB", f"ICC profile: {name}"
-            elif "srgb" in name or "iec61966" in name:
-                return "sRGB", f"ICC profile: {name}"
+            profile = ImageCms.ImageCmsProfile(io.BytesIO(icc))
+            name = ImageCms.getProfileName(profile).strip()
+            cs = _colorspace_from_profile_name(name)
+            if cs:
+                return cs, f"ICC profile: {name}"
         except Exception:
             pass
 
-    # 3. Filename / path heuristics (last resort)
-    stem = img_path.stem.lower()
-    if "prophoto" in stem or "_pp" in stem:
-        return "ProPhoto RGB", "Filename heuristic: ProPhoto RGB"
-    elif "adobe" in stem or "_argb" in stem:
-        return "Adobe RGB", "Filename heuristic: Adobe RGB"
+    # 2. EXIF ColorSpace tag
+    cs_tag = _exif_colorspace_tag(img)
+    if cs_tag == 1:
+        return "sRGB", "EXIF ColorSpace=1 (sRGB)"
+    if cs_tag == 2:
+        # Not in the EXIF standard, but written by some cameras for Adobe RGB.
+        return "Adobe RGB", "EXIF ColorSpace=2 (Adobe RGB, non-standard)"
 
-    # 4. FADGI default: widest gamut for archival master files
-    return (
-        "ProPhoto RGB",
-        "No embedded color-space metadata detected; defaulting to ProPhoto RGB "
-        "per FADGI 3rd-Ed recommendation for archival master files."
+    # 3. Filename heuristics (explicit words only)
+    stem = img_path.stem.lower()
+    if "prophoto" in stem:
+        return "ProPhoto RGB", "Filename heuristic: 'prophoto'"
+    if "adobergb" in stem or "adobe_rgb" in stem:
+        return "Adobe RGB", "Filename heuristic: 'adobergb'"
+
+    # 4. Configured default
+    return default, (
+        f"No recognised colour-space metadata; assumed {default} "
+        "(configurable with --default-colorspace)."
     )
 
 
@@ -189,8 +232,8 @@ def _gamma_decode(rgb: np.ndarray, colorspace: str) -> np.ndarray:
         # ProPhoto uses gamma 1.8 with a small linear segment below ~0.001953
         return np.where(rgb < 0.001953, rgb / 16.0, rgb ** 1.8)
     elif colorspace == "Adobe RGB":
-        # Simple gamma 2.2
-        return np.power(rgb, 2.2)
+        # Adobe RGB (1998): pure power law, gamma 563/256
+        return np.power(rgb, 563.0 / 256.0)
     else:  # sRGB – piecewise
         return np.where(
             rgb < 0.04045,
@@ -201,23 +244,19 @@ def _gamma_decode(rgb: np.ndarray, colorspace: str) -> np.ndarray:
 
 def _rgb_to_xyz(rgb: np.ndarray, colorspace: str) -> np.ndarray:
     """Linear RGB [0,1] -> XYZ (D65 or D50 depending on source space)."""
-    linear = _gamma_decode(rgb, colorspace)
-    M = _M_RGB_TO_XYZ[colorspace]
-    # Vectorised matrix multiply: (H,W,3) @ (3,3) -> (H,W,3)
-    xyz = linear @ M.T
-    # Scale to absolute XYZ (matrices above are for [0,1] RGB -> [0,1] XYZ)
-    if colorspace == "ProPhoto RGB":
-        # ProPhoto matrix is for D50; white = [96.4212, 100, 82.5188]
-        xyz = xyz * np.array([96.4212, 100.0, 82.5188])
-    else:
-        # sRGB and Adobe RGB are D65; white = [95.047, 100, 108.883]
-        xyz = xyz * np.array([95.047, 100.0, 108.883])
-    return xyz
+    linear = _gamma_decode(rgb.astype(np.float32, copy=False), colorspace)
+    M = _M_RGB_TO_XYZ[colorspace].astype(np.float32)
+    # Vectorised matrix multiply: (H,W,3) @ (3,3) -> (H,W,3).
+    # The matrices already map RGB white to the reference white in relative
+    # XYZ (Y = 1), so scaling to the 0-100 range is a single factor of 100.
+    # (Scaling by the white point again would give neutral grey spurious
+    # chroma once _xyz_to_lab divides by the white point.)
+    return (linear @ M.T) * np.float32(100.0)
 
 
 def _bradford_adapt_d50_to_d65(xyz: np.ndarray) -> np.ndarray:
     """Bradford chromatic adaptation D50 -> D65.  xyz shape (..., 3)."""
-    return xyz @ _BRADFORD_D50_TO_D65.T
+    return xyz @ _BRADFORD_D50_TO_D65.T.astype(np.float32)
 
 
 def _xyz_to_lab(xyz: np.ndarray) -> np.ndarray:
@@ -406,7 +445,7 @@ def _profile_name(img: Image.Image) -> Optional[str]:
     if not icc:
         return None
     try:
-        profile = ImageCms.ImageCmsProfile(icc)
+        profile = ImageCms.ImageCmsProfile(io.BytesIO(icc))
         name = ImageCms.getProfileName(profile).strip()
         return name or "embedded ICC profile"
     except Exception:
@@ -423,17 +462,6 @@ def _source_bit_depth(img: Image.Image) -> Optional[int]:
     return None
 
 
-def _source_max_value(img: Image.Image) -> float:
-    """Return the nominal max value for the source mode to scale to [0,1]."""
-    if img.mode in ("I;16", "I;16L", "I;16B"):
-        return 65535.0
-    if img.mode == "I":
-        # 32-bit signed integer; use actual max present to avoid clipping.
-        arr = np.asarray(img)
-        return float(arr.max()) if arr.size > 0 else float(np.iinfo(np.int32).max)
-    return 255.0
-
-
 def assess_source(img_path: Path) -> dict:
     suffix = img_path.suffix.lower()
 
@@ -446,7 +474,6 @@ def assess_source(img_path: Path) -> dict:
         "source_mode": None,
         "source_bit_depth": None,
         "source_dimensions": None,
-        "color_management": "No embedded ICC profile detected; input interpreted as sRGB.",
     }
 
     try:
@@ -455,12 +482,6 @@ def assess_source(img_path: Path) -> dict:
             info["source_bit_depth"] = _source_bit_depth(img)
             info["source_dimensions"] = [img.width, img.height]
             info["icc_profile"] = _profile_name(img)
-
-            if info["icc_profile"]:
-                info["color_management"] = (
-                    "Embedded ICC profile detected; image is converted to the "
-                    "defined sRGB working space before Lab analysis when possible."
-                )
     except Exception as exc:
         info["compression_warning"] = f"Could not inspect image metadata: {exc}"
         return info
@@ -554,6 +575,9 @@ def assess_source(img_path: Path) -> dict:
 # Configuration
 # -----------------------------------------------------------------------------
 
+THRESHOLD_MODES = ("noise_floor", "percentile", "otsu", "fixed")
+
+
 @dataclass
 class VisualizerConfig:
     input_dir: Path
@@ -561,7 +585,8 @@ class VisualizerConfig:
     analysis_scale: float = 1.0
     output_scale: float = 0.5
     chroma_boost_factor: float = 3.0
-    threshold_mode: str = "percentile"
+    threshold_mode: str = "noise_floor"
+    noise_fraction: float = 0.01
     percentile: float = 90.0
     fixed_threshold: float = 5.0
     threshold_bias: float = 0.0
@@ -589,6 +614,7 @@ class VisualizerConfig:
     save_16bit_tiff_sidecar: bool = True
     min_component_area_pixels: int = 100
     max_image_pixels: int = 100_000_000
+    default_colorspace: str = "sRGB"
     formats: set = field(default_factory=lambda: set(VALID_EXTENSIONS))
 
     def __post_init__(self):
@@ -606,8 +632,10 @@ class VisualizerConfig:
             raise ValueError("analysis_scale must be > 0 and <= 1.0")
         if not (0 < self.output_scale <= 1.0):
             raise ValueError("output_scale must be > 0 and <= 1.0")
-        if self.threshold_mode not in ("otsu", "percentile", "fixed"):
-            raise ValueError("threshold_mode must be 'otsu', 'percentile', or 'fixed'")
+        if self.threshold_mode not in THRESHOLD_MODES:
+            raise ValueError(f"threshold_mode must be one of {THRESHOLD_MODES}")
+        if not (0 < self.noise_fraction < 1):
+            raise ValueError("noise_fraction must be between 0 and 1")
         if not (0 < self.percentile <= 100):
             raise ValueError("percentile must be > 0 and <= 100")
         if self.fixed_threshold < 0:
@@ -634,6 +662,10 @@ class VisualizerConfig:
             raise ValueError("presentation_alpha_sigma must be >= 0")
         if self.max_image_pixels < 1:
             raise ValueError("max_image_pixels must be >= 1")
+        if self.default_colorspace not in SUPPORTED_COLORSPACES:
+            raise ValueError(
+                f"default_colorspace must be one of {SUPPORTED_COLORSPACES}"
+            )
 
         if HEIC_SUPPORTED:
             self.formats |= HEIC_EXTENSIONS
@@ -655,76 +687,141 @@ class ImageProcessor:
                 tileGridSize=self.cfg.clahe_grid_size,
             )
 
+    @staticmethod
+    def _is_16bit_color(img: Image.Image, image_path: Path) -> bool:
+        """True for 16-bit-per-channel RGB(A) TIFF/PNG (which Pillow truncates)."""
+        if img.mode not in ("RGB", "RGBA"):
+            return False
+        suffix = image_path.suffix.lower()
+        try:
+            if suffix in (".tif", ".tiff"):
+                bps = img.tag_v2.get(258)  # BitsPerSample
+                if isinstance(bps, (tuple, list)):
+                    bps = bps[0]
+                return bps == 16
+            if suffix == ".png":
+                with open(image_path, "rb") as f:
+                    header = f.read(26)
+                return len(header) >= 25 and header[24] == 16  # IHDR bit depth
+        except Exception:
+            return False
+        return False
+
+    @staticmethod
+    def _read_16bit_color(image_path: Path) -> Optional[np.ndarray]:
+        """
+        Pillow decodes 16-bit-per-channel RGB TIFF/PNG to 8 bits, so read those
+        with OpenCV instead.  Returns float32 RGB in [0,1], or None if the file
+        is not a 16-bit colour image.  EXIF orientation is applied by OpenCV.
+        """
+        try:
+            buf = np.fromfile(str(image_path), dtype=np.uint8)  # unicode-safe
+            arr = cv2.imdecode(buf, cv2.IMREAD_ANYDEPTH | cv2.IMREAD_COLOR)
+        except Exception:
+            return None
+        if arr is None or arr.dtype != np.uint16 or arr.ndim != 3:
+            return None
+        return cv2.cvtColor(arr, cv2.COLOR_BGR2RGB).astype(np.float32) / 65535.0
+
+    @staticmethod
+    def _pil_to_float(img: Image.Image) -> Tuple[np.ndarray, int]:
+        """Convert a Pillow image to float32 RGB [0,1] at its native depth."""
+        mode = img.mode
+        if mode.startswith("I;16"):
+            arr = np.asarray(img).astype(np.float32) / 65535.0
+            bits = 16
+        elif mode == "I":
+            # Pillow opens 16-bit greyscale PNG as "I"; treat as 16-bit range
+            # unless values exceed it.
+            raw = np.asarray(img).astype(np.float64)
+            top = 65535.0 if raw.max() <= 65535 else float(raw.max())
+            arr = (raw / top).astype(np.float32)
+            bits = 16 if top == 65535.0 else 32
+        elif mode == "F":
+            raw = np.asarray(img).astype(np.float32)
+            top = float(raw.max())
+            arr = raw / top if top > 1.0 else raw
+            bits = 32
+        else:
+            if mode not in ("RGB", "L"):
+                img = img.convert("RGB")
+            arr = np.asarray(img).astype(np.float32) / 255.0
+            bits = 8
+        if arr.ndim == 2:
+            arr = np.repeat(arr[:, :, None], 3, axis=2)
+        elif arr.shape[2] == 4:
+            arr = arr[:, :, :3]
+        return np.clip(arr, 0.0, 1.0), bits
+
     def _open_working_rgb(self, image_path: Path) -> Tuple[np.ndarray, dict]:
         """
-        Open image preserving full bit depth as float32 [0,1].
-        16-bit and 32-bit sources are kept at float32 precision.
-        Color space is detected from EXIF/ICC; defaults to ProPhoto RGB.
+        Open an image as float32 RGB [0,1], preserving 16-bit precision.
+
+        Colour handling:
+        * Recognised standard profiles (sRGB, Adobe RGB, ProPhoto) are decoded
+          analytically at full precision; no ICC transform is applied.
+        * Any other embedded ICC profile is converted to sRGB with LittleCMS
+          (8-bit), and the working space is then sRGB.
+        * Untagged images use the configured default colour space.
+        The returned metadata["working_colorspace"] is the space the pixel
+        values are actually in, and is what must be used for LAB conversion.
         """
         try:
             with Image.open(image_path) as img:
-                img = ImageOps.exif_transpose(img)
                 source_mode = img.mode
-                source_bit_depth = _source_bit_depth(img)
+                icc_bytes = img.info.get("icc_profile")
                 icc_name = _profile_name(img)
                 original_size = [img.width, img.height]
 
-                # Detect color space (FADGI: default ProPhoto RGB)
-                colorspace, cs_provenance = _detect_colorspace(img, image_path)
+                # Detect BEFORE exif_transpose (which drops EXIF accessors).
+                colorspace, cs_provenance = _detect_colorspace(
+                    img, image_path, self.cfg.default_colorspace
+                )
+                recognised = icc_name is None or cs_provenance.startswith("ICC")
 
-                # Bit-depth-aware conversion to float32 [0,1]
-                max_val = _source_max_value(img)
-                has_icc = img.info.get("icc_profile") is not None
+                rgb = (
+                    self._read_16bit_color(image_path)
+                    if self._is_16bit_color(img, image_path) else None
+                )
+                if rgb is not None:
+                    bits = 16
+                    img_t = None
+                else:
+                    img_t = ImageOps.exif_transpose(img)
+                    rgb, bits = self._pil_to_float(img_t)
 
-                if has_icc:
-                    try:
-                        src_profile = ImageCms.ImageCmsProfile(img.info["icc_profile"])
-                        dst_profile = ImageCms.createProfile("sRGB")
-                        transform = ImageCms.buildTransformFromOpenProfiles(
-                            src_profile, dst_profile, img.mode, "RGB"
-                        )
-                        img = ImageCms.applyTransform(img, transform)
-                        # After ICC transform, mode is RGB but may be 8-bit depending
-                        # on the transform path. We need to detect the actual mode.
-                        if img.mode.startswith("I"):
-                            max_val = _source_max_value(img)
-                        else:
-                            max_val = 255.0
+                working = colorspace
+                if icc_bytes and not recognised:
+                    if bits == 8 and img_t is not None:
+                        try:
+                            src_profile = ImageCms.ImageCmsProfile(io.BytesIO(icc_bytes))
+                            dst_profile = ImageCms.createProfile("sRGB")
+                            src_img = img_t if img_t.mode in ("RGB", "CMYK", "L") else img_t.convert("RGB")
+                            converted = ImageCms.profileToProfile(
+                                src_img, src_profile, dst_profile, outputMode="RGB"
+                            )
+                            rgb, _ = self._pil_to_float(converted)
+                            working = "sRGB"
+                            color_management = (
+                                f"Unrecognised ICC profile '{icc_name}' converted to "
+                                "sRGB with LittleCMS (8-bit) before LAB analysis."
+                            )
+                        except Exception as exc:
+                            color_management = (
+                                f"ICC profile '{icc_name}' could not be applied ({exc}); "
+                                f"pixel values interpreted as {colorspace}."
+                            )
+                    else:
                         color_management = (
-                            f"ICC-managed sRGB conversion from source profile. "
-                            f"Detected source space: {colorspace}."
-                        )
-                    except Exception:
-                        # Fallback: convert to RGB natively
-                        img = img.convert("RGB")
-                        max_val = 255.0
-                        color_management = (
-                            f"Embedded ICC profile present but conversion failed; "
-                            f"Pillow RGB conversion used as fallback. "
-                            f"Detected source space: {colorspace}. "
-                            "Image treated as sRGB."
+                            f"ICC profile '{icc_name}' is not a recognised standard "
+                            f"space and cannot be applied at {bits}-bit; pixel values "
+                            f"interpreted as {colorspace}."
                         )
                 else:
-                    img = img.convert("RGB")
-                    max_val = 255.0
                     color_management = (
-                        f"No embedded ICC profile; interpreted as {colorspace}. "
-                        f"Provenance: {cs_provenance}"
+                        f"Analytic {colorspace} -> XYZ -> CIELAB(D65) decode at "
+                        f"{bits}-bit precision. Provenance: {cs_provenance}"
                     )
-
-                # Convert to float32 [0,1] preserving precision
-                if img.mode.startswith("I"):
-                    arr = np.asarray(img, dtype=np.float32) / max_val
-                else:
-                    arr = np.asarray(img, dtype=np.float32) / max_val
-
-                # Ensure 3-channel RGB
-                if arr.ndim == 2:
-                    arr = np.stack([arr, arr, arr], axis=-1)
-                elif arr.ndim == 3 and arr.shape[2] == 4:
-                    arr = arr[:, :, :3]
-
-                rgb = np.clip(arr, 0.0, 1.0)
 
                 if self.cfg.analysis_scale != 1.0:
                     h, w = rgb.shape[:2]
@@ -732,16 +829,16 @@ class ImageProcessor:
                         max(1, int(round(w * self.cfg.analysis_scale))),
                         max(1, int(round(h * self.cfg.analysis_scale))),
                     )
-                    # Use INTER_AREA for downscaling float32 images
                     rgb = cv2.resize(rgb, new_size, interpolation=cv2.INTER_AREA)
 
                 metadata = {
                     "source_mode": source_mode,
-                    "source_bit_depth": source_bit_depth,
+                    "source_bit_depth": bits,
                     "source_dimensions": original_size,
                     "analysis_dimensions": [int(rgb.shape[1]), int(rgb.shape[0])],
                     "icc_profile": icc_name,
                     "detected_colorspace": colorspace,
+                    "working_colorspace": working,
                     "colorspace_provenance": cs_provenance,
                     "color_management": color_management,
                 }
@@ -895,11 +992,42 @@ class ImageProcessor:
         idx = int(np.argmax(variance))
         return float(bin_centers[idx])
 
+    def _noise_floor_threshold(self, flat: np.ndarray, space: str) -> float:
+        """
+        Substrate noise-floor threshold (the method described in the README,
+        ported from v3.0): histogram the feature, find the dominant peak (the
+        paper/substrate), and walk up from it until the bin count drops below
+        noise_fraction x peak count.  That point is the noise floor.
+        """
+        bin_width = 0.5 if space == "raw" else 0.1   # C*ab units / LRC units
+        lo = float(min(0.0, flat.min()))
+        hi = float(flat.max())
+        n_bins = int(np.clip(np.ceil((hi - lo) / bin_width), 1, 4096))
+        if hi - lo <= 0:
+            return hi
+        counts, edges = np.histogram(flat, bins=n_bins, range=(lo, hi))
+        peak = int(np.argmax(counts))
+
+        # Dominant high-feature population: tail model not trustworthy.
+        if peak > n_bins * 0.90:
+            return float(np.percentile(flat, 75))
+
+        cutoff = counts[peak] * self.cfg.noise_fraction
+        below = np.nonzero(counts[peak:] < cutoff)[0]
+        if below.size:
+            return float(edges[peak + below[0]])
+        return float(edges[peak]) + (10.0 if space == "raw" else 2.0)
+
     def _compute_threshold(self, feature: np.ndarray, space: str) -> float:
         """Compute threshold according to the configured mode."""
         flat = feature.ravel()
 
-        if self.cfg.threshold_mode == "otsu":
+        if self.cfg.threshold_mode == "noise_floor":
+            threshold = self._noise_floor_threshold(flat, space)
+            if space == "raw":
+                # Below ~1 C*ab is indistinguishable from neutral.
+                threshold = max(threshold, 1.0)
+        elif self.cfg.threshold_mode == "otsu":
             threshold = self._otsu_threshold(flat)
         elif self.cfg.threshold_mode == "percentile":
             threshold = float(np.percentile(flat, self.cfg.percentile))
@@ -916,15 +1044,15 @@ class ImageProcessor:
             threshold = 0.0
         return threshold
 
-    def _threshold_for_sensitivity(self, feature: np.ndarray, factor: float, space: str) -> float:
+    def _threshold_for_sensitivity(self, nominal: float, factor: float, space: str) -> float:
         """Perturb the nominal threshold for the stability test."""
-        nominal = self._compute_threshold(feature, space)
         # LRC is roughly zero-centered -> additive perturbation
         # Raw C*ab is positive-definite -> multiplicative perturbation
         if space == "lrc":
             delta = (factor - 1.0) * self.cfg.lrc_sensitivity_scale
             return nominal + delta
-        return max(nominal * factor, 1.0)
+        # Same clamp as _compute_threshold, so factor 1.0 == nominal threshold.
+        return max(nominal * factor, 0.0)
 
     @staticmethod
     def _jaccard(a: np.ndarray, b: np.ndarray) -> float:
@@ -937,11 +1065,17 @@ class ImageProcessor:
 
     def _sensitivity_metrics(self, feature: np.ndarray, space: str) -> dict:
         factors = self.cfg.sensitivity_factors
+        nominal = self._compute_threshold(feature, space)
         thresholds = [
-            self._threshold_for_sensitivity(feature, float(f), space) for f in factors
+            self._threshold_for_sensitivity(nominal, float(f), space) for f in factors
         ]
 
-        masks = [feature > t for t in thresholds]
+        # Apply the same spatial filter as the reported mask, so the
+        # stability metric describes the mask that is actually output.
+        masks = [
+            self._apply_spatial_filter((feature > t).astype(np.uint8)).astype(bool)
+            for t in thresholds
+        ]
         center_idx = min(
             range(len(factors)),
             key=lambda i: abs(factors[i] - 1.0)
@@ -1059,9 +1193,8 @@ class ImageProcessor:
         return threshold, alpha, binary_filtered, metrics
 
     def _boost_chroma(self, rgb: np.ndarray) -> Image.Image:
-        # Use the color-space-aware LAB conversion for consistency
-        colorspace = getattr(self, '_last_colorspace', 'sRGB')
-        lab = self._rgb_to_lab(rgb, colorspace)
+        """rgb: sRGB display image, float32 [0,1]."""
+        lab = self._rgb_to_lab(rgb, "sRGB")
         l, a, b = cv2.split(lab)
 
         factor = self.cfg.chroma_boost_factor
@@ -1088,22 +1221,19 @@ class ImageProcessor:
         else:
             alpha_blurred = alpha
 
-        colorspace = getattr(self, '_last_colorspace', 'sRGB')
-        lab = self._rgb_to_lab(rgb, colorspace)
+        # rgb is the sRGB display image
+        lab = self._rgb_to_lab(rgb, "sRGB")
         l, a, b = cv2.split(lab)
 
         if self.clahe is not None:
             # CLAHE on small images can show tile artefacts; guard against it
+            # tileGridSize is the NUMBER of tiles (cols, rows), not pixels.
+            # Skip CLAHE when tiles would be smaller than ~16 px.
             h, w = rgb.shape[:2]
-            tile_h = max(self.cfg.clahe_grid_size[1], h // 100)
-            tile_w = max(self.cfg.clahe_grid_size[0], w // 100)
-            if tile_h >= 2 and tile_w >= 2:
-                clahe_local = cv2.createCLAHE(
-                    clipLimit=self.cfg.clahe_clip_limit,
-                    tileGridSize=(tile_w, tile_h),
-                )
+            cols, rows = self.cfg.clahe_grid_size
+            if w // cols >= 16 and h // rows >= 16:
                 l8 = np.clip(l / 100.0 * 255.0, 0, 255).astype(np.uint8)
-                l_enhanced = clahe_local.apply(l8).astype(np.float32) / 255.0 * 100.0
+                l_enhanced = self.clahe.apply(l8).astype(np.float32) / 255.0 * 100.0
             else:
                 l_enhanced = l
         else:
@@ -1117,10 +1247,10 @@ class ImageProcessor:
             cv2.cvtColor(boosted_lab, cv2.COLOR_LAB2RGB) * 255.0, 0, 255
         ).astype(np.float32)
 
-        gray = cv2.cvtColor(rgb, cv2.COLOR_RGB2GRAY).astype(np.float32)
-        # FIX: "cls" typo corrected to np.uint8 cast
-        background = cv2.cvtColor(
-            (gray * 0.15).astype(np.uint8), cv2.COLOR_GRAY2RGB
+        # Dark greyscale context: rgb is [0,1], so scale to 0-255 first.
+        gray = cv2.cvtColor(rgb.astype(np.float32), cv2.COLOR_RGB2GRAY)
+        background = np.repeat(
+            (gray * 255.0 * 0.15)[:, :, None], 3, axis=2
         ).astype(np.float32)
 
         alpha3 = np.repeat(alpha_blurred[:, :, None], 3, axis=2)
@@ -1188,26 +1318,46 @@ class ImageProcessor:
         fig.savefig(path, dpi=150)
         plt.close(fig)
 
+    def _wrap(self, text: str, max_w: float) -> list[str]:
+        """Greedy word-wrap of text to max_w pixels with the current font."""
+        measure = ImageDraw.Draw(Image.new("RGB", (1, 1)))
+        lines, current = [], ""
+        for word in text.split(" "):
+            trial = f"{current} {word}".strip()
+            if current and measure.textlength(trial, font=self.font) > max_w:
+                lines.append(current)
+                current = word
+            else:
+                current = trial
+        if current:
+            lines.append(current)
+        return lines or [""]
+
     def _save_footer(self, img: Image.Image, left: str, right: str = "") -> Image.Image:
         w, h = img.size
         draw = ImageDraw.Draw(Image.new("RGB", (1, 1)))  # dummy for metrics
-        bbox = draw.textbbox((0, 0), left, font=self.font)
-        text_h = bbox[3] - bbox[1]
-        footer_h = max(FOOTER_HEIGHT, text_h + 24)
+        line_h = draw.textbbox((0, 0), "Ag" + left + right, font=self.font)[3]
+        left_w = draw.textlength(left, font=self.font)
+        right_w = draw.textlength(right, font=self.font) if right else 0
+
+        if not right or left_w + right_w + 40 <= w:
+            lines = None  # single line: left-aligned + right-aligned
+            n_lines = 1
+        else:
+            lines = self._wrap(left, w - 20) + self._wrap(right, w - 20)
+            n_lines = len(lines)
+        footer_h = max(FOOTER_HEIGHT, n_lines * (line_h + 4) + 20)
 
         out = Image.new("RGB", (w, h + footer_h), "white")
         out.paste(img, (0, 0))
         draw = ImageDraw.Draw(out)
-        draw.text((10, h + 12), left, font=self.font, fill="black")
-
-        if right:
-            bbox = draw.textbbox((0, 0), right, font=self.font)
-            draw.text(
-                (w - (bbox[2] - bbox[0]) - 10, h + 12),
-                right,
-                font=self.font,
-                fill="black",
-            )
+        if lines is None:
+            draw.text((10, h + 10), left, font=self.font, fill="black")
+            if right:
+                draw.text((w - right_w - 10, h + 10), right, font=self.font, fill="black")
+        else:
+            for k, line in enumerate(lines):
+                draw.text((10, h + 10 + k * (line_h + 4)), line, font=self.font, fill="black")
         return out
 
     def _create_montage(
@@ -1219,14 +1369,34 @@ class ImageProcessor:
         footer: str,
     ) -> Image.Image:
         w, h = original.size
+        total_w = w * 3
         draw = ImageDraw.Draw(Image.new("RGB", (1, 1)))
-        bbox = draw.textbbox((0, 0), footer, font=self.font)
-        text_h = bbox[3] - bbox[1]
-        footer_h = max(MONTAGE_FOOTER_HEIGHT, text_h + 24)
 
-        montage = Image.new(
-            "RGB", (w * 3, h + footer_h), "white"
+        def text_w(t: str) -> float:
+            return draw.textlength(t, font=self.font)
+
+        line_h = draw.textbbox((0, 0), "Ag" + footer + fname, font=self.font)[3]
+        pad = 8
+
+        # Info lines: filename + footer on one line if they fit, otherwise
+        # the footer is wrapped at " | " / spaces onto following lines.
+        max_w = total_w - 40
+        info_lines: list[str] = []
+        if text_w(fname) + 30 + text_w(footer) <= max_w:
+            info_lines.append(f"{fname}   {footer}")
+        else:
+            info_lines.append(fname)
+            info_lines.extend(self._wrap(footer, max_w))
+
+        label_y = h + pad
+        rule_y = label_y + line_h + pad
+        info_y = rule_y + pad
+        footer_h = max(
+            MONTAGE_FOOTER_HEIGHT,
+            info_y - h + len(info_lines) * (line_h + 4) + pad,
         )
+
+        montage = Image.new("RGB", (total_w, h + footer_h), "white")
         montage.paste(original, (0, 0))
         montage.paste(chroma, (w, 0))
         montage.paste(segmented, (w * 2, 0))
@@ -1235,24 +1405,18 @@ class ImageProcessor:
         for i, text in enumerate([
             "Original", "Chroma Boosted", "Segmented Chroma"
         ]):
-            bbox = draw.textbbox((0, 0), text, font=self.font)
             draw.text(
-                ((i * w) + (w - (bbox[2] - bbox[0])) / 2, h + 5),
+                ((i * w) + (w - text_w(text)) / 2, label_y),
                 text,
                 font=self.font,
                 fill="black",
             )
 
-        draw.line([(0, h + 40), (w * 3, h + 40)], fill="black", width=1)
-        draw.text((20, h + 48), fname, font=self.font, fill="black")
-
-        bbox = draw.textbbox((0, 0), footer, font=self.font)
-        draw.text(
-            ((w * 3) - (bbox[2] - bbox[0]) - 20, h + 48),
-            footer,
-            font=self.font,
-            fill="black",
-        )
+        draw.line([(0, rule_y), (total_w, rule_y)], fill="black", width=1)
+        for k, line in enumerate(info_lines):
+            draw.text(
+                (20, info_y + k * (line_h + 4)), line, font=self.font, fill="black"
+            )
         return montage
 
     def _process_single_space(
@@ -1295,7 +1459,7 @@ class ImageProcessor:
 
             if self.cfg.save_numerical_tiff:
                 # FIX: save as 16-bit unsigned rather than 8-bit "L" mode
-                Image.fromarray(categorical.astype(np.uint16), mode="I;16").save(
+                Image.fromarray(categorical.astype(np.uint16)).save(
                     space_dir / f"{out_prefix}_mask.tif", compression="tiff_deflate"
                 )
 
@@ -1357,7 +1521,6 @@ class ImageProcessor:
                 "timestamp_utc": datetime.now(timezone.utc).isoformat(),
                 "source": {
                     "path_relative": str(img_path.relative_to(self.cfg.input_dir)).replace(os.sep, "/"),
-                    "sha256": _sha256_file(img_path),
                     **source,
                     **working_meta,
                 },
@@ -1375,6 +1538,7 @@ class ImageProcessor:
                     ),
                     "threshold_mode": self.cfg.threshold_mode,
                     "percentile": self.cfg.percentile if self.cfg.threshold_mode == "percentile" else None,
+                    "noise_fraction": self.cfg.noise_fraction if self.cfg.threshold_mode == "noise_floor" else None,
                     "fixed_threshold": self.cfg.fixed_threshold if self.cfg.threshold_mode == "fixed" else None,
                     "threshold_bias": self.cfg.threshold_bias,
                     "min_component_area_pixels": self.cfg.min_component_area_pixels,
@@ -1423,7 +1587,7 @@ class ImageProcessor:
         """
         try:
             # Memory guard
-            with Image.open(img_path) as img:
+            with Image.open(img_path) as img:  # header only; pixels not decoded
                 if img.width * img.height > self.cfg.max_image_pixels:
                     raise RuntimeError(
                         f"Image exceeds max_image_pixels ({self.cfg.max_image_pixels}). "
@@ -1431,12 +1595,10 @@ class ImageProcessor:
                     )
 
             source = assess_source(img_path)
+            source["sha256"] = _sha256_file(img_path)
             rgb, working_meta = self._open_working_rgb(img_path)
 
-            # Remember colorspace for downstream visualisation
-            self._last_colorspace = working_meta.get("detected_colorspace", "sRGB")
-
-            lab = self._rgb_to_lab(rgb, self._last_colorspace)
+            lab = self._rgb_to_lab(rgb, working_meta["working_colorspace"])
             chroma = self._chroma_from_lab(lab)
             lrc, lrc_meta = self._compute_lrc(lab, chroma)
 
@@ -1455,27 +1617,42 @@ class ImageProcessor:
 
             # --- Numerical outputs (once) ---
             if self.cfg.save_numerical_tiff:
-                Image.fromarray(chroma.astype(np.float32), mode="F").save(
+                Image.fromarray(chroma.astype(np.float32)).save(
                     numerical_dir / f"{out_prefix}_chroma.tif", compression="tiff_deflate"
                 )
-                Image.fromarray(lrc.astype(np.float32), mode="F").save(
+                Image.fromarray(lrc.astype(np.float32)).save(
                     numerical_dir / f"{out_prefix}_lrc.tif", compression="tiff_deflate"
                 )
 
                 if self.cfg.save_16bit_tiff_sidecar:
-                    c16 = np.clip(chroma / chroma.max() * 65535, 0, 65535).astype(np.uint16)
-                    Image.fromarray(c16, mode="I;16").save(
+                    # Per-image min-max scaling (for viewing only); the scale
+                    # is recorded in the JSON so values can be recovered.
+                    c_max = float(chroma.max())
+                    c16 = np.clip(chroma / max(c_max, 1e-9) * 65535, 0, 65535).astype(np.uint16)
+                    Image.fromarray(c16).save(
                         numerical_dir / f"{out_prefix}_chroma_u16.tif"
                     )
-                    l16 = np.clip((lrc - lrc.min()) / (lrc.max() - lrc.min() + 1e-9) * 65535, 0, 65535).astype(np.uint16)
-                    Image.fromarray(l16, mode="I;16").save(
+                    l_min, l_max = float(lrc.min()), float(lrc.max())
+                    l16 = np.clip((lrc - l_min) / max(l_max - l_min, 1e-9) * 65535, 0, 65535).astype(np.uint16)
+                    working_meta["u16_sidecar_scaling"] = {
+                        "chroma": {"value_at_0": 0.0, "value_at_65535": c_max},
+                        "lrc": {"value_at_0": l_min, "value_at_65535": l_max},
+                    }
+                    Image.fromarray(l16).save(
                         numerical_dir / f"{out_prefix}_lrc_u16.tif"
                     )
 
             # --- Presentation images (once) ---
+            # Render the analysed LAB to sRGB for display so that Adobe RGB /
+            # ProPhoto sources are not shown with the wrong primaries.
+            if working_meta["working_colorspace"] == "sRGB":
+                display_src = rgb
+            else:
+                display_src = cv2.cvtColor(lab, cv2.COLOR_LAB2RGB)
             original_pil = Image.fromarray(
-                np.clip(rgb * 255.0, 0, 255).astype(np.uint8)
+                np.clip(display_src * 255.0, 0, 255).astype(np.uint8)
             )
+            del display_src
             if self.cfg.output_scale != 1.0:
                 w, h = original_pil.size
                 display_size = (
@@ -1483,12 +1660,10 @@ class ImageProcessor:
                     max(1, int(round(h * self.cfg.output_scale))),
                 )
                 display_original = original_pil.resize(display_size, Image.Resampling.LANCZOS)
-                display_rgb = np.asarray(display_original).astype(np.float32) / 255.0
-                # Safe to release full-res rgb now that display_rgb is independent
-                del rgb
             else:
                 display_original = original_pil
-                display_rgb = rgb  # float32 [0,1], still referenced
+            display_rgb = np.asarray(display_original).astype(np.float32) / 255.0
+            del rgb
 
             lab = None  # allow GC
 
@@ -1558,7 +1733,9 @@ def _worker_task(path: Path) -> Tuple[bool, str, list[dict]]:
     return _proc.process_image(path)
 
 
-def collect_images(input_dir: Path, formats: set) -> list[Path]:
+def collect_images(
+    input_dir: Path, formats: set, exclude_dir: Optional[Path] = None
+) -> list[Path]:
     images = []
     for p in input_dir.rglob("*"):
         if p.suffix.lower() not in formats or not p.is_file():
@@ -1567,8 +1744,12 @@ def collect_images(input_dir: Path, formats: set) -> list[Path]:
             resolved = p.resolve()
         except OSError:
             continue
-        if resolved.is_relative_to(input_dir):
-            images.append(p)
+        if not resolved.is_relative_to(input_dir):
+            continue
+        # Don't re-ingest outputs when output_dir lives inside input_dir.
+        if exclude_dir is not None and resolved.is_relative_to(exclude_dir):
+            continue
+        images.append(p)
     return sorted(images)
 
 
@@ -1602,6 +1783,7 @@ def _write_manifest(config: VisualizerConfig) -> Path:
             "output_scale": config.output_scale,
             "chroma_boost_factor": config.chroma_boost_factor,
             "threshold_mode": config.threshold_mode,
+            "noise_fraction": config.noise_fraction,
             "percentile": config.percentile,
             "fixed_threshold": config.fixed_threshold,
             "threshold_bias": config.threshold_bias,
@@ -1620,6 +1802,7 @@ def _write_manifest(config: VisualizerConfig) -> Path:
             "save_thumbnail_original": config.save_thumbnail_original,
             "save_16bit_tiff_sidecar": config.save_16bit_tiff_sidecar,
             "max_image_pixels": config.max_image_pixels,
+            "default_colorspace": config.default_colorspace,
         },
     }
 
@@ -1696,7 +1879,7 @@ def _write_summary(config: VisualizerConfig, records: list[dict]) -> Path:
 def run_batch(config: VisualizerConfig) -> list[tuple[bool, str]]:
     _write_manifest(config)
 
-    images = collect_images(config.input_dir, config.formats)
+    images = collect_images(config.input_dir, config.formats, config.output_dir)
     total = len(images)
 
     if not images:
@@ -1709,6 +1892,8 @@ def run_batch(config: VisualizerConfig) -> list[tuple[bool, str]]:
     print(f"Threshold mode: {config.threshold_mode}")
     if config.threshold_mode == "percentile":
         print(f"Percentile:     {config.percentile}")
+    elif config.threshold_mode == "noise_floor":
+        print(f"Noise fraction: {config.noise_fraction}")
     elif config.threshold_mode == "fixed":
         print(f"Fixed threshold: {config.fixed_threshold}")
     print(f"LRC bin width:  {config.lrc_bin_width}")
@@ -1717,7 +1902,7 @@ def run_batch(config: VisualizerConfig) -> list[tuple[bool, str]]:
     print(f"Alpha blur:     {config.presentation_alpha_sigma} px")
     print(f"Max pixels:     {config.max_image_pixels}")
     print(f"Workers:        {config.max_workers or 'auto'}")
-    print("Color space:    EXIF/ICC-aware; ProPhoto RGB default")
+    print(f"Color space:    ICC/EXIF-aware; {config.default_colorspace} default")
 
     results = []
     records = []
@@ -1784,7 +1969,12 @@ def _build_parser() -> argparse.ArgumentParser:
     p.add_argument("--analysis-scale", type=float, default=1.0)
     p.add_argument("--output-scale", type=float, default=0.5)
     p.add_argument(
-        "--threshold-mode", choices=["otsu", "percentile", "fixed"], default="percentile"
+        "--threshold-mode", choices=list(THRESHOLD_MODES), default="noise_floor"
+    )
+    p.add_argument(
+        "--noise-fraction", type=float, default=0.01,
+        help="noise_floor mode: fraction of the substrate peak count at which "
+             "the noise floor is placed (smaller = stricter). Default 0.01",
     )
     p.add_argument("--percentile", type=float, default=90.0)
     p.add_argument("--fixed-threshold", type=float, default=5.0)
@@ -1802,6 +1992,13 @@ def _build_parser() -> argparse.ArgumentParser:
     p.add_argument("--format", choices=["png", "jpg"], default="png")
     p.add_argument("--quality", type=int, default=95)
     p.add_argument("--max-image-pixels", type=int, default=100_000_000)
+    p.add_argument(
+        "--default-colorspace",
+        choices=list(SUPPORTED_COLORSPACES),
+        default="sRGB",
+        help="Colour space assumed for images with no ICC profile / EXIF tag "
+             "(default: sRGB)",
+    )
     p.add_argument("--no-sensitivity", action="store_true")
     p.add_argument("--no-histograms", action="store_true")
     p.add_argument("--no-numerical-tiff", action="store_true")
@@ -1818,6 +2015,11 @@ def main():
 
     parser = _build_parser()
     args = parser.parse_args()
+    if not args.input_dir.is_dir():
+        parser.error(
+            f"input directory not found: {args.input_dir} "
+            "(pass input_dir and output_dir, or edit INPUT_DIR/OUTPUT_DIR)"
+        )
 
     config = VisualizerConfig(
         input_dir=args.input_dir,
@@ -1826,6 +2028,7 @@ def main():
         output_scale=args.output_scale,
         chroma_boost_factor=args.chroma_boost,
         threshold_mode=args.threshold_mode,
+        noise_fraction=args.noise_fraction,
         percentile=args.percentile,
         fixed_threshold=args.fixed_threshold,
         threshold_bias=args.threshold_bias,
@@ -1847,13 +2050,14 @@ def main():
         save_16bit_tiff_sidecar=not args.no_16bit_sidecar,
         min_component_area_pixels=args.min_component_area,
         max_image_pixels=args.max_image_pixels,
+        default_colorspace=args.default_colorspace,
     )
 
     print(f"Chroma Diagnostic Tool v{VERSION}")
     print(f"Input:  {config.input_dir}")
     print(f"Output: {config.output_dir}")
     print("Both raw C*ab and LRC spaces will be computed for every image.")
-    print("Color-space default: ProPhoto RGB")
+    print(f"Color-space default (untagged images): {config.default_colorspace}")
 
     if HEIC_SUPPORTED:
         print("HEIC/HEIF support: enabled")

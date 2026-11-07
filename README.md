@@ -24,15 +24,29 @@ Tier 1 (Solid): Opaque, unmodified pigment.
 
 Texture Enhancement: Applies CLAHE (Contrast Limited Adaptive Histogram Equalization) to reveal topology.
 
-Batch Processing: Multi-threaded engine capable of processing hundreds of high-resolution TIFFs simultaneously using all available CPU cores.
+Batch Processing: Multi-process engine that processes a folder of images (including 16-bit TIFF/PNG) in parallel across CPU cores.
 
-User-Friendly GUI: No command line required. Includes real-time progress tracking and sensitivity controls.
+**Usage**
+
+```bash
+pip install -r requirements.txt
+python3 Chroma_diagnoser_v4.1 /path/to/input /path/to/output
+```
+
+Useful options (`--help` for all):
+
+- `--threshold-mode {noise_floor,percentile,otsu,fixed}` (default `noise_floor`, described below) and `--noise-fraction` (default 0.01; smaller is stricter).
+- `--default-colorspace {sRGB,"Adobe RGB","ProPhoto RGB"}`: the colour space assumed for images with no ICC profile or EXIF colour-space tag (default sRGB). Files with an embedded sRGB, Adobe RGB or ProPhoto profile are decoded in that space automatically.
+- `--output-scale` (default 0.5): size of the presentation images. Analysis always runs at full resolution unless `--analysis-scale` is set.
+- `--max-workers N`: lower this for very large images; each worker needs several GB for a 100-megapixel file.
+
+Each image produces analyses in two feature spaces, raw C\*ab and lightness-relative chroma (LRC), plus float TIFFs of the feature maps, a categorical mask, a JSON provenance record, and a batch CSV summary.
 
 **How It Works** 
 The processing pipeline follows a strict mathematical approach to ensure scientific integrity:
 
 1. Pre-processing & Normalization
-Images are converted to the CIELAB color space. The Euclidean distance from neutral gray (128, 128) is calculated for every pixel to determine Chroma (Color Intensity).
+Images are decoded in their source colour space (sRGB, Adobe RGB or ProPhoto RGB, with Bradford adaptation for ProPhoto) and converted to CIELAB (D65). The Euclidean distance from neutral gray (128, 128) is calculated for every pixel to determine Chroma (Color Intensity).
 
 2. Statistical Thresholding
 The tool generates a histogram of the image's chroma values. It identifies the "Noise Mountain" (the statistical peak representing the paper/substrate) and finds the exact point where the noise variance drops off (the 1% cutoff). This value becomes the Noise Floor.
@@ -41,7 +55,7 @@ The tool generates a histogram of the image's chroma values. It identifies the "
 
 Instead of applying a global filter, the tool treats data differently based on its intensity relative to the Noise Floor:
 
-Substrate Removal: Pixels below the floor are rendered as dark grayscale to reduce visual distraction.
+Substrate Removal: Pixels below the floor are rendered as dark grayscale to reduce visual distraction. Connected regions smaller than `--min-component-area` pixels are discarded.
 
 Signal Isolation: Pixels above the floor are segmented into three statistical tiers (Median, 85th Percentile, Max).
 
