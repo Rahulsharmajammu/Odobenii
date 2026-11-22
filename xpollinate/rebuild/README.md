@@ -6,9 +6,12 @@ visualiser's earlier iterations, Woodii's removed Chroma mode and the plan in TO
 
 The plan that came out of it is `../../TODO.md`. This folder holds the reasoning and the evidence behind it.
 
-> **Later correction (22 Nov):** the captures will be controlled and ICC-calibrated (DSLR or mirrorless), not the
-> phone snapshots the agents assumed. Finding 3 below, the second-photograph requirement and the phone-specific
-> handling no longer apply as the default. `03-author-answers.md` §5 lists what is superseded and what still holds.
+> **Later corrections (22 Nov), in `03-author-answers.md`:**
+> - **§5:** the captures will be controlled and ICC-calibrated (DSLR or mirrorless), not the phone snapshots the agents
+>   assumed. Finding 3 below, the second-photograph requirement and the phone-specific handling no longer apply as the
+>   default.
+> - **§6:** the visualiser is a viewer of one ProPhoto photograph per print. Infrared goes to a separate Woodii module.
+> - **§7:** the boost's leading candidate is a guarded decorrelation stretch, in a few colour spaces.
 
 > **Read this first: limits of everything here.**
 > - **No real capture of any print was available.** Every number comes from synthetic test images that the agents
@@ -24,8 +27,8 @@ The plan that came out of it is `../../TODO.md`. This folder holds the reasoning
 1. **`02-synthesis.md`**, sections 4 (the design) and 8 (what the red team left standing). Each idea is tagged
    with the report it came from. **[coordinator]** marks ideas that appear only in the synthesis, and
    **[Amended, B#]** marks fixes adopted after the final red-team pass.
-2. **`03-author-answers.md`**: your answers to the plan's four questions, and what they change. Where they conflict
-   with the synthesis, they win.
+2. **`03-author-answers.md`**: your answers to the plan's four questions and two later notes, and what they change.
+   Where they conflict with the synthesis, they win.
 3. **`00-precommit.md`**: the coordinator's own answer, written before any agent started. Section 6 of the
    synthesis diffs against it.
 4. **`reports/`**: every report, saved verbatim.
@@ -71,11 +74,12 @@ The plan that came out of it is `../../TODO.md`. This folder holds the reasoning
 
 ## The next action
 
-Answer the questions at the top of `TODO.md`. Then make the four test captures:
-- a known-unpainted print and a conservator-marked painted print;
-- each photographed twice, the second time under different light and with another device or the print moved.
+Make the gate's two test captures with the real setup, as 16-bit ProPhoto TIFFs:
+- a known-unpainted print;
+- a print whose faint washes a conservator has marked.
 
-Nothing else is built until the first build passes on those.
+Nothing else is built until the first build passes on those (`TODO.md`). The Woodii module's captures come later,
+through Woodii.
 
 ## Figures (synthetic, downscaled; in `figures/`)
 
