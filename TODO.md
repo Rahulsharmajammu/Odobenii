@@ -6,12 +6,12 @@ tool:
 - no claim to colorimetric accuracy;
 - it never claims a place is unpainted.
 
-**Two tools:**
+**Two tools, written separately on purpose (redundancy):**
 - **The visualiser** (this repository) is a viewer. It takes one visible photograph per print and nothing else. The
   photographs are ProPhoto RGB, taken under controlled lighting with DSLR or mirrorless cameras and calibrated with ICC
   profiles.
-- **A Woodii module** comes later, like Chroma mode. It takes a registered visible and near-infrared (NIRR) pair from
-  Woodii's linear output.
+- **A Woodii module** comes later, in Woodii, like Chroma mode. It takes a registered visible and near-infrared pair
+  (NIRR, at 850 nm) from Woodii's linear output.
 
 The reasoning and evidence are in `xpollinate/rebuild/`: start with its `README.md`, then `03-author-answers.md`.
 All of it comes from synthetic test images, so the real-capture gate below comes before any new code.
@@ -34,6 +34,8 @@ All of it comes from synthetic test images, so the real-capture gate below comes
   - The departure picture comes from that one photograph.
   - It takes no infrared, ultraviolet, second capture or session control. Infrared goes to the Woodii module.
   - The known-unpainted print checks the capture setup (the gate below); it is not an input.
+- **Two codebases, no shared code** (your choice: redundancy is good). The single-photograph viewer stays here; the
+  module for VIS and NIRR goes in Woodii.
 - **The captures are controlled and ICC-calibrated**, so decoding through the embedded profile matters. It is now
   correct for every matrix/TRC profile, ProPhoto included.
 - **Chroma mode failed on its method, and its output was too complex.**
@@ -48,11 +50,7 @@ All of it comes from synthetic test images, so the real-capture gate below comes
 
 ## Still open
 
-- [ ] **For the module:** which near-infrared band does Woodii's IRR record (behind a 720 nm or an 850 nm filter, say)?
-      It decides which colourants vanish: most grow more transparent further into the infrared.
-- [ ] **When the module starts:** where the shared core lives. Recommended: written once here, as a plain module
-      without a window. Woodii keeps a pinned copy, with a test that both give the same pictures from the same
-      photograph.
+Nothing. The gate's test captures are next.
 
 ## The gate: test captures before any code
 
@@ -133,16 +131,17 @@ trusted.
 
 ## The Woodii module (after the visualiser's step 1 passes the gate)
 
-Like Chroma mode, it lives in Woodii. Its idea is untested.
+Like Chroma mode, it lives in Woodii; this section moves there when work on it starts. Its idea is untested.
 
 **Inputs:** Woodii's linear exports, both on VIS's grid.
 - **VIS:** linear ProPhoto RGB with its ICC profile (32-bit float by default).
-- **NIRR:** the standardised IRR band, linear (one plane or three; 32-bit float by default). Its no-value pixels are
-  NaN, and are hatched.
+- **NIRR:** the standardised IRR band at 850 nm, linear (one plane or three; 32-bit float by default). Its no-value
+  pixels are NaN, and are hatched.
 - **Reading:** with tifffile. The module checks each file's description, and refuses Woodii's "picture" TIFFs, which
   have levels applied and are not data.
 
-**The idea: predict "this print unpainted" from the IR.** The silver stays in the IR while most washes vanish.
+**The idea: predict "this print unpainted" from the IR.** The silver stays in the IR while most washes vanish: at
+850 nm, most dyes and many watercolour pigments are transparent.
 - The reference is the visible colour as a smooth curve of IR density, per print. It is fitted with the visualiser's
   place votes and high-breakdown fit, with IR density in place of lightness.
 - Departures are what the IR does not predict: in colour, and now in lightness too (visible darker than the silver
@@ -161,11 +160,13 @@ Like Chroma mode, it lives in Woodii. Its idea is untested.
     still the wash's.
 
 **Where it can mislead:**
-- **IR-absorbing colourants** (Prussian blue, carbon-based media, copper greens and blues) read as silver. Their colour
-  still departs, but their darkening is explained away.
-- **Edges:** residual misregistration and the IR's softer focus make false departures. The noise's edge term takes
-  gradients from both frames, or the comparison is made at the IR's sharpness.
-- **Toned and printed-out images** can be faint in the IR, which weakens the reference.
+- **Colourants that still absorb at 850 nm read as silver:** Prussian blue, carbon-based media, and copper greens and
+  blues; iron-oxide earths (siennas, umbers, ochres) perhaps in part. Their colour still departs, but their darkening
+  is explained away. Check on a real print.
+- **Edges:** residual misregistration and the IR's softer image (focus, and light spreading in the paper) make false
+  departures. The noise's edge term takes gradients from both frames, or the comparison is made at the IR's sharpness.
+- **Printed-out images** (albumen, collodion) may be faint at 850 nm, since their fine silver absorbs mostly in the
+  visible. That would weaken the reference.
 
 **Lessons from Chroma mode,** whose IR reference fitted each channel's density to IR density in the user's untinted
 pick:
@@ -174,8 +175,12 @@ pick:
 - a curve that can bend with the print's tone, not a straight axis;
 - few pictures: no disagreement map, palette plot or unmixing.
 
-**Shared with the visualiser:** decoding to CIELAB, finding the print, hatching, the votes and the fit, the threshold,
-the pictures and the words.
+**Written separately, on purpose.** The module takes the visualiser's design but none of its code, and keeps Woodii's
+own conventions (tifffile, its colour maths, its provenance record). The redundancy is also a check:
+- export a print's VIS from Woodii as 16-bit (`--data uint16`), which the visualiser reads since 4.1.5;
+- run it through both;
+- the boosts differ by design, but the decoded colour, the print's border and the hatching should broadly agree.
+  Where they do not, find out why: one of the two may have a bug.
 
 **Its gate:** the gate's two prints captured through Woodii, plus a print with Prussian blue or carbon-based paint if
 one is to hand. Each is judged beside the visualiser on the same VIS:

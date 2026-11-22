@@ -1,8 +1,8 @@
 # The author's answers, and what they change
 
 22 November 2026, after the run. These are the author's words, verbatim: answers to the four questions in TODO.md
-(§1-4), then later notes on the captures (§5), the inputs (§6) and the stretch (§7). Where they conflict with the
-synthesis, they win.
+(§1-4), then later notes on the captures (§5), the inputs (§6), the stretch (§7), and the infrared band and where
+the code lives (§8). Where they conflict with the synthesis, they win.
 
 ## 1. Which part of Chroma mode failed?
 
@@ -210,3 +210,27 @@ built to bring out certain hues.
 - **The gate decides which spaces stay**: a space stays only if it shows a marked faint wash that the balanced one
   misses. The baseline becomes DStretch in its own spaces.
 - **One limit no space removes:** a yellow wash and uneven yellowing of the paper are the same colour change.
+
+## 8. The infrared band, and where the code lives (later the same day)
+
+> "the woodii IRR records 850nm. I think redundacny is good, so the VIS-IRR module can be in Woodii, whereas the
+> single photo viewer can be in the handpaint viewer."
+
+**What it settles.**
+- **Woodii's IRR is at 850 nm.** At 850 nm most dyes and many watercolour pigments are transparent, so washes in them
+  vanish from the IR, as the module needs. Some colourants do not vanish, and read as silver **[coordinator, general
+  knowledge of infrared reflectography; to check on a real print]**:
+  - Prussian blue;
+  - carbon-based media;
+  - copper greens and blues;
+  - iron-oxide earths (siennas, umbers, ochres), perhaps in part.
+- **Two codebases, no shared code.** The single-photograph viewer stays in this repository; the VIS and NIRR module
+  goes in Woodii. This replaces the previous plan's recommendation: one core, with a pinned copy in Woodii.
+
+**What changes.**
+- **The module keeps Woodii's conventions.** Its plan, now in `TODO.md`, moves to Woodii when work on it starts.
+- **The redundancy is also a check.** The same print's VIS can be exported from Woodii as 16-bit, which the visualiser
+  reads since 4.1.5, and run through both tools. The boosts differ by design, but the decoded colour, the print's
+  border and the hatching should broadly agree.
+- **A new caveat.** Printed-out images (albumen, collodion) may be faint at 850 nm, since their fine silver absorbs
+  mostly in the visible. That would weaken the module's reference.
