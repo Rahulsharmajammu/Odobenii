@@ -7,6 +7,16 @@ stands out from a monochrome substrate; they are qualitative.  It reports no
 areas, counts or statistics, and its colour handling is only as careful as a
 legible picture needs.
 
+Changes in 4.1.5
+----------------
+- An embedded matrix/TRC profile is now always applied from its own tone
+  curves, even when its name says sRGB, Adobe RGB or ProPhoto.  Before, the
+  name decided: a linear profile named "ProPhoto" (as Woodii writes for its
+  linear exports) was decoded with gamma 1.8, about 24 dE wrong in tests.
+  Names now decide only for LUT-based profiles and untagged files.
+- A 32-bit floating-point TIFF (Woodii's default export) is still not read;
+  the error now says so and suggests 16-bit.
+
 Changes in 4.1.4
 ----------------
 - Any embedded RGB matrix/TRC ICC profile (eciRGB v2, Display P3, camera matrix
@@ -108,7 +118,7 @@ from PIL import Image, ImageCms, ImageDraw, ImageFont, ImageOps, TiffImagePlugin
 # CONFIG
 # -----------------------------------------------------------------------------
 
-VERSION = "4.1.4"
+VERSION = "4.1.5"
 
 # Defaults used when no paths are given on the command line.
 INPUT_DIR = r"/path/to/input"
@@ -879,14 +889,17 @@ class ImageProcessor:
         Open an image as float32 RGB [0,1], preserving 16-bit precision.
 
         Colour handling:
-        * Recognised standard profiles (sRGB, Adobe RGB, ProPhoto) are decoded
-          analytically at full precision; no ICC transform is applied.
-        * Any other RGB matrix/TRC profile (eciRGB v2, Display P3, most camera
-          matrix profiles) is applied from its own colorants and tone curves at
-          full bit depth, and the pixels are re-encoded as ProPhoto RGB.
-        * LUT-based profiles are converted to sRGB with LittleCMS at 8-bit
+        * Any RGB matrix/TRC profile (sRGB, Adobe RGB, ProPhoto, eciRGB v2,
+          Display P3, most camera matrix profiles, linear profiles) is applied
+          from its own colorants and tone curves at full bit depth, and the
+          pixels are re-encoded as ProPhoto RGB.  The profile's name is not
+          trusted: a linear profile may be named "ProPhoto".
+        * LUT-based profiles with a recognised name (sRGB, Adobe RGB, ProPhoto)
+          are decoded analytically at full precision.
+        * Other LUT-based profiles are converted to sRGB with LittleCMS at 8-bit
           precision (16-bit data is reduced first); the working space is sRGB.
-        * Untagged images use the configured default colour space.
+        * Untagged images: EXIF colour space, then filename words, then the
+          configured default colour space.
         The returned metadata["working_colorspace"] is the space the pixel
         values are actually in, and is what must be used for LAB conversion.
         """
@@ -915,9 +928,9 @@ class ImageProcessor:
                     rgb, bits = self._pil_to_float(img_t)
 
                 working = colorspace
-                matrix_shaper = (
-                    _icc_matrix_shaper(icc_bytes) if (icc_bytes and not recognised) else None
-                )
+                # The profile's own curves win over its name (a linear profile
+                # may be named "ProPhoto"); names serve LUT profiles only.
+                matrix_shaper = _icc_matrix_shaper(icc_bytes) if icc_bytes else None
                 if matrix_shaper is not None:
                     rgb = _matrix_shaper_to_prophoto(rgb, *matrix_shaper)
                     working = "ProPhoto RGB"
@@ -979,7 +992,17 @@ class ImageProcessor:
                 return rgb, metadata
 
         except Exception as exc:
-            raise RuntimeError(f"File load/color-management error: {exc}") from exc
+            hint = ""
+            if image_path.suffix.lower() in (".tif", ".tiff"):
+                try:  # Pillow cannot open RGB float TIFFs: say so plainly
+                    probe = cv2.imdecode(np.fromfile(str(image_path), dtype=np.uint8),
+                                         cv2.IMREAD_UNCHANGED)
+                    if probe is not None and probe.dtype.kind == "f":
+                        hint = (" (a 32-bit floating-point TIFF, which this tool does not "
+                                "read: save it as 16-bit, e.g. Woodii's --data uint16)")
+                except Exception:
+                    pass
+            raise RuntimeError(f"File load/color-management error: {exc}{hint}") from exc
 
     @staticmethod
     def _rgb_to_lab(rgb: np.ndarray, colorspace: str = "sRGB") -> np.ndarray:
