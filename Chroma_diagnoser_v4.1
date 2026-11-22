@@ -7,6 +7,15 @@ stands out from a monochrome substrate; they are qualitative.  It reports no
 areas, counts or statistics, and its colour handling is only as careful as a
 legible picture needs.
 
+Changes in 4.1.3
+----------------
+- The threshold value is no longer printed on the montage footer or the
+  console, nor written to the run log or the JSON record; the per-band LRC
+  statistics are no longer written.  The record keeps the settings only.
+- Known limitation, unchanged: with the default noise_floor threshold, the
+  threshold rises with the paint, so the Segmented panel can miss large
+  painted areas.  The Chroma Boosted panel still shows them.
+
 Changes in 4.1.2
 ----------------
 - Everything that invited a quantitative reading is removed: area
@@ -88,7 +97,7 @@ from PIL import Image, ImageCms, ImageDraw, ImageFont, ImageOps, TiffImagePlugin
 # CONFIG
 # -----------------------------------------------------------------------------
 
-VERSION = "4.1.2"
+VERSION = "4.1.3"
 
 # Defaults used when no paths are given on the command line.
 INPUT_DIR = r"/path/to/input"
@@ -105,6 +114,9 @@ Image.MAX_IMAGE_PIXELS = 100_000_000
 # Presentation constants (were undefined in v4.0)
 FOOTER_HEIGHT = 60
 MONTAGE_FOOTER_HEIGHT = 60
+
+# Settings written to the JSON record and the run log (no computed values).
+SETTING_KEYS = ("chroma_space", "threshold_method", "min_component_area_pixels")
 
 # Printed on every picture this tool writes.
 VIS_LABEL = "Visualisation only - not a measurement"
@@ -1074,7 +1086,8 @@ class ImageProcessor:
 
     def _threshold_and_map(self, feature: np.ndarray, space: str) -> Tuple[float, np.ndarray, np.ndarray, dict]:
         """Threshold, display alpha and mask for one feature.  The returned dict
-        holds the settings used (for the provenance record), no statistics."""
+        holds the settings and the computed cut-offs; only the settings are
+        written out (the cut-offs are used for the opt-in histograms)."""
         threshold = self._compute_threshold(feature, space)
 
         binary = (feature > threshold).astype(np.uint8)
@@ -1356,7 +1369,7 @@ class ImageProcessor:
 
             fidelity_tag = f"[{source['compression_label']}]"
             space_label = "LRC" if space == "lrc" else "C*ab"
-            threshold_label = f"{self.cfg.threshold_mode}({space_label}):{threshold:.2f}"
+            threshold_label = f"{space_label}, {self.cfg.threshold_mode.replace('_', ' ')} threshold"
             chroma_saved = self._save_footer(
                 chroma_pil,
                 out_prefix,
@@ -1424,7 +1437,7 @@ class ImageProcessor:
                     "lrc_iqr_floor": self.cfg.lrc_iqr_floor,
                 },
                 "what": VIS_LABEL + ": the pictures are qualitative",
-                "thresholds": metrics,
+                "settings": {k: metrics[k] for k in SETTING_KEYS},
                 "outputs": {
                     "chroma_boost_image": str((space_dir / f"{out_prefix}_chroma_boost.{suffix}").relative_to(self.cfg.output_dir)),
                     "segmented_image": str((space_dir / f"{out_prefix}_segmented.{suffix}").relative_to(self.cfg.output_dir)),
@@ -1433,15 +1446,12 @@ class ImageProcessor:
                 },
             }
 
-            if space == "lrc" and lrc_meta is not None:
-                record["lrc_binning"] = lrc_meta
-
             if self.cfg.save_per_image_json:
                 with open(space_dir / f"{out_prefix}_metadata.json", "w", encoding="utf-8") as f:
                     json.dump(record, f, indent=2, default=str)
 
             msg = (
-                f"Space={space_label} Mode={self.cfg.threshold_mode} Threshold={threshold:.2f} | "
+                f"Space={space_label} Mode={self.cfg.threshold_mode} | "
                 f"{source['compression_label']}"
             )
             if source.get("compression_warning") and self.cfg.warn_on_low_fidelity:
@@ -1669,9 +1679,7 @@ def _write_summary(config: VisualizerConfig, records: list[dict]) -> Path:
         "analysis_dimensions",
         "detected_colorspace",
         "threshold_method",
-        "threshold",
-        "mid_threshold",
-        "high_threshold",
+        "min_component_area_pixels",
     ]
 
     with open(path, "w", newline="", encoding="utf-8") as f:
@@ -1683,13 +1691,13 @@ def _write_summary(config: VisualizerConfig, records: list[dict]) -> Path:
                 continue
             row = {
                 "path_relative": record["source"]["path_relative"],
-                "chroma_space": record["thresholds"]["chroma_space"],
+                "chroma_space": record["settings"]["chroma_space"],
                 "compression_label": record["source"]["compression_label"],
                 "source_bit_depth": record["source"]["source_bit_depth"],
                 "source_dimensions": record["source"]["source_dimensions"],
                 "analysis_dimensions": record["source"]["analysis_dimensions"],
                 "detected_colorspace": record["source"].get("detected_colorspace", ""),
-                **record["thresholds"],
+                **record["settings"],
             }
             writer.writerow({key: row.get(key, "") for key in fields})
 

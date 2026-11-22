@@ -3,8 +3,9 @@ A quick tool to visualise colour applied to monochrome photographs, initially de
 
 **A visualiser, not a measuring tool.** Its pictures show where colour stands out from a monochrome substrate. They are qualitative: the tool reports no areas, counts or statistics, and its colour handling is only as careful as a legible picture needs.
 
-The program, as is, utilizes statistical color analysis to separate faint pigments, washes, and residues from substrates (paper, parchment, canvas).
-Unlike standard saturation sliders, this tool algorithmically calculates the "Noise Floor" of the substrate to isolate legitimate color signals, creating high-contrast visualizations that reveal details invisible to the naked eye.
+The program boosts the colour in a photograph and draws where colour stands out from the image's own colour statistics, to help the eye find faint colour on paper, parchment or canvas. It does not identify pigments, and a place where nothing is drawn is not shown to be unpainted.
+
+**Known limitation.** With the default `noise_floor` threshold, the threshold is set from the image's own chroma histogram, so it rises with the paint: the Segmented panel can miss large painted areas, and a blue wash over a warm print can lower chroma and disappear. The Chroma Boosted panel still shows them. A rebuild that addresses this is planned (see `TODO.md`).
 
 **Output**
 
@@ -13,16 +14,13 @@ Unlike standard saturation sliders, this tool algorithmically calculates the "No
 The tool generates a 3-panel montage for every image processed:
 *Original*: The raw input image.
 *Chroma Boost*: Linearly expanded color variance to highlight general hue presence.
-*Segmented Boost Map*: A high-contrast, segmented visualization where pigment opacity is determined by signal strength, overlaying a texture-enhanced (CLAHE) background.
+*Segmented Boost Map*: where chroma exceeds the threshold, the boosted colour is drawn over a darkened, texture-enhanced (CLAHE) print; stronger departures are drawn more opaque.
 
 **Cool things**
 
-Adaptive Noise Floor Detection: Automatically calculates the statistical threshold between the background substrate (noise) and actual pigment (signal) using histogram peak analysis.
+Adaptive threshold: by default the threshold is set from the image's own chroma histogram (its peak and where the counts fall away). It is a display setting, not a boundary between substrate and pigment (see the known limitation above).
 
-3-Tier Segmentation 
-Tier 3 (Faint): Visualized as semi-transparent "ghost" layers.
-Tier 2 (Mid-Tones): High opacity washes.
-Tier 1 (Solid): Opaque, unmodified pigment.
+Three display opacities: weaker departures are drawn more transparent and stronger ones more opaque. The levels are relative to each image; they are not classes of paint.
 
 Texture Enhancement: Applies CLAHE (Contrast Limited Adaptive Histogram Equalization) to reveal topology.
 
@@ -53,14 +51,14 @@ The processing pipeline:
 Images are decoded in their source colour space (sRGB, Adobe RGB or ProPhoto RGB, with Bradford adaptation for ProPhoto) and converted to CIELAB (D65). Chroma (colour intensity) is each pixel's distance from neutral in the a\*b\* plane.
 
 2. Statistical Thresholding
-The tool generates a histogram of the image's chroma values. It identifies the "Noise Mountain" (the statistical peak representing the paper/substrate) and finds the exact point where the noise variance drops off (the 1% cutoff). This value becomes the Noise Floor.
+The tool makes a histogram of the image's chroma values, takes its peak (usually the paper and the image's own tone), and walks up from it until the counts fall below 1% of the peak. That point is used as the threshold.
 
 3. The "Segmented Boost" Map
 
-Instead of applying a global filter, the tool treats data differently based on its intensity relative to the Noise Floor:
+The picture is drawn differently above and below the threshold:
 
-Substrate Removal: Pixels below the floor are rendered as dark grayscale to reduce visual distraction. Connected regions smaller than `--min-component-area` pixels are discarded.
+Below the threshold: pixels are rendered as dark grayscale to reduce visual distraction. Connected regions smaller than `--min-component-area` pixels are discarded.
 
-Signal Isolation: Pixels above the floor are segmented into three statistical tiers (Median, 85th Percentile, Max).
+Above the threshold: pixels are drawn at three display opacities, set at the median and 85th percentile of what lies above it.
 
-Visualization: Faint signals are rendered with high transparency (preserving the context of the background), while strong signals are rendered opaque. This allows researchers to distinguish between faint residue and solid paint.
+Visualization: weaker departures are drawn more transparent (keeping the print visible), stronger ones more opaque. The opacity shows how far colour departs in this image; it does not tell faint residue from solid paint.
