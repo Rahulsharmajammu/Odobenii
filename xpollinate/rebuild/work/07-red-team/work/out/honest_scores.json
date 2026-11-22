@@ -1,0 +1,739 @@
+{
+ "H0 clean, good marks": {
+  "s25": {
+   "unpainted_shown": 0.004885487425367248,
+   "cheeks": 1.0,
+   "lips": 1.0,
+   "flag_red": 1.0,
+   "flag_blue": NaN,
+   "patch_yellow": 1.0,
+   "wash": 0.9469047833799344,
+   "foxing": 1.0,
+   "mat_burn": 0.897489539748954,
+   "retouch_matched": 0.0011337868480725624,
+   "retouch_neutral": 0.28202479338842973,
+   "usable_unpainted_px": 418382
+  },
+  "s50": {
+   "unpainted_shown": 0.0008198249446677916,
+   "cheeks": 0.992680886658302,
+   "lips": 1.0,
+   "flag_red": 1.0,
+   "flag_blue": NaN,
+   "patch_yellow": 1.0,
+   "wash": 0.9104206127296233,
+   "foxing": 1.0,
+   "mat_burn": 0.6689330543933054,
+   "retouch_matched": 0.0,
+   "retouch_neutral": 0.17458677685950413,
+   "usable_unpainted_px": 418382
+  },
+  "scale": 0.8,
+  "words": [],
+  "loo": [
+   0.3102209270000458,
+   0.15167976915836334,
+   0.34675559401512146,
+   0.43423137068748474,
+   0.23676463961601257
+  ]
+ },
+ "H1 unruly A, good marks": {
+  "s25": {
+   "unpainted_shown": 0.023486777603405062,
+   "cheeks": 0.9083052276559865,
+   "lips": 1.0,
+   "flag_red": 1.0,
+   "flag_blue": NaN,
+   "patch_yellow": 1.0,
+   "wash": 0.9188798053977492,
+   "foxing": 0.9389587073608617,
+   "mat_burn": 0.7868952847519902,
+   "retouch_matched": 0.0,
+   "retouch_neutral": 0.2948539638386648,
+   "usable_unpainted_px": 298849
+  },
+  "s50": {
+   "unpainted_shown": 0.010767979815893645,
+   "cheeks": 0.690345699831366,
+   "lips": 1.0,
+   "flag_red": 1.0,
+   "flag_blue": NaN,
+   "patch_yellow": 0.9993685872138911,
+   "wash": 0.705294597632134,
+   "foxing": 0.8509874326750448,
+   "mat_burn": 0.5315370483772198,
+   "retouch_matched": 0.0,
+   "retouch_neutral": 0.06258692628650904,
+   "usable_unpainted_px": 298849
+  },
+  "scale": 1.9547743767467676,
+  "words": [],
+  "loo": [
+   1.225497841835022,
+   1.6135026216506958,
+   1.94315767288208,
+   1.3206731081008911,
+   0.47234365344047546
+  ]
+ },
+ "H1 unruly B, good marks": {
+  "s25": {
+   "unpainted_shown": 0.011825560734567045,
+   "cheeks": 0.9585558641315958,
+   "lips": 1.0,
+   "flag_red": 1.0,
+   "flag_blue": NaN,
+   "patch_yellow": 1.0,
+   "wash": 0.38124270532587995,
+   "foxing": 0.9230769230769231,
+   "mat_burn": 0.5889261744966443,
+   "retouch_matched": 0.0,
+   "retouch_neutral": 0.1434108527131783,
+   "usable_unpainted_px": 367509
+  },
+  "s50": {
+   "unpainted_shown": 0.0036434481876634313,
+   "cheeks": 0.7472762230292672,
+   "lips": 1.0,
+   "flag_red": 1.0,
+   "flag_blue": NaN,
+   "patch_yellow": 0.9994314143567875,
+   "wash": 0.0068800294858406535,
+   "foxing": 0.8495726495726496,
+   "mat_burn": 0.26677852348993286,
+   "retouch_matched": 0.0,
+   "retouch_neutral": 0.037467700258397935,
+   "usable_unpainted_px": 367509
+  },
+  "scale": 1.567334030831223,
+  "words": [],
+  "loo": [
+   0.9067261219024658,
+   0.9441267251968384,
+   1.1329631805419922,
+   1.1792610883712769,
+   0.2025795876979828
+  ]
+ },
+ "H2 unruly A, one mark on the faint wash": {
+  "s25": {
+   "unpainted_shown": 0.0003820413744106006,
+   "cheeks": 0.0,
+   "lips": 1.0,
+   "flag_red": 1.0,
+   "flag_blue": NaN,
+   "patch_yellow": 0.9679822475828181,
+   "wash": 0.0008775576185857466,
+   "foxing": 0.351985559566787,
+   "mat_burn": 0.19657072872014697,
+   "retouch_matched": 0.0,
+   "retouch_neutral": 0.013908205841446454,
+   "usable_unpainted_px": 298397
+  },
+  "s50": {
+   "unpainted_shown": 5.697108214894922e-05,
+   "cheeks": 0.0,
+   "lips": 1.0,
+   "flag_red": 0.8819628647214854,
+   "flag_blue": NaN,
+   "patch_yellow": 0.8254873989538755,
+   "wash": 0.0004464766831401167,
+   "foxing": 0.0983754512635379,
+   "mat_burn": 0.011022657685241886,
+   "retouch_matched": 0.0,
+   "retouch_neutral": 0.0013908205841446453,
+   "usable_unpainted_px": 298397
+  },
+  "scale": 4.777453089579604,
+  "words": [
+   "the marks disagree with each other by more than their own texture: one may hold paint, or the light varies more than the model allows; the map is shown at lower sensitivity"
+  ],
+  "loo": [
+   0.8147975206375122,
+   5.190590858459473,
+   4.439525604248047,
+   0.6602963209152222,
+   9.365958213806152
+  ]
+ },
+ "H2 clean, one mark on the faint wash": {
+  "s25": {
+   "unpainted_shown": 0.0,
+   "cheeks": 0.7542869092429946,
+   "lips": 1.0,
+   "flag_red": 1.0,
+   "flag_blue": NaN,
+   "patch_yellow": 0.9998773307163886,
+   "wash": 0.005231352033913592,
+   "foxing": 0.9119402985074627,
+   "mat_burn": 0.2186192468619247,
+   "retouch_matched": 0.0,
+   "retouch_neutral": 0.0,
+   "usable_unpainted_px": 418382
+  },
+  "s50": {
+   "unpainted_shown": 0.0,
+   "cheeks": 0.36532831451275616,
+   "lips": 1.0,
+   "flag_red": 1.0,
+   "flag_blue": NaN,
+   "patch_yellow": 0.9841756624141315,
+   "wash": 0.0034274375394606296,
+   "foxing": 0.6686567164179105,
+   "mat_burn": 0.13023012552301255,
+   "retouch_matched": 0.0,
+   "retouch_neutral": 0.0,
+   "usable_unpainted_px": 418382
+  },
+  "scale": 1.985127759165418,
+  "words": [
+   "mark 5 disagrees with the others: it may hold paint, or the light varies more than the model allows",
+   "much of what is shown sits on edges: colour fringes from the lens or the file are likely"
+  ],
+  "loo": [
+   0.1702101230621338,
+   1.71914541721344,
+   3.086029529571533,
+   1.0553953647613525,
+   5.388174533843994
+  ]
+ },
+ "H4 clean, marks on the suit only": {
+  "s25": {
+   "unpainted_shown": 0.0,
+   "cheeks": 0.26957223567393057,
+   "lips": 1.0,
+   "flag_red": 1.0,
+   "flag_blue": 0.9957737321196359,
+   "patch_yellow": 0.999441132637854,
+   "wash": 0.009581082458464988,
+   "foxing": 0.9030172413793104,
+   "mat_burn": 0.2712508638562543,
+   "retouch_matched": 0.0,
+   "retouch_neutral": 0.0,
+   "usable_unpainted_px": 326180
+  },
+  "s50": {
+   "unpainted_shown": 0.0,
+   "cheeks": 0.0008071025020177562,
+   "lips": 1.0,
+   "flag_red": 0.9999724790841039,
+   "flag_blue": 0.9816861725184222,
+   "patch_yellow": 0.9711251862891207,
+   "wash": 0.005911731729691163,
+   "foxing": 0.6666666666666666,
+   "mat_burn": 0.2579474775397374,
+   "retouch_matched": 0.0,
+   "retouch_neutral": 0.0,
+   "usable_unpainted_px": 326180
+  },
+  "scale": 2.0969160623117045,
+  "words": [
+   "the marks do not span the frame: a colour cast across the frame cannot be told from a wash",
+   "the marks cover little of the lightness range: tones outside it are guessed (hatched)"
+  ],
+  "loo": [
+   NaN,
+   NaN
+  ]
+ },
+ "H5 unpainted print, unruly A, good marks": {
+  "s25": {
+   "unpainted_shown": 0.027829096974200225,
+   "cheeks": NaN,
+   "lips": NaN,
+   "flag_red": NaN,
+   "flag_blue": NaN,
+   "patch_yellow": NaN,
+   "wash": NaN,
+   "foxing": 0.955736224028907,
+   "mat_burn": 0.8419117647058824,
+   "retouch_matched": 0.0,
+   "retouch_neutral": 0.14759358288770053,
+   "usable_unpainted_px": 445469
+  },
+  "s50": {
+   "unpainted_shown": 0.012220827936399614,
+   "cheeks": NaN,
+   "lips": NaN,
+   "flag_red": NaN,
+   "flag_blue": NaN,
+   "patch_yellow": NaN,
+   "wash": NaN,
+   "foxing": 0.8952122854561879,
+   "mat_burn": 0.6403186274509803,
+   "retouch_matched": 0.0,
+   "retouch_neutral": 0.06096256684491978,
+   "usable_unpainted_px": 445469
+  },
+  "scale": 1.9136813474399703,
+  "words": [
+   "much of what is shown sits on edges: colour fringes from the lens or the file are likely"
+  ],
+  "loo": [
+   1.2536942958831787,
+   1.3869503736495972,
+   1.7869584560394287,
+   1.2890324592590332,
+   0.5470874905586243
+  ]
+ },
+ "H5 unpainted print, unruly B, good marks": {
+  "s25": {
+   "unpainted_shown": 0.013666108543830342,
+   "cheeks": NaN,
+   "lips": NaN,
+   "flag_red": NaN,
+   "flag_blue": NaN,
+   "patch_yellow": NaN,
+   "wash": NaN,
+   "foxing": 0.9256410256410257,
+   "mat_burn": 0.5784148397976391,
+   "retouch_matched": 0.0,
+   "retouch_neutral": 0.04161979752530934,
+   "usable_unpainted_px": 527363
+  },
+  "s50": {
+   "unpainted_shown": 0.004583180845072559,
+   "cheeks": NaN,
+   "lips": NaN,
+   "flag_red": NaN,
+   "flag_blue": NaN,
+   "patch_yellow": NaN,
+   "wash": NaN,
+   "foxing": 0.8572649572649572,
+   "mat_burn": 0.26138279932546377,
+   "retouch_matched": 0.0,
+   "retouch_neutral": 0.006749156355455568,
+   "usable_unpainted_px": 527363
+  },
+  "scale": 1.5495192581321684,
+  "words": [
+   "much of what is shown sits on edges: colour fringes from the lens or the file are likely"
+  ],
+  "loo": [
+   0.901701807975769,
+   0.8210738301277161,
+   1.1456948518753052,
+   1.2390010356903076,
+   0.22747232019901276
+  ]
+ },
+ "H5 unpainted print, clean, good marks": {
+  "s25": {
+   "unpainted_shown": 0.005391041922198198,
+   "cheeks": NaN,
+   "lips": NaN,
+   "flag_red": NaN,
+   "flag_blue": NaN,
+   "patch_yellow": NaN,
+   "wash": NaN,
+   "foxing": 1.0,
+   "mat_burn": 0.9022988505747126,
+   "retouch_matched": 0.0011325028312570782,
+   "retouch_neutral": 0.1519916142557652,
+   "usable_unpainted_px": 587827
+  },
+  "s50": {
+   "unpainted_shown": 0.001284391496137469,
+   "cheeks": NaN,
+   "lips": NaN,
+   "flag_red": NaN,
+   "flag_blue": NaN,
+   "patch_yellow": NaN,
+   "wash": NaN,
+   "foxing": 1.0,
+   "mat_burn": 0.668234064785789,
+   "retouch_matched": 0.0,
+   "retouch_neutral": 0.12578616352201258,
+   "usable_unpainted_px": 587827
+  },
+  "scale": 0.8,
+  "words": [
+   "much of what is shown sits on edges: colour fringes from the lens or the file are likely"
+  ],
+  "loo": [
+   0.3234851658344269,
+   0.13965681195259094,
+   0.3601130545139313,
+   0.4524833559989929,
+   0.25526177883148193
+  ]
+ },
+ "P1 two captures (A+B), good marks": {
+  "s25": {
+   "unpainted_shown": 0.00027903661767276735,
+   "cheeks": 0.9690134907251264,
+   "lips": 1.0,
+   "flag_red": 1.0,
+   "flag_blue": NaN,
+   "patch_yellow": 1.0,
+   "wash": 0.7885073580939033,
+   "foxing": 0.9425493716337523,
+   "mat_burn": 0.5982142857142857,
+   "retouch_matched": 0.0,
+   "retouch_neutral": 0.07355242566510173,
+   "usable_unpainted_px": 297452
+  },
+  "s50": {
+   "unpainted_shown": 1.008566087973858e-05,
+   "cheeks": 0.8513912310286678,
+   "lips": 1.0,
+   "flag_red": 1.0,
+   "flag_blue": NaN,
+   "patch_yellow": 0.9995240361732508,
+   "wash": 0.1411041034026318,
+   "foxing": 0.8599640933572711,
+   "mat_burn": 0.35267857142857145,
+   "retouch_matched": 0.0,
+   "retouch_neutral": 0.010954616588419406,
+   "usable_unpainted_px": 297452
+  },
+  "scale": 1.9547743767467676,
+  "words": [],
+  "loo": [
+   1.225497841835022,
+   1.6135026216506958,
+   1.94315767288208,
+   1.3206731081008911,
+   0.47234365344047546
+  ],
+  "one_capture_only_unpainted": 0.2090555787152213,
+  "reg_err_px": 0.340914785861969
+ },
+ "P2 two captures, A's marks contaminated": {
+  "s25": {
+   "unpainted_shown": 0.0,
+   "cheeks": 0.1294266441821248,
+   "lips": 1.0,
+   "flag_red": 1.0,
+   "flag_blue": NaN,
+   "patch_yellow": 0.9952206468057989,
+   "wash": 0.001993303745230865,
+   "foxing": 0.6191335740072202,
+   "mat_burn": 0.2857142857142857,
+   "retouch_matched": 0.0,
+   "retouch_neutral": 0.0,
+   "usable_unpainted_px": 297003
+  },
+  "s50": {
+   "unpainted_shown": 0.0,
+   "cheeks": 0.0,
+   "lips": 1.0,
+   "flag_red": 0.982078853046595,
+   "flag_blue": NaN,
+   "patch_yellow": 0.9514099091922893,
+   "wash": 0.0007942069609904228,
+   "foxing": 0.27617328519855594,
+   "mat_burn": 0.046875,
+   "retouch_matched": 0.0,
+   "retouch_neutral": 0.0,
+   "usable_unpainted_px": 297003
+  },
+  "scale": 4.777453089579604,
+  "words": [
+   "the marks disagree with each other by more than their own texture: one may hold paint, or the light varies more than the model allows; the map is shown at lower sensitivity"
+  ],
+  "loo": [
+   0.8147975206375122,
+   5.190590858459473,
+   4.439525604248047,
+   0.6602963209152222,
+   9.365958213806152
+  ],
+  "one_capture_only_unpainted": 0.15050016329801383,
+  "reg_err_px": 0.340914785861969
+ },
+ "P5 two captures of the unpainted print": {
+  "s25": {
+   "unpainted_shown": 0.0007299336054200395,
+   "cheeks": NaN,
+   "lips": NaN,
+   "flag_red": NaN,
+   "flag_blue": NaN,
+   "patch_yellow": NaN,
+   "wash": NaN,
+   "foxing": 0.947606142728094,
+   "mat_burn": 0.6308724832214765,
+   "retouch_matched": 0.0,
+   "retouch_neutral": 0.04912280701754386,
+   "usable_unpainted_px": 442506
+  },
+  "s50": {
+   "unpainted_shown": 0.00020338707271765806,
+   "cheeks": NaN,
+   "lips": NaN,
+   "flag_red": NaN,
+   "flag_blue": NaN,
+   "patch_yellow": NaN,
+   "wash": NaN,
+   "foxing": 0.8879855465221319,
+   "mat_burn": 0.38478747203579416,
+   "retouch_matched": 0.0,
+   "retouch_neutral": 0.00935672514619883,
+   "usable_unpainted_px": 442506
+  },
+  "scale": 1.9136813474399703,
+  "words": [
+   "much of what is shown sits on edges: colour fringes from the lens or the file are likely"
+  ],
+  "loo": [
+   1.2536942958831787,
+   1.3869503736495972,
+   1.7869584560394287,
+   1.2890324592590332,
+   0.5470874905586243
+  ],
+  "one_capture_only_unpainted": 0.2580981952787081,
+  "reg_err_px": 0.3149608373641968
+ },
+ "R normal A+C": {
+  "s25": {
+   "unpainted_shown": 0.030763588808585575,
+   "cheeks": 0.9165261382799326,
+   "lips": 1.0,
+   "flag_red": 1.0,
+   "flag_blue": NaN,
+   "patch_yellow": 0.9990458015267175,
+   "wash": 0.9408351026185421,
+   "foxing": 0.8983812949640287,
+   "mat_burn": 0.8329238329238329,
+   "retouch_matched": 0.0,
+   "retouch_neutral": 0.35048678720445064,
+   "usable_unpainted_px": 289043
+  },
+  "s50": {
+   "unpainted_shown": 0.013551616887452732,
+   "cheeks": 0.6435497470489039,
+   "lips": 1.0,
+   "flag_red": 1.0,
+   "flag_blue": NaN,
+   "patch_yellow": 0.9961832061068703,
+   "wash": 0.7693481166941889,
+   "foxing": 0.7652877697841727,
+   "mat_burn": 0.5448402948402948,
+   "retouch_matched": 0.0,
+   "retouch_neutral": 0.13212795549374132,
+   "usable_unpainted_px": 289043
+  },
+  "scale": 1.9547743767467676,
+  "words": [],
+  "loo": [
+   1.225497841835022,
+   1.6135026216506958,
+   1.94315767288208,
+   1.3206731081008911,
+   0.47234365344047546
+  ],
+  "one_capture_only_unpainted": 0.12393657691070187,
+  "reg_err_px": 0.17928463220596313
+ },
+ "R unpainted A+C": {
+  "s25": {
+   "unpainted_shown": 0.03135533033675634,
+   "cheeks": NaN,
+   "lips": NaN,
+   "flag_red": NaN,
+   "flag_blue": NaN,
+   "patch_yellow": NaN,
+   "wash": NaN,
+   "foxing": 0.9221719457013575,
+   "mat_burn": 0.8196923076923077,
+   "retouch_matched": 0.0,
+   "retouch_neutral": 0.13796791443850268,
+   "usable_unpainted_px": 432271
+  },
+  "s50": {
+   "unpainted_shown": 0.013401315378547255,
+   "cheeks": NaN,
+   "lips": NaN,
+   "flag_red": NaN,
+   "flag_blue": NaN,
+   "patch_yellow": NaN,
+   "wash": NaN,
+   "foxing": 0.8289592760180996,
+   "mat_burn": 0.5766153846153846,
+   "retouch_matched": 0.0,
+   "retouch_neutral": 0.08449197860962566,
+   "usable_unpainted_px": 432271
+  },
+  "scale": 1.9136813474399703,
+  "words": [
+   "much of what is shown sits on edges: colour fringes from the lens or the file are likely"
+  ],
+  "loo": [
+   1.2536942958831787,
+   1.3869503736495972,
+   1.7869584560394287,
+   1.2890324592590332,
+   0.5470874905586243
+  ],
+  "one_capture_only_unpainted": 0.15318631136486138,
+  "reg_err_px": 0.12543748319149017
+ },
+ "R normal B+C": {
+  "s25": {
+   "unpainted_shown": 0.0005029622517032131,
+   "cheeks": 0.9099272571673085,
+   "lips": 1.0,
+   "flag_red": 1.0,
+   "flag_blue": NaN,
+   "patch_yellow": 0.999400299850075,
+   "wash": 0.7908938140080535,
+   "foxing": 0.8551483420593369,
+   "mat_burn": 0.5609243697478992,
+   "retouch_matched": 0.0,
+   "retouch_neutral": 0.07285714285714286,
+   "usable_unpainted_px": 306186
+  },
+  "s50": {
+   "unpainted_shown": 3.2659886474234616e-06,
+   "cheeks": 0.6360718870346598,
+   "lips": 1.0,
+   "flag_red": 1.0,
+   "flag_blue": NaN,
+   "patch_yellow": 0.995952023988006,
+   "wash": 0.1344208757411459,
+   "foxing": 0.7015706806282722,
+   "mat_burn": 0.21008403361344538,
+   "retouch_matched": 0.0,
+   "retouch_neutral": 0.017142857142857144,
+   "usable_unpainted_px": 306186
+  },
+  "scale": 1.567334030831223,
+  "words": [],
+  "loo": [
+   0.9067261219024658,
+   0.9441267251968384,
+   1.1329631805419922,
+   1.1792610883712769,
+   0.2025795876979828
+  ],
+  "one_capture_only_unpainted": 0.2501943263245217,
+  "reg_err_px": 0.30671975016593933
+ },
+ "R unpainted B+C": {
+  "s25": {
+   "unpainted_shown": 0.0006769944961226679,
+   "cheeks": NaN,
+   "lips": NaN,
+   "flag_red": NaN,
+   "flag_blue": NaN,
+   "patch_yellow": NaN,
+   "wash": NaN,
+   "foxing": 0.8929824561403509,
+   "mat_burn": 0.5421940928270043,
+   "retouch_matched": 0.0,
+   "retouch_neutral": 0.03784403669724771,
+   "usable_unpainted_px": 454952
+  },
+  "s50": {
+   "unpainted_shown": 7.473315866289191e-05,
+   "cheeks": NaN,
+   "lips": NaN,
+   "flag_red": NaN,
+   "flag_blue": NaN,
+   "patch_yellow": NaN,
+   "wash": NaN,
+   "foxing": 0.769298245614035,
+   "mat_burn": 0.20042194092827004,
+   "retouch_matched": 0.0,
+   "retouch_neutral": 0.005733944954128441,
+   "usable_unpainted_px": 454952
+  },
+  "scale": 1.5495192581321684,
+  "words": [
+   "much of what is shown sits on edges: colour fringes from the lens or the file are likely"
+  ],
+  "loo": [
+   0.901701807975769,
+   0.8210738301277161,
+   1.1456948518753052,
+   1.2390010356903076,
+   0.22747232019901276
+  ],
+  "one_capture_only_unpainted": 0.2412188538571102,
+  "reg_err_px": 0.4186561107635498
+ },
+ "R normal C single": {
+  "s25": {
+   "unpainted_shown": 0.028094425693227103,
+   "cheeks": 0.7449468639299854,
+   "lips": 1.0,
+   "flag_red": 1.0,
+   "flag_blue": NaN,
+   "patch_yellow": 0.9973544973544973,
+   "wash": 0.8564524986271279,
+   "foxing": 0.8056042031523643,
+   "mat_burn": 0.6876328091797705,
+   "retouch_matched": 0.0,
+   "retouch_neutral": 0.22784810126582278,
+   "usable_unpainted_px": 298351
+  },
+  "s50": {
+   "unpainted_shown": 0.012465183625997567,
+   "cheeks": 0.37987080641800375,
+   "lips": 1.0,
+   "flag_red": 1.0,
+   "flag_blue": NaN,
+   "patch_yellow": 0.9902998236331569,
+   "wash": 0.25012944222169925,
+   "foxing": 0.6462346760070052,
+   "mat_burn": 0.4050148746281343,
+   "retouch_matched": 0.0,
+   "retouch_neutral": 0.07721518987341772,
+   "usable_unpainted_px": 298351
+  },
+  "scale": 2.4799095095841883,
+  "words": [],
+  "loo": [
+   1.9303566217422485,
+   1.8072394132614136,
+   2.554412841796875,
+   1.7517420053482056,
+   0.8267275094985962
+  ]
+ },
+ "R unpainted C single": {
+  "s25": {
+   "unpainted_shown": 0.024812085433358097,
+   "cheeks": NaN,
+   "lips": NaN,
+   "flag_red": NaN,
+   "flag_blue": NaN,
+   "patch_yellow": NaN,
+   "wash": NaN,
+   "foxing": 0.8503521126760564,
+   "mat_burn": 0.686560755689137,
+   "retouch_matched": 0.0,
+   "retouch_neutral": 0.1189245087900724,
+   "usable_unpainted_px": 448209
+  },
+  "s50": {
+   "unpainted_shown": 0.009906092916474233,
+   "cheeks": NaN,
+   "lips": NaN,
+   "flag_red": NaN,
+   "flag_blue": NaN,
+   "patch_yellow": NaN,
+   "wash": NaN,
+   "foxing": 0.7077464788732394,
+   "mat_burn": 0.3250322026620867,
+   "retouch_matched": 0.0,
+   "retouch_neutral": 0.03722854188210962,
+   "usable_unpainted_px": 448209
+  },
+  "scale": 2.6628142006719226,
+  "words": [
+   "much of what is shown sits on edges: colour fringes from the lens or the file are likely"
+  ],
+  "loo": [
+   1.9909589290618896,
+   2.759856700897217,
+   3.166130781173706,
+   2.023922920227051,
+   1.0223392248153687
+  ]
+ }
+}

@@ -1,0 +1,7 @@
+JPEG q85 case          ref     floor 0.3    floor 0.6    floor 1.0    floor 1.5
+B_warm_untinted        A1      nan/ 5.66    nan/ 0.26    nan/ 0.00    nan/ 0.00
+B_warm_untinted        A5      nan/21.23    nan/ 0.30    nan/ 0.00    nan/ 0.00
+C_warm_blue_wash       A1     99.7/ 6.96   99.5/ 0.31   13.1/ 0.00    0.0/ 0.00
+C_warm_blue_wash       A5     99.7/23.20   99.4/ 0.37    3.7/ 0.00    0.0/ 0.00
+F_warm_strong_pink     A1    100.0/ 7.49  100.0/ 0.89   99.9/ 0.19   99.8/ 0.01
+F_warm_strong_pink     A5    100.0/23.68  100.0/ 0.99   99.9/ 0.19   99.8/ 0.00

@@ -1,0 +1,52 @@
+neg_neutral      TODO plan                  FP=0.067 (d 0.084 m 0.075 l 0.044)    [2.2s]
+neg_neutral      proposed (auto)            FP=0.028 (d 0.053 m 0.033 l 0.007)    [16.4s]
+neg_neutral      proposed (3 boxes)         FP=0.044 (d 0.067 m 0.059 l 0.009)    [9.8s]
+                                           ! Your marked areas do not cover the darkest tones; the reference is carried over to them.
+neg_hard         TODO plan                  FP=0.155 (d 0.031 m 0.158 l 0.230)    [2.1s]
+neg_hard         proposed (auto)            FP=0.029 (d 0.046 m 0.029 l 0.019)    [18.4s]
+                                           ! The colour of the light changes across the frame; the reference follows it. A painted area covering one side could be taken for it: check that side in
+                                           ! The left and right halves of the print disagree about what bare print looks like in the middle tones: paint may cover those tones in one half, and the
+                                           ! The top and bottom halves of the print disagree about what bare print looks like in the middle tones: paint may cover those tones in one half, and the
+neg_hard         proposed (3 boxes)         FP=0.033 (d 0.038 m 0.042 l 0.017)    [11.9s]
+                                           ! The colour of the light changes across the frame; the reference follows it. A painted area covering one side could be taken for it: check that side in
+portrait         TODO plan                  FP=0.088 (d 0.143 m 0.091 l 0.049)  flesh=0.94 cheeks=1.00 lips=1.00 hair=0.63 patch_gold=1.00 badge_gold=1.00  [1.9s]
+portrait         proposed (auto)            FP=0.030 (d 0.072 m 0.030 l 0.004)  flesh=0.84 cheeks=1.00 lips=1.00 hair=0.57 patch_gold=1.00 badge_gold=1.00  [11.5s]
+portrait         proposed (3 boxes)         FP=0.083 (d 0.113 m 0.108 l 0.027)  flesh=0.88 cheeks=0.99 lips=1.00 hair=0.44 patch_gold=1.00 badge_gold=0.99  [7.7s]
+                                           ! Your marked areas do not cover the middle tones; the reference is carried over to them.
+portrait_heavy   TODO plan                  FP=0.034 (d 0.050 m 0.018 l 0.037)  flesh=0.45 cheeks=0.58 lips=1.00 hair=0.16 suit=0.25 flag_red=0.95 flag_blue=0.97 bg_blue=0.03 patch_gold=0.98  [1.4s]
+portrait_heavy   proposed (auto)            FP=0.017 (d 0.059 m 0.002 l 0.002)  flesh=0.37 cheeks=0.64 lips=1.00 hair=0.18 suit=0.27 flag_red=0.96 flag_blue=1.00 bg_blue=0.01 patch_gold=0.97  [10.6s]
+                                           ! The left and right halves of the print disagree about what bare print looks like in the lighter tones: paint may cover those tones in one half, and th
+                                           ! The top and bottom halves of the print disagree about what bare print looks like in the lighter tones: paint may cover those tones in one half, and th
+portrait_heavy   proposed (3 boxes)         FP=0.021 (d 0.070 m 0.003 l 0.001)  flesh=0.35 cheeks=0.71 lips=1.00 hair=0.22 suit=0.31 flag_red=0.97 flag_blue=0.99 bg_blue=0.09 patch_gold=0.98  [8.4s]
+blue_over_warm   TODO plan                  FP=0.057 (d 0.063 m 0.049 l 0.058)  suit_blue=0.02 bg_blue_faint=0.01  [1.5s]
+blue_over_warm   proposed (auto)            FP=0.017 (d 0.032 m 0.011 l 0.009)  suit_blue=0.00 bg_blue_faint=0.00  [11.1s]
+                                           ! The bare-print reference is strongly coloured (a strong cast, or a print painted all over); if the print is painted all over, mark a bare area and run
+                                           ! The top and bottom halves of the print disagree about what bare print looks like in the middle tones: paint may cover those tones in one half, and the
+blue_over_warm   proposed (3 boxes)         FP=0.014 (d 0.032 m 0.007 l 0.003)  suit_blue=0.16 bg_blue_faint=0.14  [9.1s]
+                                           ! Your marked areas leave out the darker tones of the print; the reference is carried over to them.
+                                           ! The bare-print reference is strongly coloured (a strong cast, or a print painted all over); if the print is painted all over, mark a bare area and run
+sky_mixed        TODO plan                  FP=0.013 (d 0.016 m 0.009 l 0.003)  sky_blue=0.00 grass_green=0.00 face_flesh=0.10  [2.0s]
+sky_mixed        proposed (auto)            FP=0.012 (d 0.016 m 0.003 l 0.000)  sky_blue=0.00 grass_green=0.00 face_flesh=0.12  [13.2s]
+                                           ! The colour of the light changes across the frame; the reference follows it. A painted area covering one side could be taken for it: check that side in
+                                           ! The top and bottom halves of the print disagree about what bare print looks like in the lighter tones: paint may cover those tones in one half, and th
+sky_mixed        proposed (3 boxes)         FP=0.031 (d 0.043 m 0.000 l 0.000)  sky_blue=0.09 grass_green=0.03 face_flesh=0.11  [9.4s]
+                                           ! The colour of the light changes across the frame; the reference follows it. A painted area covering one side could be taken for it: check that side in
+sky_faint        TODO plan                  FP=0.061 (d 0.032 m 0.082 l 0.078)  sky_blue_faint=0.02  [2.2s]
+sky_faint        proposed (auto)            FP=0.020 (d 0.029 m 0.021 l 0.009)  sky_blue_faint=0.01  [15.3s]
+                                           ! The top and bottom halves of the print disagree about what bare print looks like in the lighter tones: paint may cover those tones in one half, and th
+sky_faint        proposed (3 boxes)         FP=0.013 (d 0.020 m 0.015 l 0.005)  sky_blue_faint=0.48  [11.6s]
+                                           ! Your marked areas do not cover the lightest tones; the reference is carried over to them.
+glare_bg         TODO plan                  FP=0.359 (d 0.157 m 0.703 l 0.073)  flesh=0.88 cheeks=0.99 lips=1.00 patch_gold=1.00  [2.9s]
+glare_bg         proposed (auto)            FP=0.016 (d 0.003 m 0.035 l 0.002)  flesh=0.27 cheeks=0.38 lips=0.99 patch_gold=0.88  [15.3s]
+                                           ! The bare-print reference is strongly coloured (a strong cast, or a print painted all over); if the print is painted all over, mark a bare area and run
+glare_bg         proposed (3 boxes)         FP=0.019 (d 0.023 m 0.001 l 0.040)  flesh=0.33 cheeks=0.37 lips=1.00 patch_gold=0.97  [11.9s]
+heavy_jpeg       TODO plan                  FP=0.114 (d 0.153 m 0.115 l 0.085)  flesh_faint=0.31 cheeks=0.91 lips=1.00 badge_gold=0.74  [2.4s]
+heavy_jpeg       proposed (auto)            FP=0.046 (d 0.092 m 0.046 l 0.012)  flesh_faint=0.16 cheeks=0.84 lips=1.00 badge_gold=0.73  [16.2s]
+heavy_jpeg       proposed (3 boxes)         FP=0.047 (d 0.089 m 0.051 l 0.008)  flesh_faint=0.15 cheeks=0.84 lips=1.00 badge_gold=0.75  [9.5s]
+all_painted      TODO plan                  FP=  -   (d   -   m   -   l   -  )  flesh=0.37 cheeks=0.58 lips=1.00 hair=0.20 suit=0.26 flag_red=0.95 flag_blue=0.86 bg_blue=0.00 patch_gold=0.98 badge_gold=1.00 rest_violet=0.09  [1.7s]
+all_painted      proposed (auto)            FP=  -   (d   -   m   -   l   -  )  flesh=0.34 cheeks=0.63 lips=0.99 hair=0.27 suit=0.26 flag_red=0.95 flag_blue=0.92 bg_blue=0.00 patch_gold=0.98 badge_gold=1.00 rest_violet=0.03  [12.5s]
+                                           ! The left and right halves of the print disagree about what bare print looks like in the lighter tones: paint may cover those tones in one half, and th
+                                           ! The top and bottom halves of the print disagree about what bare print looks like in the lighter tones: paint may cover those tones in one half, and th
+all_painted      proposed (3 boxes)         FP=  -   (d   -   m   -   l   -  )  flesh=0.34 cheeks=0.63 lips=0.99 hair=0.27 suit=0.26 flag_red=0.95 flag_blue=0.92 bg_blue=0.00 patch_gold=0.98 badge_gold=1.00 rest_violet=0.03  [13.0s]
+                                           ! The left and right halves of the print disagree about what bare print looks like in the lighter tones: paint may cover those tones in one half, and th
+                                           ! The top and bottom halves of the print disagree about what bare print looks like in the lighter tones: paint may cover those tones in one half, and th

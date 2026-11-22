@@ -1,0 +1,7 @@
+cast +-3% case         ref     floor 0.3    floor 0.6    floor 1.0    floor 1.5
+B_warm_untinted        A1      nan/ 2.00    nan/ 2.00    nan/ 0.06    nan/ 0.00
+B_warm_untinted        A5      nan/ 6.90    nan/ 6.90    nan/ 0.56    nan/ 0.00
+C_warm_blue_wash       A1      1.2/ 2.46    1.2/ 2.46    0.0/ 0.08    0.0/ 0.00
+C_warm_blue_wash       A5      2.4/ 8.50    2.4/ 8.50    0.0/ 0.69    0.0/ 0.00
+F_warm_strong_pink     A1    100.0/ 2.46  100.0/ 2.46  100.0/ 0.08  100.0/ 0.00
+F_warm_strong_pink     A5    100.0/ 8.51  100.0/ 8.51  100.0/ 0.69  100.0/ 0.00

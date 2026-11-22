@@ -1,0 +1,9 @@
+scan         proposed           auc=0.999 FA=0.001 margin=0.000 light=0.002 mid=0.002 dark=0.000 stain=0.17743803567292102 | cheeks=0.89/230 lips=1.00/1127 backdr=0.91/146 flag=0.44/48 flag=1.00/2364 missio=1.00/208 small=1.00/419  (16.2s)
+phone        proposed           auc=0.963 FA=0.009 margin=0.003 light=0.012 mid=0.009 dark=0.009 stain=0.2094488188976378 | cheeks=0.96/22 lips=1.00/164 backdr=0.82/48 flag=0.37/15 flag=1.00/459 missio=1.00/36 small=1.00/88  (27.7s)
+phone_mixed  proposed           auc=0.950 FA=0.009 margin=0.006 light=0.008 mid=0.011 dark=0.008 stain=0.23792577529232334 | cheeks=0.84/19 lips=1.00/178 backdr=0.17/54 flag=0.66/27 flag=1.00/nan missio=1.00/55 small=1.00/92  (26.4s)
+phone_glare  proposed           auc=0.909 FA=0.069 margin=0.006 light=0.022 mid=0.058 dark=0.118 glare=0.407 stain=0.2743231810490694 | cheeks=0.96/3 lips=1.00/12 backdr=0.83/135 flag=0.34/1 flag=1.00/nan missio=1.00/3 small=1.00/12  (29.1s)
+majority     proposed           auc=0.664 FA=0.146 margin=0.001 light=0.898 mid=0.136 dark=0.013 stain=0.18355018587360594 | cheeks=0.95/10 lips=1.00/56 backdr=0.10/nan flag=0.29/19 flag=1.00/nan missio=1.00/17 small=1.00/37  (52.5s)
+/usr/local/lib/python3.13/site-packages/sklearn/metrics/_ranking.py:469: UndefinedMetricWarning: Only one class is present in y_true. ROC AUC score is not defined in that case.
+  warnings.warn(
+control      proposed           auc=nan FA=0.004 margin=0.003 light=0.005 mid=0.002 dark=0.006 stain=0.3197244194947691 |   (13.8s)
+toned        proposed           auc=0.960 FA=0.008 margin=0.015 light=0.008 mid=0.005 dark=0.009 stain=0.267498776309349 | cheeks=0.72/13 lips=1.00/125 backdr=0.36/nan flag=0.52/19 flag=1.00/nan missio=0.95/26 small=1.00/72  (32.1s)

@@ -1,0 +1,17 @@
+% painted flagged / % unpainted flagged.  'ab5' = TODO.md:29's 5 px median on a*, b* before the feature
+input          case                             A1       A1+ab5           A5       A5+ab5
+PNG (prior)    B_warm_untinted           nan/ 0.00    nan/ 0.00    nan/ 0.00    nan/ 0.01
+JPEG q85       B_warm_untinted           nan/ 5.66    nan/ 5.53    nan/21.23    nan/21.21
+cast +-3%      B_warm_untinted           nan/ 2.00    nan/41.07    nan/ 6.90    nan/48.71
+PNG (prior)    C_warm_blue_wash         17.5/ 0.00  100.0/ 0.02    9.0/ 0.00  100.0/ 0.01
+JPEG q85       C_warm_blue_wash         99.7/ 6.96   99.7/ 6.72   99.7/23.20   99.7/23.12
+cast +-3%      C_warm_blue_wash          1.2/ 2.46   99.4/39.92    2.4/ 8.50   99.1/46.37
+PNG (prior)    D_warm_sky_painted      100.0/ 0.00  100.0/ 0.02  100.0/ 0.00  100.0/ 0.01
+JPEG q85       D_warm_sky_painted      100.0/ 2.98  100.0/ 2.81  100.0/ 6.75  100.0/ 6.61
+cast +-3%      D_warm_sky_painted       96.2/ 0.00  100.0/ 0.39  100.0/ 0.11  100.0/13.65
+PNG (prior)    E_warm_small_touches     97.5/ 0.00   98.3/ 0.00   97.5/ 0.00   98.1/ 0.01
+JPEG q85       E_warm_small_touches    100.0/ 5.73  100.0/ 5.59  100.0/21.30  100.0/21.27
+cast +-3%      E_warm_small_touches     97.5/ 2.00   99.9/41.06   97.5/ 6.91  100.0/48.70
+PNG (prior)    F_warm_strong_pink      100.0/ 0.00  100.0/ 0.06  100.0/ 0.00  100.0/ 0.06
+JPEG q85       F_warm_strong_pink      100.0/ 7.49  100.0/ 7.25  100.0/23.68  100.0/23.58
+cast +-3%      F_warm_strong_pink      100.0/ 2.46  100.0/40.01  100.0/ 8.51  100.0/46.44

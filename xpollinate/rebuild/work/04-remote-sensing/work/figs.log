@@ -1,0 +1,5 @@
+P2 auto {"flags": []}
+P2 margin+box {"flags": [{"L": [31, 40], "minor_weight": 0.17, "sep": 6.8, "picked": "False"}]}
+P3 auto {"flags": [{"L": [63, 77], "minor_weight": 0.18, "sep": 4.4, "picked": false}]}
+P3 margin+box {"flags": [{"L": [62, 76], "minor_weight": 0.19, "sep": 4.4, "picked": "True"}]}
+N3 auto {"flags": []}

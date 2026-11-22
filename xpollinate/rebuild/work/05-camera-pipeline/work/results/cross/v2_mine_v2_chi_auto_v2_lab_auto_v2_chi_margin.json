@@ -1,0 +1,462 @@
+{
+ "S1_benign|v2_chi_auto": {
+  "found": 9,
+  "of": 9,
+  "FP": 0.01715708591992963,
+  "per": {
+   "cheek_L": 0.9572163552667208,
+   "cheek_R": 0.8549807374793615,
+   "lips": 1.0,
+   "garment": 0.9252710392333033,
+   "rocket_faint": 0.5446848954525515,
+   "touch1": 1.0,
+   "touch2": 1.0,
+   "touch3": 1.0,
+   "touch4": 1.0
+  },
+  "notes": [
+   "a gentle colour gradient across the frame was taken out"
+  ]
+ },
+ "S1_benign|v2_lab_auto": {
+  "found": 9,
+  "of": 9,
+  "FP": 0.04249962952977956,
+  "per": {
+   "cheek_L": 1.0,
+   "cheek_R": 0.945514584479912,
+   "lips": 1.0,
+   "garment": 0.9218887890586004,
+   "rocket_faint": 0.7310279280596579,
+   "touch1": 1.0,
+   "touch2": 1.0,
+   "touch3": 1.0,
+   "touch4": 1.0
+  },
+  "notes": [
+   "a gentle colour gradient across the frame was taken out"
+  ]
+ },
+ "S1_benign|v2_chi_margin": {
+  "found": 8,
+  "of": 9,
+  "FP": 0.007339178728522398,
+  "per": {
+   "cheek_L": 0.9588410506363391,
+   "cheek_R": 0.8514034122179417,
+   "lips": 1.0,
+   "garment": 0.9242647499251273,
+   "rocket_faint": 0.021567480625822488,
+   "touch1": 1.0,
+   "touch2": 1.0,
+   "touch3": 1.0,
+   "touch4": 1.0
+  },
+  "notes": [
+   "a gentle colour gradient across the frame was taken out",
+   "the light was read from the paper margin"
+  ]
+ },
+ "S2_tone_shift|v2_chi_auto": {
+  "found": 9,
+  "of": 9,
+  "FP": 0.07529907225443942,
+  "per": {
+   "cheek_L": 0.9683184402924452,
+   "cheek_R": 0.9121789560894781,
+   "lips": 1.0,
+   "garment": 0.8940786288951388,
+   "rocket_faint": 0.6446401915431341,
+   "touch1": 1.0,
+   "touch2": 1.0,
+   "touch3": 1.0,
+   "touch4": 1.0
+  },
+  "notes": [
+   "a gentle colour gradient across the frame was taken out"
+  ]
+ },
+ "S2_tone_shift|v2_lab_auto": {
+  "found": 9,
+  "of": 9,
+  "FP": 0.11157443070436457,
+  "per": {
+   "cheek_L": 1.0,
+   "cheek_R": 0.9491853079259873,
+   "lips": 1.0,
+   "garment": 0.9146980104737177,
+   "rocket_faint": 0.7287654631176009,
+   "touch1": 1.0,
+   "touch2": 1.0,
+   "touch3": 1.0,
+   "touch4": 1.0
+  },
+  "notes": [
+   "a gentle colour gradient across the frame was taken out"
+  ]
+ },
+ "S2_tone_shift|v2_chi_margin": {
+  "found": 8,
+  "of": 9,
+  "FP": 0.015933619185096448,
+  "per": {
+   "cheek_L": 0.9558624424587057,
+   "cheek_R": 0.8931234465617233,
+   "lips": 1.0,
+   "garment": 0.8831608383774939,
+   "rocket_faint": 0.010833419547449787,
+   "touch1": 1.0,
+   "touch2": 1.0,
+   "touch3": 1.0,
+   "touch4": 1.0
+  },
+  "notes": [
+   "a gentle colour gradient across the frame was taken out",
+   "the light was read from the paper margin"
+  ]
+ },
+ "S3_mixed_light|v2_chi_auto": {
+  "found": 8,
+  "of": 9,
+  "FP": 0.02595266004483106,
+  "per": {
+   "cheek_L": 0.9604657460059572,
+   "cheek_R": 0.8618693134822167,
+   "lips": 1.0,
+   "garment": 0.9155616637568368,
+   "rocket_faint": 0.47991521404008064,
+   "touch1": 1.0,
+   "touch2": 1.0,
+   "touch3": 1.0,
+   "touch4": 1.0
+  },
+  "notes": [
+   "a gentle colour gradient across the frame was taken out"
+  ]
+ },
+ "S3_mixed_light|v2_lab_auto": {
+  "found": 9,
+  "of": 9,
+  "FP": 0.2111632486914193,
+  "per": {
+   "cheek_L": 1.0,
+   "cheek_R": 0.9445822994210091,
+   "lips": 1.0,
+   "garment": 0.8954179168281389,
+   "rocket_faint": 0.7269654927072217,
+   "touch1": 1.0,
+   "touch2": 1.0,
+   "touch3": 1.0,
+   "touch4": 1.0
+  },
+  "notes": [
+   "a gentle colour gradient across the frame was taken out"
+  ]
+ },
+ "S3_mixed_light|v2_chi_margin": {
+  "found": 8,
+  "of": 9,
+  "FP": 0.009635774847911897,
+  "per": {
+   "cheek_L": 0.9566747901435148,
+   "cheek_R": 0.8538737248414667,
+   "lips": 1.0,
+   "garment": 0.9110790608107838,
+   "rocket_faint": 0.0024753942843590655,
+   "touch1": 1.0,
+   "touch2": 1.0,
+   "touch3": 1.0,
+   "touch4": 1.0
+  },
+  "notes": [
+   "a gentle colour gradient across the frame was taken out",
+   "the margin does not agree with itself across the frame: the light was read from the image"
+  ]
+ },
+ "S4_sheen|v2_chi_auto": {
+  "found": 9,
+  "of": 9,
+  "FP": 0.12038207030413338,
+  "per": {
+   "cheek_L": 0.9691307879772543,
+   "cheek_R": 0.8826240173488751,
+   "lips": 1.0,
+   "garment": 0.9242306262594643,
+   "rocket_faint": 0.7665363825363826,
+   "touch1": 1.0,
+   "touch2": 1.0,
+   "touch3": 1.0,
+   "touch4": 1.0
+  },
+  "notes": [
+   "a gentle colour gradient across the frame was taken out"
+  ]
+ },
+ "S4_sheen|v2_lab_auto": {
+  "found": 9,
+  "of": 9,
+  "FP": 0.11425215902208367,
+  "per": {
+   "cheek_L": 1.0,
+   "cheek_R": 0.9533748983464353,
+   "lips": 1.0,
+   "garment": 0.9018371060199949,
+   "rocket_faint": 0.8842577962577962,
+   "touch1": 1.0,
+   "touch2": 1.0,
+   "touch3": 1.0,
+   "touch4": 1.0
+  },
+  "notes": [
+   "a gentle colour gradient across the frame was taken out"
+  ]
+ },
+ "S4_sheen|v2_chi_margin": {
+  "found": 8,
+  "of": 9,
+  "FP": 0.09179136063226784,
+  "per": {
+   "cheek_L": 0.9694015705388573,
+   "cheek_R": 0.8755760368663594,
+   "lips": 1.0,
+   "garment": 0.9149727075303739,
+   "rocket_faint": 0.4748939708939709,
+   "touch1": 1.0,
+   "touch2": 1.0,
+   "touch3": 1.0,
+   "touch4": 1.0
+  },
+  "notes": [
+   "a gentle colour gradient across the frame was taken out",
+   "the margin does not agree with itself across the frame: the light was read from the image"
+  ]
+ },
+ "S5_extensive|v2_chi_auto": {
+  "found": 12,
+  "of": 13,
+  "FP": 0.009959187753568487,
+  "per": {
+   "cheek_L": 0.9688600054156512,
+   "cheek_R": 0.9043813722788647,
+   "lips": 0.9997162315550511,
+   "garment": 0.9180276808318625,
+   "rocket_faint": 0.3226150786687723,
+   "touch1": 1.0,
+   "touch2": 1.0,
+   "touch3": 1.0,
+   "touch4": 1.0,
+   "sky": 0.9906031807084742,
+   "skin": 0.8746443812233285,
+   "hair": 0.8373417247321495,
+   "flag": 0.9643195101586418
+  },
+  "notes": [
+   "a gentle colour gradient across the frame was taken out"
+  ]
+ },
+ "S5_extensive|v2_lab_auto": {
+  "found": 13,
+  "of": 13,
+  "FP": 0.025119868738991205,
+  "per": {
+   "cheek_L": 0.9975629569455727,
+   "cheek_R": 0.9457150730228713,
+   "lips": 1.0,
+   "garment": 0.9077332225887088,
+   "rocket_faint": 0.6708194420073698,
+   "touch1": 1.0,
+   "touch2": 1.0,
+   "touch3": 1.0,
+   "touch4": 1.0,
+   "sky": 0.9905818121597726,
+   "skin": 0.9025604551920341,
+   "hair": 0.834734397242826,
+   "flag": 0.9885935615548752
+  },
+  "notes": [
+   "a gentle colour gradient across the frame was taken out"
+  ]
+ },
+ "S5_extensive|v2_chi_margin": {
+  "found": 12,
+  "of": 13,
+  "FP": 0.003166051380687948,
+  "per": {
+   "cheek_L": 0.967776875169239,
+   "cheek_R": 0.8771011297878203,
+   "lips": 0.9997162315550511,
+   "garment": 0.9092067117631556,
+   "rocket_faint": 0.014783295314967538,
+   "touch1": 1.0,
+   "touch2": 1.0,
+   "touch3": 1.0,
+   "touch4": 1.0,
+   "sky": 0.8957214823362234,
+   "skin": 0.6780692635955794,
+   "hair": 0.7480182812617068,
+   "flag": 0.9365850264403006
+  },
+  "notes": [
+   "a gentle colour gradient across the frame was taken out",
+   "the light was read from the paper margin"
+  ]
+ },
+ "S6_unpainted_unruly|v2_chi_auto": {
+  "found": 0,
+  "of": 0,
+  "FP": 0.0775903178490427,
+  "per": {},
+  "notes": [
+   "the image reads two ways in the tones L* 20-39 (one colour or another there is paint): box an unpainted area at those tones",
+   "a gentle colour gradient across the frame was taken out"
+  ]
+ },
+ "S6_unpainted_unruly|v2_lab_auto": {
+  "found": 0,
+  "of": 0,
+  "FP": 0.0712927842645662,
+  "per": {},
+  "notes": [
+   "the image reads two ways in the tones L* 20-31 (one colour or another there is paint): box an unpainted area at those tones",
+   "a gentle colour gradient across the frame was taken out"
+  ]
+ },
+ "S6_unpainted_unruly|v2_chi_margin": {
+  "found": 0,
+  "of": 0,
+  "FP": 0.0317263185555175,
+  "per": {},
+  "notes": [
+   "a gentle colour gradient across the frame was taken out",
+   "the margin does not agree with itself across the frame: the light was read from the image"
+  ]
+ },
+ "S7_extensive_unruly|v2_chi_auto": {
+  "found": 10,
+  "of": 13,
+  "FP": 0.16087482428323907,
+  "per": {
+   "cheek_L": 0.9891686975358787,
+   "cheek_R": 0.9381946326917864,
+   "lips": 1.0,
+   "garment": 0.18463248880398359,
+   "rocket_faint": 0.45614633813391575,
+   "touch1": 0.9830917874396136,
+   "touch2": 1.0,
+   "touch3": 1.0,
+   "touch4": 1.0,
+   "sky": 0.11765327583837999,
+   "skin": 0.9073843993085566,
+   "hair": 0.8589943669089342,
+   "flag": 0.9103078926890571
+  },
+  "notes": [
+   "a gentle colour gradient across the frame was taken out"
+  ]
+ },
+ "S7_extensive_unruly|v2_lab_auto": {
+  "found": 11,
+  "of": 13,
+  "FP": 0.1484428190298587,
+  "per": {
+   "cheek_L": 0.9962090441375575,
+   "cheek_R": 0.9116291677961507,
+   "lips": 1.0,
+   "garment": 0.1792811061351038,
+   "rocket_faint": 0.6662173230496212,
+   "touch1": 0.9927536231884058,
+   "touch2": 1.0,
+   "touch3": 1.0,
+   "touch4": 0.994413407821229,
+   "sky": 0.12553769407188983,
+   "skin": 0.8969047104580813,
+   "hair": 0.8225501999078492,
+   "flag": 0.7991768999338358
+  },
+  "notes": [
+   "a gentle colour gradient across the frame was taken out"
+  ]
+ },
+ "S7_extensive_unruly|v2_chi_margin": {
+  "found": 10,
+  "of": 13,
+  "FP": 0.032953022328287944,
+  "per": {
+   "cheek_L": 0.9910641754670999,
+   "cheek_R": 0.9262672811059908,
+   "lips": 1.0,
+   "garment": 0.17515502176568226,
+   "rocket_faint": 0.22964302777967374,
+   "touch1": 0.9927536231884058,
+   "touch2": 1.0,
+   "touch3": 1.0,
+   "touch4": 1.0,
+   "sky": 0.11177166893898559,
+   "skin": 0.8491654062229905,
+   "hair": 0.7994381771971285,
+   "flag": 0.8821693555434417
+  },
+  "notes": [
+   "a gentle colour gradient across the frame was taken out",
+   "the light was read from the paper margin"
+  ]
+ },
+ "S8_basic_unruly|v2_chi_auto": {
+  "found": 8,
+  "of": 9,
+  "FP": 0.035320391738342755,
+  "per": {
+   "cheek_L": 0.9683184402924452,
+   "cheek_R": 0.8807264841420439,
+   "lips": 1.0,
+   "garment": 0.8570276533775955,
+   "rocket_faint": 0.4007391944149755,
+   "touch1": 1.0,
+   "touch2": 1.0,
+   "touch3": 1.0,
+   "touch4": 1.0
+  },
+  "notes": [
+   "a gentle colour gradient across the frame was taken out"
+  ]
+ },
+ "S8_basic_unruly|v2_lab_auto": {
+  "found": 9,
+  "of": 9,
+  "FP": 0.03430413314532035,
+  "per": {
+   "cheek_L": 0.9983753046303818,
+   "cheek_R": 0.9213879100027108,
+   "lips": 1.0,
+   "garment": 0.835943127368388,
+   "rocket_faint": 0.6498579788508264,
+   "touch1": 1.0,
+   "touch2": 1.0,
+   "touch3": 1.0,
+   "touch4": 1.0
+  },
+  "notes": [
+   "a gentle colour gradient across the frame was taken out"
+  ]
+ },
+ "S8_basic_unruly|v2_chi_margin": {
+  "found": 8,
+  "of": 9,
+  "FP": 0.02175071392938393,
+  "per": {
+   "cheek_L": 0.7121581370159762,
+   "cheek_R": 0.6771482786663052,
+   "lips": 1.0,
+   "garment": 0.7906070902884345,
+   "rocket_faint": 0.2691557441565997,
+   "touch1": 1.0,
+   "touch2": 1.0,
+   "touch3": 1.0,
+   "touch4": 1.0
+  },
+  "notes": [
+   "a gentle colour gradient across the frame was taken out",
+   "the margin does not agree with itself across the frame: the light was read from the image"
+  ]
+ }
+}

@@ -1,0 +1,33 @@
+scan        v1              auc=0.999 FA=0.001 | cheeks=0.89 lips=1.00 backdro=0.91 flag ca=0.44 flag st=1.00 mission=1.00 small g=1.00
+scan        v2              auc=0.999 FA=0.001 | cheeks=0.83 lips=1.00 backdro=0.37 flag ca=0.44 flag st=1.00 mission=1.00 small g=1.00
+scan        todo_fair       auc=0.999 FA=0.004 | cheeks=0.96 lips=1.00 backdro=0.98 flag ca=0.79 flag st=1.00 mission=1.00 small g=1.00
+phone       v1              auc=0.963 FA=0.009 | cheeks=0.96 lips=1.00 backdro=0.82 flag ca=0.37 flag st=1.00 mission=1.00 small g=1.00
+phone       v2              auc=0.969 FA=0.006 | cheeks=0.79 lips=1.00 backdro=0.37 flag ca=0.33 flag st=1.00 mission=1.00 small g=1.00
+phone       todo_fair       auc=0.903 FA=0.051 | cheeks=0.81 lips=1.00 backdro=0.46 flag ca=0.39 flag st=0.85 mission=0.94 small g=1.00
+phone_mixed v1              auc=0.950 FA=0.009 | cheeks=0.84 lips=1.00 backdro=0.17 flag ca=0.66 flag st=1.00 mission=1.00 small g=1.00
+phone_mixed v2              auc=0.967 FA=0.006 | cheeks=0.58 lips=1.00 backdro=0.17 flag ca=0.90 flag st=1.00 mission=1.00 small g=1.00
+phone_mixed todo_fair       auc=0.518 FA=0.156 | cheeks=0.09 lips=1.00 backdro=0.01 flag ca=0.02 flag st=0.40 mission=0.22 small g=0.82
+phone_glare v1              auc=0.909 FA=0.069 | cheeks=0.96 lips=1.00 backdro=0.83 flag ca=0.34 flag st=1.00 mission=1.00 small g=1.00
+phone_glare v2              auc=0.912 FA=0.061 | cheeks=0.53 lips=1.00 backdro=0.40 flag ca=0.31 flag st=1.00 mission=0.99 small g=1.00
+phone_glare todo_fair       auc=0.863 FA=0.080 | cheeks=0.64 lips=1.00 backdro=0.38 flag ca=0.38 flag st=0.54 mission=0.89 small g=1.00
+toned       v1              auc=0.960 FA=0.008 | cheeks=0.72 lips=1.00 backdro=0.36 flag ca=0.52 flag st=1.00 mission=0.95 small g=1.00
+toned       v2              auc=0.969 FA=0.013 | cheeks=0.64 lips=1.00 backdro=0.39 flag ca=0.42 flag st=1.00 mission=0.95 small g=1.00
+toned       todo_fair       auc=0.884 FA=0.041 | cheeks=0.55 lips=1.00 backdro=0.26 flag ca=0.34 flag st=0.41 mission=0.84 small g=1.00
+majority    v1              auc=0.664 FA=0.146 | cheeks=0.95 lips=1.00 backdro=0.10 flag ca=0.29 flag st=1.00 mission=1.00 small g=1.00
+majority    v2              auc=0.830 FA=0.007 | cheeks=0.27 lips=1.00 backdro=0.13 flag ca=0.18 flag st=1.00 mission=0.89 small g=1.00
+majority    todo_fair       auc=0.570 FA=0.150 | cheeks=0.85 lips=1.00 backdro=0.13 flag ca=0.34 flag st=0.72 mission=0.89 small g=1.00
+/usr/local/lib/python3.13/site-packages/sklearn/metrics/_ranking.py:469: UndefinedMetricWarning: Only one class is present in y_true. ROC AUC score is not defined in that case.
+  warnings.warn(
+control     v1              auc=nan FA=0.004 | 
+/usr/local/lib/python3.13/site-packages/sklearn/metrics/_ranking.py:469: UndefinedMetricWarning: Only one class is present in y_true. ROC AUC score is not defined in that case.
+  warnings.warn(
+control     v2              auc=nan FA=0.007 | 
+/usr/local/lib/python3.13/site-packages/sklearn/metrics/_ranking.py:469: UndefinedMetricWarning: Only one class is present in y_true. ROC AUC score is not defined in that case.
+  warnings.warn(
+control     todo_fair       auc=nan FA=0.164 | 
+thin        v1              auc=0.801 FA=0.008 | cheeks=0.77 face=0.23 lips=1.00 backdro=0.00 flag ca=0.30 flag st=1.00 mission=1.00 small g=1.00
+thin        v2              auc=0.865 FA=0.007 | cheeks=0.77 face=0.19 lips=1.00 backdro=0.00 flag ca=0.28 flag st=1.00 mission=1.00 small g=1.00
+thin        todo_fair       auc=0.716 FA=0.058 | cheeks=0.78 face=0.35 lips=1.00 backdro=0.01 flag ca=0.34 flag st=0.88 mission=0.95 small g=1.00
+thin_mixed  v1              auc=0.808 FA=0.009 | cheeks=0.70 face=0.32 lips=1.00 backdro=0.00 flag ca=0.40 flag st=1.00 mission=1.00 small g=1.00
+thin_mixed  v2              auc=0.870 FA=0.009 | cheeks=0.57 face=0.22 lips=1.00 backdro=0.02 flag ca=0.61 flag st=1.00 mission=1.00 small g=1.00
+thin_mixed  todo_fair       auc=0.487 FA=0.170 | cheeks=0.11 face=0.20 lips=1.00 backdro=0.04 flag ca=0.02 flag st=0.34 mission=0.22 small g=0.80

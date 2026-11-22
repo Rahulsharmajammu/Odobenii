@@ -1,0 +1,1150 @@
+{
+ "neg_neutral": {
+  "desc": "unpainted neutral print, phone capture",
+  "v1.2": {
+   "FP": 0.20240432515732656,
+   "FP_dark": 0.31973586177260743,
+   "FP_mid": 0.22695390643323263,
+   "FP_light": 0.09508702289488527,
+   "det": {},
+   "unjudged_bare": 0.0,
+   "time": 0.3
+  },
+  "v4.1 C*": {
+   "FP": 0.010942377586336666,
+   "FP_dark": 0.01725060052493763,
+   "FP_mid": 0.011820702785480733,
+   "FP_light": 0.005788692510121068,
+   "det": {},
+   "unjudged_bare": 0.0,
+   "time": 0.3
+  },
+  "v4.1 LRC": {
+   "FP": 0.060181482090985984,
+   "FP_dark": 0.08767818664655128,
+   "FP_mid": 0.06523322710152725,
+   "FP_light": 0.03601040309089614,
+   "det": {},
+   "unjudged_bare": 0.0,
+   "time": 0.5
+  },
+  "Woodii (ideal pick)": {
+   "FP": 0.03428845523352456,
+   "FP_dark": 0.04584084311537189,
+   "FP_mid": 0.03793717147469062,
+   "FP_light": 0.022003576784397672,
+   "det": {},
+   "unjudged_bare": 0.107534453659302,
+   "time": 1.2
+  },
+  "Woodii (3 boxes)": {
+   "FP": 0.15287435943557615,
+   "FP_dark": 0.21568197064924707,
+   "FP_mid": 0.22021715436723094,
+   "FP_light": 0.019797443888954127,
+   "det": {},
+   "unjudged_bare": 0.22289792174557552,
+   "time": 0.6
+  },
+  "TODO plan": {
+   "FP": 0.06673032445058485,
+   "FP_dark": 0.08444447192449307,
+   "FP_mid": 0.07498999765462247,
+   "FP_light": 0.044174634861904934,
+   "det": {},
+   "unjudged_bare": 0.0,
+   "time": 2.0
+  },
+  "proposed (auto)": {
+   "FP": 0.02825818780704675,
+   "FP_dark": 0.052787455907403226,
+   "FP_mid": 0.032600747761544084,
+   "FP_light": 0.0069244851875309215,
+   "det": {},
+   "unjudged_bare": 0.00693984658346505,
+   "time": 8.6,
+   "warnings": []
+  },
+  "proposed (3 boxes)": {
+   "FP": 0.060161708631051476,
+   "FP_dark": 0.1498236296129126,
+   "FP_mid": 0.057268600913317605,
+   "FP_light": 0.008366364366141058,
+   "det": {},
+   "unjudged_bare": 0.00693984658346505,
+   "time": 5.3,
+   "warnings": []
+  }
+ },
+ "neg_hard": {
+  "desc": "unpainted split-toned print, yellowed and foxed, mixed light, JPEG q75",
+  "v1.2": {
+   "FP": 0.19864732702632532,
+   "FP_dark": 0.05721367899207427,
+   "FP_mid": 0.30795654446124865,
+   "FP_light": 0.13034900087821663,
+   "det": {},
+   "unjudged_bare": 0.0,
+   "time": 0.4
+  },
+  "v4.1 C*": {
+   "FP": 0.004124780633117063,
+   "FP_dark": 0.0017177681644510404,
+   "FP_mid": 0.004600897445316691,
+   "FP_light": 0.004964530474918695,
+   "det": {},
+   "unjudged_bare": 0.0,
+   "time": 0.4
+  },
+  "v4.1 LRC": {
+   "FP": 0.0021492586261532827,
+   "FP_dark": 0.002112475922826739,
+   "FP_mid": 0.0008358967036836291,
+   "FP_light": 0.004072278430759236,
+   "det": {},
+   "unjudged_bare": 0.0,
+   "time": 1.0
+  },
+  "Woodii (ideal pick)": {
+   "FP": 0.2854772453831283,
+   "FP_dark": 0.2188165082572863,
+   "FP_mid": 0.3126031874973142,
+   "FP_light": 0.288570351567356,
+   "det": {},
+   "unjudged_bare": 0.044585891935822866,
+   "time": 1.4
+  },
+  "Woodii (3 boxes)": {
+   "FP": 0.46121085964488756,
+   "FP_dark": 0.3096529729388361,
+   "FP_mid": 0.3834547901871549,
+   "FP_light": 0.6699148651195618,
+   "det": {},
+   "unjudged_bare": 0.5075718583116055,
+   "time": 0.8
+  },
+  "TODO plan": {
+   "FP": 0.1554376633661047,
+   "FP_dark": 0.030910353973917712,
+   "FP_mid": 0.15843777421362637,
+   "FP_light": 0.2301709514815394,
+   "det": {},
+   "unjudged_bare": 0.0,
+   "time": 3.0
+  },
+  "proposed (auto)": {
+   "FP": 0.03195517465085121,
+   "FP_dark": 0.04601660930247245,
+   "FP_mid": 0.034392366863003045,
+   "FP_light": 0.019501221082010994,
+   "det": {},
+   "unjudged_bare": 0.012643080564988883,
+   "time": 9.0,
+   "warnings": [
+    "The colour of the light changes across the frame; the reference follows it. A painted area covering one side could be taken for it: check that side in the Boosted panel.",
+    "The left and right halves of the print disagree about what bare print looks like in the middle tones: paint may cover those tones in one half, and then the reference may have taken it for bare print. If an area in those tones looks neutral in the Boosted panel but you think it is painted, mark a bare area in those tones and run again.",
+    "The top and bottom halves of the print disagree about what bare print looks like in the middle tones: paint may cover those tones in one half, and then the reference may have taken it for bare print. If an area in those tones looks neutral in the Boosted panel but you think it is painted, mark a bare area in those tones and run again."
+   ]
+  },
+  "proposed (3 boxes)": {
+   "FP": 0.06783406395980242,
+   "FP_dark": 0.17711326533834348,
+   "FP_mid": 0.05285001961515482,
+   "FP_light": 0.02011677473944235,
+   "det": {},
+   "unjudged_bare": 0.012643080564988883,
+   "time": 5.6,
+   "warnings": [
+    "The colour of the light changes across the frame; the reference follows it. A painted area covering one side could be taken for it: check that side in the Boosted panel."
+   ]
+  }
+ },
+ "portrait": {
+  "desc": "warm print: flesh tint, cheeks, lips, hair, small gold touches; phone capture",
+  "v1.2": {
+   "FP": 0.43596816637415464,
+   "FP_dark": 0.7122600701941946,
+   "FP_mid": 0.3256534895251688,
+   "FP_light": 0.4199647054607998,
+   "det": {
+    "flesh": 0.9677686961961621,
+    "cheeks": 1.0,
+    "lips": 1.0,
+    "hair": 0.9634030418250951,
+    "patch_gold": 1.0,
+    "badge_gold": 1.0
+   },
+   "unjudged_bare": 0.0,
+   "time": 0.5
+  },
+  "v4.1 C*": {
+   "FP": 0.0010563806917407137,
+   "FP_dark": 0.001642319081145333,
+   "FP_mid": 0.001149196257697993,
+   "FP_light": 0.0005486777984807224,
+   "det": {
+    "flesh": 0.09425956399341774,
+    "cheeks": 0.5662374821173104,
+    "lips": 1.0,
+    "hair": 0.0049565453557848995,
+    "patch_gold": 0.951104366885854,
+    "badge_gold": 0.783816425120773
+   },
+   "unjudged_bare": 0.0,
+   "time": 0.3
+  },
+  "v4.1 LRC": {
+   "FP": 0.00662051772811402,
+   "FP_dark": 0.007772002503921169,
+   "FP_mid": 0.005242435616434124,
+   "FP_light": 0.007885283789594381,
+   "det": {
+    "flesh": 0.410697528933375,
+    "cheeks": 0.780829756795422,
+    "lips": 1.0,
+    "hair": 0.029671374253123304,
+    "patch_gold": 0.9870173663800371,
+    "badge_gold": 0.9891304347826086
+   },
+   "unjudged_bare": 0.0,
+   "time": 0.9
+  },
+  "Woodii (ideal pick)": {
+   "FP": 0.04786725009450109,
+   "FP_dark": 0.05667231690076454,
+   "FP_mid": 0.05034838873108035,
+   "FP_light": 0.03866274903253547,
+   "det": {
+    "flesh": 0.8241557982347582,
+    "cheeks": 0.9464949928469242,
+    "lips": 0.9246231155778895,
+    "hair": 0.4738593155893536,
+    "patch_gold": 0.7326476704321925,
+    "badge_gold": 0.19685990338164253
+   },
+   "unjudged_bare": 0.10586806414610557,
+   "time": 1.0
+  },
+  "Woodii (3 boxes)": {
+   "FP": 0.1721298332500176,
+   "FP_dark": 0.012945131772368244,
+   "FP_mid": 0.18899335659528985,
+   "FP_light": 0.2490504514834456,
+   "det": {
+    "flesh": 0.6061389073996002,
+    "cheeks": 0.7273247496423462,
+    "lips": 0.7577889447236181,
+    "hair": 0.22379141770776753,
+    "patch_gold": 0.6179396391839488,
+    "badge_gold": 0.10628019323671498
+   },
+   "unjudged_bare": 0.17264931716161536,
+   "time": 0.6
+  },
+  "TODO plan": {
+   "FP": 0.08804163997298103,
+   "FP_dark": 0.14349015663574277,
+   "FP_mid": 0.09078959359539333,
+   "FP_light": 0.04874722301848932,
+   "det": {
+    "flesh": 0.9445539976336511,
+    "cheeks": 0.9994277539341917,
+    "lips": 1.0,
+    "hair": 0.6349809885931559,
+    "patch_gold": 1.0,
+    "badge_gold": 1.0
+   },
+   "unjudged_bare": 0.0,
+   "time": 2.4
+  },
+  "proposed (auto)": {
+   "FP": 0.030436968680779313,
+   "FP_dark": 0.07319749326543674,
+   "FP_mid": 0.02976789015908027,
+   "FP_light": 0.0041766697721083565,
+   "det": {
+    "flesh": 0.8437529749357414,
+    "cheeks": 0.9985693848354793,
+    "lips": 1.0,
+    "hair": 0.5695953286257469,
+    "patch_gold": 0.9980329343000056,
+    "badge_gold": 0.9975845410628019
+   },
+   "unjudged_bare": 0.014491134310533843,
+   "time": 8.0,
+   "warnings": []
+  },
+  "proposed (3 boxes)": {
+   "FP": 0.0878907284455895,
+   "FP_dark": 0.12557938344457964,
+   "FP_mid": 0.11116929174602144,
+   "FP_light": 0.030139207395728822,
+   "det": {
+    "flesh": 0.8785274238076457,
+    "cheeks": 0.9951359084406295,
+    "lips": 1.0,
+    "hair": 0.46095871808799566,
+    "patch_gold": 0.9980891361771483,
+    "badge_gold": 0.9915458937198067
+   },
+   "unjudged_bare": 0.014491134310533843,
+   "time": 5.6,
+   "warnings": []
+  }
+ },
+ "portrait_heavy": {
+  "desc": "warm print painted almost everywhere it is light: face, hair, suit, flag, background",
+  "v1.2": {
+   "FP": 0.0013304922311488112,
+   "FP_dark": 0.0015093985843528804,
+   "FP_mid": 0.001996769730879056,
+   "FP_light": 0.000489441029553601,
+   "det": {
+    "flesh": 0.04476475387544194,
+    "cheeks": 0.10472103004291845,
+    "lips": 1.0,
+    "hair": 0.0,
+    "suit": 0.201358134041925,
+    "flag_red": 0.33372221225096793,
+    "flag_blue": 0.0,
+    "bg_blue": 0.0,
+    "patch_gold": 0.8366923874237014
+   },
+   "unjudged_bare": 0.0,
+   "time": 0.4
+  },
+  "v4.1 C*": {
+   "FP": 0.0,
+   "FP_dark": 0.0,
+   "FP_mid": 0.0,
+   "FP_light": 0.0,
+   "det": {
+    "flesh": 0.026638564046777263,
+    "cheeks": 0.0,
+    "lips": 0.9577889447236181,
+    "hair": 0.0,
+    "suit": 0.06830334642557849,
+    "flag_red": 0.1397912874028871,
+    "flag_blue": 0.0,
+    "bg_blue": 0.0,
+    "patch_gold": 0.6432108718184959
+   },
+   "unjudged_bare": 0.0,
+   "time": 0.5
+  },
+  "v4.1 LRC": {
+   "FP": 0.0005479996737490315,
+   "FP_dark": 0.0004031312989265457,
+   "FP_mid": 0.0004974887042804474,
+   "FP_light": 0.0007125685577324485,
+   "det": {
+    "flesh": 0.0739461517541474,
+    "cheeks": 0.39799713876967097,
+    "lips": 0.4623115577889447,
+    "hair": 0.0,
+    "suit": 0.029178707655235555,
+    "flag_red": 0.03424271172534037,
+    "flag_blue": 0.0,
+    "bg_blue": 0.0,
+    "patch_gold": 0.6331912933317978
+   },
+   "unjudged_bare": 0.0,
+   "time": 0.8
+  },
+  "Woodii (ideal pick)": {
+   "FP": 0.01778577545777089,
+   "FP_dark": 0.026887920123751935,
+   "FP_mid": 0.018870496193870667,
+   "FP_light": 0.009652065009284984,
+   "det": {
+    "flesh": 0.8401686157193364,
+    "cheeks": 0.9542203147353362,
+    "lips": 0.9547738693467337,
+    "hair": 0.39602947196070404,
+    "suit": 0.9160843748974838,
+    "flag_red": 0.9538857978000564,
+    "flag_blue": 0.942283950617284,
+    "bg_blue": 0.7706936579571693,
+    "patch_gold": 0.6145341471841529
+   },
+   "unjudged_bare": 0.15283073691937524,
+   "time": 0.7
+  },
+  "Woodii (3 boxes)": {
+   "FP": 0.1091131071326618,
+   "FP_dark": 0.00019687807621994094,
+   "FP_mid": 0.07308313513292489,
+   "FP_light": 0.2307858407589215,
+   "det": {
+    "flesh": 0.6264209953766657,
+    "cheeks": 0.8363376251788269,
+    "lips": 0.8874371859296483,
+    "hair": 0.15445490517123756,
+    "suit": 0.8190079120105692,
+    "flag_red": 0.35473449398733364,
+    "flag_blue": 0.0,
+    "bg_blue": 0.852877564177891,
+    "patch_gold": 0.545721524818611
+   },
+   "unjudged_bare": 0.1689852575343583,
+   "time": 0.9
+  },
+  "TODO plan": {
+   "FP": 0.033512091676522165,
+   "FP_dark": 0.04965077579337177,
+   "FP_mid": 0.01833211800704662,
+   "FP_light": 0.03715433227287777,
+   "det": {
+    "flesh": 0.4458797933097634,
+    "cheeks": 0.5836909871244635,
+    "lips": 1.0,
+    "hair": 0.16496111338518216,
+    "suit": 0.25343783271152626,
+    "flag_red": 0.9457962616343171,
+    "flag_blue": 0.970679012345679,
+    "bg_blue": 0.02709397936271505,
+    "patch_gold": 0.9843372106414834
+   },
+   "unjudged_bare": 0.0,
+   "time": 2.3
+  },
+  "proposed (auto)": {
+   "FP": 0.017400901268300642,
+   "FP_dark": 0.057544649135142734,
+   "FP_mid": 0.0032438989484588074,
+   "FP_light": 0.0015331020484546619,
+   "det": {
+    "flesh": 0.44898014685885235,
+    "cheeks": 0.844349070100143,
+    "lips": 1.0,
+    "hair": 0.23618501841997544,
+    "suit": 0.47773870980248306,
+    "flag_red": 0.9846798800030768,
+    "flag_blue": 0.995679012345679,
+    "bg_blue": 0.015952767358916622,
+    "patch_gold": 0.99406887020615
+   },
+   "unjudged_bare": 0.017793421964846456,
+   "time": 8.3,
+   "warnings": [
+    "The left and right halves of the print disagree about what bare print looks like in the middle tones: paint may cover those tones in one half, and then the reference may have taken it for bare print. If an area in those tones looks neutral in the Boosted panel but you think it is painted, mark a bare area in those tones and run again.",
+    "The top and bottom halves of the print disagree about what bare print looks like in the middle tones: paint may cover those tones in one half, and then the reference may have taken it for bare print. If an area in those tones looks neutral in the Boosted panel but you think it is painted, mark a bare area in those tones and run again."
+   ]
+  },
+  "proposed (3 boxes)": {
+   "FP": 0.01690897597977244,
+   "FP_dark": 0.057854028969202644,
+   "FP_mid": 0.0026714461928484296,
+   "FP_light": 0.000511034016151554,
+   "det": {
+    "flesh": 0.4160592874626054,
+    "cheeks": 0.9064377682403434,
+    "lips": 1.0,
+    "hair": 0.2710465274935189,
+    "suit": 0.544366010265036,
+    "flag_red": 0.9852183277351863,
+    "flag_blue": 0.9919753086419754,
+    "bg_blue": 0.13714997125770564,
+    "patch_gold": 0.9944719566969942
+   },
+   "unjudged_bare": 0.017793421964846456,
+   "time": 6.2,
+   "warnings": []
+  }
+ },
+ "blue_over_warm": {
+  "desc": "strongly warm print, blue washes (lower its chroma); no white balance",
+  "v1.2": {
+   "FP": 0.019381498181631592,
+   "FP_dark": 0.006743601629785054,
+   "FP_mid": 0.04085519958373597,
+   "FP_light": 0.009392832742697331,
+   "det": {
+    "suit_blue": 2.9821281062591886e-06,
+    "bg_blue_faint": 0.00039027919240764184
+   },
+   "unjudged_bare": 0.0,
+   "time": 0.4
+  },
+  "v4.1 C*": {
+   "FP": 0.0030803224958148665,
+   "FP_dark": 0.0012345377802717935,
+   "FP_mid": 0.005746859436556902,
+   "FP_light": 0.0021184253857156198,
+   "det": {
+    "suit_blue": 0.0,
+    "bg_blue_faint": 0.0
+   },
+   "unjudged_bare": 0.0,
+   "time": 0.5
+  },
+  "v4.1 LRC": {
+   "FP": 0.006280907452424171,
+   "FP_dark": 0.006470344255495645,
+   "FP_mid": 0.004761949007656285,
+   "FP_light": 0.007697109406103621,
+   "det": {
+    "suit_blue": 0.0,
+    "bg_blue_faint": 0.00035537617520045437
+   },
+   "unjudged_bare": 0.0,
+   "time": 1.1
+  },
+  "Woodii (ideal pick)": {
+   "FP": 0.13413754177116138,
+   "FP_dark": 0.0737990094420182,
+   "FP_mid": 0.1937346688470973,
+   "FP_light": 0.13186337876561172,
+   "det": {
+    "suit_blue": 0.40285866800266007,
+    "bg_blue_faint": 0.23372964122871312
+   },
+   "unjudged_bare": 0.16195986120108524,
+   "time": 1.0
+  },
+  "Woodii (3 boxes)": {
+   "FP": 0.31092977313689396,
+   "FP_dark": 0.2600483080000976,
+   "FP_mid": 0.4526453207463019,
+   "FP_light": 0.21225049520036568,
+   "det": {
+    "suit_blue": 0.7650619835326886,
+    "bg_blue_faint": 0.3092090024400382
+   },
+   "unjudged_bare": 0.2207136855473385,
+   "time": 0.7
+  },
+  "TODO plan": {
+   "FP": 0.05662598053993034,
+   "FP_dark": 0.06323956376412034,
+   "FP_mid": 0.04855794246636438,
+   "FP_light": 0.058499997542429946,
+   "det": {
+    "suit_blue": 0.023436544787090965,
+    "bg_blue_faint": 0.009176320523926019
+   },
+   "unjudged_bare": 0.0,
+   "time": 2.7
+  },
+  "proposed (auto)": {
+   "FP": 0.020170419924443104,
+   "FP_dark": 0.029580110766828507,
+   "FP_mid": 0.02379116182264179,
+   "FP_light": 0.006861535588071938,
+   "det": {
+    "suit_blue": 0.020493184346213146,
+    "bg_blue_faint": 0.002811279385960737
+   },
+   "unjudged_bare": 0.020787767223187887,
+   "time": 11.0,
+   "warnings": [
+    "The bare-print reference is strongly coloured: a strong colour cast, a print painted nearly all over, or something other than the print filling much of the frame. Check the Taken as bare print panel; mark the print or a bare area if it is wrong.",
+    "The left and right halves of the print disagree about what bare print looks like in the middle tones: paint may cover those tones in one half, and then the reference may have taken it for bare print. If an area in those tones looks neutral in the Boosted panel but you think it is painted, mark a bare area in those tones and run again.",
+    "The top and bottom halves of the print disagree about what bare print looks like in the middle tones: paint may cover those tones in one half, and then the reference may have taken it for bare print. If an area in those tones looks neutral in the Boosted panel but you think it is painted, mark a bare area in those tones and run again."
+   ]
+  },
+  "proposed (3 boxes)": {
+   "FP": 0.015228434535530341,
+   "FP_dark": 0.030273013394490938,
+   "FP_mid": 0.012915334869545827,
+   "FP_light": 0.0025214668744132553,
+   "det": {
+    "suit_blue": 0.39233473791567136,
+    "bg_blue_faint": 0.14633883214504426
+   },
+   "unjudged_bare": 0.020787767223187887,
+   "time": 6.6,
+   "warnings": [
+    "Your marked areas leave out the darker tones of the print; there the reference follows the automatic one's shape, joined on to yours. Mark a bare area in those tones if they matter."
+   ]
+  }
+ },
+ "sky_mixed": {
+  "desc": "faint blue sky (the lightest third), green grass, face; mixed light left to right",
+  "v1.2": {
+   "FP": 0.2756543160252934,
+   "FP_dark": 0.2851937280690992,
+   "FP_mid": 0.37953101982660775,
+   "FP_light": 0.14910582288139634,
+   "det": {
+    "sky_blue": 0.4700713592028037,
+    "grass_green": 0.6906630448810526,
+    "face_flesh": 0.9946799382186374
+   },
+   "unjudged_bare": 0.0,
+   "time": 0.3
+  },
+  "v4.1 C*": {
+   "FP": 0.0003428407608109366,
+   "FP_dark": 0.00014722842490123427,
+   "FP_mid": 0.0013161390035982515,
+   "FP_light": 0.00048643235252038725,
+   "det": {
+    "sky_blue": 0.0,
+    "grass_green": 0.0024111095405781337,
+    "face_flesh": 0.061094903037583664
+   },
+   "unjudged_bare": 0.0,
+   "time": 0.3
+  },
+  "v4.1 LRC": {
+   "FP": 0.0034963846555115348,
+   "FP_dark": 0.004118306218765081,
+   "FP_mid": 0.003489579559999034,
+   "FP_light": 0.0006008870237016548,
+   "det": {
+    "sky_blue": 0.0,
+    "grass_green": 0.0011983849458268548,
+    "face_flesh": 0.004290372404324695
+   },
+   "unjudged_bare": 0.0,
+   "time": 1.0
+  },
+  "Woodii (ideal pick)": {
+   "FP": 0.034888480698212945,
+   "FP_dark": 0.018561005733729215,
+   "FP_mid": 0.048346977710159625,
+   "FP_light": 0.10041489818303209,
+   "det": {
+    "sky_blue": 0.5167926360680657,
+    "grass_green": 0.643012391505192,
+    "face_flesh": 0.7178651106916081
+   },
+   "unjudged_bare": 0.05066950002881636,
+   "time": 1.0
+  },
+  "Woodii (3 boxes)": {
+   "FP": 0.4132103047292814,
+   "FP_dark": 0.4089473985555256,
+   "FP_mid": 0.3626023328261972,
+   "FP_light": 0.47306976965997427,
+   "det": {
+    "sky_blue": 0.9135582485327027,
+    "grass_green": 0.5964433573624879,
+    "face_flesh": 0.9035524283507809
+   },
+   "unjudged_bare": 0.16360006443041883,
+   "time": 0.9
+  },
+  "TODO plan": {
+   "FP": 0.012790029244908001,
+   "FP_dark": 0.015626661431878224,
+   "FP_mid": 0.008633388876814219,
+   "FP_light": 0.0028422910010014782,
+   "det": {
+    "sky_blue": 0.004931807625723092,
+    "grass_green": 0.0019358526047972271,
+    "face_flesh": 0.09953663978033293
+   },
+   "unjudged_bare": 0.0,
+   "time": 2.7
+  },
+  "proposed (auto)": {
+   "FP": 0.010456643204733567,
+   "FP_dark": 0.01412983911204901,
+   "FP_mid": 0.0019560965007607042,
+   "FP_light": 3.815155706042253e-05,
+   "det": {
+    "sky_blue": 0.00044546721276865264,
+    "grass_green": 0.00837435497186356,
+    "face_flesh": 0.239402780161318
+   },
+   "unjudged_bare": 0.008860660352682655,
+   "time": 8.1,
+   "warnings": [
+    "The colour of the light changes across the frame; the reference follows it. A painted area covering one side could be taken for it: check that side in the Boosted panel.",
+    "The top and bottom halves of the print disagree about what bare print looks like in the lighter tones: paint may cover those tones in one half, and then the reference may have taken it for bare print. If an area in those tones looks neutral in the Boosted panel but you think it is painted, mark a bare area in those tones and run again."
+   ]
+  },
+  "proposed (3 boxes)": {
+   "FP": 0.046054449614969135,
+   "FP_dark": 0.06274180223950793,
+   "FP_mid": 0.0058199908232509845,
+   "FP_light": 0.0,
+   "det": {
+    "sky_blue": 0.18837351686863996,
+    "grass_green": 0.26791175789756166,
+    "face_flesh": 0.49356444139351296
+   },
+   "unjudged_bare": 0.008860660352682655,
+   "time": 7.5,
+   "warnings": [
+    "The colour of the light changes across the frame; the reference follows it. A painted area covering one side could be taken for it: check that side in the Boosted panel."
+   ]
+  }
+ },
+ "sky_faint": {
+  "desc": "a faint blue wash over the whole sky (most of the light tones), nothing else",
+  "v1.2": {
+   "FP": 0.6879551443544485,
+   "FP_dark": 0.8971296923809505,
+   "FP_mid": 0.7014839135698302,
+   "FP_light": 0.4396189326782566,
+   "det": {
+    "sky_blue_faint": 0.6494489649818003
+   },
+   "unjudged_bare": 0.0,
+   "time": 0.3
+  },
+  "v4.1 C*": {
+   "FP": 0.004308164923724421,
+   "FP_dark": 0.0031692527162906305,
+   "FP_mid": 0.009538134194211087,
+   "FP_light": 0.0017540264927801206,
+   "det": {
+    "sky_blue_faint": 4.033193179870333e-06
+   },
+   "unjudged_bare": 0.0,
+   "time": 0.3
+  },
+  "v4.1 LRC": {
+   "FP": 0.005653928235351222,
+   "FP_dark": 0.008670000572994569,
+   "FP_mid": 0.0050228059234259026,
+   "FP_light": 0.0026817016083454733,
+   "det": {
+    "sky_blue_faint": 1.0082982949675833e-05
+   },
+   "unjudged_bare": 0.0,
+   "time": 0.7
+  },
+  "Woodii (ideal pick)": {
+   "FP": 0.03778392944097978,
+   "FP_dark": 0.009725100916198557,
+   "FP_mid": 0.05216014282744537,
+   "FP_light": 0.059170811558111415,
+   "det": {
+    "sky_blue_faint": 0.19826169373947589
+   },
+   "unjudged_bare": 0.09676186956977849,
+   "time": 1.0
+  },
+  "Woodii (3 boxes)": {
+   "FP": 0.01904893129639517,
+   "FP_dark": 0.0020252394228166435,
+   "FP_mid": 0.041710994533915406,
+   "FP_light": 0.02175758408181554,
+   "det": {
+    "sky_blue_faint": 0.6858344172540004
+   },
+   "unjudged_bare": 0.10284481368341447,
+   "time": 0.6
+  },
+  "TODO plan": {
+   "FP": 0.06091086020815099,
+   "FP_dark": 0.031838739570016976,
+   "FP_mid": 0.08207075339031757,
+   "FP_light": 0.07845609642417269,
+   "det": {
+    "sky_blue_faint": 0.015350333242586486
+   },
+   "unjudged_bare": 0.0,
+   "time": 1.9
+  },
+  "proposed (auto)": {
+   "FP": 0.0193276350421422,
+   "FP_dark": 0.028266414812502347,
+   "FP_mid": 0.02010039497658266,
+   "FP_light": 0.00857198826445946,
+   "det": {
+    "sky_blue_faint": 0.007594502757695837
+   },
+   "unjudged_bare": 0.008498115618213446,
+   "time": 10.3,
+   "warnings": [
+    "The top and bottom halves of the print disagree about what bare print looks like in the lighter tones: paint may cover those tones in one half, and then the reference may have taken it for bare print. If an area in those tones looks neutral in the Boosted panel but you think it is painted, mark a bare area in those tones and run again."
+   ]
+  },
+  "proposed (3 boxes)": {
+   "FP": 0.013232164917461415,
+   "FP_dark": 0.019432419242343114,
+   "FP_mid": 0.014958362375729117,
+   "FP_light": 0.004895062381648245,
+   "det": {
+    "sky_blue_faint": 0.48237595410226164
+   },
+   "unjudged_bare": 0.008498115618213446,
+   "time": 5.3,
+   "warnings": []
+  }
+ },
+ "glare_bg": {
+  "desc": "portrait on a wooden table, veiling glare and specular spots",
+  "v1.2": {
+   "FP": 5.595449034785042e-06,
+   "FP_dark": 1.932450132050759e-05,
+   "FP_mid": 0.0,
+   "FP_light": 0.0,
+   "det": {
+    "flesh": 0.02096299610842181,
+    "cheeks": 0.0,
+    "lips": 0.857286432160804,
+    "patch_gold": 0.6363839285714286
+   },
+   "unjudged_bare": 0.0,
+   "time": 0.3
+  },
+  "v4.1 C*": {
+   "FP": 0.0,
+   "FP_dark": 0.0,
+   "FP_mid": 0.0,
+   "FP_light": 0.0,
+   "det": {
+    "flesh": 0.017152774952880718,
+    "cheeks": 0.0,
+    "lips": 0.699497487437186,
+    "patch_gold": 0.6113839285714285
+   },
+   "unjudged_bare": 0.0,
+   "time": 0.4
+  },
+  "v4.1 LRC": {
+   "FP": 0.009266685318163449,
+   "FP_dark": 0.006136602752667855,
+   "FP_mid": 0.004989723083822266,
+   "FP_light": 0.01838330747554064,
+   "det": {
+    "flesh": 0.061587275759671316,
+    "cheeks": 0.3882689556509299,
+    "lips": 0.2884422110552764,
+    "patch_gold": 0.6824776785714286
+   },
+   "unjudged_bare": 0.0,
+   "time": 1.1
+  },
+  "Woodii (ideal pick)": {
+   "FP": 0.0688843296341198,
+   "FP_dark": 0.043619693814012414,
+   "FP_mid": 0.07256324974774842,
+   "FP_light": 0.08852652798446421,
+   "det": {
+    "flesh": 0.7819495857570951,
+    "cheeks": 0.9121602288984263,
+    "lips": 1.0,
+    "patch_gold": 0.8571428571428571
+   },
+   "unjudged_bare": 0.08311853026205353,
+   "time": 1.3
+  },
+  "Woodii (3 boxes)": {
+   "FP": 0.5045453697659237,
+   "FP_dark": 0.5797157151139072,
+   "FP_mid": 0.41459097873612616,
+   "FP_light": 0.5576713210693517,
+   "det": {
+    "flesh": 0.18834153683439775,
+    "cheeks": 0.25608011444921314,
+    "lips": 0.5246231155778894,
+    "patch_gold": 0.4206473214285714
+   },
+   "unjudged_bare": 0.39537815909726753,
+   "time": 0.9
+  },
+  "TODO plan": {
+   "FP": 0.35927570020827504,
+   "FP_dark": 0.15691709788933503,
+   "FP_mid": 0.7029201390186479,
+   "FP_light": 0.07295063800145649,
+   "det": {
+    "flesh": 0.8800526108828595,
+    "cheeks": 0.9874105865522175,
+    "lips": 1.0,
+    "patch_gold": 0.9986607142857142
+   },
+   "unjudged_bare": 0.0,
+   "time": 2.6
+  },
+  "proposed (auto)": {
+   "FP": 0.02758867232428736,
+   "FP_dark": 0.004899834668155369,
+   "FP_mid": 0.04811390560185358,
+   "FP_light": 0.02090998321882025,
+   "det": {
+    "flesh": 0.6192219555519397,
+    "cheeks": 0.9482117310443491,
+    "lips": 1.0,
+    "patch_gold": 0.98125
+   },
+   "unjudged_bare": 0.023147750940346296,
+   "time": 8.5,
+   "warnings": [
+    "The left and right halves of the print disagree about what bare print looks like in the middle tones: paint may cover those tones in one half, and then the reference may have taken it for bare print. If an area in those tones looks neutral in the Boosted panel but you think it is painted, mark a bare area in those tones and run again."
+   ]
+  },
+  "proposed (3 boxes)": {
+   "FP": 0.05872858963598496,
+   "FP_dark": 0.0284606961114809,
+   "FP_mid": 0.10559138981277327,
+   "FP_light": 0.022309470284646804,
+   "det": {
+    "flesh": 0.6651208829950237,
+    "cheeks": 0.951931330472103,
+    "lips": 1.0,
+    "patch_gold": 0.9891183035714286
+   },
+   "unjudged_bare": 0.023147750940346296,
+   "time": 4.7,
+   "warnings": []
+  }
+ },
+ "heavy_jpeg": {
+  "desc": "faint flesh tint; heavy JPEG q60, strong lateral colour, sharpening, noise",
+  "v1.2": {
+   "FP": 0.4144304527774467,
+   "FP_dark": 0.5841184542491463,
+   "FP_mid": 0.3936428594988291,
+   "FP_light": 0.31679804735763606,
+   "det": {
+    "flesh_faint": 0.6555188043611417,
+    "cheeks": 0.9934172867773325,
+    "lips": 1.0,
+    "badge_gold": 0.9955849889624724
+   },
+   "unjudged_bare": 0.0,
+   "time": 0.3
+  },
+  "v4.1 C*": {
+   "FP": 0.010383598600171186,
+   "FP_dark": 0.015695705832093922,
+   "FP_mid": 0.011769150732086153,
+   "FP_light": 0.0043882521210967165,
+   "det": {
+    "flesh_faint": 0.03941905889719194,
+    "cheeks": 0.03463079564968517,
+    "lips": 1.0,
+    "badge_gold": 0.14275202354672553
+   },
+   "unjudged_bare": 0.0,
+   "time": 0.3
+  },
+  "v4.1 LRC": {
+   "FP": 0.014552206463915404,
+   "FP_dark": 0.01563529347460236,
+   "FP_mid": 0.011935568022692722,
+   "FP_light": 0.017514059501063522,
+   "det": {
+    "flesh_faint": 0.09024459961615419,
+    "cheeks": 0.4736691471093303,
+    "lips": 1.0,
+    "badge_gold": 0.459896983075791
+   },
+   "unjudged_bare": 0.0,
+   "time": 0.9
+  },
+  "Woodii (ideal pick)": {
+   "FP": 0.06872447100122431,
+   "FP_dark": 0.06367462479610829,
+   "FP_mid": 0.0762146213331974,
+   "FP_light": 0.06171250024343115,
+   "det": {
+    "flesh_faint": 0.302625668667565,
+    "cheeks": 0.7610188895248998,
+    "lips": 0.9919597989949749,
+    "badge_gold": 0.07137601177336277
+   },
+   "unjudged_bare": 0.06920728734411737,
+   "time": 1.3
+  },
+  "Woodii (3 boxes)": {
+   "FP": 0.14534329393154707,
+   "FP_dark": 0.14138217720382842,
+   "FP_mid": 0.19959430163208886,
+   "FP_light": 0.07002378051815131,
+   "det": {
+    "flesh_faint": 0.459172145316945,
+    "cheeks": 0.8963938179736691,
+    "lips": 0.8763819095477386,
+    "badge_gold": 0.18395879323031641
+   },
+   "unjudged_bare": 0.1218762527492768,
+   "time": 0.6
+  },
+  "TODO plan": {
+   "FP": 0.11432183602934007,
+   "FP_dark": 0.15253544910834238,
+   "FP_mid": 0.11456556091622463,
+   "FP_light": 0.08522686700869644,
+   "det": {
+    "flesh_faint": 0.31174540950358665,
+    "cheeks": 0.9149971379507728,
+    "lips": 1.0,
+    "badge_gold": 0.7446651949963208
+   },
+   "unjudged_bare": 0.0,
+   "time": 1.9
+  },
+  "proposed (auto)": {
+   "FP": 0.045217477274450954,
+   "FP_dark": 0.09027907632382175,
+   "FP_mid": 0.045518877118072315,
+   "FP_light": 0.0108884046712814,
+   "det": {
+    "flesh_faint": 0.1542325125566581,
+    "cheeks": 0.8360045792787636,
+    "lips": 1.0,
+    "badge_gold": 0.7255334805003679
+   },
+   "unjudged_bare": 0.01946704659956445,
+   "time": 7.9,
+   "warnings": []
+  },
+  "proposed (3 boxes)": {
+   "FP": 0.07024334485411227,
+   "FP_dark": 0.08803231198092121,
+   "FP_mid": 0.10418621944893389,
+   "FP_light": 0.007874186128535972,
+   "det": {
+    "flesh_faint": 0.16276695659275592,
+    "cheeks": 0.8623354321694333,
+    "lips": 1.0,
+    "badge_gold": 0.7490802060338484
+   },
+   "unjudged_bare": 0.01946704659956445,
+   "time": 4.3,
+   "warnings": []
+  }
+ },
+ "all_painted": {
+  "desc": "every part of the print painted (a violet wash over all that was left)",
+  "v1.2": {
+   "FP": null,
+   "FP_dark": null,
+   "FP_mid": null,
+   "FP_light": null,
+   "det": {
+    "flesh": 0.02604768835267074,
+    "cheeks": 0.0,
+    "lips": 0.9487437185929648,
+    "hair": 0.0,
+    "suit": 0.07516059190867286,
+    "flag_red": 0.13977398147703823,
+    "flag_blue": 0.0,
+    "bg_blue": 0.0,
+    "patch_gold": 0.6636481974078895,
+    "badge_gold": 0.11314475873544093,
+    "rest_violet": 2.405933469377935e-05
+   },
+   "unjudged_bare": NaN,
+   "time": 0.4
+  },
+  "v4.1 C*": {
+   "FP": null,
+   "FP_dark": null,
+   "FP_mid": null,
+   "FP_light": null,
+   "det": {
+    "flesh": 0.024048205225859983,
+    "cheeks": 0.0,
+    "lips": 0.935678391959799,
+    "hair": 0.0,
+    "suit": 0.05823656067898915,
+    "flag_red": 0.11282931042756371,
+    "flag_blue": 0.0,
+    "bg_blue": 0.0,
+    "patch_gold": 0.6381232667383553,
+    "badge_gold": 0.10732113144758736,
+    "rest_violet": 0.0
+   },
+   "unjudged_bare": NaN,
+   "time": 0.3
+  },
+  "v4.1 LRC": {
+   "FP": null,
+   "FP_dark": null,
+   "FP_mid": null,
+   "FP_light": null,
+   "det": {
+    "flesh": 0.04280526122498946,
+    "cheeks": 0.16738197424892703,
+    "lips": 0.4984924623115578,
+    "hair": 0.0,
+    "suit": 0.030510971543769867,
+    "flag_red": 0.03164739190940064,
+    "flag_blue": 0.0,
+    "bg_blue": 0.0,
+    "patch_gold": 0.6622332899428377,
+    "badge_gold": 0.12479201331114809,
+    "rest_violet": 0.0003849493551004696
+   },
+   "unjudged_bare": NaN,
+   "time": 0.7
+  },
+  "Woodii (ideal pick)": {
+   "error": "the untinted pick has 0 usable pixels; it needs 100"
+  },
+  "Woodii (3 boxes)": {
+   "error": "the untinted pick has 0 usable pixels; it needs 100"
+  },
+  "TODO plan": {
+   "FP": null,
+   "FP_dark": null,
+   "FP_mid": null,
+   "FP_light": null,
+   "det": {
+    "flesh": 0.36936030141868087,
+    "cheeks": 0.5805436337625178,
+    "lips": 1.0,
+    "hair": 0.1973943939992104,
+    "suit": 0.25924037194099997,
+    "flag_red": 0.9472503479053698,
+    "flag_blue": 0.8637783795042699,
+    "bg_blue": 0.0030881881658298776,
+    "patch_gold": 0.9820023770445413,
+    "badge_gold": 0.9991680532445923,
+    "rest_violet": 0.08696793328127768
+   },
+   "unjudged_bare": NaN,
+   "time": 2.1
+  },
+  "proposed (auto)": {
+   "FP": null,
+   "FP_dark": null,
+   "FP_mid": null,
+   "FP_light": null,
+   "det": {
+    "flesh": 0.36302180388743044,
+    "cheeks": 0.7067238912732475,
+    "lips": 0.9919597989949749,
+    "hair": 0.32662192393736017,
+    "suit": 0.30556002886777484,
+    "flag_red": 0.9635899035462354,
+    "flag_blue": 0.921682982711935,
+    "bg_blue": 0.00052117221666521,
+    "patch_gold": 0.9914539589110872,
+    "badge_gold": 1.0,
+    "rest_violet": 0.026808660485604863
+   },
+   "unjudged_bare": NaN,
+   "time": 9.0,
+   "warnings": [
+    "The left and right halves of the print disagree about what bare print looks like in the lighter tones: paint may cover those tones in one half, and then the reference may have taken it for bare print. If an area in those tones looks neutral in the Boosted panel but you think it is painted, mark a bare area in those tones and run again.",
+    "The top and bottom halves of the print disagree about what bare print looks like in the lighter tones: paint may cover those tones in one half, and then the reference may have taken it for bare print. If an area in those tones looks neutral in the Boosted panel but you think it is painted, mark a bare area in those tones and run again."
+   ]
+  },
+  "proposed (3 boxes)": {
+   "FP": null,
+   "FP_dark": null,
+   "FP_mid": null,
+   "FP_light": null,
+   "det": {
+    "flesh": 0.36302180388743044,
+    "cheeks": 0.7067238912732475,
+    "lips": 0.9919597989949749,
+    "hair": 0.32662192393736017,
+    "suit": 0.30556002886777484,
+    "flag_red": 0.9635899035462354,
+    "flag_blue": 0.921682982711935,
+    "bg_blue": 0.00052117221666521,
+    "patch_gold": 0.9914539589110872,
+    "badge_gold": 1.0,
+    "rest_violet": 0.026808660485604863
+   },
+   "unjudged_bare": NaN,
+   "time": 8.7,
+   "warnings": [
+    "The left and right halves of the print disagree about what bare print looks like in the lighter tones: paint may cover those tones in one half, and then the reference may have taken it for bare print. If an area in those tones looks neutral in the Boosted panel but you think it is painted, mark a bare area in those tones and run again.",
+    "The top and bottom halves of the print disagree about what bare print looks like in the lighter tones: paint may cover those tones in one half, and then the reference may have taken it for bare print. If an area in those tones looks neutral in the Boosted panel but you think it is painted, mark a bare area in those tones and run again."
+   ]
+  }
+ }
+}

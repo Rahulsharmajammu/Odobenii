@@ -1,0 +1,264 @@
+{
+ "S1_benign|E4_proposed": {
+  "AUC": 0.9763513325694443,
+  "TPR_clear": 0.9242090198808695,
+  "TPR_faint": 0.7160598289485675,
+  "TPR_touch": 1.0,
+  "FPR_all": 0.02947267736339879,
+  "FPR_light": 0.020952501729818964,
+  "FPR_mid": 0.03611895649848756,
+  "FPR_dark": 0.044752791503999564,
+  "FPR_left": 0.02699644742884745,
+  "FPR_right": 0.03197983973941996,
+  "FPR_sheen": NaN,
+  "words": []
+ },
+ "S1_benign|E4_proposed_picks": {
+  "AUC": 0.9752919820833333,
+  "TPR_clear": 0.9220120677651428,
+  "TPR_faint": 0.7403767297153048,
+  "TPR_touch": 1.0,
+  "FPR_all": 0.03059079432992591,
+  "FPR_light": 0.0214631042407819,
+  "FPR_mid": 0.038412687801861724,
+  "FPR_dark": 0.04581410903928581,
+  "FPR_left": 0.02866327669365796,
+  "FPR_right": 0.03254239003165701,
+  "FPR_sheen": NaN,
+  "words": []
+ },
+ "S2_tone_shift|E4_proposed": {
+  "AUC": 0.9625773147916667,
+  "TPR_clear": 0.776741951357488,
+  "TPR_faint": 0.7218164621811207,
+  "TPR_touch": 1.0,
+  "FPR_all": 0.018974075643943756,
+  "FPR_light": 0.014927614585210549,
+  "FPR_mid": 0.021353844611193742,
+  "FPR_dark": 0.028772915179516946,
+  "FPR_left": 0.01734715076562099,
+  "FPR_right": 0.02060896026800736,
+  "FPR_sheen": NaN,
+  "words": [
+   "a light gradient across the frame was taken out"
+  ]
+ },
+ "S2_tone_shift|E4_proposed_picks": {
+  "AUC": 0.9624489605555555,
+  "TPR_clear": 0.8137217294943178,
+  "TPR_faint": 0.7254026219688411,
+  "TPR_touch": 1.0,
+  "FPR_all": 0.019445104606405993,
+  "FPR_light": 0.01385857534112475,
+  "FPR_mid": 0.024201163159917778,
+  "FPR_dark": 0.030212345369113828,
+  "FPR_left": 0.017638001197619425,
+  "FPR_right": 0.02126104928614059,
+  "FPR_sheen": NaN,
+  "words": [
+   "a light gradient across the frame was taken out"
+  ]
+ },
+ "S3_mixed_light|E4_proposed": {
+  "AUC": 0.9743452049305554,
+  "TPR_clear": 0.8941902130590575,
+  "TPR_faint": 0.6499420564686051,
+  "TPR_touch": 1.0,
+  "FPR_all": 0.022864475027525987,
+  "FPR_light": 0.012528116510816097,
+  "FPR_mid": 0.03330088406838578,
+  "FPR_dark": 0.03878103001111523,
+  "FPR_left": 0.028864606023510774,
+  "FPR_right": 0.01672481484074032,
+  "FPR_sheen": NaN,
+  "words": [
+   "a light gradient across the frame was taken out"
+  ]
+ },
+ "S3_mixed_light|E4_proposed_picks": {
+  "AUC": 0.947799510625,
+  "TPR_clear": 0.8396175307438106,
+  "TPR_faint": 0.648085229667088,
+  "TPR_touch": 1.0,
+  "FPR_all": 0.03263544181789268,
+  "FPR_light": 0.015284702615753255,
+  "FPR_mid": 0.06320086234269766,
+  "FPR_dark": 0.03621341237495369,
+  "FPR_left": 0.0463926743355716,
+  "FPR_right": 0.018558293698015104,
+  "FPR_sheen": NaN,
+  "words": [
+   "a light gradient across the frame was taken out",
+   "the print's colour differs between left and right beyond a gentle light gradient: uneven light, a stain or a broad wash; picks on both sides would settle it"
+  ]
+ },
+ "S4_sheen|E4_proposed": {
+  "AUC": 0.9711363147916667,
+  "TPR_clear": 0.8562608659422074,
+  "TPR_faint": 0.7468847914290252,
+  "TPR_touch": 1.0,
+  "FPR_all": 0.03184840980835515,
+  "FPR_light": 0.0193508519425721,
+  "FPR_mid": 0.0531476496386565,
+  "FPR_dark": 0.03365328338990987,
+  "FPR_left": 0.01992284790581515,
+  "FPR_right": 0.04171637137233678,
+  "FPR_sheen": 0.04205975679877334,
+  "words": [
+   "a light gradient across the frame was taken out",
+   "glare left out (hatched)"
+  ]
+ },
+ "S4_sheen|E4_proposed_picks": {
+  "AUC": 0.9644401727777777,
+  "TPR_clear": 0.8787218811194903,
+  "TPR_faint": 0.7427696839308662,
+  "TPR_touch": 1.0,
+  "FPR_all": 0.022357114346950813,
+  "FPR_light": 0.008095912821154638,
+  "FPR_mid": 0.0363886244570391,
+  "FPR_dark": 0.032832177703107465,
+  "FPR_left": 0.016797384659429745,
+  "FPR_right": 0.02695758510974986,
+  "FPR_sheen": 0.02739474412760611,
+  "words": [
+   "a light gradient across the frame was taken out",
+   "glare left out (hatched)",
+   "the print's colour differs between top and bottom beyond a gentle light gradient: uneven light, a stain or a broad wash; picks on both sides would settle it"
+  ]
+ },
+ "S5_extensive|E4_proposed": {
+  "AUC": 0.9828990352083333,
+  "TPR_clear": 0.9386575412148258,
+  "TPR_faint": 0.7110049341891136,
+  "TPR_touch": 1.0,
+  "FPR_all": 0.03715673940393042,
+  "FPR_light": 0.034622160871814994,
+  "FPR_mid": 0.03734041022721359,
+  "FPR_dark": 0.045542927122722586,
+  "FPR_left": 0.03537649175064312,
+  "FPR_right": 0.03836208840857865,
+  "FPR_sheen": NaN,
+  "words": [
+   "much of the middle tones departs from the reference: if those areas are painted, the reference there may hold some paint (look for the opposite colour on unpainted middle tones); picks would settle it"
+  ]
+ },
+ "S5_extensive|E4_proposed_picks": {
+  "AUC": 0.9838360820138891,
+  "TPR_clear": 0.9437280426749072,
+  "TPR_faint": 0.7457525614820794,
+  "TPR_touch": 1.0,
+  "FPR_all": 0.038345408008329356,
+  "FPR_light": 0.0351521158334597,
+  "FPR_mid": 0.03941878866350165,
+  "FPR_dark": 0.04743361120660021,
+  "FPR_left": 0.03660363328454855,
+  "FPR_right": 0.03952470821735025,
+  "FPR_sheen": NaN,
+  "words": [
+   "much of the middle tones departs from the reference: if those areas are painted, the reference there may hold some paint (look for the opposite colour on unpainted middle tones); picks would settle it"
+  ]
+ },
+ "S6_unpainted_unruly|E4_proposed": {
+  "AUC": NaN,
+  "TPR_clear": NaN,
+  "TPR_faint": NaN,
+  "TPR_touch": NaN,
+  "FPR_all": 0.02671895791503848,
+  "FPR_light": 0.011208205677534812,
+  "FPR_mid": 0.03494252688583027,
+  "FPR_dark": 0.0399901529893047,
+  "FPR_left": 0.00817678545987422,
+  "FPR_right": 0.04581108515793839,
+  "FPR_sheen": 0.04054261200972031,
+  "words": [
+   "a light gradient across the frame was taken out",
+   "glare left out (hatched)"
+  ]
+ },
+ "S6_unpainted_unruly|E4_proposed_picks": {
+  "AUC": NaN,
+  "TPR_clear": NaN,
+  "TPR_faint": NaN,
+  "TPR_touch": NaN,
+  "FPR_all": 0.026615706217946265,
+  "FPR_light": 0.01951738934991982,
+  "FPR_mid": 0.023999098776508646,
+  "FPR_dark": 0.04014852051800294,
+  "FPR_left": 0.014968724346840887,
+  "FPR_right": 0.0386081337728394,
+  "FPR_sheen": 0.03575083670092619,
+  "words": [
+   "a light gradient across the frame was taken out",
+   "glare left out (hatched)"
+  ]
+ },
+ "S7_extensive_unruly|E4_proposed": {
+  "AUC": 0.8084519572222222,
+  "TPR_clear": 0.3538040937191542,
+  "TPR_faint": 0.5547353657636377,
+  "TPR_touch": 1.0,
+  "FPR_all": 0.03438333034306742,
+  "FPR_light": 0.03562669481615393,
+  "FPR_mid": 0.039305817298155125,
+  "FPR_dark": 0.02916020629212989,
+  "FPR_left": 0.030076213152619637,
+  "FPR_right": 0.03668696244663922,
+  "FPR_sheen": 0.045238990129787646,
+  "words": [
+   "a light gradient across the frame was taken out",
+   "glare left out (hatched)"
+  ]
+ },
+ "S7_extensive_unruly|E4_proposed_picks": {
+  "AUC": 0.8964268234722224,
+  "TPR_clear": 0.3955023637591563,
+  "TPR_faint": 0.6611943603749908,
+  "TPR_touch": 1.0,
+  "FPR_all": 0.03348979633807072,
+  "FPR_light": 0.03297977914451686,
+  "FPR_mid": 0.04045886232890299,
+  "FPR_dark": 0.02925477517896612,
+  "FPR_left": 0.034250129735339904,
+  "FPR_right": 0.03308313723270632,
+  "FPR_sheen": 0.04160697030253187,
+  "words": [
+   "a light gradient across the frame was taken out",
+   "glare left out (hatched)"
+  ]
+ },
+ "S8_basic_unruly|E4_proposed": {
+  "AUC": 0.8514017498611111,
+  "TPR_clear": 0.022325715565373504,
+  "TPR_faint": 0.5978035640281807,
+  "TPR_touch": 1.0,
+  "FPR_all": 0.0156708982838765,
+  "FPR_light": 0.006336143164526573,
+  "FPR_mid": 0.02330708064009644,
+  "FPR_dark": 0.023779891008832876,
+  "FPR_left": 0.005739951123823797,
+  "FPR_right": 0.023934273989607634,
+  "FPR_sheen": 0.021608120742620543,
+  "words": [
+   "a light gradient across the frame was taken out",
+   "glare left out (hatched)"
+  ]
+ },
+ "S8_basic_unruly|E4_proposed_picks": {
+  "AUC": 0.80955027875,
+  "TPR_clear": 0.024288040445907016,
+  "TPR_faint": 0.692824581137884,
+  "TPR_touch": 1.0,
+  "FPR_all": 0.0243491922159081,
+  "FPR_light": 0.025400664577055712,
+  "FPR_mid": 0.023212242171084384,
+  "FPR_dark": 0.02366251059444549,
+  "FPR_left": 0.019128265439064946,
+  "FPR_right": 0.02869343841859738,
+  "FPR_sheen": 0.029972841814701036,
+  "words": [
+   "a light gradient across the frame was taken out",
+   "glare left out (hatched)"
+  ]
+ }
+}

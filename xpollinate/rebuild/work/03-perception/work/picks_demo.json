@@ -1,0 +1,40 @@
+{
+ "automatic": {
+  "false_shown_all": 0.14566681727767997,
+  "false_shown": {
+   "margin": 0.0011681939721191038,
+   "light": 0.8980347590963419,
+   "mid": 0.13634447199347074,
+   "dark": 0.013142533542428995
+  },
+  "objects": {
+   "cheeks (faint pink)": 0.9504927264195213,
+   "lips (red)": 1.0,
+   "backdrop (faint blue wash)": 0.09619010789048471,
+   "flag canton (blue)": 0.290010175795642,
+   "flag stripes (red, over dark silver)": 1.0,
+   "mission patch (green)": 1.0,
+   "small gold touches": 1.0
+  },
+  "auc": 0.6636917905416666
+ },
+ "three boxes": {
+  "false_shown_all": 0.0073228113363351666,
+  "false_shown": {
+   "margin": 0.00046727758884764154,
+   "light": 0.0014891157395614946,
+   "mid": 0.006405470952968526,
+   "dark": 0.010803275832026485
+  },
+  "objects": {
+   "cheeks (faint pink)": 0.2803847958704833,
+   "lips (red)": 1.0,
+   "backdrop (faint blue wash)": 0.16131710929045293,
+   "flag canton (blue)": 0.29183480122109545,
+   "flag stripes (red, over dark silver)": 0.99997536278302,
+   "mission patch (green)": 0.946456987737527,
+   "small gold touches": 1.0
+  },
+  "auc": 0.8494539998333334
+ }
+}

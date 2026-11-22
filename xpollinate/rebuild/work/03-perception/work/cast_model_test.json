@@ -1,0 +1,54 @@
+{
+ "phone_mixed": {
+  "plane, additive": {
+   "auc": 0.7460431066666666,
+   "FA": 0.0702224541099464,
+   "margin": 0.07261172459793967,
+   "backdrop": 0.03427752545389407
+  },
+  "plane, scaled": {
+   "auc": 0.9498297163333334,
+   "FA": 0.013415231861373302,
+   "margin": 0.012024753575928259,
+   "backdrop": 0.2048677322053878
+  },
+  "plane+tilt, additive": {
+   "auc": 0.9410422628333334,
+   "FA": 0.010347989691536625,
+   "margin": 0.005558437708441414,
+   "backdrop": 0.19945914086606803
+  },
+  "plane+tilt, scaled": {
+   "auc": 0.950273886375,
+   "FA": 0.009074112972988845,
+   "margin": 0.006206922107759579,
+   "backdrop": 0.17117960452565037
+  }
+ },
+ "control": {
+  "plane, additive": {
+   "auc": NaN,
+   "FA": 0.1415919743442151,
+   "margin": 0.15469728223500886,
+   "backdrop": null
+  },
+  "plane, scaled": {
+   "auc": NaN,
+   "FA": 0.00986030023115789,
+   "margin": 0.01039517967647378,
+   "backdrop": null
+  },
+  "plane+tilt, additive": {
+   "auc": NaN,
+   "FA": 0.0038428857275991557,
+   "margin": 0.0027503347446893207,
+   "backdrop": null
+  },
+  "plane+tilt, scaled": {
+   "auc": NaN,
+   "FA": 0.0037423822967774943,
+   "margin": 0.0030579379727137842,
+   "backdrop": null
+  }
+ }
+}

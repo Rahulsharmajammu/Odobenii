@@ -1,0 +1,99 @@
+scan         v412_raw           auc=0.443 FA=0.000 margin=0.000 light=0.000 mid=0.000 dark=0.000 stain=0.0 | cheeks=0.00/1 lips=0.85/7 backdr=0.00/0 flag=0.00/-2 flag=0.00/2 missio=0.00/2 small=0.26/12  (5.3s)
+scan         v412_lrc           auc=0.352 FA=0.000 margin=0.000 light=0.000 mid=0.000 dark=0.000 stain=0.15366750532223727 | cheeks=0.00/-1 lips=1.00/161 backdr=0.00/-42 flag=0.00/-33 flag=0.03/42 missio=0.18/34 small=0.79/267  (5.3s)
+scan         todo               auc=0.999 FA=0.012 margin=0.027 light=0.008 mid=0.007 dark=0.019 stain=0.5260597637248089 | cheeks=0.99/29 lips=1.00/265 backdr=0.99/87 flag=1.00/29 flag=1.00/759 missio=1.00/63 small=1.00/262  (12.7s)
+scan         proposed           auc=0.999 FA=0.001 margin=0.000 light=0.002 mid=0.002 dark=0.000 stain=0.17257354644429002 | cheeks=0.89/232 lips=1.00/1139 backdr=0.90/144 flag=0.44/47 flag=1.00/2403 missio=1.00/209 small=1.00/420  (25.7s)
+scan         proposed_logc      auc=0.999 FA=0.002 margin=0.000 light=0.002 mid=0.002 dark=0.001 stain=0.6240444753300903 | cheeks=1.00/28 lips=1.00/280 backdr=0.90/55 flag=1.00/40 flag=1.00/816 missio=1.00/73 small=1.00/252  (25.2s)
+scan         abl_additive_cast  auc=0.999 FA=0.001 margin=0.000 light=0.002 mid=0.002 dark=0.000 stain=0.17280518878851053 | cheeks=0.89/232 lips=1.00/1139 backdr=0.90/144 flag=0.42/47 flag=1.00/2409 missio=1.00/209 small=1.00/420  (20.8s)
+scan         abl_plane_only     auc=0.999 FA=0.001 margin=0.000 light=0.002 mid=0.002 dark=0.000 stain=0.1714153347231874 | cheeks=0.89/233 lips=1.00/1138 backdr=0.90/144 flag=0.44/47 flag=1.00/2379 missio=1.00/209 small=1.00/420  (22.1s)
+scan         abl_no_position    auc=0.999 FA=0.001 margin=0.000 light=0.002 mid=0.002 dark=0.000 stain=0.17743803567292102 | cheeks=0.89/230 lips=1.00/1127 backdr=0.91/146 flag=0.44/48 flag=1.00/2364 missio=1.00/208 small=1.00/419  (17.7s)
+scan         abl_one_scale      auc=0.999 FA=0.000 margin=0.000 light=0.001 mid=0.000 dark=0.000 stain=0.1702571230020848 | cheeks=0.88/221 lips=1.00/1336 backdr=0.89/154 flag=0.29/45 flag=1.00/2400 missio=1.00/206 small=1.00/509  (14.7s)
+scan         abl_ungated        auc=0.989 FA=0.022 margin=0.179 light=0.037 mid=0.028 dark=0.008 stain=0.1853138753764188 | cheeks=0.89/79 lips=1.00/101 backdr=0.91/63 flag=0.46/27 flag=1.00/1328 missio=1.00/107 small=1.00/84  (11.5s)
+scan         abl_not_tolerant   auc=0.999 FA=0.004 margin=0.299 light=0.007 mid=0.002 dark=0.003 stain=0.2592077831827658 | cheeks=0.91/86 lips=1.00/504 backdr=0.93/140 flag=0.92/46 flag=1.00/2222 missio=1.00/148 small=1.00/273  (16.1s)
+phone        v412_raw           auc=0.512 FA=0.000 margin=0.000 light=0.000 mid=0.000 dark=0.000 stain=0.0 | cheeks=0.00/1 lips=0.99/7 backdr=0.00/-1 flag=0.00/-2 flag=0.05/3 missio=0.07/2 small=0.89/10  (6.0s)
+phone        v412_lrc           auc=0.349 FA=0.002 margin=0.000 light=0.011 mid=0.000 dark=0.002 stain=0.1871492161796013 | cheeks=0.00/1 lips=1.00/95 backdr=0.00/-52 flag=0.00/-24 flag=0.15/20 missio=0.45/25 small=1.00/71  (5.5s)
+phone        todo               auc=0.870 FA=0.200 margin=0.954 light=0.156 mid=0.182 dark=0.066 stain=0.30236220472440944 | cheeks=0.93/13 lips=1.00/121 backdr=0.60/18 flag=0.46/12 flag=0.98/141 missio=0.98/17 small=1.00/65  (16.1s)
+phone        proposed           auc=0.955 FA=0.008 margin=0.002 light=0.008 mid=0.009 dark=0.010 stain=0.15433070866141732 | cheeks=0.96/22 lips=1.00/177 backdr=0.60/46 flag=0.34/15 flag=1.00/489 missio=1.00/37 small=1.00/91  (27.1s)
+phone        proposed_logc      auc=0.955 FA=0.028 margin=0.000 light=0.008 mid=0.018 dark=0.055 stain=0.21822272215973004 | cheeks=1.00/19 lips=1.00/151 backdr=0.70/19 flag=0.60/12 flag=1.00/1374 missio=1.00/37 small=1.00/68  (22.7s)
+phone        abl_additive_cast  auc=0.958 FA=0.008 margin=0.002 light=0.008 mid=0.009 dark=0.010 stain=0.15883014623172104 | cheeks=0.96/23 lips=1.00/177 backdr=0.62/47 flag=0.34/15 flag=1.00/494 missio=1.00/37 small=1.00/91  (24.2s)
+phone        abl_plane_only     auc=0.958 FA=0.008 margin=0.003 light=0.008 mid=0.008 dark=0.009 stain=0.17435320584926883 | cheeks=0.96/23 lips=1.00/177 backdr=0.61/48 flag=0.35/15 flag=1.00/489 missio=1.00/37 small=1.00/91  (26.2s)
+phone        abl_no_position    auc=0.963 FA=0.009 margin=0.003 light=0.012 mid=0.009 dark=0.009 stain=0.2094488188976378 | cheeks=0.96/22 lips=1.00/164 backdr=0.82/48 flag=0.37/15 flag=1.00/459 missio=1.00/36 small=1.00/88  (21.1s)
+phone        abl_one_scale      auc=0.952 FA=0.005 margin=0.002 light=0.004 mid=0.004 dark=0.006 stain=0.14960629921259844 | cheeks=0.94/21 lips=0.99/175 backdr=0.37/43 flag=0.31/14 flag=1.00/467 missio=0.98/35 small=1.00/92  (13.5s)
+phone        abl_ungated        auc=0.966 FA=0.029 margin=0.019 light=0.051 mid=0.033 dark=0.017 stain=0.16647919010123735 | cheeks=0.96/20 lips=1.00/122 backdr=0.60/25 flag=0.37/16 flag=1.00/452 missio=1.00/34 small=1.00/66  (13.0s)
+phone        abl_not_tolerant   auc=0.938 FA=0.021 margin=0.009 light=0.041 mid=0.023 dark=0.011 stain=0.19347581552305962 | cheeks=0.83/14 lips=1.00/147 backdr=0.36/20 flag=0.51/14 flag=1.00/287 missio=1.00/29 small=1.00/69  (14.2s)
+phone_mixed  v412_raw           auc=0.573 FA=0.000 margin=0.000 light=0.000 mid=0.000 dark=0.000 stain=0.0 | cheeks=0.00/1 lips=0.87/6 backdr=0.00/-0 flag=0.00/1 flag=0.05/44 missio=0.01/2 small=0.33/7  (2.9s)
+phone_mixed  v412_lrc           auc=0.655 FA=0.000 margin=0.000 light=0.000 mid=0.000 dark=0.000 stain=0.0 | cheeks=0.00/1 lips=0.45/6 backdr=0.00/0 flag=0.00/2 flag=0.01/24 missio=0.00/3 small=0.00/11  (4.2s)
+phone_mixed  todo               auc=0.475 FA=0.272 margin=0.606 light=0.447 mid=0.256 dark=0.056 stain=0.1776817488561261 | cheeks=0.16/0 lips=1.00/8 backdr=0.05/-2 flag=0.03/-1 flag=0.48/nan missio=0.42/1 small=0.86/6  (15.9s)
+phone_mixed  proposed           auc=0.950 FA=0.009 margin=0.006 light=0.008 mid=0.011 dark=0.008 stain=0.23792577529232334 | cheeks=0.84/19 lips=1.00/178 backdr=0.17/54 flag=0.66/27 flag=1.00/nan missio=1.00/55 small=1.00/92  (21.4s)
+phone_mixed  proposed_logc      auc=0.911 FA=0.021 margin=0.001 light=0.028 mid=0.023 dark=0.023 stain=0.18174885612608033 | cheeks=0.93/18 lips=1.00/171 backdr=0.17/35 flag=0.93/35 flag=1.00/nan missio=1.00/62 small=1.00/73  (17.6s)
+phone_mixed  abl_additive_cast  auc=0.941 FA=0.010 margin=0.006 light=0.009 mid=0.014 dark=0.008 stain=0.2407219115404169 | cheeks=0.83/20 lips=1.00/177 backdr=0.20/53 flag=0.34/22 flag=1.00/nan missio=1.00/55 small=1.00/95  (14.2s)
+phone_mixed  abl_plane_only     auc=0.950 FA=0.013 margin=0.012 light=0.009 mid=0.017 dark=0.011 stain=0.2671581087951195 | cheeks=0.80/20 lips=1.00/183 backdr=0.20/60 flag=0.75/34 flag=1.00/nan missio=1.00/63 small=1.00/97  (17.4s)
+phone_mixed  abl_no_position    auc=0.636 FA=0.268 margin=0.026 light=0.353 mid=0.414 dark=0.106 stain=0.3934926283680732 | cheeks=0.37/0 lips=1.00/7 backdr=0.22/-1 flag=0.04/-1 flag=1.00/nan missio=0.95/1 small=0.93/5  (18.8s)
+phone_mixed  abl_one_scale      auc=0.932 FA=0.005 margin=0.005 light=0.006 mid=0.004 dark=0.005 stain=0.2376715810879512 | cheeks=0.78/17 lips=1.00/180 backdr=0.10/41 flag=0.51/26 flag=1.00/nan missio=0.99/51 small=1.00/94  (16.8s)
+phone_mixed  abl_ungated        auc=0.945 FA=0.029 margin=0.007 light=0.046 mid=0.036 dark=0.018 stain=0.2516522623284189 | cheeks=0.84/18 lips=1.00/125 backdr=0.17/28 flag=0.72/23 flag=1.00/nan missio=1.00/45 small=1.00/65  (17.3s)
+phone_mixed  abl_not_tolerant   auc=0.910 FA=0.010 margin=0.006 light=0.012 mid=0.011 dark=0.008 stain=0.20411794611082867 | cheeks=0.67/17 lips=1.00/158 backdr=0.11/26 flag=0.97/43 flag=1.00/nan missio=1.00/54 small=1.00/78  (16.6s)
+phone_glare  v412_raw           auc=0.513 FA=0.000 margin=0.000 light=0.000 mid=0.000 dark=0.000 glare=0.000 stain=0.0 | cheeks=0.00/1 lips=0.97/7 backdr=0.00/-2 flag=0.00/-1 flag=0.03/4 missio=0.04/2 small=0.88/10  (3.0s)
+phone_glare  v412_lrc           auc=0.365 FA=0.000 margin=0.000 light=0.002 mid=0.000 dark=0.000 glare=0.000 stain=0.11070253532030191 | cheeks=0.00/-1 lips=0.97/11 backdr=0.00/-10 flag=0.00/-1 flag=0.05/4 missio=0.13/2 small=0.86/22  (3.8s)
+phone_glare  todo               auc=0.817 FA=0.259 margin=0.623 light=0.156 mid=0.307 dark=0.142 glare=0.479 stain=0.34115905245346867 | cheeks=0.80/2 lips=1.00/13 backdr=0.66/34 flag=0.47/1 flag=0.78/nan missio=0.96/2 small=1.00/9  (11.3s)
+phone_glare  proposed           auc=0.904 FA=0.066 margin=0.007 light=0.019 mid=0.054 dark=0.117 glare=0.398 stain=0.25084602368866327 | cheeks=0.96/3 lips=1.00/13 backdr=0.79/136 flag=0.32/1 flag=1.00/nan missio=1.00/3 small=1.00/12  (20.1s)
+phone_glare  proposed_logc      auc=0.901 FA=0.083 margin=0.000 light=0.010 mid=0.059 dark=0.166 glare=0.378 stain=0.2817258883248731 | cheeks=0.99/3 lips=1.00/14 backdr=0.77/59 flag=0.45/1 flag=1.00/nan missio=1.00/4 small=1.00/11  (18.4s)
+phone_glare  abl_additive_cast  auc=0.905 FA=0.067 margin=0.007 light=0.019 mid=0.055 dark=0.117 glare=0.399 stain=0.26015228426395937 | cheeks=0.96/3 lips=1.00/13 backdr=0.81/135 flag=0.32/1 flag=1.00/nan missio=1.00/3 small=1.00/12  (15.5s)
+phone_glare  abl_plane_only     auc=0.906 FA=0.067 margin=0.008 light=0.019 mid=0.055 dark=0.118 glare=0.399 stain=0.26311336717428085 | cheeks=0.96/3 lips=1.00/13 backdr=0.80/133 flag=0.34/1 flag=1.00/nan missio=1.00/3 small=1.00/12  (17.8s)
+phone_glare  abl_no_position    auc=0.909 FA=0.069 margin=0.006 light=0.022 mid=0.058 dark=0.118 glare=0.407 stain=0.2743231810490694 | cheeks=0.96/3 lips=1.00/12 backdr=0.83/135 flag=0.34/1 flag=1.00/nan missio=1.00/3 small=1.00/12  (23.1s)
+phone_glare  abl_one_scale      auc=0.904 FA=0.059 margin=0.006 light=0.012 mid=0.043 dark=0.111 glare=0.371 stain=0.24344331641285957 | cheeks=0.94/3 lips=0.99/13 backdr=0.74/134 flag=0.30/1 flag=1.00/nan missio=0.98/3 small=1.00/12  (20.3s)
+phone_glare  abl_ungated        auc=0.912 FA=0.095 margin=0.021 light=0.108 mid=0.083 dark=0.125 glare=0.471 stain=0.2586717428087986 | cheeks=0.96/3 lips=1.00/13 backdr=0.79/117 flag=0.36/1 flag=1.00/nan missio=1.00/3 small=1.00/13  (21.6s)
+phone_glare  abl_not_tolerant   auc=0.891 FA=0.085 margin=0.039 light=0.043 mid=0.072 dark=0.129 glare=0.444 stain=0.26776649746192893 | cheeks=0.77/2 lips=1.00/12 backdr=0.55/71 flag=0.46/1 flag=1.00/nan missio=1.00/3 small=1.00/10  (22.5s)
+majority     v412_raw           auc=0.502 FA=0.000 margin=0.000 light=0.000 mid=0.000 dark=0.000 stain=0.0 | cheeks=0.00/1 lips=0.99/7 backdr=0.00/nan flag=0.00/-1 flag=0.03/nan missio=0.04/2 small=0.89/11  (29.0s)
+majority     v412_lrc           auc=0.290 FA=0.001 margin=0.000 light=0.006 mid=0.000 dark=0.001 stain=0.16044126185407392 | cheeks=0.00/3 lips=0.99/38 backdr=0.00/nan flag=0.00/-7 flag=0.06/nan missio=0.18/10 small=0.89/44  (29.6s)
+majority     todo               auc=0.651 FA=0.292 margin=0.029 light=0.999 mid=0.394 dark=0.065 stain=0.30436802973977695 | cheeks=0.93/8 lips=1.00/38 backdr=0.39/nan flag=0.42/8 flag=0.99/nan missio=0.91/7 small=1.00/27  (31.2s)
+majority     proposed           auc=0.567 FA=0.162 margin=0.001 light=0.887 mid=0.173 dark=0.016 stain=0.2158457249070632 | cheeks=0.99/8 lips=1.00/44 backdr=0.01/nan flag=0.29/19 flag=1.00/nan missio=1.00/9 small=1.00/43  (38.0s)
+majority     proposed_logc      auc=0.501 FA=0.169 margin=0.000 light=0.826 mid=0.148 dark=0.074 stain=0.28903345724907065 | cheeks=1.00/12 lips=1.00/74 backdr=0.02/nan flag=0.40/12 flag=1.00/nan missio=1.00/19 small=1.00/55  (32.8s)
+majority     abl_additive_cast  auc=0.587 FA=0.151 margin=0.001 light=0.893 mid=0.149 dark=0.015 stain=0.20051115241635686 | cheeks=0.98/9 lips=1.00/51 backdr=0.02/nan flag=0.29/19 flag=1.00/nan missio=1.00/12 small=1.00/43  (28.4s)
+majority     abl_plane_only     auc=0.609 FA=0.147 margin=0.001 light=0.881 mid=0.142 dark=0.013 stain=0.19470260223048327 | cheeks=0.97/10 lips=1.00/54 backdr=0.05/nan flag=0.29/20 flag=1.00/nan missio=1.00/14 small=1.00/44  (26.3s)
+majority     abl_no_position    auc=0.664 FA=0.146 margin=0.001 light=0.898 mid=0.136 dark=0.013 stain=0.18355018587360594 | cheeks=0.95/10 lips=1.00/56 backdr=0.10/nan flag=0.29/19 flag=1.00/nan missio=1.00/17 small=1.00/37  (32.8s)
+majority     abl_one_scale      auc=0.570 FA=0.145 margin=0.000 light=0.862 mid=0.143 dark=0.011 stain=0.20608736059479554 | cheeks=0.96/9 lips=0.99/48 backdr=0.01/nan flag=0.28/19 flag=1.00/nan missio=0.98/9 small=1.00/44  (32.5s)
+majority     abl_ungated        auc=0.547 FA=0.178 margin=0.014 light=0.895 mid=0.193 dark=0.028 stain=0.21979553903345725 | cheeks=0.99/8 lips=1.00/42 backdr=0.01/nan flag=0.31/16 flag=1.00/nan missio=1.00/8 small=1.00/41  (27.2s)
+majority     abl_not_tolerant   auc=0.597 FA=0.198 margin=0.003 light=0.954 mid=0.240 dark=0.017 stain=0.21096654275092938 | cheeks=0.99/7 lips=1.00/28 backdr=0.05/nan flag=0.39/20 flag=1.00/nan missio=1.00/5 small=1.00/25  (38.8s)
+/usr/local/lib/python3.13/site-packages/sklearn/metrics/_ranking.py:469: UndefinedMetricWarning: Only one class is present in y_true. ROC AUC score is not defined in that case.
+  warnings.warn(
+control      v412_raw           auc=nan FA=0.000 margin=0.000 light=0.000 mid=0.000 dark=0.000 stain=0.0 |   (0.2s)
+/usr/local/lib/python3.13/site-packages/sklearn/metrics/_ranking.py:469: UndefinedMetricWarning: Only one class is present in y_true. ROC AUC score is not defined in that case.
+  warnings.warn(
+control      v412_lrc           auc=nan FA=0.000 margin=0.000 light=0.000 mid=0.000 dark=0.000 stain=0.0 |   (0.6s)
+/usr/local/lib/python3.13/site-packages/sklearn/metrics/_ranking.py:469: UndefinedMetricWarning: Only one class is present in y_true. ROC AUC score is not defined in that case.
+  warnings.warn(
+control      todo               auc=nan FA=0.297 margin=0.643 light=0.454 mid=0.266 dark=0.108 stain=0.26511865271753 |   (3.0s)
+/usr/local/lib/python3.13/site-packages/sklearn/metrics/_ranking.py:469: UndefinedMetricWarning: Only one class is present in y_true. ROC AUC score is not defined in that case.
+  warnings.warn(
+control      proposed           auc=nan FA=0.004 margin=0.003 light=0.005 mid=0.002 dark=0.006 stain=0.3197244194947691 |   (12.5s)
+/usr/local/lib/python3.13/site-packages/sklearn/metrics/_ranking.py:469: UndefinedMetricWarning: Only one class is present in y_true. ROC AUC score is not defined in that case.
+  warnings.warn(
+control      proposed_logc      auc=nan FA=0.022 margin=0.001 light=0.032 mid=0.011 dark=0.037 stain=0.21383005868844093 |   (11.4s)
+/usr/local/lib/python3.13/site-packages/sklearn/metrics/_ranking.py:469: UndefinedMetricWarning: Only one class is present in y_true. ROC AUC score is not defined in that case.
+  warnings.warn(
+control      abl_additive_cast  auc=nan FA=0.004 margin=0.003 light=0.007 mid=0.002 dark=0.004 stain=0.32176575657055373 |   (9.6s)
+/usr/local/lib/python3.13/site-packages/sklearn/metrics/_ranking.py:469: UndefinedMetricWarning: Only one class is present in y_true. ROC AUC score is not defined in that case.
+  warnings.warn(
+control      abl_plane_only     auc=nan FA=0.010 margin=0.010 light=0.009 mid=0.004 dark=0.019 stain=0.32865526920132687 |   (11.4s)
+/usr/local/lib/python3.13/site-packages/sklearn/metrics/_ranking.py:469: UndefinedMetricWarning: Only one class is present in y_true. ROC AUC score is not defined in that case.
+  warnings.warn(
+control      abl_no_position    auc=nan FA=0.253 margin=0.107 light=0.399 mid=0.337 dark=0.083 stain=0.43046695585608574 |   (10.1s)
+/usr/local/lib/python3.13/site-packages/sklearn/metrics/_ranking.py:469: UndefinedMetricWarning: Only one class is present in y_true. ROC AUC score is not defined in that case.
+  warnings.warn(
+control      abl_one_scale      auc=nan FA=0.004 margin=0.003 light=0.005 mid=0.002 dark=0.006 stain=0.31895891809134985 |   (8.2s)
+/usr/local/lib/python3.13/site-packages/sklearn/metrics/_ranking.py:469: UndefinedMetricWarning: Only one class is present in y_true. ROC AUC score is not defined in that case.
+  warnings.warn(
+control      abl_ungated        auc=nan FA=0.005 margin=0.005 light=0.006 mid=0.003 dark=0.009 stain=0.3261035978565961 |   (9.1s)
+/usr/local/lib/python3.13/site-packages/sklearn/metrics/_ranking.py:469: UndefinedMetricWarning: Only one class is present in y_true. ROC AUC score is not defined in that case.
+  warnings.warn(
+control      abl_not_tolerant   auc=nan FA=0.010 margin=0.018 light=0.016 mid=0.004 dark=0.011 stain=0.3332482776218423 |   (9.8s)
+toned        v412_raw           auc=0.541 FA=0.000 margin=0.000 light=0.000 mid=0.000 dark=0.000 stain=0.0 | cheeks=0.00/1 lips=0.99/12 backdr=0.00/-2 flag=0.00/-2 flag=0.05/6 missio=0.02/2 small=0.78/15  (4.9s)
+toned        v412_lrc           auc=0.398 FA=0.001 margin=0.000 light=0.003 mid=0.000 dark=0.000 stain=0.21850203212695954 | cheeks=0.00/1 lips=1.00/49 backdr=0.00/-16 flag=0.00/-15 flag=0.30/37 missio=0.31/10 small=1.00/53  (5.5s)
+toned        todo               auc=0.796 FA=0.212 margin=0.958 light=0.145 mid=0.186 dark=0.050 stain=0.3776309348996574 | cheeks=0.77/9 lips=1.00/83 backdr=0.54/nan flag=0.36/15 flag=0.48/nan missio=0.91/19 small=1.00/53  (16.3s)
+toned        proposed           auc=0.949 FA=0.010 margin=0.021 light=0.010 mid=0.005 dark=0.012 stain=0.19334312285854136 | cheeks=0.74/15 lips=1.00/131 backdr=0.34/nan flag=0.49/20 flag=1.00/nan missio=0.96/29 small=1.00/72  (28.7s)
+toned        proposed_logc      auc=0.912 FA=0.083 margin=0.004 light=0.007 mid=0.026 dark=0.225 stain=0.41605482134116495 | cheeks=0.88/6 lips=1.00/67 backdr=0.34/nan flag=0.84/12 flag=1.00/nan missio=1.00/20 small=1.00/49  (25.7s)
+toned        abl_additive_cast  auc=0.957 FA=0.010 margin=0.028 light=0.010 mid=0.005 dark=0.011 stain=0.19481155163974548 | cheeks=0.75/16 lips=1.00/140 backdr=0.35/nan flag=0.54/22 flag=1.00/nan missio=0.96/30 small=1.00/75  (18.4s)
+toned        abl_plane_only     auc=0.956 FA=0.010 margin=0.034 light=0.010 mid=0.005 dark=0.010 stain=0.1727851199216838 | cheeks=0.75/15 lips=1.00/133 backdr=0.35/nan flag=0.50/21 flag=1.00/nan missio=0.96/29 small=1.00/74  (17.8s)
+toned        abl_no_position    auc=0.960 FA=0.008 margin=0.015 light=0.008 mid=0.005 dark=0.009 stain=0.267498776309349 | cheeks=0.72/13 lips=1.00/125 backdr=0.36/nan flag=0.52/19 flag=1.00/nan missio=0.95/26 small=1.00/72  (18.8s)
+toned        abl_one_scale      auc=0.933 FA=0.007 margin=0.014 light=0.009 mid=0.002 dark=0.012 stain=0.18918257464512972 | cheeks=0.67/14 lips=0.99/132 backdr=0.33/nan flag=0.46/20 flag=1.00/nan missio=0.91/27 small=1.00/73  (16.6s)
+toned        abl_ungated        auc=0.949 FA=0.025 margin=0.026 light=0.036 mid=0.024 dark=0.020 stain=0.2109642682329907 | cheeks=0.75/15 lips=1.00/109 backdr=0.34/nan flag=0.53/21 flag=1.00/nan missio=0.96/28 small=1.00/63  (17.9s)
+toned        abl_not_tolerant   auc=0.882 FA=0.024 margin=0.057 light=0.035 mid=0.024 dark=0.008 stain=0.2474302496328928 | cheeks=0.69/14 lips=1.00/134 backdr=0.36/nan flag=0.52/22 flag=1.00/nan missio=1.00/44 small=1.00/69  (16.7s)

@@ -1,0 +1,24 @@
+N1_neutral_even  peer             auto   {'FC': 0.047, 'FCbord': 0.013} 10s
+N1_neutral_even  peer+misfit      auto   {'FC': 0.047, 'FCbord': 0.013} 10s
+N1_neutral_even  peer+res         auto   {'FC': 0.025, 'FCbord': 0.0} 8s
+N1_neutral_even  peer+misfit+res  auto   {'FC': 0.025, 'FCbord': 0.0} 9s
+N2_split_even    peer             auto   {'FC': 0.035, 'FCbord': 0.002} 11s
+N2_split_even    peer+misfit      auto   {'FC': 0.034, 'FCbord': 0.002} 9s
+N2_split_even    peer+res         auto   {'FC': 0.017, 'FCbord': 0.0} 11s
+N2_split_even    peer+misfit+res  auto   {'FC': 0.016, 'FCbord': 0.0} 11s
+N3_split_mixed   peer             auto   {'FC': 0.051, 'FCbord': 0.037} 10s
+N3_split_mixed   peer+misfit      auto   {'FC': 0.043, 'FCbord': 0.028} 7s
+N3_split_mixed   peer+res         auto   {'FC': 0.03, 'FCbord': 0.016} 9s
+N3_split_mixed   peer+misfit+res  auto   {'FC': 0.025, 'FCbord': 0.007} 9s
+P1_touches       peer             auto   {'FC': 0.059, 'FCbord': 0.054, 'DET:touch': 1.0, 'DET:wash': 0.963, 'DET:lowchroma': 0.475, 'AUC': 0.832} 7s
+P1_touches       peer+misfit      auto   {'FC': 0.041, 'FCbord': 0.028, 'DET:touch': 1.0, 'DET:wash': 0.961, 'DET:lowchroma': 0.395, 'AUC': 0.831} 10s
+P1_touches       peer+res         auto   {'FC': 0.037, 'FCbord': 0.034, 'DET:touch': 1.0, 'DET:wash': 0.972, 'DET:lowchroma': 0.472, 'AUC': 0.855} 10s
+P1_touches       peer+misfit+res  auto   {'FC': 0.023, 'FCbord': 0.016, 'DET:touch': 1.0, 'DET:wash': 0.971, 'DET:lowchroma': 0.388, 'AUC': 0.856} 8s
+P2_backdrop      peer             auto   {'FC': 0.09, 'FCbord': 0.08, 'DET:large': 0.381, 'DET:wash': 0.944, 'DET:touch': 1.0, 'AUC': 0.806} 7s
+P2_backdrop      peer+misfit      auto   {'FC': 0.024, 'FCbord': 0.0, 'DET:large': 0.017, 'DET:wash': 0.926, 'DET:touch': 1.0, 'AUC': 0.696} 5s
+P2_backdrop      peer+res         auto   {'FC': 0.073, 'FCbord': 0.054, 'DET:large': 0.37, 'DET:wash': 0.951, 'DET:touch': 1.0, 'AUC': 0.835} 4s
+P2_backdrop      peer+misfit+res  auto   {'FC': 0.012, 'FCbord': 0.0, 'DET:large': 0.012, 'DET:wash': 0.934, 'DET:touch': 1.0, 'AUC': 0.747} 4s
+P3_full          peer             auto   {'FC': 0.188, 'FCbord': 0.616, 'DET:large': 0.317, 'DET:wash': 0.445, 'DET:touch': 1.0, 'AUC': 0.636} 4s
+P3_full          peer+misfit      auto   {'FC': 0.042, 'FCbord': 0.018, 'DET:large': 0.116, 'DET:wash': 0.41, 'DET:touch': 1.0, 'AUC': 0.64} 4s
+P3_full          peer+res         auto   {'FC': 0.169, 'FCbord': 0.602, 'DET:large': 0.302, 'DET:wash': 0.434, 'DET:touch': 1.0, 'AUC': 0.635} 5s
+P3_full          peer+misfit+res  auto   {'FC': 0.032, 'FCbord': 0.017, 'DET:large': 0.111, 'DET:wash': 0.398, 'DET:touch': 1.0, 'AUC': 0.64} 5s

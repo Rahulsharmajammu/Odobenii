@@ -1,0 +1,33 @@
+S1_benign            peer             auto   found 9/9 FP  10.2% misfit sd 0.0000 13s | garmen:0.87 rocket:0.51
+S1_benign            peer+misfit      auto   found 9/9 FP  10.2% misfit sd 0.0000 13s | garmen:0.87 rocket:0.51
+S1_benign            peer+res         auto   found 9/9 FP  10.0% misfit sd 0.0000 13s | garmen:0.87 rocket:0.51
+S1_benign            peer+misfit+res  auto   found 9/9 FP  10.0% misfit sd 0.0000 14s | garmen:0.87 rocket:0.51
+S2_tone_shift        peer             auto   found 9/9 FP  13.0% misfit sd 0.0171 13s | garmen:0.82 rocket:0.58
+S2_tone_shift        peer+misfit      auto   found 8/9 FP   8.1% misfit sd 0.0171 14s | garmen:0.82 rocket:0.36
+S2_tone_shift        peer+res         auto   found 9/9 FP  12.7% misfit sd 0.0171 13s | garmen:0.82 rocket:0.59
+S2_tone_shift        peer+misfit+res  auto   found 8/9 FP   8.0% misfit sd 0.0171 13s | garmen:0.81 rocket:0.36
+S3_mixed_light       peer             auto   found 8/9 FP   1.4% misfit sd 0.0000 9s | garmen:0.88 rocket:0.39
+S3_mixed_light       peer+misfit      auto   found 8/9 FP   1.4% misfit sd 0.0000 9s | garmen:0.88 rocket:0.39
+S3_mixed_light       peer+res         auto   found 8/9 FP   1.3% misfit sd 0.0000 10s | garmen:0.88 rocket:0.39
+S3_mixed_light       peer+misfit+res  auto   found 8/9 FP   1.3% misfit sd 0.0000 11s | garmen:0.88 rocket:0.39
+S4_sheen             peer             auto   found 9/9 FP   6.6% misfit sd 0.0108 8s | garmen:0.86 rocket:0.72
+S4_sheen             peer+misfit      auto   found 9/9 FP   6.2% misfit sd 0.0108 9s | garmen:0.85 rocket:0.67
+S4_sheen             peer+res         auto   found 9/9 FP   6.2% misfit sd 0.0108 5s | garmen:0.85 rocket:0.72
+S4_sheen             peer+misfit+res  auto   found 9/9 FP   5.9% misfit sd 0.0108 4s | garmen:0.85 rocket:0.67
+S5_extensive         peer             auto   found 12/13 FP   3.5% misfit sd 0.0000 6s | garmen:0.89 rocket:0.28 sky:0.99 hair:0.84
+S5_extensive         peer+misfit      auto   found 12/13 FP   3.5% misfit sd 0.0000 5s | garmen:0.89 rocket:0.28 sky:0.99 hair:0.84
+S5_extensive         peer+res         auto   found 12/13 FP   3.7% misfit sd 0.0000 7s | garmen:0.88 rocket:0.29 sky:0.99 hair:0.84
+S5_extensive         peer+misfit+res  auto   found 12/13 FP   3.7% misfit sd 0.0000 7s | garmen:0.88 rocket:0.29 sky:0.99 hair:0.84
+S6_unpainted_unruly  peer             auto   found 0/0 FP   4.8% misfit sd 0.0000 7s | 
+S6_unpainted_unruly  peer+misfit      auto   found 0/0 FP   4.8% misfit sd 0.0000 7s | 
+S6_unpainted_unruly  peer+res         auto   found 0/0 FP   4.2% misfit sd 0.0000 6s | 
+S6_unpainted_unruly  peer+misfit+res  auto   found 0/0 FP   4.2% misfit sd 0.0000 7s | 
+S7_extensive_unruly  peer             auto   found 13/13 FP  25.1% misfit sd 0.0518 7s | garmen:0.76 rocket:0.73 sky:0.88 hair:0.84
+S7_extensive_unruly  peer+misfit      auto   found 10/13 FP   3.4% misfit sd 0.0518 7s | garmen:0.36 rocket:0.28 sky:0.12 hair:0.79
+S7_extensive_unruly  peer+res         auto   found 13/13 FP  24.1% misfit sd 0.0518 10s | garmen:0.75 rocket:0.72 sky:0.87 hair:0.84
+S7_extensive_unruly  peer+misfit+res  auto   found 10/13 FP   2.9% misfit sd 0.0518 13s | garmen:0.35 rocket:0.27 sky:0.11 hair:0.80
+S8_basic_unruly      peer             auto   found 9/9 FP   6.4% misfit sd 0.0170 12s | garmen:0.80 rocket:0.56
+S8_basic_unruly      peer+misfit      auto   found 8/9 FP   3.6% misfit sd 0.0170 12s | garmen:0.80 rocket:0.45
+S8_basic_unruly      peer+res         auto   found 9/9 FP   5.5% misfit sd 0.0170 12s | garmen:0.80 rocket:0.56
+S8_basic_unruly      peer+misfit+res  auto   found 8/9 FP   2.9% misfit sd 0.0170 11s | garmen:0.79 rocket:0.45
+DONE
