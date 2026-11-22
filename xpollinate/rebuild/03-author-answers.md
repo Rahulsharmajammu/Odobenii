@@ -83,3 +83,46 @@ The order is now:
   - adds up the paint;
   - partly cancels light-driven errors, which point different ways in the two shots;
   - lowers noise by about √2.
+
+## 5. Capture conditions (a later note, same day)
+
+> "note that the images provided to this script will be taken in controlled lighting using DSLR or Mirrorless
+> cameras, and will be calibrated using ICC profiles."
+
+**What this corrects.** The agents and the coordinator read "unruly visualiser captures" as phone or
+document-camera snapshots under uncontrolled light. Much of the synthesis was built for that case.
+
+**No longer needed, or no longer the default:**
+- **The second photograph as a witness** (synthesis §4.2–4.4, §5.1). It was there to separate paint from mixed light
+  and phone processing. Under controlled light the departure picture can come from one photograph, checked by the
+  session's known-unpainted print. A second capture stays useful only for glossy or mirrored prints, with the lights
+  moved, to tell sheen from paint.
+- **Phone-specific handling:** semantic face and sky processing, 4:2:0 chroma, local tone mapping, auto white
+  balance. Comparison at chroma resolution is no longer needed for JPEG 4:2:0. A fitted edge term stays for lens and
+  demosaicing fringes.
+- **The light field across the frame, always fitted** ([10]). Controlled light makes it small. It is off by default,
+  switched on only if the session's unpainted print shows a gradient. History's [06] warning still holds: an
+  unguarded plane can hide a painted sky.
+- **Log-chromaticity over CIELAB** ([10]). That case was argued under casts and mixed light. With ICC-calibrated
+  captures, CIELAB from the profile is meaningful, so the departure and its threshold can be in ΔE.
+
+**Still holds:**
+- **The reference is the print's own tone**, per print. Calibration does not remove a print's toning, yellowing or
+  split tone.
+- **Votes of places and a high-breakdown fit**, so paint cannot become the reference.
+- **A threshold the paint cannot raise.**
+- **The boosted picture first.**
+- **The expected-unpainted check**, read against the session's known-unpainted print.
+- **The strip and the blank sentence.**
+- **The broad-wash weak point (B1)**, which comes from the object, not the capture.
+- **No numbers, and the real-capture gate.**
+- **Woodii's Chroma mode failure mechanism.** It applies all the more, because controlled raw-derived captures were
+  its own setting.
+
+**New, and done.** Correct colour decoding became central. 4.1.4 applies any RGB matrix/TRC ICC profile (for example
+eciRGB v2, or a camera matrix profile) at full bit depth. Before, a 16-bit file with such a profile was read as sRGB:
+up to 12 ΔE wrong in tests.
+
+**Better for priority (c).** Calibrated 16-bit captures carry far less noise than phone JPEGs, so faint washes are
+easier to separate from capture noise. The thin-wash strength the strip assumes (about 1.3 ΔE) is still to be
+measured on the test print.

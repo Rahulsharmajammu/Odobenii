@@ -6,6 +6,10 @@ visualiser's earlier iterations, Woodii's removed Chroma mode and the plan in TO
 
 The plan that came out of it is `../../TODO.md`. This folder holds the reasoning and the evidence behind it.
 
+> **Later correction (22 Nov):** the captures will be controlled and ICC-calibrated (DSLR or mirrorless), not the
+> phone snapshots the agents assumed. Finding 3 below, the second-photograph requirement and the phone-specific
+> handling no longer apply as the default. `03-author-answers.md` §5 lists what is superseded and what still holds.
+
 > **Read this first: limits of everything here.**
 > - **No real capture of any print was available.** Every number comes from synthetic test images that the agents
 >   built themselves, and they encode the agents' own assumptions about prints and phones.
