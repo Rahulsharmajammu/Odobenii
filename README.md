@@ -36,7 +36,7 @@ python3 Chroma_diagnoser_v4.1 /path/to/input /path/to/output
 Useful options (`--help` for all):
 
 - `--threshold-mode {noise_floor,percentile,otsu,fixed}` (default `noise_floor`, described below) and `--noise-fraction` (default 0.01; smaller is stricter).
-- `--default-colorspace {sRGB,"Adobe RGB","ProPhoto RGB"}`: the colour space assumed for images with no ICC profile or EXIF colour-space tag (default sRGB). Files with an embedded sRGB, Adobe RGB or ProPhoto profile are decoded in that space automatically.
+- `--default-colorspace {sRGB,"Adobe RGB","ProPhoto RGB"}`: the colour space assumed for images with no ICC profile or EXIF colour-space tag (default sRGB). Files with an embedded sRGB, Adobe RGB or ProPhoto profile are decoded in that space automatically. Any other RGB matrix/TRC profile (eciRGB v2, a camera matrix profile, ...) is applied from its own colorants and tone curves at full bit depth; LUT-based profiles are converted with LittleCMS at 8-bit precision.
 - `--output-scale` (default 0.5): size of the presentation images. Analysis always runs at full resolution unless `--analysis-scale` is set.
 - `--max-workers N`: lower this for very large images; each worker needs several GB for a 100-megapixel file.
 

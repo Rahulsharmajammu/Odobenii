@@ -7,6 +7,17 @@ stands out from a monochrome substrate; they are qualitative.  It reports no
 areas, counts or statistics, and its colour handling is only as careful as a
 legible picture needs.
 
+Changes in 4.1.4
+----------------
+- Any embedded RGB matrix/TRC ICC profile (eciRGB v2, Display P3, camera matrix
+  profiles, ...) is applied from its own colorants and tone curves at full bit
+  depth.  Before, a 16-bit file with such a profile was read as sRGB (colour
+  errors of up to about 12 dE in tests).
+- LUT-based profiles in 16-bit files are converted with LittleCMS at 8-bit
+  precision instead of being ignored.
+- The ProPhoto RGB decode uses the ROMM linear segment correctly (it affects
+  only the deepest shadows).
+
 Changes in 4.1.3
 ----------------
 - The threshold value is no longer printed on the montage footer or the
@@ -97,7 +108,7 @@ from PIL import Image, ImageCms, ImageDraw, ImageFont, ImageOps, TiffImagePlugin
 # CONFIG
 # -----------------------------------------------------------------------------
 
-VERSION = "4.1.3"
+VERSION = "4.1.4"
 
 # Defaults used when no paths are given on the command line.
 INPUT_DIR = r"/path/to/input"
@@ -153,6 +164,96 @@ _M_RGB_TO_XYZ = {
 
 # D65 white point for CIELAB reference
 _XN_D65, _YN_D65, _ZN_D65 = 95.047, 100.0, 108.883
+
+
+# -----------------------------------------------------------------------------
+# Any RGB matrix/TRC ICC profile, applied at full bit depth
+# -----------------------------------------------------------------------------
+
+def _s15fixed16(b: bytes) -> float:
+    return struct.unpack(">i", b)[0] / 65536.0
+
+
+def _icc_tone_curve(data: bytes):
+    """Decoder (encoded 0-1 -> linear 0-1) for an ICC 'curv' or 'para' tag, or None if unsupported."""
+    sig = data[:4]
+    if sig == b"curv":
+        n = struct.unpack(">I", data[8:12])[0]
+        if n == 0:
+            return lambda v: np.clip(v, 0.0, 1.0)
+        if n == 1:
+            g = struct.unpack(">H", data[12:14])[0] / 256.0
+            return lambda v: np.power(np.clip(v, 0.0, 1.0), g)
+        table = np.frombuffer(data[12:12 + 2 * n], dtype=">u2").astype(np.float64) / 65535.0
+        xs = np.linspace(0.0, 1.0, n)
+        return lambda v: np.interp(np.clip(v, 0.0, 1.0), xs, table)
+    if sig == b"para":
+        ftype = struct.unpack(">H", data[8:10])[0]
+        count = {0: 1, 1: 3, 2: 4, 3: 5, 4: 7}.get(ftype)
+        if count is None or len(data) < 12 + 4 * count:
+            return None
+        g, a, b, c, d, e, f = (
+            [_s15fixed16(data[12 + 4 * i:16 + 4 * i]) for i in range(count)] + [0.0] * (7 - count)
+        )
+        if ftype == 0:
+            return lambda v: np.power(np.clip(v, 0.0, 1.0), g)
+
+        def para(v):
+            v = np.clip(v, 0.0, 1.0)
+            if ftype in (1, 2):
+                cut = -b / a if a else 0.0
+                offset = c if ftype == 2 else 0.0
+                return np.where(v >= cut, np.power(np.clip(a * v + b, 0.0, None), g) + offset, offset)
+            return np.where(
+                v >= d,
+                np.power(np.clip(a * v + b, 0.0, None), g) + (e if ftype == 4 else 0.0),
+                c * v + (f if ftype == 4 else 0.0),
+            )
+        return para
+    return None
+
+
+def _icc_matrix_shaper(icc: bytes):
+    """(colorants, tone curves) of an RGB matrix/TRC ICC profile: a 3 x 3 matrix from linear
+    RGB to PCS XYZ (D50), and one decoder per channel.  None for any other kind of profile
+    (LUT-based, not RGB, unreadable), which is then left to LittleCMS."""
+    try:
+        if len(icc) < 132 or icc[16:20] != b"RGB " or icc[36:40] != b"acsp":
+            return None
+        tags = {}
+        for i in range(struct.unpack(">I", icc[128:132])[0]):
+            sig, off, size = struct.unpack(">4sII", icc[132 + 12 * i:144 + 12 * i])
+            tags[sig] = icc[off:off + size]
+        if any(k in tags for k in (b"A2B0", b"A2B1", b"A2B2")):
+            return None
+        cols = []
+        for key in (b"rXYZ", b"gXYZ", b"bXYZ"):
+            t = tags.get(key)
+            if t is None or t[:4] != b"XYZ ":
+                return None
+            cols.append([_s15fixed16(t[8 + 4 * j:12 + 4 * j]) for j in range(3)])
+        curves = [_icc_tone_curve(tags[k]) if k in tags else None for k in (b"rTRC", b"gTRC", b"bTRC")]
+        if any(c is None for c in curves):
+            return None
+        return np.array(cols, dtype=np.float64).T, curves
+    except Exception:
+        return None
+
+
+def _matrix_shaper_to_prophoto(rgb: np.ndarray, colorants: np.ndarray, curves) -> np.ndarray:
+    """Decode RGB through a matrix/TRC profile to PCS XYZ (D50) and re-encode it as ProPhoto RGB
+    (ROMM: D50, gamma 1.8), in float, so the analytic ProPhoto path takes it from there.  Rows go
+    in blocks to bound memory; colours outside ProPhoto (rare) are clipped."""
+    to_prophoto = (
+        np.linalg.inv(_M_RGB_TO_XYZ["ProPhoto RGB"].astype(np.float64)) @ colorants
+    ).T.astype(np.float32)
+    out = np.empty(rgb.shape, dtype=np.float32)
+    for r0 in range(0, rgb.shape[0], 512):
+        block = rgb[r0:r0 + 512]
+        lin = np.stack([curves[i](block[..., i]) for i in range(3)], axis=-1).astype(np.float32)
+        pp = np.clip(lin @ to_prophoto, 0.0, 1.0)
+        out[r0:r0 + 512] = np.where(pp < 1.0 / 512.0, pp * 16.0, np.power(pp, 1.0 / 1.8))
+    return out
 
 # -----------------------------------------------------------------------------
 # Optional HEIF support
@@ -261,7 +362,7 @@ def _gamma_decode(rgb: np.ndarray, colorspace: str) -> np.ndarray:
     """Linearize gamma-encoded RGB.  Input float32 [0,1]."""
     if colorspace == "ProPhoto RGB":
         # ProPhoto uses gamma 1.8 with a small linear segment below ~0.001953
-        return np.where(rgb < 0.001953, rgb / 16.0, rgb ** 1.8)
+        return np.where(rgb < 16.0 / 512.0, rgb / 16.0, rgb ** 1.8)
     elif colorspace == "Adobe RGB":
         # Adobe RGB (1998): pure power law, gamma 563/256
         return np.power(rgb, 563.0 / 256.0)
@@ -780,8 +881,11 @@ class ImageProcessor:
         Colour handling:
         * Recognised standard profiles (sRGB, Adobe RGB, ProPhoto) are decoded
           analytically at full precision; no ICC transform is applied.
-        * Any other embedded ICC profile is converted to sRGB with LittleCMS
-          (8-bit), and the working space is then sRGB.
+        * Any other RGB matrix/TRC profile (eciRGB v2, Display P3, most camera
+          matrix profiles) is applied from its own colorants and tone curves at
+          full bit depth, and the pixels are re-encoded as ProPhoto RGB.
+        * LUT-based profiles are converted to sRGB with LittleCMS at 8-bit
+          precision (16-bit data is reduced first); the working space is sRGB.
         * Untagged images use the configured default colour space.
         The returned metadata["working_colorspace"] is the space the pixel
         values are actually in, and is what must be used for LAB conversion.
@@ -811,31 +915,41 @@ class ImageProcessor:
                     rgb, bits = self._pil_to_float(img_t)
 
                 working = colorspace
-                if icc_bytes and not recognised:
-                    if bits == 8 and img_t is not None:
-                        try:
-                            src_profile = ImageCms.ImageCmsProfile(io.BytesIO(icc_bytes))
-                            dst_profile = ImageCms.createProfile("sRGB")
+                matrix_shaper = (
+                    _icc_matrix_shaper(icc_bytes) if (icc_bytes and not recognised) else None
+                )
+                if matrix_shaper is not None:
+                    rgb = _matrix_shaper_to_prophoto(rgb, *matrix_shaper)
+                    working = "ProPhoto RGB"
+                    color_management = (
+                        f"ICC profile '{icc_name}' (matrix/TRC) applied from its own colorants "
+                        f"and tone curves at {bits}-bit precision; re-encoded as ProPhoto RGB "
+                        "for analysis."
+                    )
+                elif icc_bytes and not recognised:
+                    try:
+                        src_profile = ImageCms.ImageCmsProfile(io.BytesIO(icc_bytes))
+                        dst_profile = ImageCms.createProfile("sRGB")
+                        if bits == 8 and img_t is not None:
                             src_img = img_t if img_t.mode in ("RGB", "CMYK", "L") else img_t.convert("RGB")
-                            converted = ImageCms.profileToProfile(
-                                src_img, src_profile, dst_profile, outputMode="RGB"
+                        else:  # LittleCMS here works in 8 bits: reduce first
+                            src_img = Image.fromarray(
+                                np.clip(rgb * 255.0 + 0.5, 0, 255).astype(np.uint8)
                             )
-                            rgb, _ = self._pil_to_float(converted)
-                            working = "sRGB"
-                            color_management = (
-                                f"Unrecognised ICC profile '{icc_name}' converted to "
-                                "sRGB with LittleCMS (8-bit) before LAB analysis."
-                            )
-                        except Exception as exc:
-                            color_management = (
-                                f"ICC profile '{icc_name}' could not be applied ({exc}); "
-                                f"pixel values interpreted as {colorspace}."
-                            )
-                    else:
+                        converted = ImageCms.profileToProfile(
+                            src_img, src_profile, dst_profile, outputMode="RGB"
+                        )
+                        rgb, _ = self._pil_to_float(converted)
+                        working = "sRGB"
+                        reduced = f" (reduced from {bits}-bit)" if bits != 8 else ""
                         color_management = (
-                            f"ICC profile '{icc_name}' is not a recognised standard "
-                            f"space and cannot be applied at {bits}-bit; pixel values "
-                            f"interpreted as {colorspace}."
+                            f"ICC profile '{icc_name}' (LUT-based) converted to sRGB with "
+                            f"LittleCMS at 8-bit precision{reduced} before LAB analysis."
+                        )
+                    except Exception as exc:
+                        color_management = (
+                            f"ICC profile '{icc_name}' could not be applied ({exc}); "
+                            f"pixel values interpreted as {colorspace}."
                         )
                 else:
                     color_management = (
