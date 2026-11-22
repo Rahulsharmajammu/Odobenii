@@ -271,4 +271,9 @@ technique, and Woodii's stacks are registered, standardised and linear. There ar
 - across the Analysis tab's planes;
 - noise-adjusted with MNF's noise.
 
-The guards carry over. It waits for your yes.
+The guards carry over.
+
+> "as much as i would like it, i think it is best to keep it as a to do until we validate most of the todo tasks
+> for woodii"
+
+So the stretch stays a to-do in Woodii's TODO until most of that list is validated.
