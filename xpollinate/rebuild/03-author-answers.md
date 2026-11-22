@@ -2,7 +2,7 @@
 
 22 November 2026, after the run. These are the author's words, verbatim: answers to the four questions in TODO.md
 (§1-4), then later notes on the captures (§5), the inputs (§6), the stretch (§7), the infrared band and where the
-code lives (§8), and the web app (§9). Where they conflict with the synthesis, they win.
+code lives (§8), the web app (§9), and the Woodii note (§10). Where they conflict with the synthesis, they win.
 
 ## 1. Which part of Chroma mode failed?
 
@@ -256,3 +256,19 @@ built to bring out certain hues.
 
 **Not built:** finding the print and its border (the user draws the print area), the light term, and the line-up
 check (pass criterion 5), which needs the test captures.
+
+## 10. The Woodii note, and a stretch on Woodii's stacks (later the same day)
+
+> "please push a note to Woodii which uses the 2 image model with the Vis and NIR to create colour maps. i am also
+> wondering if it is possible to use decorrelation stretch with the image stacks that Woodii generates?"
+
+**Done.** The module's design moved to Woodii as `docs/colour-maps-vis-irr.md`, linked from Woodii's README and TODO.
+`TODO.md` here keeps a pointer, so the two do not drift apart.
+
+**The question** is answered in the note's last section: yes. The decorrelation stretch began as a multiband
+technique, and Woodii's stacks are registered, standardised and linear. There are three ways:
+- on a composite;
+- across the Analysis tab's planes;
+- noise-adjusted with MNF's noise.
+
+The guards carry over. It waits for your yes.
