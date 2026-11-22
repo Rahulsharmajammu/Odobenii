@@ -46,7 +46,6 @@ Tests: `python -m pytest tests` (needs pytest and tifffile).
 
 **Output**
 
-![2021 443 694_montage](https://github.com/user-attachments/assets/fb07c8a6-0813-449a-a5dd-b0f9d9ae2760)
 
 The tool generates a 3-panel montage for every image processed:
 *Original*: The raw input image.
