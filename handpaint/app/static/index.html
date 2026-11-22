@@ -1,0 +1,426 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="handpaint-token" content="">
+<title>Handpaint visualiser</title>
+<link rel="icon" type="image/svg+xml" href="/static/handpaint.svg">
+<style>
+/* Woodii's instrument console: controls on the left follow the workflow tabs; a dark image well on the right (dark in
+   both themes, so pictures read true). No web fonts: the app runs offline. */
+:root {
+  --bg: #eceff2; --panel: #fbfcfd; --ink: #000000; --muted: #434b55; --line: #c9cfd6;
+  --accent: #1f4fa8; --accent-ink: #ffffff; --accent-soft: #dfe7f6;
+  --well: #1b1e23; --well-ink: #c7cdd5;
+  --overlay: #ffd166; --overlay-2: #6fe3ff; --overlay-bad: #ff7a70;
+  --ok: #1c7444; --warn: #9a5800; --bad: #b3261e;
+  --font-ui: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-head: "IBM Plex Sans Condensed", "Arial Narrow", "Segoe UI", system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "Cascadia Mono", Consolas, monospace;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #111317; --panel: #181b20; --ink: #e3e7ec; --muted: #9aa3ae; --line: #2b3038;
+    --accent: #84a3ea; --accent-ink: #0c1222; --accent-soft: #1b2640;
+    --well: #0a0b0d; --well-ink: #a9b0ba; --ok: #5cc28a; --warn: #e2a443; --bad: #f2766b;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #111317; --panel: #181b20; --ink: #e3e7ec; --muted: #9aa3ae; --line: #2b3038;
+  --accent: #84a3ea; --accent-ink: #0c1222; --accent-soft: #1b2640;
+  --well: #0a0b0d; --well-ink: #a9b0ba; --ok: #5cc28a; --warn: #e2a443; --bad: #f2766b;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body { background: var(--bg); color: var(--ink); font: 14px/1.45 var(--font-ui);
+  padding: 14px max(16px, env(safe-area-inset-right, 0px)) 28px max(16px, env(safe-area-inset-left, 0px)); }
+[hidden] { display: none !important; }
+h1, h2, h3 { font-family: var(--font-head); font-weight: 600; margin: 0; text-wrap: balance; }
+h1 { font-size: 1.35rem; letter-spacing: 0.01em; }
+h2 { font-size: 1rem; }
+h3 { font-size: 0.92rem; }
+.mono { font-family: var(--font-mono); }
+button, select, input, textarea { font: inherit; color: inherit; }
+button, select, select option { color: var(--ink); }
+select option { background: var(--panel); }
+button { border: 1px solid var(--line); background: var(--panel); border-radius: 6px; padding: 6px 11px; cursor: pointer; line-height: 1.2; }
+button:hover:not(:disabled) { border-color: var(--accent); }
+button:disabled { opacity: 0.45; cursor: not-allowed; }
+button.primary { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); font-weight: 600; }
+button.on, button[aria-pressed="true"] { background: var(--accent-soft); border-color: var(--accent); }
+button.small { padding: 3px 8px; font-size: 0.8rem; }
+button.danger { color: var(--bad); }
+button.danger:hover { border-color: var(--bad); }
+button:focus-visible, select:focus-visible, input:focus-visible, label.file:focus-within, a:focus-visible {
+  outline: 2px solid var(--accent); outline-offset: 2px; }
+select, input[type="number"], input[type="text"] { border: 1px solid var(--line); background: var(--bg); border-radius: 5px; padding: 4px 6px; }
+input[type="number"] { width: 5.5em; font-family: var(--font-mono); }
+input[type="text"] { width: 100%; min-width: 0; font-family: var(--font-mono); font-size: 0.8rem; }
+a { color: var(--accent); }
+
+.top { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 18px; margin-bottom: 10px; }
+.top .sub { color: var(--muted); font-size: 0.85rem; }
+.top .right { display: flex; align-items: center; gap: 10px; min-width: 0; flex-wrap: wrap; }
+.top h1 .logo { display: inline-block; width: 2.1em; height: 2.1em; vertical-align: -0.6em; margin-right: 8px; }
+.top .sep { width: 1px; align-self: stretch; background: var(--line); margin: 2px 4px; }
+.status { font-size: 0.85rem; color: var(--muted); min-width: 0; }
+.status.warn { color: var(--warn); } .status.bad { color: var(--bad); } .status.ok { color: var(--ok); }
+
+.flow { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px; }
+.flow button { display: flex; align-items: center; gap: 8px; font: 600 0.9rem/1 var(--font-head); padding: 8px 14px; }
+.flow button .n { display: inline-grid; place-items: center; width: 1.5em; height: 1.5em; border-radius: 50%;
+  border: 1px solid var(--line); font: 600 0.75rem/1 var(--font-mono); }
+.flow button.on { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+.flow button.on .n { border-color: var(--accent-ink); }
+.xp { font: 500 0.68rem/1 var(--font-ui); letter-spacing: .02em; text-transform: uppercase; color: var(--warn);
+  border: 1px solid currentColor; border-radius: 999px; padding: 2px 6px; }
+h2 .xp, h3 .xp { margin-left: 6px; vertical-align: 2px; }
+
+.main { display: grid; grid-template-columns: minmax(280px, 360px) minmax(0, 1fr); gap: 14px; align-items: start; }
+@media (max-width: 900px) { .main { grid-template-columns: minmax(0, 1fr); } }
+.rail { display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+@media (min-width: 901px) {
+  .rail { position: sticky; top: 8px; max-height: calc(100vh - 16px); overflow-y: auto; padding-right: 2px; }
+}
+details.explain > summary, details.adv > summary { color: var(--muted); font-size: 0.8rem; }
+details summary { cursor: pointer; color: var(--muted); font-size: 0.82rem; }
+details[open] summary { margin-bottom: 6px; }
+.step { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 12px; display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+.hint { margin: 0; color: var(--muted); font-size: 0.82rem; }
+.warntext { color: var(--warn); }
+.row { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.field { display: flex; align-items: center; justify-content: space-between; gap: 8px; font-size: 0.86rem; }
+.field > span { color: var(--muted); }
+.field .right { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; justify-content: flex-end; }
+label.file { border: 1px solid var(--line); border-radius: 6px; padding: 4px 9px; cursor: pointer; font-size: 0.8rem; background: var(--panel); white-space: nowrap; }
+label.file:hover { border-color: var(--accent); }
+label.file input { position: absolute; width: 1px; height: 1px; opacity: 0; pointer-events: none; }
+.kv { font-size: 0.8rem; color: var(--muted); margin: 0; overflow-wrap: anywhere; }
+.kv b { color: var(--ink); font-weight: 500; }
+
+/* a choice of a few: buttons side by side, one pressed */
+.seg { display: inline-flex; flex-wrap: wrap; gap: 4px; }
+.seg button { font-size: 0.82rem; padding: 5px 9px; }
+.choice { display: flex; flex-direction: column; gap: 4px; }
+.choice > .lbl { font-size: 0.8rem; color: var(--muted); }
+.guard { display: grid; grid-template-columns: auto 1fr; gap: 2px 8px; align-items: start; font-size: 0.84rem; }
+.guard input { margin-top: 3px; }
+.guard .why { grid-column: 2; color: var(--muted); font-size: 0.76rem; }
+.strength { display: flex; align-items: center; gap: 8px; font-size: 0.86rem; }
+.strength input[type=range] { flex: 1 1 auto; }
+
+.files { display: flex; flex-direction: column; gap: 2px; max-height: 320px; overflow-y: auto; }
+.photo { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 8px; align-items: center; font-size: 0.8rem;
+  padding: 4px 7px; border-radius: 5px; border: 1px solid transparent; cursor: pointer; text-align: left; background: none; }
+.photo:hover { border-color: var(--line); }
+.photo.sel { border-color: var(--accent); background: var(--accent-soft); }
+.photo .fn { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-family: var(--font-mono); }
+.photo .mb { color: var(--muted); font: 0.72rem var(--font-mono); }
+.group { font-size: 0.75rem; color: var(--muted); margin: 6px 0 2px; }
+
+.tools { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+.tools button { text-align: left; font-size: 0.82rem; }
+.tools button .st { display: block; color: var(--muted); font-size: 0.72rem; }
+.boxlist { display: flex; flex-direction: column; gap: 4px; }
+.bx { display: grid; grid-template-columns: 2.2em minmax(0, 1fr) auto; gap: 6px; align-items: start; font-size: 0.78rem;
+  border: 1px solid var(--line); border-radius: 6px; padding: 5px 7px; }
+.bx .tag { font: 600 0.78rem/1.4 var(--font-mono); }
+.bx.unused { border-style: dashed; }
+.bx.unused .tag, .bx.unused .note { color: var(--warn); }
+.bx .note { color: var(--muted); }
+
+.stripwrap { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 2px 6px; align-items: center; }
+.stripwrap img { width: 100%; image-rendering: pixelated; border-radius: 4px; display: block; background: var(--well); }
+.stripwrap .hues { display: grid; font-size: 0.7rem; color: var(--muted); text-align: right; height: 100%; }
+.stripwrap .hues span { display: flex; align-items: center; justify-content: flex-end; }
+.stripwrap .tones { grid-column: 2; display: flex; justify-content: space-between; font: 0.66rem var(--font-mono); color: var(--muted); }
+.words { margin: 0; padding-left: 1.1em; font-size: 0.82rem; }
+.words li { margin-bottom: 4px; }
+
+.stage { display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+.viewbar { display: flex; flex-wrap: wrap; gap: 4px; align-items: center; }
+.viewbar button { font: 500 0.8rem/1 var(--font-ui); padding: 7px 10px; display: inline-flex; gap: 6px; align-items: center; }
+.viewbar button .k { font: 600 0.7rem/1 var(--font-mono); color: var(--muted); border: 1px solid var(--line); border-radius: 3px; padding: 1px 4px; }
+.viewbar button.on { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+.viewbar button.on .k { color: var(--accent-ink); border-color: var(--accent-ink); }
+.layoutbar { display: flex; flex-wrap: wrap; gap: 6px 12px; align-items: center; justify-content: flex-end; font-size: 0.8rem; }
+.layoutbar .grp { display: inline-flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.layoutbar .lbl { font-size: 0.78rem; color: var(--muted); }
+.well { background: var(--well); color: var(--well-ink); border-radius: 8px; height: min(70vh, 780px); min-height: 320px;
+  position: relative; overflow: hidden; }
+.well canvas { display: block; width: 100%; height: 100%; touch-action: none; cursor: grab; }
+.well canvas.panning { cursor: grabbing; }
+.well canvas.picking { cursor: crosshair; }
+.well.split { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 3px; }
+.well .vlabel { position: absolute; top: 8px; transform: translateX(-50%); font: 500 0.72rem/1 var(--font-mono);
+  background: rgba(0,0,0,0.55); color: var(--well-ink); padding: 4px 7px; border-radius: 4px; pointer-events: none;
+  max-width: 48%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.well .vlabel.l { left: 25%; } .well .vlabel.r { left: 75%; }
+.well:not(.split) .vlabel.l { left: 50%; max-width: 90%; }
+.well .vislabel { position: absolute; left: 8px; bottom: 8px; font: 500 0.72rem/1.3 var(--font-ui); color: var(--well-ink);
+  background: rgba(0,0,0,0.5); padding: 4px 8px; border-radius: 4px; pointer-events: none; }
+.well .empty { position: absolute; inset: 0; display: grid; place-items: center; text-align: center; padding: 30px 16px; font-size: 0.9rem; }
+.well .zoom { position: absolute; right: 8px; bottom: 8px; display: flex; gap: 4px; align-items: center; }
+.well .zoom button { background: rgba(0,0,0,0.45); color: var(--well-ink); border-color: rgba(255,255,255,0.18); font: 500 0.75rem/1 var(--font-mono); padding: 5px 8px; }
+.well .zoom span { font: 0.75rem var(--font-mono); color: var(--well-ink); }
+.well .busy { position: absolute; left: 8px; top: 8px; font-size: 0.75rem; color: var(--well-ink); opacity: 0.85; pointer-events: none; }
+.wellbar { display: flex; flex-wrap: wrap; gap: 6px 16px; align-items: center; justify-content: space-between; font-size: 0.8rem; }
+.wellbar .keys { color: var(--muted); font-size: 0.75rem; }
+.note { font-size: 0.8rem; color: var(--muted); margin: 0; max-width: 80ch; }
+body.wide .main { grid-template-columns: minmax(0, 1fr); }
+body.wide .rail { display: none; }
+body.wide .well { height: calc(100vh - 220px); min-height: 420px; max-height: none; }
+.stage:fullscreen { background: var(--bg); padding: 12px; overflow: auto; }
+.stage:fullscreen .well { height: calc(100vh - 140px); max-height: none; }
+
+.progress { display: flex; align-items: center; gap: 8px; font-size: 0.8rem; max-width: 30rem; min-width: 0; }
+.progress #pLabel { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; }
+.pbar { flex: none; width: 140px; height: 6px; border-radius: 3px; background: var(--line); overflow: hidden; position: relative; }
+.pbar i { position: absolute; inset: 0 auto 0 0; width: 0; background: var(--accent); border-radius: 3px; transition: width 0.25s; }
+
+.project { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 12px; margin-bottom: 12px;
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; }
+.project section { display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+dialog { max-width: 34rem; border: 1px solid var(--line); border-radius: 8px; background: var(--panel); color: inherit; padding: 16px 18px; }
+dialog::backdrop { background: rgba(0, 0, 0, 0.45); }
+dialog .row { margin-top: 14px; }
+body.stopped > :not(#stopped) { display: none !important; }
+#stopped { max-width: 34rem; margin: 12vh auto 0; padding: 0 16px; }
+#stopped code { font-family: var(--font-mono); }
+.out { font-size: 0.8rem; overflow-wrap: anywhere; }
+.out.bad { color: var(--bad); } .out.ok { color: var(--ok); }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+</head>
+<body>
+<header class="top">
+  <div>
+    <h1><img class="logo" src="/static/handpaint.svg" alt="" aria-hidden="true">Handpaint visualiser</h1>
+    <div class="sub">A visualiser, not a measuring tool</div>
+  </div>
+  <div class="right">
+    <div class="status" id="status" role="status" aria-live="polite"></div>
+    <div class="progress" id="progress" hidden>
+      <div class="pbar" role="progressbar" aria-labelledby="pLabel" aria-valuemin="0" aria-valuemax="100"><i id="pFill"></i></div>
+      <span id="pLabel"></span> <span class="mono" id="pTime"></span>
+    </div>
+    <button type="button" id="btnSettings" aria-expanded="false" aria-controls="project">Settings</button>
+    <span class="sep" aria-hidden="true"></span>
+    <button type="button" class="danger" id="btnStop" title="Stop the server: the session is saved, and the console window can then be closed">Stop server…</button>
+  </div>
+</header>
+
+<div class="project" id="project" hidden>
+  <section aria-labelledby="hs1">
+    <h3 id="hs1">Reading files</h3>
+    <div class="field"><span>Files with no colour-space information are read as</span>
+      <select id="defSpace"><option>sRGB</option><option>Adobe RGB</option><option>ProPhoto RGB</option></select></div>
+    <p class="hint">Files with an ICC profile are read through it. 16-bit ProPhoto TIFF from your raw converter is best: at 8 bits, rounding alone moves colour by up to about 0.65 ΔE, against about 1.3 ΔE for a faint wash. 32-bit float TIFFs are not read (Woodii: <span class="mono">--data uint16</span>).</p>
+  </section>
+  <section aria-labelledby="hs2">
+    <h3 id="hs2">Judged tones</h3>
+    <div class="field"><span>Darker than L* (not judged)</span><input id="nearBlack" type="number" min="2" max="30" step="1"></div>
+    <div class="field"><span>Lighter than L* (not judged)</span><input id="nearWhite" type="number" min="80" max="99.5" step="0.5"></div>
+    <p class="hint">Hatched in the pictures: too dark or too light for colour to be judged, or clipped by the camera.</p>
+  </section>
+  <section aria-labelledby="hs3">
+    <h3 id="hs3">For the test captures <span class="xp" title="Developer settings: change them only while testing on the gate's captures">gate</span></h3>
+    <div class="field"><span>Departure floor T0 (ΔE)</span><input id="t0" type="number" min="0.5" max="10" step="0.1"></div>
+    <div class="field"><span>Analysis size (long edge, px)</span><input id="anaEdge" type="number" min="800" max="6000" step="100"></div>
+    <p class="hint">T0 is the smallest departure "Where colour departs" draws; measured noise can only raise it, never the paint. Pictures are drawn from the full photograph when you zoom in.</p>
+    <div class="row"><button type="button" class="primary" id="btnSaveSettings">Apply</button></div>
+  </section>
+  <section aria-labelledby="hs4">
+    <h3 id="hs4">Session folder</h3>
+    <p class="kv mono" id="sessionRoot"></p>
+    <p class="hint">Files you add from the browser, and each photograph's print area and boxes, are kept here.</p>
+  </section>
+  <section aria-labelledby="hs5">
+    <h3 id="hs5">About</h3>
+    <p class="hint">Handpaint visualiser <span id="ver"></span>. It runs on this computer; photographs stay here. It shows where colour departs from a print's own tone: no areas, counts or statistics, no claim to colorimetric accuracy, and never a claim that a place is unpainted.</p>
+  </section>
+</div>
+
+<nav class="flow" id="flow" aria-label="Workflow">
+  <button type="button" data-tab="photos" class="on"><span class="n">1</span>Photographs</button>
+  <button type="button" data-tab="look"><span class="n">2</span>Look</button>
+  <button type="button" data-tab="check"><span class="n">3</span>Check</button>
+  <button type="button" data-tab="export"><span class="n">4</span>Export</button>
+</nav>
+
+<div class="main">
+  <aside class="rail">
+    <!-- 1 Photographs -->
+    <section class="step" data-pane="photos" aria-labelledby="hp1">
+      <h2 id="hp1">Folder</h2>
+      <div class="row" style="flex-wrap:nowrap">
+        <input id="folder" type="text" placeholder="/path/to/your/captures" spellcheck="false" aria-label="Folder of photographs">
+        <button type="button" id="btnFolder">Open</button>
+      </div>
+      <p class="hint">A folder on this computer: its photographs are listed below and read from where they are. Or add files from the browser; they are copied into the session folder.</p>
+      <div class="row"><label class="file">Add files…<input id="addFiles" type="file" multiple accept=".tif,.tiff,.png,.jpg,.jpeg,.webp,.bmp"></label></div>
+    </section>
+    <section class="step" data-pane="photos" aria-labelledby="hp2">
+      <h2 id="hp2">Photographs</h2>
+      <div class="files" id="files" aria-label="Photographs"></div>
+      <p class="hint" id="filesHint">Open a folder, or add files.</p>
+    </section>
+    <section class="step" data-pane="photos" aria-labelledby="hp3" id="infoStep" hidden>
+      <h2 id="hp3">This photograph</h2>
+      <p class="kv" id="imgInfo"></p>
+      <p class="hint warntext" id="imgWarn" hidden></p>
+    </section>
+
+    <!-- 2 Look -->
+    <section class="step" data-pane="look" aria-labelledby="hl1" hidden>
+      <h2 id="hl1">Decorrelation stretch <span class="xp" title="Built and tested on synthetic prints, not yet on real captures">untested</span></h2>
+      <div class="choice"><span class="lbl">Colour space</span>
+        <div class="seg" id="segSpace" role="group" aria-label="Colour space">
+          <button type="button" data-v="lab" title="Departures as they look: equal steps of colour difference (ΔE)">CIELAB</button>
+          <button type="button" data-v="density" title="Departures as amounts of colourant: a wash over the dark tones shows as strongly as over the light (and so does noise in the darks)">Density</button>
+        </div></div>
+      <div class="choice"><span class="lbl">Emphasis</span>
+        <div class="seg" id="segEmph" role="group" aria-label="Emphasis">
+          <button type="button" data-v="balanced" title="The stretch alone: each direction by how little the unpainted print varies in it">Balanced</button>
+          <button type="button" data-v="redgreen" title="Twice the gain along red–green (reds, pinks, flesh; greens)">Red–green</button>
+          <button type="button" data-v="yellowblue" title="Twice the gain along yellow–blue (yellows; blues, skies)">Yellow–blue</button>
+        </div></div>
+      <div class="strength"><span>Strength</span><input id="k" type="range" min="1" max="12" step="0.5" aria-label="Strength"><output id="kOut" class="mono"></output></div>
+      <details class="explain" open><summary>The three guards</summary>
+        <div class="guard"><input id="gTone" type="checkbox"><label for="gTone">Stretch the departures, not the photograph</label>
+          <span class="why">The print's own tone is removed first. Off, its toning and yellowed paper are stretched with everything else, and show as colour that follows the tones.</span></div>
+        <div class="guard"><input id="gUnp" type="checkbox"><label for="gUnp">Statistics from the unpainted print</label>
+          <span class="why">From the places the reference holds as unpainted, or from your boxes (as DStretch's selection works). Off, every pixel sets the stretch: the amount of paint changes it, and a broad wash steers it.</span></div>
+        <div class="guard"><input id="gCap" type="checkbox"><label for="gCap">Cap at 2:1</label>
+          <span class="why">No direction gains more than twice another. Off, the direction the print varies least in, mostly noise, can gain many times more than the others.</span></div>
+        <div class="row"><button type="button" class="small" id="btnGuards">All off (a plain stretch, to compare)</button></div>
+      </details>
+      <label class="field"><span>Hatch what is not judged</span><input id="hatch" type="checkbox"></label>
+      <p class="hint">Strength sets the boost too. Every stretch keeps the same overall strength; the guards and the emphasis only share it out between directions.</p>
+    </section>
+    <section class="step" data-pane="look" aria-labelledby="hl2" hidden>
+      <h2 id="hl2">The print</h2>
+      <div class="tools">
+        <button type="button" data-tool="crop"><b>Print area</b><span class="st" id="stCrop">the whole frame</span></button>
+        <button type="button" data-tool="box"><b>Unpainted box</b><span class="st" id="stBox">none</span></button>
+      </div>
+      <p class="hint" id="toolHint">Pick a tool, then drag on the picture. Scroll to zoom, drag to pan, double-click to fit.</p>
+      <div class="boxlist" id="boxList" aria-label="Unpainted boxes"></div>
+      <div class="row"><button type="button" class="small" id="btnCropClear">Whole frame</button><button type="button" class="small" id="btnBoxClear">Remove all boxes</button></div>
+      <details class="explain"><summary>When to box</summary>
+        <p class="hint">Only places you have examined on the object and know are unpainted, at the tones where the boosted picture looks wrong: colour opposite to paint you can see, following one band of tone. Boxes that disagree with the others at the same tones are not used. Boxes correct the reference and set the stretch's statistics; they never show a place is unpainted.</p>
+      </details>
+    </section>
+
+    <!-- 3 Check -->
+    <section class="step" data-pane="check" aria-labelledby="hc1" hidden>
+      <h2 id="hc1">The strip</h2>
+      <p class="hint">A thin wash (about 1.3 ΔE, a guess to measure on the test print) set into this capture's own noise and the print's own tone, at each tone, drawn as the picture you are looking at draws. In each cell the right half carries the wash. Where you cannot see it here, a wash that thin would not show in the picture either.</p>
+      <div class="stripwrap">
+        <div class="hues" id="stripHues"></div>
+        <img id="strip" alt="The strip: a thin wash in this capture's noise, rows of hues, columns of tones">
+        <div class="tones" id="stripTones"></div>
+      </div>
+    </section>
+    <section class="step" data-pane="check" aria-labelledby="hc2" hidden>
+      <h2 id="hc2">The expected-unpainted picture</h2>
+      <p class="hint">The print as the tool assumes it unpainted, its colour ×4. It should look like the print's own tone: colour that changes smoothly with lightness, with no forms or washes in it. If a face or a sky shows here in a colour of its own, the reference has taken in paint: box unpainted areas at those tones.</p>
+      <div class="row"><button type="button" id="btnShowExpected">Show it (4)</button><button type="button" id="btnCompareExpected">Beside the boost</button></div>
+      <p class="hint warntext" id="guessHint" hidden>Some tones have too few places to judge: they are hatched in this picture, and the reference is guessing there.</p>
+    </section>
+    <section class="step" data-pane="check" aria-labelledby="hc3" hidden>
+      <h2 id="hc3">What the pictures cannot show</h2>
+      <ul class="words">
+        <li><b>Blank does not mean unpainted.</b> A wash fainter than the strip shows, or matched to the print's tone, leaves nothing to see.</li>
+        <li>Neutral or tone-matched media never show: graphite, grey retouching, black spotting, white gouache, varnish.</li>
+        <li>Colour that is not paint shows like paint: foxing, stains, silver mirroring, uneven toning. Telling them apart is for you, at the object.</li>
+        <li>A broad wash over most of the print at some tone can enter the reference. Its sign: colour opposite to paint you can see, following one band of tone. Box unpainted areas at those tones.</li>
+      </ul>
+    </section>
+
+    <!-- 4 Export -->
+    <section class="step" data-pane="export" aria-labelledby="he1" hidden>
+      <h2 id="he1">This picture</h2>
+      <label class="field" style="flex-direction:column;align-items:stretch"><span>Folder</span>
+        <input id="exFolder" type="text" spellcheck="false" placeholder="/path/to/folder"></label>
+      <div class="field"><span>Size</span><select id="exEdge"><option value="full">Full size</option><option value="6000">6000 px long edge</option><option value="4000" selected>4000 px</option><option value="2000">2000 px</option></select></div>
+      <div class="row"><button type="button" class="primary" id="btnExport" disabled>Export the picture shown</button></div>
+      <div class="out" id="exOut"></div>
+      <p class="hint">An sRGB PNG with its words printed under it: what it is, and that it is a visualisation, not a measurement.</p>
+    </section>
+    <section class="step" data-pane="export" aria-labelledby="he2" hidden>
+      <h2 id="he2">Batch</h2>
+      <label class="field" style="flex-direction:column;align-items:stretch"><span>Photographs from</span>
+        <input id="bIn" type="text" spellcheck="false" placeholder="/path/to/captures"></label>
+      <label class="field" style="flex-direction:column;align-items:stretch"><span>Pictures to</span>
+        <input id="bOut" type="text" spellcheck="false" placeholder="/path/to/pictures"></label>
+      <div class="choice"><span class="lbl">Pictures for each photograph</span>
+        <label class="field"><span>The photograph</span><input type="checkbox" data-b="original"></label>
+        <label class="field"><span>Boost</span><input type="checkbox" data-b="boost" checked></label>
+        <label class="field"><span>Stretch, as set in Look</span><input type="checkbox" data-b="stretch" checked></label>
+        <label class="field"><span>Where colour departs</span><input type="checkbox" data-b="departs" checked></label>
+        <label class="field"><span>Expected unpainted ×4</span><input type="checkbox" data-b="expected" checked></label>
+      </div>
+      <div class="field"><span>Size</span><select id="bEdge"><option value="full">Full size</option><option value="4000">4000 px long edge</option><option value="2000" selected>2000 px</option></select></div>
+      <div class="row"><button type="button" class="primary" id="btnBatch">Run</button><button type="button" id="btnBatchCancel" disabled>Cancel</button></div>
+      <div class="out" id="bOutMsg"></div>
+      <p class="hint">No boxes are used in batch runs. A photograph's print area, if you drew one, is. Each run writes handpaint_run.json beside the pictures: what was read and drawn, never figures about paint.</p>
+    </section>
+  </aside>
+
+  <section class="stage" id="stage">
+    <nav class="viewbar" id="viewbar" aria-label="Pictures">
+      <button type="button" data-view="original"><span class="k">1</span>Photograph</button>
+      <button type="button" data-view="boost"><span class="k">2</span>Boost</button>
+      <button type="button" data-view="stretch"><span class="k">3</span>Stretch</button>
+      <button type="button" data-view="expected"><span class="k">4</span>Expected unpainted ×4</button>
+      <button type="button" data-view="departs"><span class="k">5</span>Where colour departs</button>
+    </nav>
+    <div class="layoutbar">
+      <span class="grp" role="group" aria-label="Compare"><span class="lbl">Compare</span>
+        <label>with <select id="cmpSel" aria-label="Show beside it">
+          <option value="">nothing</option><option value="original">Photograph</option><option value="boost">Boost</option>
+          <option value="stretch">Stretch</option><option value="expected">Expected unpainted ×4</option><option value="departs">Where colour departs</option></select></label>
+        <label title="Show one picture at a time and flip between the two (F)"><input id="flipMode" type="checkbox"> one at a time</label>
+        <button type="button" id="zFlip" title="Swap the two pictures (F)" disabled>Flip</button></span>
+      <span class="grp" role="group" aria-label="Layout"><span class="lbl">Layout</span>
+        <button type="button" id="zWide" aria-pressed="false" title="Hide the side panels and give the picture the width (W)">Wide</button>
+        <button type="button" id="zFull" title="Full screen (Esc to leave)">Full screen</button></span>
+    </div>
+    <div class="well" id="well">
+      <canvas id="cv" aria-label="Picture"></canvas>
+      <canvas id="cv2" aria-label="Second picture, panned and zoomed with the first" hidden></canvas>
+      <span class="vlabel l" id="lab1" hidden></span><span class="vlabel r" id="lab2" hidden></span>
+      <div class="empty" id="empty">Open a folder of photographs in 1, and pick one.</div>
+      <div class="busy" id="busy" hidden>Drawing…</div>
+      <div class="vislabel" id="visLabel">Visualisation only — not a measurement</div>
+      <div class="zoom"><button type="button" id="zFit" title="Fit (double-click)">Fit</button><button type="button" id="z11" title="One photograph pixel per screen pixel">1:1</button><span id="zoomOut"></span></div>
+    </div>
+    <div class="wellbar">
+      <span id="viewDesc"></span>
+      <span class="keys">Keys: 1–5 pictures · F flip · W wide · Esc stop a tool</span>
+    </div>
+    <p class="note" id="viewNote">The boost and the stretches draw the print's own tone as neutral grey and exaggerate how colour departs from it. Their hue is the direction of departure from the print's own tone, not the paint's own colour. Nothing here is a measurement, and blank does not mean unpainted.</p>
+  </section>
+</div>
+
+<dialog id="stopDlg" aria-labelledby="stopTitle">
+  <h2 id="stopTitle">Stop the server?</h2>
+  <p class="hint">The visualiser stops and this page with it. The session is saved in its folder and reopens where you left off the next time the app starts.</p>
+  <div class="row">
+    <button type="button" class="primary" id="stopGo">Stop server</button>
+    <button type="button" id="stopCancel">Cancel</button>
+  </div>
+</dialog>
+<main id="stopped" hidden>
+  <h1>The handpaint visualiser has stopped</h1>
+  <p>The session is saved in its folder. You can close this tab, and the console window.</p>
+  <p>To start again, run <code>python -m handpaint.app</code> (with the same <code>--session</code> folder, if you gave one).</p>
+</main>
+<script src="/static/app.js"></script>
+</body>
+</html>

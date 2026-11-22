@@ -13,6 +13,7 @@ The plan that came out of it is `../../TODO.md`. This folder holds the reasoning
 > - **§6:** the visualiser is a viewer of one ProPhoto photograph per print. Infrared goes to a separate Woodii module.
 > - **§7:** the boost's leading candidate is a guarded decorrelation stretch, in a few colour spaces.
 > - **§8:** Woodii's IRR is at 850 nm, and the two tools are written separately, on purpose.
+> - **§9:** the single view is a local web app like Woodii's, built before the gate as its instrument.
 
 > **Read this first: limits of everything here.**
 > - **No real capture of any print was available.** Every number comes from synthetic test images that the agents

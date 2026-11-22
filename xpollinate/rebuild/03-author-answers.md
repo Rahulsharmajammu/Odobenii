@@ -1,8 +1,8 @@
 # The author's answers, and what they change
 
 22 November 2026, after the run. These are the author's words, verbatim: answers to the four questions in TODO.md
-(§1-4), then later notes on the captures (§5), the inputs (§6), the stretch (§7), and the infrared band and where
-the code lives (§8). Where they conflict with the synthesis, they win.
+(§1-4), then later notes on the captures (§5), the inputs (§6), the stretch (§7), the infrared band and where the
+code lives (§8), and the web app (§9). Where they conflict with the synthesis, they win.
 
 ## 1. Which part of Chroma mode failed?
 
@@ -234,3 +234,25 @@ built to bring out certain hues.
   border and the hatching should broadly agree.
 - **A new caveat.** Printed-out images (albumen, collodion) may be faint at 850 nm, since their fine silver absorbs
   mostly in the visible. That would weaken the module's reference.
+
+## 9. A web app (later the same day)
+
+> "Okay. Please make a web UI like woodii's for the handprint visualiser that incorporates the multiple colour
+> spaces tc"
+
+> "you are building in the decorrelation stretch into this, yes?"
+
+**What it settles.**
+- **Single view is a local web app like Woodii's**, not the Tk window of the plan. It runs batches too.
+- **It is built before the gate, as the gate's instrument.** The plan had said no new code before the test captures;
+  the request overrides that. What the gate rejects comes out.
+
+**What was built** **[coordinator, synthetic prints only]**:
+- the decoding of 4.1.5, the reference from place votes with a high-breakdown fit, and the five pictures: the
+  photograph, the boost, the stretch, the expected-unpainted picture ×4 and the departure picture;
+- the decorrelation stretch in two colour spaces (CIELAB and density) with three emphases (balanced, red-green,
+  yellow-blue), and the three guards of §7, each switchable so a plain stretch can be compared;
+- the strip, the words, the print area, unpainted boxes with their cross-check, export, and batch runs.
+
+**Not built:** finding the print and its border (the user draws the print area), the light term, and the line-up
+check (pass criterion 5), which needs the test captures.

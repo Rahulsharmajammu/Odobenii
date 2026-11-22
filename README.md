@@ -5,7 +5,44 @@ A quick tool to visualise colour applied to monochrome photographs, initially de
 
 The program boosts the colour in a photograph and draws where colour stands out from the image's own colour statistics, to help the eye find faint colour on paper, parchment or canvas. It does not identify pigments, and a place where nothing is drawn is not shown to be unpainted.
 
-**Known limitation.** With the default `noise_floor` threshold, the threshold is set from the image's own chroma histogram, so it rises with the paint: the Segmented panel can miss large painted areas, and a blue wash over a warm print can lower chroma and disappear. The Chroma Boosted panel still shows them. A rebuild that addresses this is planned (see `TODO.md`).
+There are two programs:
+- **the web app** (`python -m handpaint.app`), new: one photograph at a time, with the decorrelation stretch, and batch runs. It is built and tested on synthetic prints only; real captures decide (`TODO.md`, the gate);
+- **the batch tool** (`Chroma_diagnoser_v4.1`), described further below.
+
+## The web app
+
+```bash
+pip install -r requirements.txt
+python -m handpaint.app            # opens http://127.0.0.1:8766/ in your browser
+```
+
+It is built like Woodii's app: a local server on 127.0.0.1, so photographs stay on this computer, with Woodii's checks against other web pages (a per-launch token, local host names only, no cross-site requests). Options: `--session FOLDER` (default `~/handpaint_sessions/default`), `--port`, `--no-browser`. Stop it with the page's Stop server button or Ctrl+C. The session folder keeps files added from the browser, each photograph's print area and boxes, and the settings.
+
+Open a folder of photographs (16-bit ProPhoto TIFF from your raw converter is best; any ICC-tagged file is read through its profile), pick one, and flip between five pictures with keys 1-5:
+
+1. **The photograph.**
+2. **Boost:** the print's own tone drawn neutral grey, and departures from it multiplied by the strength.
+3. **Stretch:** a decorrelation stretch of those departures.
+   - Two colour spaces: CIELAB (departures as they look) and density (as amounts of colourant, so a wash over the dark tones shows as strongly as over the light).
+   - Three emphases: balanced, red-green and yellow-blue.
+   - Three guards, on by default and each with a switch, so a plain stretch can be compared: the print's own tone is removed first; the statistics come from the unpainted print (or your boxes); no direction gains more than twice another.
+4. **Expected unpainted ×4:** the tool's assumption about this print, exaggerated. It should show the print's own tone and no forms.
+5. **Where colour departs:** drawn bright on a dimmed print (so colour-deficient viewers see it), from a threshold that measured noise can raise but the paint cannot.
+
+"The print's own tone" is a smooth curve of colour against lightness, fitted per print to votes of places with a high-breakdown fit, so local paint cannot become the reference.
+
+The other tabs:
+- **Look:** draw the print area, and box areas you have examined on the object and know are unpainted. Boxes are cross-checked, and a box that disagrees with the others is not used.
+- **Check:** the strip, a thin wash set into this capture's own noise at each tone, and what the pictures cannot show.
+- **Export:** the picture shown as a PNG with its words printed under it, or a batch run over a folder (no boxes are used in batch runs).
+
+Compare puts two pictures side by side, panned and zoomed together, or one at a time (F flips).
+
+Tests: `python -m pytest tests` (needs pytest and tifffile).
+
+## The batch tool (4.1)
+
+**Known limitation.** With the default `noise_floor` threshold, the threshold is set from the image's own chroma histogram, so it rises with the paint: the Segmented panel can miss large painted areas, and a blue wash over a warm print can lower chroma and disappear. The Chroma Boosted panel still shows them. The web app addresses this; see `TODO.md`.
 
 **Output**
 

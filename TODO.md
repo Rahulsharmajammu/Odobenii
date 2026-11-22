@@ -26,6 +26,9 @@ All of it comes from synthetic test images, so the real-capture gate below comes
 - [x] 4.1.5: a matrix/TRC profile is applied from its own tone curves, whatever its name. Before, Woodii's linear
       ProPhoto export was decoded with ProPhoto's gamma 1.8, about 24 ΔE wrong. Woodii's 32-bit float TIFFs are still
       not read; the error now says to save them as 16-bit.
+- [x] **The web app** (`python -m handpaint.app`), your request of 22 Nov, built like Woodii's: a first build of
+      steps 1 and 2 below, with the guarded decorrelation stretch in two colour spaces and three emphases. It is built
+      and tested on synthetic prints only (34 tests), and not yet tried on a real capture.
 - [x] The xpollinate review, and your answers and notes of 22 Nov (`xpollinate/rebuild/03-author-answers.md`).
 
 ## Decided
@@ -47,12 +50,14 @@ All of it comes from synthetic test images, so the real-capture gate below comes
   3. **(b)** moderate and strong paint, which the eye already sees.
 - **No boxes in batch runs.** In single view, after the boosted picture is shown, the user may box areas known to be
   unpainted.
+- **Single view is a local web app like Woodii's** (your request of 22 Nov), not a Tk window. It runs batches too; the
+  4.1 batch tool stays as it is.
 
 ## Still open
 
-Nothing. The gate's test captures are next.
+Nothing. The gate's test captures are next: run the web app on them.
 
-## The gate: test captures before any code
+## The gate: test captures, before anything more is built
 
 - [ ] One print known to be unpainted, of the Van Der Zee kind.
 - [ ] One print whose **faint washes** (and some moderate or strong paint) a conservator has marked under
@@ -80,54 +85,59 @@ Nothing. The gate's test captures are next.
 lights or profile change. If its departure picture shows colour, departure pictures from that setup are not to be
 trusted.
 
-## Build the visualiser, in this order (each step tried on the test captures before the next)
+## Build the visualiser (each step tried on the test captures before the next)
 
-1. [ ] **Batch, one photograph per print:**
-   - Load: through the embedded ICC profile to CIELAB (4.1.5's decoding); about 3,000 px long edge.
-   - Find the print and its paper border.
+The web app (`handpaint/`) is a first build of steps 1 and 2, made before the gate at your request. It is the
+instrument for the gate: what the gate rejects comes out.
+
+1. [ ] **Batch, one photograph per print.** Built, except where marked:
+   - Load: through the embedded ICC profile (4.1.5's decoding), held as linear ProPhoto RGB and CIELAB. Analysed at
+     3,000 px long edge; drawn from the full photograph when zoomed in.
+   - **Not built: finding the print and its paper border.** The user draws the print area instead.
    - Hatch what cannot be judged: clipped, near-white, near-black.
    - The reference, "this print unpainted":
-     - the print's own tone as a smooth curve in lightness;
-     - fitted to votes of places;
-     - a high-breakdown fit, so paint cannot take it over;
-     - a light term across the frame only if the setup check shows a gradient.
-   - **Main output: the boosted picture**, the print's own tone drawn neutral grey with departures exaggerated, beside
-     the original. Two boosts are compared at the gate:
-     - the plain ×4 boost;
-     - **an updated DStretch**, a decorrelation stretch with three guards:
-       - it stretches the departures, not the photograph. The print's own tone is removed first; otherwise the
-         stretch pushes hardest where the print varies least, and its toning and yellowed paper become the loudest
-         colour;
-       - its statistics come from the unpainted print, not from all pixels: the reference's inliers in batch, and the
-         user's boxes in single view (as DStretch's own selection works). Otherwise the amount of paint sets the
-         stretch, and a broad wash steers it;
-       - it is capped at about 2:1 between directions, so the quietest direction, mostly noise, is not blown up.
-   - **The updated DStretch in a few colour spaces** (your suggestion of 22 Nov). Once the print's tone is removed, a
-     colour space mostly decides which hue is pushed hardest:
-     - the batch writes one picture, balanced;
-     - single view adds two or three on keys (reds and pinks; yellows; blues and greens);
-     - the gate keeps a space only if it shows a marked faint wash that the balanced one misses.
+     - the print's own tone as a stiff smooth curve in lightness (a P-spline);
+     - fitted to votes of places (10 × 10 tiles, one vote per 2 L\* band);
+     - least trimmed squares, then Tukey biweight steps, so paint cannot take it over;
+     - **not built:** a light term across the frame, only if the setup check shows a gradient.
+   - **The boosted picture**, the print's own tone drawn neutral grey with departures exaggerated. Two candidates for
+     the gate:
+     - the plain boost (×4 by default);
+     - **the updated DStretch**, a decorrelation stretch of the departures with three guards. Each guard can be
+       switched off, so a plain stretch can be compared:
+       - the print's own tone is removed first. Otherwise its toning and yellowed paper are stretched with everything
+         else, and show as colour that follows the tones;
+       - its statistics come from the unpainted print (the reference's inliers, or the user's boxes, as DStretch's own
+         selection works), not from all pixels. Otherwise the amount of paint sets the stretch, and a broad wash
+         steers it;
+       - it is capped at 2:1 between directions, so the quietest direction, mostly noise, is not blown up.
+   - **The updated DStretch in a few colour spaces** (your suggestion of 22 Nov):
+     - two spaces: CIELAB (departures as they look) and density (as amounts of colourant). In density, a wash over the
+       dark tones shows as strongly as over the light, and so does noise there;
+     - three emphases: balanced, red-green and yellow-blue. An emphasis gives 2:1 along its axis, to both directions
+       alike, so noise gains no cast;
+     - the strength means the same in all of them: the guards and the emphasis only share it out between directions;
+     - the gate keeps a space or an emphasis only if it shows a marked faint wash that balanced CIELAB misses.
 
      No space separates a yellow wash from uneven yellowing of the paper: they are the same colour change.
    - **The departure picture**, "where colour departs from the print's own tone":
      - drawn bright on a dimmed print, so colour-deficient viewers see it too;
-     - a fixed threshold in ΔE, raised only by measured pixel noise and never by the paint;
-     - faded in from the threshold, with no hard edge.
-   - **A check sheet:**
-     - the expected-unpainted picture ×4, which should look like the print's own tone with no forms or washes in it;
-     - the strip showing how a thin wash looks in this capture at each tone;
-     - the words, including "Blank does not mean unpainted".
-   - Run the line-up check (pass criterion 5) as soon as the check sheet exists.
-2. [ ] **Single view:** a small Tk window (as in v1.2).
-   - Batch: folder in, folder out, Run, Cancel.
-   - Single view:
-     - it opens one print on the boosted picture;
-     - keys flip to the original, the expected-unpainted picture and the departure picture;
-     - the user may box unpainted areas (cross-checked against one another) and refit.
+     - T = max(T0, 3σ), with σ from shift-difference noise by tone plus an edge term. The edge term is fitted on the
+       places the reference holds as unpainted, so paint's own edges can still raise it;
+     - faded in from T to 2T. T0 is 2 ΔE for now, a developer setting for the gate.
+   - **The check sheet:** the expected-unpainted picture ×4 (hatched where the reference is guessing), the strip, and
+     the words.
+   - [ ] **Not built: the line-up check** (pass criterion 5). It needs the test captures.
+2. [x] **Single view**, as the web app rather than a Tk window:
+   - folders or files in, export of the picture shown, and batch runs;
+   - keys 1-5 flip between the photograph, the boost, the stretch, the expected-unpainted picture and the departure
+     picture; two pictures side by side, or flipped;
+   - the user may draw the print area, and box unpainted areas. Boxes are cross-checked: a box that disagrees with
+     most of the others at its tones is not used. The reference is then refitted.
 3. [ ] **Housekeeping:**
-   - one `.py` file plus tests, the version in git only;
+   - the version in git only;
    - remove `Chroma Diagnostic Tool v3.0`, which does not parse;
-   - rewrite the README around what the pictures cannot show, including the known weak point.
+   - rewrite the README around what the pictures cannot show, including the known weak point (begun for the web app).
 
 ## The Woodii module (after the visualiser's step 1 passes the gate)
 
@@ -194,6 +204,8 @@ When a broad wash covers most of a print at some tone, it can enter the tool's i
 areas at that tone then show in the opposite colour. The signature is colour complementary to paint you can see,
 following one band of tone.
 - **The remedy:** box unpainted areas at those tones in single view.
+- **On a synthetic bench** (a wash over 80 % of a sky), the stiff curve held without boxes, and boxes brought it closer
+  still. Real prints decide.
 - **The Woodii module may resist it** (above).
 - **Pass criterion 4 tests it.**
 
