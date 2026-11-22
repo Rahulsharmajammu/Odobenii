@@ -2,6 +2,22 @@
 Chroma Diagnostic Tool v4.1
 =================================
 
+A VISUALISER, NOT A MEASURING TOOL.  The images it writes show where colour
+stands out from a monochrome substrate; they are qualitative.  It reports no
+areas, counts or statistics, and its colour handling is only as careful as a
+legible picture needs.
+
+Changes in 4.1.2
+----------------
+- Everything that invited a quantitative reading is removed: area
+  percentages (montage footer, console, JSON, CSV), component counts,
+  feature statistics, the threshold-sensitivity (Jaccard) analysis, and the
+  numerical outputs (float / 16-bit feature TIFFs and the categorical mask).
+- Every picture is labelled "Visualisation only - not a measurement".
+- The batch CSV is now a plain run log (what was processed, and how).
+- Threshold histograms are off by default (--histograms): a diagnostic for
+  choosing a threshold, not a result.
+
 Fixes in 4.1.1
 --------------
 - Script parses again (placeholder INPUT_DIR/OUTPUT_DIR were invalid syntax).
@@ -23,8 +39,8 @@ Fixes in 4.1.1
   clipped; u16 sidecar scaling recorded and guarded against divide-by-zero.
 
 Refactored batch chroma analysis with corrected LRC interpolation,
-bit-depth preservation, vectorized spatial filtering, and FADGI-compliant
-color-space management.
+bit-depth preservation, vectorized spatial filtering, and colour-space-aware
+decoding.
 
 Key fixes from v4.0
 ---------------------
@@ -72,7 +88,7 @@ from PIL import Image, ImageCms, ImageDraw, ImageFont, ImageOps, TiffImagePlugin
 # CONFIG
 # -----------------------------------------------------------------------------
 
-VERSION = "4.1.1"
+VERSION = "4.1.2"
 
 # Defaults used when no paths are given on the command line.
 INPUT_DIR = r"/path/to/input"
@@ -90,8 +106,11 @@ Image.MAX_IMAGE_PIXELS = 100_000_000
 FOOTER_HEIGHT = 60
 MONTAGE_FOOTER_HEIGHT = 60
 
+# Printed on every picture this tool writes.
+VIS_LABEL = "Visualisation only - not a measurement"
+
 # -----------------------------------------------------------------------------
-# Colorimetric constants  (FADGI-compliant wide-gamut support)
+# Colour-space constants (sRGB, Adobe RGB and ProPhoto RGB sources)
 # -----------------------------------------------------------------------------
 
 # Bradford chromatic adaptation matrix  D50 -> D65
@@ -493,8 +512,8 @@ def assess_source(img_path: Path) -> dict:
     elif suffix == ".gif":
         info["compression_label"] = "GIF indexed/paletted"
         info["compression_warning"] = (
-            "GIF uses an indexed palette of up to 256 colors; colorimetric "
-            "fidelity may be lower than the original RGB source."
+            "GIF uses an indexed palette of up to 256 colors; faint colour "
+            "may be lost or banded."
         )
     elif suffix in (".tif", ".tiff"):
         try:
@@ -593,7 +612,6 @@ class VisualizerConfig:
     lrc_bin_width: float = 1.0
     lrc_smooth_window: int = 3
     lrc_iqr_floor: float = 1.0
-    lrc_sensitivity_scale: float = 0.5
     clahe_enabled: bool = True
     clahe_clip_limit: float = 3.0
     clahe_grid_size: Tuple[int, int] = (8, 8)
@@ -603,15 +621,9 @@ class VisualizerConfig:
     output_format: str = "png"
     quality: int = 95
     warn_on_low_fidelity: bool = True
-    run_sensitivity_analysis: bool = True
-    sensitivity_factors: Tuple[float, ...] = (
-        0.90, 0.95, 1.00, 1.05, 1.10
-    )
-    save_histograms: bool = True
-    save_numerical_tiff: bool = True
+    save_histograms: bool = False   # a threshold diagnostic; opt in with --histograms
     save_per_image_json: bool = True
     save_thumbnail_original: bool = True
-    save_16bit_tiff_sidecar: bool = True
     min_component_area_pixels: int = 100
     max_image_pixels: int = 100_000_000
     default_colorspace: str = "sRGB"
@@ -646,8 +658,6 @@ class VisualizerConfig:
             raise ValueError("output_format must be 'png' or 'jpg'")
         if self.clahe_clip_limit <= 0:
             raise ValueError("clahe_clip_limit must be > 0")
-        if any(f <= 0 for f in self.sensitivity_factors):
-            raise ValueError("All sensitivity factors must be > 0")
         if self.min_component_area_pixels < 0:
             raise ValueError("min_component_area_pixels must be >= 0")
         if self.lrc_bin_width <= 0:
@@ -656,8 +666,6 @@ class VisualizerConfig:
             raise ValueError("lrc_smooth_window must be >= 1")
         if self.lrc_iqr_floor <= 0:
             raise ValueError("lrc_iqr_floor must be > 0")
-        if self.lrc_sensitivity_scale <= 0:
-            raise ValueError("lrc_sensitivity_scale must be > 0")
         if self.presentation_alpha_sigma < 0:
             raise ValueError("presentation_alpha_sigma must be >= 0")
         if self.max_image_pixels < 1:
@@ -1044,62 +1052,6 @@ class ImageProcessor:
             threshold = 0.0
         return threshold
 
-    def _threshold_for_sensitivity(self, nominal: float, factor: float, space: str) -> float:
-        """Perturb the nominal threshold for the stability test."""
-        # LRC is roughly zero-centered -> additive perturbation
-        # Raw C*ab is positive-definite -> multiplicative perturbation
-        if space == "lrc":
-            delta = (factor - 1.0) * self.cfg.lrc_sensitivity_scale
-            return nominal + delta
-        # Same clamp as _compute_threshold, so factor 1.0 == nominal threshold.
-        return max(nominal * factor, 0.0)
-
-    @staticmethod
-    def _jaccard(a: np.ndarray, b: np.ndarray) -> float:
-        a = a.astype(bool)
-        b = b.astype(bool)
-        union = np.logical_or(a, b).sum()
-        if union == 0:
-            return 1.0
-        return float(np.logical_and(a, b).sum() / union)
-
-    def _sensitivity_metrics(self, feature: np.ndarray, space: str) -> dict:
-        factors = self.cfg.sensitivity_factors
-        nominal = self._compute_threshold(feature, space)
-        thresholds = [
-            self._threshold_for_sensitivity(nominal, float(f), space) for f in factors
-        ]
-
-        # Apply the same spatial filter as the reported mask, so the
-        # stability metric describes the mask that is actually output.
-        masks = [
-            self._apply_spatial_filter((feature > t).astype(np.uint8)).astype(bool)
-            for t in thresholds
-        ]
-        center_idx = min(
-            range(len(factors)),
-            key=lambda i: abs(factors[i] - 1.0)
-        )
-        center_mask = masks[center_idx]
-
-        jaccards = [self._jaccard(center_mask, mask) for mask in masks]
-        area_percentages = [float(mask.mean() * 100.0) for mask in masks]
-
-        return {
-            "factors": [float(x) for x in factors],
-            "thresholds": [float(x) for x in thresholds],
-            "chromatic_area_percent": area_percentages,
-            "jaccard_to_nominal": jaccards,
-            "nominal_index": center_idx,
-            "min_jaccard_to_nominal": float(min(jaccards)),
-            "nominal_mask_area_percent": float(center_mask.mean() * 100.0),
-            "sensitivity_interpretation": (
-                "Higher Jaccard indicates a more stable chroma mask "
-                "under small threshold perturbations. Low Jaccard on a "
-                "tiny nominal mask should be interpreted with caution."
-            ),
-        }
-
     def _apply_spatial_filter(self, binary: np.ndarray) -> np.ndarray:
         """
         Remove connected components smaller than min_component_area_pixels.
@@ -1121,6 +1073,8 @@ class ImageProcessor:
         return keep[labels]
 
     def _threshold_and_map(self, feature: np.ndarray, space: str) -> Tuple[float, np.ndarray, np.ndarray, dict]:
+        """Threshold, display alpha and mask for one feature.  The returned dict
+        holds the settings used (for the provenance record), no statistics."""
         threshold = self._compute_threshold(feature, space)
 
         binary = (feature > threshold).astype(np.uint8)
@@ -1163,31 +1117,13 @@ class ImageProcessor:
             strong = np.clip((feature - high) / high_ramp, 0, 1)
             alpha = np.maximum.reduce([faint, medium, strong]) * binary_filtered
 
-        total_pixels = feature.size
-        chromatic_pixels = int(binary_filtered.sum())
-        chromatic_area_percent = (chromatic_pixels / total_pixels) * 100.0 if total_pixels > 0 else 0.0
-
         metrics = {
             "chroma_space": space,
             "threshold_method": self.cfg.threshold_mode,
             "threshold": float(threshold),
             "mid_threshold": float(mid),
             "high_threshold": float(high),
-            "chromatic_area_percent": chromatic_area_percent,
-            "faint_area_percent": float(
-                ((binary_filtered > 0) & (feature <= mid)).mean() * 100
-            ),
-            "medium_area_percent": float(
-                ((binary_filtered > 0) & (feature > mid) & (feature <= high)).mean() * 100
-            ),
-            "high_area_percent": float(
-                ((binary_filtered > 0) & (feature > high)).mean() * 100
-            ),
-            "mean_feature": float(np.mean(feature)),
-            "median_feature": float(np.median(feature)),
-            "max_feature": float(np.max(feature)),
             "min_component_area_pixels": self.cfg.min_component_area_pixels,
-            "retained_pixels_after_spatial_filter": chromatic_pixels,
         }
 
         return threshold, alpha, binary_filtered, metrics
@@ -1203,7 +1139,7 @@ class ImageProcessor:
 
         # For the boost visual we need to go back to RGB.  Since OpenCV's
         # LAB2RGB assumes sRGB, we use a simplified sRGB path for the
-        # presentation image (the boost is illustrative, not metrological).
+        # presentation image (the boost is illustrative only).
         boosted = cv2.merge([l, a2, b2])
         return Image.fromarray(
             np.clip(cv2.cvtColor(boosted, cv2.COLOR_LAB2RGB) * 255.0, 0, 255)
@@ -1241,7 +1177,7 @@ class ImageProcessor:
 
         factor = self.cfg.chroma_boost_factor
         # For presentation, use OpenCV's LAB2RGB (sRGB assumption is acceptable
-        # for the visual overlay since it is not used for metrology).
+        # for a picture).
         boosted_lab = cv2.merge([l_enhanced, a * factor, b * factor])
         foreground = np.clip(
             cv2.cvtColor(boosted_lab, cv2.COLOR_LAB2RGB) * 255.0, 0, 255
@@ -1256,38 +1192,6 @@ class ImageProcessor:
         alpha3 = np.repeat(alpha_blurred[:, :, None], 3, axis=2)
         final = background * (1.0 - alpha3) + foreground * alpha3
         return Image.fromarray(np.clip(final, 0, 255).astype(np.uint8))
-
-    @staticmethod
-    def _categorical_mask(feature: np.ndarray, binary: np.ndarray, threshold: float, mid: float, high: float) -> np.ndarray:
-        mask = np.zeros(feature.shape, dtype=np.uint16)  # 16-bit to safely hold 0-3
-        mask[(binary > 0) & (feature <= mid)] = 1
-        mask[(binary > 0) & (feature > mid) & (feature <= high)] = 2
-        mask[(binary > 0) & (feature > high)] = 3
-        return mask
-
-    @staticmethod
-    def _component_statistics(mask: np.ndarray, minimum_area: int = 0) -> dict:
-        binary = (mask > 0).astype(np.uint8)
-        n_labels, labels, stats, _ = cv2.connectedComponentsWithStats(
-            binary, connectivity=8
-        )
-
-        areas = stats[1:, cv2.CC_STAT_AREA].astype(int)
-        if minimum_area > 0:
-            areas = areas[areas >= minimum_area]
-
-        if areas.size == 0:
-            return {
-                "component_count": 0,
-                "largest_component_pixels": 0,
-                "median_component_pixels": 0.0,
-            }
-
-        return {
-            "component_count": int(len(areas)),
-            "largest_component_pixels": int(areas.max()),
-            "median_component_pixels": float(np.median(areas)),
-        }
 
     def _save_histogram(
         self, feature: np.ndarray, threshold: float, mid: float, high: float, path: Path, space: str
@@ -1439,29 +1343,8 @@ class ImageProcessor:
             feature = lrc if space == "lrc" else chroma
 
             threshold, alpha, binary_filtered, metrics = self._threshold_and_map(feature, space)
-            metrics["mean_chroma"] = float(np.mean(chroma))
-            metrics["median_chroma"] = float(np.median(chroma))
-            metrics["max_chroma"] = float(np.max(chroma))
-
-            categorical = self._categorical_mask(
-                feature, binary_filtered, threshold, metrics["mid_threshold"], metrics["high_threshold"]
-            )
-            metrics["component_statistics"] = self._component_statistics(
-                categorical, self.cfg.min_component_area_pixels
-            )
-
-            if self.cfg.run_sensitivity_analysis:
-                sensitivity = self._sensitivity_metrics(feature, space)
-                metrics["sensitivity"] = sensitivity
-
             space_dir = img_dir / space
             space_dir.mkdir(exist_ok=True)
-
-            if self.cfg.save_numerical_tiff:
-                # FIX: save as 16-bit unsigned rather than 8-bit "L" mode
-                Image.fromarray(categorical.astype(np.uint16)).save(
-                    space_dir / f"{out_prefix}_mask.tif", compression="tiff_deflate"
-                )
 
             # Resize alpha to display resolution for visualization
             alpha_display = cv2.resize(
@@ -1474,21 +1357,15 @@ class ImageProcessor:
             fidelity_tag = f"[{source['compression_label']}]"
             space_label = "LRC" if space == "lrc" else "C*ab"
             threshold_label = f"{self.cfg.threshold_mode}({space_label}):{threshold:.2f}"
-            map_data = (
-                f"Thr:{threshold:.2f} Mid:{metrics['mid_threshold']:.2f} "
-                f"High:{metrics['high_threshold']:.2f} "
-                f"Area:{metrics['chromatic_area_percent']:.2f}%"
-            )
-
             chroma_saved = self._save_footer(
                 chroma_pil,
                 out_prefix,
-                f"Chroma Boost {self.cfg.chroma_boost_factor:g}x {fidelity_tag}",
+                f"Chroma Boost {self.cfg.chroma_boost_factor:g}x | {VIS_LABEL} {fidelity_tag}",
             )
             segmented_saved = self._save_footer(
                 segmented_pil,
                 out_prefix,
-                f"Segmented ({space_label}) | {map_data} {fidelity_tag}",
+                f"Segmented ({space_label}) | {VIS_LABEL} {fidelity_tag}",
             )
 
             suffix = "jpg" if self.cfg.output_format == "jpg" else "png"
@@ -1502,7 +1379,7 @@ class ImageProcessor:
                 chroma_pil,
                 segmented_pil,
                 out_prefix,
-                f"{threshold_label} | {map_data} {fidelity_tag}",
+                f"{threshold_label} | {VIS_LABEL} {fidelity_tag}",
             )
             montage.save(space_dir / f"{out_prefix}_montage.{suffix}", **save_kwargs)
 
@@ -1529,8 +1406,8 @@ class ImageProcessor:
                     "analysis_scale": self.cfg.analysis_scale,
                     "output_scale": self.cfg.output_scale,
                     "lab_method": (
-                        "Custom RGB->XYZ->LAB pipeline with Bradford adaptation; "
-                        "D65 CIELAB reference; color-space aware."
+                        "RGB->XYZ->LAB with Bradford adaptation, D65 reference; "
+                        "for display, not colorimetry."
                     ),
                     "chroma_definition": "sqrt(a*^2 + b*^2)",
                     "lrc_definition": (
@@ -1546,9 +1423,9 @@ class ImageProcessor:
                     "lrc_smooth_window": self.cfg.lrc_smooth_window,
                     "lrc_iqr_floor": self.cfg.lrc_iqr_floor,
                 },
-                "results": metrics,
+                "what": VIS_LABEL + ": the pictures are qualitative",
+                "thresholds": metrics,
                 "outputs": {
-                    "mask_tiff": str((space_dir / f"{out_prefix}_mask.tif").relative_to(self.cfg.output_dir)) if self.cfg.save_numerical_tiff else None,
                     "chroma_boost_image": str((space_dir / f"{out_prefix}_chroma_boost.{suffix}").relative_to(self.cfg.output_dir)),
                     "segmented_image": str((space_dir / f"{out_prefix}_segmented.{suffix}").relative_to(self.cfg.output_dir)),
                     "montage_image": str((space_dir / f"{out_prefix}_montage.{suffix}").relative_to(self.cfg.output_dir)),
@@ -1565,8 +1442,6 @@ class ImageProcessor:
 
             msg = (
                 f"Space={space_label} Mode={self.cfg.threshold_mode} Threshold={threshold:.2f} | "
-                f"Chroma={metrics['chromatic_area_percent']:.2f}% | "
-                f"Components={metrics['component_statistics']['component_count']} | "
                 f"{source['compression_label']}"
             )
             if source.get("compression_warning") and self.cfg.warn_on_low_fidelity:
@@ -1611,36 +1486,6 @@ class ImageProcessor:
 
             img_dir = self.cfg.output_dir / out_prefix
             img_dir.mkdir(exist_ok=True)
-
-            numerical_dir = img_dir / "numerical"
-            numerical_dir.mkdir(exist_ok=True)
-
-            # --- Numerical outputs (once) ---
-            if self.cfg.save_numerical_tiff:
-                Image.fromarray(chroma.astype(np.float32)).save(
-                    numerical_dir / f"{out_prefix}_chroma.tif", compression="tiff_deflate"
-                )
-                Image.fromarray(lrc.astype(np.float32)).save(
-                    numerical_dir / f"{out_prefix}_lrc.tif", compression="tiff_deflate"
-                )
-
-                if self.cfg.save_16bit_tiff_sidecar:
-                    # Per-image min-max scaling (for viewing only); the scale
-                    # is recorded in the JSON so values can be recovered.
-                    c_max = float(chroma.max())
-                    c16 = np.clip(chroma / max(c_max, 1e-9) * 65535, 0, 65535).astype(np.uint16)
-                    Image.fromarray(c16).save(
-                        numerical_dir / f"{out_prefix}_chroma_u16.tif"
-                    )
-                    l_min, l_max = float(lrc.min()), float(lrc.max())
-                    l16 = np.clip((lrc - l_min) / max(l_max - l_min, 1e-9) * 65535, 0, 65535).astype(np.uint16)
-                    working_meta["u16_sidecar_scaling"] = {
-                        "chroma": {"value_at_0": 0.0, "value_at_65535": c_max},
-                        "lrc": {"value_at_0": l_min, "value_at_65535": l_max},
-                    }
-                    Image.fromarray(l16).save(
-                        numerical_dir / f"{out_prefix}_lrc_u16.tif"
-                    )
 
             # --- Presentation images (once) ---
             # Render the analysed LAB to sRGB for display so that Adobe RGB /
@@ -1770,6 +1615,7 @@ def _write_manifest(config: VisualizerConfig) -> Path:
 
     manifest = {
         "software_version": VERSION,
+        "what": VIS_LABEL + ": the pictures are qualitative",
         "run_timestamp_utc": datetime.now(timezone.utc).isoformat(),
         "python_version": sys.version,
         "platform": platform.platform(),
@@ -1790,17 +1636,14 @@ def _write_manifest(config: VisualizerConfig) -> Path:
             "lrc_bin_width": config.lrc_bin_width,
             "lrc_smooth_window": config.lrc_smooth_window,
             "lrc_iqr_floor": config.lrc_iqr_floor,
-            "lrc_sensitivity_scale": config.lrc_sensitivity_scale,
             "clahe_enabled": config.clahe_enabled,
             "clahe_clip_limit": config.clahe_clip_limit,
             "clahe_grid_size": list(config.clahe_grid_size),
             "presentation_alpha_sigma": config.presentation_alpha_sigma,
             "output_format": config.output_format,
             "output_quality": config.quality,
-            "sensitivity_factors": list(config.sensitivity_factors),
             "min_component_area_pixels": config.min_component_area_pixels,
             "save_thumbnail_original": config.save_thumbnail_original,
-            "save_16bit_tiff_sidecar": config.save_16bit_tiff_sidecar,
             "max_image_pixels": config.max_image_pixels,
             "default_colorspace": config.default_colorspace,
         },
@@ -1815,7 +1658,7 @@ def _write_manifest(config: VisualizerConfig) -> Path:
 def _write_summary(config: VisualizerConfig, records: list[dict]) -> Path:
     summary_dir = config.output_dir / "summary"
     summary_dir.mkdir(exist_ok=True)
-    path = summary_dir / "batch_summary.csv"
+    path = summary_dir / "run_log.csv"   # what was processed and how; no statistics
 
     fields = [
         "path_relative",
@@ -1829,20 +1672,6 @@ def _write_summary(config: VisualizerConfig, records: list[dict]) -> Path:
         "threshold",
         "mid_threshold",
         "high_threshold",
-        "chromatic_area_percent",
-        "faint_area_percent",
-        "medium_area_percent",
-        "high_area_percent",
-        "mean_feature",
-        "median_feature",
-        "max_feature",
-        "mean_chroma",
-        "median_chroma",
-        "max_chroma",
-        "component_count",
-        "largest_component_pixels",
-        "median_component_pixels",
-        "min_jaccard_to_nominal",
     ]
 
     with open(path, "w", newline="", encoding="utf-8") as f:
@@ -1854,23 +1683,14 @@ def _write_summary(config: VisualizerConfig, records: list[dict]) -> Path:
                 continue
             row = {
                 "path_relative": record["source"]["path_relative"],
-                "chroma_space": record["results"]["chroma_space"],
+                "chroma_space": record["thresholds"]["chroma_space"],
                 "compression_label": record["source"]["compression_label"],
                 "source_bit_depth": record["source"]["source_bit_depth"],
                 "source_dimensions": record["source"]["source_dimensions"],
                 "analysis_dimensions": record["source"]["analysis_dimensions"],
                 "detected_colorspace": record["source"].get("detected_colorspace", ""),
-                **record["results"],
+                **record["thresholds"],
             }
-            component = row.pop("component_statistics", {})
-            row.update(component)
-
-            sensitivity = row.pop("sensitivity", {})
-            row["min_jaccard_to_nominal"] = sensitivity.get(
-                "min_jaccard_to_nominal", ""
-            )
-            row.pop("lrc_binning", None)
-
             writer.writerow({key: row.get(key, "") for key in fields})
 
     return path
@@ -1948,7 +1768,7 @@ def run_batch(config: VisualizerConfig) -> list[tuple[bool, str]]:
 
 def _build_parser() -> argparse.ArgumentParser:
     p = argparse.ArgumentParser(
-        description="Chroma Diagnostic Tool v4.1 chroma analysis"
+        description="Chroma Diagnostic Tool v4.1: a visualiser of colour on monochrome photographs (qualitative; not a measuring tool)"
     )
     # nargs='?' makes positionals optional; omitted args fall back to the
     # hardcoded constants above.
@@ -1982,7 +1802,6 @@ def _build_parser() -> argparse.ArgumentParser:
     p.add_argument("--lrc-bin-width", type=float, default=1.0)
     p.add_argument("--lrc-smooth-window", type=int, default=3)
     p.add_argument("--lrc-iqr-floor", type=float, default=1.0)
-    p.add_argument("--lrc-sensitivity-scale", type=float, default=0.5)
     p.add_argument("--chroma-boost", type=float, default=3.0)
     p.add_argument("--clahe", action=argparse.BooleanOptionalAction, default=True)
     p.add_argument("--clahe-clip", type=float, default=3.0)
@@ -1999,12 +1818,13 @@ def _build_parser() -> argparse.ArgumentParser:
         help="Colour space assumed for images with no ICC profile / EXIF tag "
              "(default: sRGB)",
     )
-    p.add_argument("--no-sensitivity", action="store_true")
-    p.add_argument("--no-histograms", action="store_true")
-    p.add_argument("--no-numerical-tiff", action="store_true")
+    p.add_argument(
+        "--histograms", action="store_true",
+        help="Also save a histogram of each feature with its thresholds: a "
+             "diagnostic for choosing a threshold, not a result",
+    )
     p.add_argument("--no-json", action="store_true")
     p.add_argument("--no-thumbnail", action="store_true")
-    p.add_argument("--no-16bit-sidecar", action="store_true")
     return p
 
 
@@ -2035,25 +1855,22 @@ def main():
         lrc_bin_width=args.lrc_bin_width,
         lrc_smooth_window=args.lrc_smooth_window,
         lrc_iqr_floor=args.lrc_iqr_floor,
-        lrc_sensitivity_scale=args.lrc_sensitivity_scale,
         clahe_enabled=args.clahe,
         clahe_clip_limit=args.clahe_clip,
         presentation_alpha_sigma=args.alpha_sigma,
         max_workers=args.max_workers,
         output_format=args.format,
         quality=args.quality,
-        run_sensitivity_analysis=not args.no_sensitivity,
-        save_histograms=not args.no_histograms,
-        save_numerical_tiff=not args.no_numerical_tiff,
+        save_histograms=args.histograms,
         save_per_image_json=not args.no_json,
         save_thumbnail_original=not args.no_thumbnail,
-        save_16bit_tiff_sidecar=not args.no_16bit_sidecar,
         min_component_area_pixels=args.min_component_area,
         max_image_pixels=args.max_image_pixels,
         default_colorspace=args.default_colorspace,
     )
 
     print(f"Chroma Diagnostic Tool v{VERSION}")
+    print(f"{VIS_LABEL}.")
     print(f"Input:  {config.input_dir}")
     print(f"Output: {config.output_dir}")
     print("Both raw C*ab and LRC spaces will be computed for every image.")

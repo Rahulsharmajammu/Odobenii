@@ -1,6 +1,8 @@
 # handpaint_visualiser
 A quick tool to visualise colour applied to monochrome photographs, initially developed for the Van Der Zee applied media project at The Metropolitan Museum of Art
 
+**A visualiser, not a measuring tool.** Its pictures show where colour stands out from a monochrome substrate. They are qualitative: the tool reports no areas, counts or statistics, and its colour handling is only as careful as a legible picture needs.
+
 The program, as is, utilizes statistical color analysis to separate faint pigments, washes, and residues from substrates (paper, parchment, canvas).
 Unlike standard saturation sliders, this tool algorithmically calculates the "Noise Floor" of the substrate to isolate legitimate color signals, creating high-contrast visualizations that reveal details invisible to the naked eye.
 
@@ -40,13 +42,15 @@ Useful options (`--help` for all):
 - `--output-scale` (default 0.5): size of the presentation images. Analysis always runs at full resolution unless `--analysis-scale` is set.
 - `--max-workers N`: lower this for very large images; each worker needs several GB for a 100-megapixel file.
 
-Each image produces analyses in two feature spaces, raw C\*ab and lightness-relative chroma (LRC), plus float TIFFs of the feature maps, a categorical mask, a JSON provenance record, and a batch CSV summary.
+- `--histograms`: also save a histogram of each feature with its thresholds, as a diagnostic for choosing a threshold.
+
+Each image produces pictures in two feature spaces, raw C\*ab and lightness-relative chroma (LRC), plus a JSON provenance record (source, hash, settings). The batch writes a run log (`summary/run_log.csv`) of what was processed and how. Every picture is labelled "Visualisation only - not a measurement".
 
 **How It Works** 
-The processing pipeline follows a strict mathematical approach to ensure scientific integrity:
+The processing pipeline:
 
 1. Pre-processing & Normalization
-Images are decoded in their source colour space (sRGB, Adobe RGB or ProPhoto RGB, with Bradford adaptation for ProPhoto) and converted to CIELAB (D65). The Euclidean distance from neutral gray (128, 128) is calculated for every pixel to determine Chroma (Color Intensity).
+Images are decoded in their source colour space (sRGB, Adobe RGB or ProPhoto RGB, with Bradford adaptation for ProPhoto) and converted to CIELAB (D65). Chroma (colour intensity) is each pixel's distance from neutral in the a\*b\* plane.
 
 2. Statistical Thresholding
 The tool generates a histogram of the image's chroma values. It identifies the "Noise Mountain" (the statistical peak representing the paper/substrate) and finds the exact point where the noise variance drops off (the 1% cutoff). This value becomes the Noise Floor.
