@@ -1,0 +1,44 @@
+{
+ "N1_neutral_even|mine_E4_auto": {
+  "FC": 0.017569203139030962,
+  "FCbord": 0.0,
+  "FCglare": null
+ },
+ "N2_split_even|mine_E4_auto": {
+  "FC": 0.0038736914545863606,
+  "FCbord": 0.0,
+  "FCglare": null
+ },
+ "N3_split_mixed|mine_E4_auto": {
+  "FC": 0.005080908765405006,
+  "FCbord": 0.0,
+  "FCglare": 0.07551774632173489
+ },
+ "P1_touches|mine_E4_auto": {
+  "FC": 0.005266536687431642,
+  "FCbord": 0.0,
+  "FCglare": 0.0,
+  "DET:touch": 1.0,
+  "DET:wash": 0.9046711153479504,
+  "DET:lowchroma": 0.1382443747953408,
+  "AUC": 0.8854607161111112
+ },
+ "P2_backdrop|mine_E4_auto": {
+  "FC": 0.003812772312628345,
+  "FCbord": 0.0,
+  "FCglare": 0.11504394397143641,
+  "DET:large": 1.4431680424868672e-05,
+  "DET:wash": 0.7974111571651831,
+  "DET:touch": 1.0,
+  "AUC": 0.5920988152777777
+ },
+ "P3_full|mine_E4_auto": {
+  "FC": 0.018129050212698287,
+  "FCbord": 0.0,
+  "FCglare": 0.14184567795153807,
+  "DET:large": 0.10587889742431089,
+  "DET:wash": 0.40192149609535555,
+  "DET:touch": 1.0,
+  "AUC": 0.5519836445833334
+ }
+}

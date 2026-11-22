@@ -1,0 +1,9 @@
+S1_benign            gated margin  found 9/9 FP   9.4% 30s | margin used (held-out side off by 0.003) | garmen:0.88 rocket:0.61
+S2_tone_shift        gated margin  found 9/9 FP  24.3% 20s | margin used (held-out side off by 0.006) | garmen:0.84 rocket:0.64
+S3_mixed_light       gated margin  found 8/9 FP   8.5% 21s | margin used (held-out side off by 0.002) | garmen:0.85 rocket:0.44
+S4_sheen             gated margin  found 9/9 FP   6.2% 11s | margin refused (held-out side off by 0.042) | garmen:0.85 rocket:0.72
+S5_extensive         gated margin  found 13/13 FP  23.0% 21s | margin used (held-out side off by 0.013) | garmen:0.88 rocket:0.59 sky:0.98 hair:0.86
+S6_unpainted_unruly  gated margin  found 0/0 FP  19.4% 27s | margin used (held-out side off by 0.016) | 
+S7_extensive_unruly  gated margin  found 13/13 FP  24.1% 27s | margin refused (held-out side off by 0.037) | garmen:0.75 rocket:0.72 sky:0.87 hair:0.84
+S8_basic_unruly      gated margin  found 9/9 FP  32.6% 25s | margin used (held-out side off by 0.013) | garmen:0.81 rocket:0.80
+DONE

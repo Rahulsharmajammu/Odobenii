@@ -1,6 +1,8 @@
 numpy>=1.23
 opencv-python-headless>=4.7
 Pillow>=10.0
+flask>=3.0            # the web app (python -m handpaint.app)
 # optional
-matplotlib>=3.6      # threshold histograms
+matplotlib>=3.6      # the batch tool's threshold histograms
 # pillow-heif        # HEIC/HEIF input
+# for the tests: pytest, tifffile

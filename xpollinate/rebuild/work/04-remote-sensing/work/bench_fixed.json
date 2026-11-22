@@ -1,0 +1,212 @@
+{
+ "N1_neutral_even": {
+  "M7F fixed auto": {
+   "FC": 0.04686812686266089,
+   "FCbord": 0.012896574938988471,
+   "FCglare": null,
+   "note": "proposal, fixed departure 0.04 with 3.0 noise sd floor",
+   "secs": 20.4
+  },
+  "M7F fixed + margin": {
+   "FC": 0.0,
+   "FCbord": 0.0,
+   "FCglare": null,
+   "note": "proposal, fixed departure 0.04 with 3.0 noise sd floor",
+   "secs": 27.8
+  },
+  "M7F fixed + margin + box": {
+   "FC": 0.0645778836268041,
+   "FCbord": 0.011045190608432214,
+   "FCglare": null,
+   "note": "proposal, fixed departure 0.04 with 3.0 noise sd floor",
+   "secs": 36.2
+  }
+ },
+ "N2_split_even": {
+  "M7F fixed auto": {
+   "FC": 0.03500483053427032,
+   "FCbord": 0.002003137188400882,
+   "FCglare": null,
+   "note": "proposal, fixed departure 0.04 with 3.0 noise sd floor",
+   "secs": 29.6
+  },
+  "M7F fixed + margin": {
+   "FC": 0.05195272693585315,
+   "FCbord": 0.01714325080549432,
+   "FCglare": null,
+   "note": "proposal, fixed departure 0.04 with 3.0 noise sd floor",
+   "secs": 29.9
+  },
+  "M7F fixed + margin + box": {
+   "FC": 0.05417344926615582,
+   "FCbord": 0.002050830930981855,
+   "FCglare": null,
+   "note": "proposal, fixed departure 0.04 with 3.0 noise sd floor",
+   "secs": 27.9
+  }
+ },
+ "N3_split_mixed": {
+  "M7F fixed auto": {
+   "FC": 0.051089756176440015,
+   "FCbord": 0.03657535975763696,
+   "FCglare": 0.24327104107105502,
+   "note": "proposal, fixed departure 0.04 with 3.0 noise sd floor",
+   "secs": 26.7
+  },
+  "M7F fixed + margin": {
+   "FC": 0.03436976634056758,
+   "FCbord": 0.051160270975342925,
+   "FCglare": 0.2299700160379332,
+   "note": "proposal, fixed departure 0.04 with 3.0 noise sd floor",
+   "secs": 40.2
+  },
+  "M7F fixed + margin + box": {
+   "FC": 0.05310641148546414,
+   "FCbord": 0.07214087351678869,
+   "FCglare": 0.3496966738721149,
+   "note": "proposal, fixed departure 0.04 with 3.0 noise sd floor",
+   "secs": 33.0
+  }
+ },
+ "P1_touches": {
+  "M7F fixed auto": {
+   "FC": 0.05904148239732433,
+   "FCbord": 0.054247664731128506,
+   "FCglare": 0.035460701826390315,
+   "DET:touch": 1.0,
+   "DET:wash": 0.9628217349857007,
+   "DET:lowchroma": 0.47480937456144456,
+   "AUC": 0.8316107648611111,
+   "AUC_R": 0.7139076133333333,
+   "R99:touch": 0.9796660229467227,
+   "R99:wash": 0.00667302192564347,
+   "R99:lowchroma": 0.016758665855826357,
+   "note": "proposal, fixed departure 0.04 with 3.0 noise sd floor",
+   "secs": 26.3
+  },
+  "M7F fixed + margin": {
+   "FC": 0.04094477995994949,
+   "FCbord": 0.02884372633173441,
+   "FCglare": 0.028975990149805047,
+   "DET:touch": 1.0,
+   "DET:wash": 0.9623450905624404,
+   "DET:lowchroma": 0.5442531692941012,
+   "AUC": 0.8733756584722222,
+   "AUC_R": 0.7576511761111111,
+   "R99:touch": 0.9840963307963194,
+   "R99:wash": 0.005719733079122974,
+   "R99:lowchroma": 0.02609112597651682,
+   "note": "proposal, fixed departure 0.04 with 3.0 noise sd floor",
+   "secs": 36.4
+  },
+  "M7F fixed + margin + box": {
+   "FC": 0.04198699150908005,
+   "FCbord": 0.024520323150719517,
+   "FCglare": 0.02959162733429099,
+   "DET:touch": 1.0,
+   "DET:wash": 0.9518589132507149,
+   "DET:lowchroma": 0.540627777517893,
+   "AUC": 0.8798487304166666,
+   "AUC_R": 0.7632605747222222,
+   "R99:touch": 0.9814267863228445,
+   "R99:wash": 0.004766444232602479,
+   "R99:lowchroma": 0.028991439397483276,
+   "note": "proposal, fixed departure 0.04 with 3.0 noise sd floor",
+   "secs": 40.2
+  }
+ },
+ "P2_backdrop": {
+  "M7F fixed auto": {
+   "FC": 0.09047503029651029,
+   "FCbord": 0.08010392998401077,
+   "FCglare": 0.4780966767371601,
+   "DET:large": 0.38082318305143453,
+   "DET:wash": 0.9441801997689746,
+   "DET:touch": 1.0,
+   "AUC": 0.8054592134722223,
+   "AUC_R": 0.46840225055555557,
+   "R99:large": 0.0,
+   "R99:wash": 0.08157233131752395,
+   "R99:touch": 1.0,
+   "note": "proposal, fixed departure 0.04 with 3.0 noise sd floor",
+   "secs": 26.8
+  },
+  "M7F fixed + margin": {
+   "FC": 0.09694725084877691,
+   "FCbord": 0.031615543212993355,
+   "FCglare": 0.4834523482559736,
+   "DET:large": 0.6165069560699648,
+   "DET:wash": 0.9319494462186587,
+   "DET:touch": 1.0,
+   "AUC": 0.9155731719444445,
+   "AUC_R": 0.5557118508333333,
+   "R99:large": 0.0,
+   "R99:wash": 0.07939797513080112,
+   "R99:touch": 1.0,
+   "note": "proposal, fixed departure 0.04 with 3.0 noise sd floor",
+   "secs": 37.7
+  },
+  "M7F fixed + margin + box": {
+   "FC": 0.07913005508744063,
+   "FCbord": 0.06694963393082555,
+   "FCglare": 0.4864391650645427,
+   "DET:large": 0.8409340183570975,
+   "DET:wash": 0.962424407148196,
+   "DET:touch": 1.0,
+   "AUC": 0.9628330538888888,
+   "AUC_R": 0.6428013552777778,
+   "R99:large": 0.0,
+   "R99:wash": 0.08075694774750289,
+   "R99:touch": 1.0,
+   "note": "proposal, fixed departure 0.04 with 3.0 noise sd floor",
+   "secs": 35.4
+  }
+ },
+ "P3_full": {
+  "M7F fixed auto": {
+   "FC": 0.1874925456208007,
+   "FCbord": 0.6150435496086847,
+   "FCglare": 0.5270321361058601,
+   "DET:large": 0.31664482602801625,
+   "DET:wash": 0.4450010275380189,
+   "DET:touch": 1.0,
+   "AUC": 0.6344852640277777,
+   "AUC_R": 0.5808133461111111,
+   "R99:large": 0.032742882964301855,
+   "R99:wash": 0.048191533086724206,
+   "R99:touch": 0.9750085198227877,
+   "note": "proposal, fixed departure 0.04 with 3.0 noise sd floor",
+   "secs": 25.6
+  },
+  "M7F fixed + margin": {
+   "FC": 0.19199830371459997,
+   "FCbord": 0.041161743667424054,
+   "FCglare": 0.504725897920605,
+   "DET:large": 0.3966787166741979,
+   "DET:wash": 0.4723592272914098,
+   "DET:touch": 1.0,
+   "AUC": 0.6823404241666666,
+   "AUC_R": 0.634894586111111,
+   "R99:large": 0.0337211929507456,
+   "R99:wash": 0.0489878750513769,
+   "R99:touch": 0.9967056685220947,
+   "note": "proposal, fixed departure 0.04 with 3.0 noise sd floor",
+   "secs": 33.4
+  },
+  "M7F fixed + margin + box": {
+   "FC": 0.19199830371459997,
+   "FCbord": 0.041161743667424054,
+   "FCglare": 0.504725897920605,
+   "DET:large": 0.3966787166741979,
+   "DET:wash": 0.4723592272914098,
+   "DET:touch": 1.0,
+   "AUC": 0.6831880102777779,
+   "AUC_R": 0.6349862219444444,
+   "R99:large": 0.0337211929507456,
+   "R99:wash": 0.0489878750513769,
+   "R99:touch": 0.9967056685220947,
+   "note": "proposal, fixed departure 0.04 with 3.0 noise sd floor",
+   "secs": 41.0
+  }
+ }
+}

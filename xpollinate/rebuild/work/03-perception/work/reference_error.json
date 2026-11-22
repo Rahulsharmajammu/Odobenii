@@ -1,0 +1,62 @@
+{
+ "phone": {
+  "final (CIELAB)": {
+   "margin": 0.6817952394485474,
+   "light": 1.1867313385009766,
+   "mid": 0.5873922109603882,
+   "dark": 0.8383976817131042,
+   "under cheeks": 1.0953216552734375,
+   "under lips": 4.531857490539551,
+   "under backdrop": 0.9308087229728699,
+   "under flag canton": 1.8743337392807007,
+   "under flag stripes": 1.4649289846420288,
+   "under mission patch": 2.035215377807617,
+   "under small gold touches": 2.6876578330993652
+  }
+ },
+ "phone_mixed": {
+  "final (CIELAB)": {
+   "margin": 1.5765607357025146,
+   "light": 1.2827203273773193,
+   "mid": 1.3598471879959106,
+   "dark": 1.1089292764663696,
+   "under cheeks": 1.1274785995483398,
+   "under lips": 3.68375563621521,
+   "under backdrop": 0.7976046204566956,
+   "under flag canton": 1.9168739318847656,
+   "under flag stripes": 2.1269867420196533,
+   "under mission patch": 2.1384472846984863,
+   "under small gold touches": 1.846272587776184
+  }
+ },
+ "toned": {
+  "final (CIELAB)": {
+   "margin": 1.0384691953659058,
+   "light": 1.0904467105865479,
+   "mid": 1.4640742540359497,
+   "dark": 1.6638730764389038,
+   "under cheeks": 1.2706488370895386,
+   "under lips": 5.421928882598877,
+   "under backdrop": 0.8352302312850952,
+   "under flag canton": 2.6192893981933594,
+   "under flag stripes": 3.089679718017578,
+   "under mission patch": 3.937769889831543,
+   "under small gold touches": 4.637636661529541
+  }
+ },
+ "majority": {
+  "final (CIELAB)": {
+   "margin": 2.8904764652252197,
+   "light": 7.689304828643799,
+   "mid": 2.3293850421905518,
+   "dark": 0.7820570468902588,
+   "under cheeks": 5.939664363861084,
+   "under lips": 3.5602571964263916,
+   "under backdrop": 5.4850754737854,
+   "under flag canton": 2.139786958694458,
+   "under flag stripes": 1.963956594467163,
+   "under mission patch": 2.0865092277526855,
+   "under small gold touches": 2.6251845359802246
+  }
+ }
+}

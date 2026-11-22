@@ -1,0 +1,3853 @@
+{
+ "U0_neutral_clean": {
+  "v41_raw": {
+   "shown>=0.2": {
+    "clean": 0.0,
+    "edges": 0.0
+   },
+   "shown>=0.5": {
+    "clean": 0.0,
+    "edges": 0.0
+   }
+  },
+  "v41_lrc": {
+   "shown>=0.2": {
+    "clean": 0.25433795367126794,
+    "edges": 0.3114746369979257
+   },
+   "shown>=0.5": {
+    "clean": 0.01751020875316277,
+    "edges": 0.022754415739518512
+   }
+  },
+  "todo": {
+   "shown>=0.2": {
+    "clean": 0.2098670307345806,
+    "edges": 0.27597586271921554
+   },
+   "shown>=0.5": {
+    "clean": 0.1002951239152561,
+    "edges": 0.08633477905588031
+   }
+  },
+  "todo_plane": {
+   "shown>=0.2": {
+    "clean": 0.20977403808815295,
+    "edges": 0.27595229115594944
+   },
+   "shown>=0.5": {
+    "clean": 0.1003400873926497,
+    "edges": 0.08658620906405179
+   }
+  },
+  "first_try_auto": {
+   "shown>=0.2": {
+    "clean": 0.21460556811353687,
+    "edges": 0.26060327487585644
+   },
+   "shown>=0.5": {
+    "clean": 0.14267013566707407,
+    "edges": 0.16304843170532404
+   }
+  },
+  "prop_auto": {
+   "shown>=0.2": {
+    "clean": 0.06753820873681242,
+    "edges": 0.06871110692061097
+   },
+   "shown>=0.5": {
+    "clean": 0.042046982746287445,
+    "edges": 0.0405784461625495
+   }
+  },
+  "prop_auto_high": {
+   "shown>=0.2": {
+    "clean": 0.09907089105349427,
+    "edges": 0.10609167766672953
+   },
+   "shown>=0.5": {
+    "clean": 0.06905981368770003,
+    "edges": 0.07075004714312653
+   }
+  },
+  "prop_auto_fine_only": {
+   "shown>=0.2": {
+    "clean": 0.026345532061003176,
+    "edges": 0.020546545980262745
+   },
+   "shown>=0.5": {
+    "clean": 0.019318966821041273,
+    "edges": 0.016111163492362815
+   }
+  },
+  "prop_auto_no_plane": {
+   "shown>=0.2": {
+    "clean": 0.06753820873681242,
+    "edges": 0.06866789238795651
+   },
+   "shown>=0.5": {
+    "clean": 0.04206742069055726,
+    "edges": 0.0405784461625495
+   }
+  },
+  "prop_auto_no_edge_term": {
+   "shown>=0.2": {
+    "clean": 0.06762609189717261,
+    "edges": 0.06960289773084417
+   },
+   "shown>=0.5": {
+    "clean": 0.0421287345233667,
+    "edges": 0.041148092274812996
+   }
+  },
+  "prop_picks": {
+   "shown>=0.2": {
+    "clean": 0.05409515089334255,
+    "edges": 0.04751634295053114
+   },
+   "shown>=0.5": {
+    "clean": 0.031088157028813415,
+    "edges": 0.02658479477025583
+   }
+  },
+  "prop_badpick": {
+   "shown>=0.2": {
+    "clean": 0.060288869904309546,
+    "edges": 0.051916368093531964
+   },
+   "shown>=0.5": {
+    "clean": 0.036675890992180445,
+    "edges": 0.029582311898925136
+   }
+  },
+  "warnings": {
+   "prop_auto": [],
+   "prop_picks": [],
+   "prop_badpick": []
+  },
+  "seconds": 65.0
+ },
+ "U1_warm": {
+  "v41_raw": {
+   "shown>=0.2": {
+    "clean": 0.0,
+    "edges": 0.0
+   },
+   "shown>=0.5": {
+    "clean": 0.0,
+    "edges": 0.0
+   }
+  },
+  "v41_lrc": {
+   "shown>=0.2": {
+    "clean": 0.0006226170597074359,
+    "edges": 0.00031667261262922447
+   },
+   "shown>=0.5": {
+    "clean": 5.170141661881535e-05,
+    "edges": 8.818730984611315e-05
+   }
+  },
+  "todo": {
+   "shown>=0.2": {
+    "clean": 0.11139785230115305,
+    "edges": 0.3086235163487247
+   },
+   "shown>=0.5": {
+    "clean": 0.0886624293505642,
+    "edges": 0.22260481262200915
+   }
+  },
+  "todo_plane": {
+   "shown>=0.2": {
+    "clean": 0.11121524729777596,
+    "edges": 0.3099623600527521
+   },
+   "shown>=0.5": {
+    "clean": 0.0906952850508104,
+    "edges": 0.2242242523119105
+   }
+  },
+  "first_try_auto": {
+   "shown>=0.2": {
+    "clean": 0.06662772559968143,
+    "edges": 0.06770781139139533
+   },
+   "shown>=0.5": {
+    "clean": 0.023647347937333484,
+    "edges": 0.02666062717211357
+   }
+  },
+  "prop_auto": {
+   "shown>=0.2": {
+    "clean": 0.023882754387470218,
+    "edges": 0.017837887673418342
+   },
+   "shown>=0.5": {
+    "clean": 0.006831187174528582,
+    "edges": 0.005315289675270274
+   }
+  },
+  "prop_auto_high": {
+   "shown>=0.2": {
+    "clean": 0.10974340696935096,
+    "edges": 0.04969354909828476
+   },
+   "shown>=0.5": {
+    "clean": 0.02575500568715583,
+    "edges": 0.018856050250732555
+   }
+  },
+  "prop_auto_fine_only": {
+   "shown>=0.2": {
+    "clean": 0.014024284265388872,
+    "edges": 0.011564563132092564
+   },
+   "shown>=0.5": {
+    "clean": 0.005812559264123837,
+    "edges": 0.004220965330361688
+   }
+  },
+  "prop_auto_no_plane": {
+   "shown>=0.2": {
+    "clean": 0.020929173459352787,
+    "edges": 0.012254027554525813
+   },
+   "shown>=0.5": {
+    "clean": 0.00549025043286186,
+    "edges": 0.0029783259643482757
+   }
+  },
+  "prop_auto_no_edge_term": {
+   "shown>=0.2": {
+    "clean": 0.02846437992400992,
+    "edges": 0.08696070453643538
+   },
+   "shown>=0.5": {
+    "clean": 0.010212679827427271,
+    "edges": 0.04786165816193595
+   }
+  },
+  "prop_picks": {
+   "shown>=0.2": {
+    "clean": 0.09629663852789566,
+    "edges": 0.05185413818951453
+   },
+   "shown>=0.5": {
+    "clean": 0.038816763579322074,
+    "edges": 0.02613952034120472
+   }
+  },
+  "prop_badpick": {
+   "shown>=0.2": {
+    "clean": 0.024156661892535857,
+    "edges": 0.01509205552593709
+   },
+   "shown>=0.5": {
+    "clean": 0.005172341722163187,
+    "edges": 0.0031025899009496168
+   }
+  },
+  "warnings": {
+   "prop_auto": [
+    "At some tones the commonest colour was overruled as not the print's own (marked on the tone strip): a large area of one colour at those tones?"
+   ],
+   "prop_picks": [
+    "At some tones the commonest colour was overruled as not the print's own (marked on the tone strip): a large area of one colour at those tones?"
+   ],
+   "prop_badpick": [
+    "At some tones the commonest colour was overruled as not the print's own (marked on the tone strip): a large area of one colour at those tones?"
+   ]
+  },
+  "seconds": 96.6
+ },
+ "U2_warm_aged": {
+  "v41_raw": {
+   "shown>=0.2": {
+    "clean": 0.0,
+    "edges": 0.0,
+    "foxing": 0.18355614973262033,
+    "adhesive": 0.08232987958555027,
+    "mirroring": 0.0,
+    "yellowing_edge": 0.0003249107350506861
+   },
+   "shown>=0.5": {
+    "clean": 0.0,
+    "edges": 0.0,
+    "foxing": 0.08181818181818182,
+    "adhesive": 0.020205501583266915,
+    "mirroring": 0.0,
+    "yellowing_edge": 0.0
+   }
+  },
+  "v41_lrc": {
+   "shown>=0.2": {
+    "clean": 2.2013194708908518e-06,
+    "edges": 0.0,
+    "foxing": 0.07032085561497327,
+    "adhesive": 0.03584430131615794,
+    "mirroring": 0.0,
+    "yellowing_edge": 0.0
+   },
+   "shown>=0.5": {
+    "clean": 0.0,
+    "edges": 0.0,
+    "foxing": 0.02459893048128342,
+    "adhesive": 0.019106908213601018,
+    "mirroring": 0.0,
+    "yellowing_edge": 0.0
+   }
+  },
+  "todo": {
+   "shown>=0.2": {
+    "clean": 0.04166877626449294,
+    "edges": 0.11336447308776286,
+    "foxing": 0.6774064171122994,
+    "adhesive": 0.34047778041057236,
+    "mirroring": 0.27226599011884095,
+    "yellowing_edge": 0.0838167093040754
+   },
+   "shown>=0.5": {
+    "clean": 0.02097197059917715,
+    "edges": 0.054120104850312385,
+    "foxing": 0.5407754010695187,
+    "adhesive": 0.30066992654503155,
+    "mirroring": 0.1866356370295481,
+    "yellowing_edge": 0.04939327195370535
+   }
+  },
+  "todo_plane": {
+   "shown>=0.2": {
+    "clean": 0.03296916171553229,
+    "edges": 0.14853465775833186,
+    "foxing": 0.7171122994652407,
+    "adhesive": 0.34893264114770695,
+    "mirroring": 0.44763748736241726,
+    "yellowing_edge": 0.07782809144014118
+   },
+   "shown>=0.5": {
+    "clean": 0.013146279880160167,
+    "edges": 0.07325233055440589,
+    "foxing": 0.5851604278074867,
+    "adhesive": 0.31489778773452815,
+    "mirroring": 0.30833794326917574,
+    "yellowing_edge": 0.04639725296523797
+   }
+  },
+  "first_try_auto": {
+   "shown>=0.2": {
+    "clean": 0.19773792411171257,
+    "edges": 0.07839137547054534,
+    "foxing": 0.7080213903743315,
+    "adhesive": 0.8364388341985654,
+    "mirroring": 0.9682295938805486,
+    "yellowing_edge": 0.1307167188803918
+   },
+   "shown>=0.5": {
+    "clean": 0.1090313533932239,
+    "edges": 0.03200201028794419,
+    "foxing": 0.654144385026738,
+    "adhesive": 0.7455033065506322,
+    "mirroring": 0.9473322778169887,
+    "yellowing_edge": 0.07713038838803234
+   }
+  },
+  "prop_auto": {
+   "shown>=0.2": {
+    "clean": 0.008869116148219242,
+    "edges": 0.0027887818049232346,
+    "foxing": 0.5279411764705882,
+    "adhesive": 0.7826508411778644,
+    "mirroring": 0.4548766762680503,
+    "yellowing_edge": 0.018742219242923786
+   },
+   "shown>=0.5": {
+    "clean": 6.163694518494385e-05,
+    "edges": 0.0007686395080707148,
+    "foxing": 0.45387700534759357,
+    "adhesive": 0.765633414471275,
+    "mirroring": 0.3609389008641245,
+    "yellowing_edge": 0.011758348495834302
+   }
+  },
+  "prop_auto_high": {
+   "shown>=0.2": {
+    "clean": 0.035159474589068686,
+    "edges": 0.010982676048010407,
+    "foxing": 0.5967914438502674,
+    "adhesive": 0.7975787863774422,
+    "mirroring": 0.583312668103695,
+    "yellowing_edge": 0.03422165068333858
+   },
+   "shown>=0.5": {
+    "clean": 0.01015028408027772,
+    "edges": 0.0030745580322828594,
+    "foxing": 0.5315508021390374,
+    "adhesive": 0.7836524998384422,
+    "mirroring": 0.461085782957862,
+    "yellowing_edge": 0.019337318905016623
+   }
+  },
+  "prop_auto_fine_only": {
+   "shown>=0.2": {
+    "clean": 0.0006714024386217099,
+    "edges": 0.00023650446402175842,
+    "foxing": 0.31711229946524067,
+    "adhesive": 0.5380737996251858,
+    "mirroring": 0.21130038341949145,
+    "yellowing_edge": 0.0005266974020821648
+   },
+   "shown>=0.5": {
+    "clean": 2.2013194708908518e-06,
+    "edges": 1.4781529001359901e-05,
+    "foxing": 0.23221925133689839,
+    "adhesive": 0.22350989811085023,
+    "mirroring": 0.04533315529443183,
+    "yellowing_edge": 5.814192100907014e-05
+   }
+  },
+  "prop_auto_no_plane": {
+   "shown>=0.2": {
+    "clean": 0.0011777059169266059,
+    "edges": 0.0023995348745540906,
+    "foxing": 0.468048128342246,
+    "adhesive": 0.7224005342179524,
+    "mirroring": 0.44113270892547163,
+    "yellowing_edge": 0.015814602514467077
+   },
+   "shown>=0.5": {
+    "clean": 7.924750095207067e-05,
+    "edges": 0.00012810658467845247,
+    "foxing": 0.39585561497326205,
+    "adhesive": 0.6929646942248454,
+    "mirroring": 0.3425214123571715,
+    "yellowing_edge": 0.008228791879283692
+   }
+  },
+  "prop_auto_no_edge_term": {
+   "shown>=0.2": {
+    "clean": 0.00942825129382552,
+    "edges": 0.0036066930763318157,
+    "foxing": 0.5344919786096257,
+    "adhesive": 0.7849018805333563,
+    "mirroring": 0.4581958300745856,
+    "yellowing_edge": 0.01931679822701342
+   },
+   "shown>=0.5": {
+    "clean": 7.704618148117982e-05,
+    "edges": 0.0009805080904235401,
+    "foxing": 0.46336898395721926,
+    "adhesive": 0.7685953083600802,
+    "mirroring": 0.36430574366213303,
+    "yellowing_edge": 0.011946454710863646
+   }
+  },
+  "prop_picks": {
+   "shown>=0.2": {
+    "clean": 0.190750936111105,
+    "edges": 0.0231133841817931,
+    "foxing": 0.604144385026738,
+    "adhesive": 0.34437670982056307,
+    "mirroring": 0.9235926978616257,
+    "yellowing_edge": 0.03442685746337059
+   },
+   "shown>=0.5": {
+    "clean": 0.08910060690377812,
+    "edges": 0.008612704231459035,
+    "foxing": 0.566711229946524,
+    "adhesive": 0.3094802145488228,
+    "mirroring": 0.8808061347118631,
+    "yellowing_edge": 0.02101659438827859
+   }
+  },
+  "prop_badpick": {
+   "shown>=0.2": {
+    "clean": 0.07718266328837506,
+    "edges": 0.030129683281105265,
+    "foxing": 0.5580213903743315,
+    "adhesive": 0.7953815996381104,
+    "mirroring": 0.9464071113824085,
+    "yellowing_edge": 0.11083560200829036
+   },
+   "shown>=0.5": {
+    "clean": 0.020883917820341512,
+    "edges": 0.012667770354165435,
+    "foxing": 0.5296791443850267,
+    "adhesive": 0.7697692953923702,
+    "mirroring": 0.9174312801632871,
+    "yellowing_edge": 0.05296386992626236
+   }
+  },
+  "warnings": {
+   "prop_auto": [
+    "At some tones the commonest colour was overruled as not the print's own (marked on the tone strip): a large area of one colour at those tones?",
+    "The light's colour drifts across the frame (see the expected-tone picture). An even drift is allowed for; soft colour that spans the frame is the light's."
+   ],
+   "prop_picks": [
+    "At some tones the commonest colour was overruled as not the print's own (marked on the tone strip): a large area of one colour at those tones?",
+    "The light's colour drifts across the frame (see the expected-tone picture). An even drift is allowed for; soft colour that spans the frame is the light's."
+   ],
+   "prop_badpick": [
+    "At some tones the commonest colour was overruled as not the print's own (marked on the tone strip): a large area of one colour at those tones?",
+    "Colour departs at one range of tones all over the print: the expected tone may be wrong there (or the print is coloured all over at those tones).",
+    "The light's colour drifts across the frame (see the expected-tone picture). An even drift is allowed for; soft colour that spans the frame is the light's."
+   ]
+  },
+  "seconds": 91.6
+ },
+ "U3_warm_capture": {
+  "v41_raw": {
+   "shown>=0.2": {
+    "clean": 0.0002518314728597805,
+    "edges": 0.008279952310707862,
+    "glare": 0.0
+   },
+   "shown>=0.5": {
+    "clean": 0.0,
+    "edges": 0.00016671044920888315,
+    "glare": 0.0
+   }
+  },
+  "v41_lrc": {
+   "shown>=0.2": {
+    "clean": 0.0006378043332730119,
+    "edges": 0.017166124436720755,
+    "glare": 0.0
+   },
+   "shown>=0.5": {
+    "clean": 0.0002505659880715404,
+    "edges": 0.014241113827873988,
+    "glare": 0.0
+   }
+  },
+  "todo": {
+   "shown>=0.2": {
+    "clean": 0.0886750500815605,
+    "edges": 0.22302321821892618,
+    "glare": 0.20914907017602016
+   },
+   "shown>=0.5": {
+    "clean": 0.056514019673226515,
+    "edges": 0.14174934831369854,
+    "glare": 0.152756323134551
+   }
+  },
+  "todo_plane": {
+   "shown>=0.2": {
+    "clean": 0.06946752196565222,
+    "edges": 0.31438559621718837,
+    "glare": 0.23532336659263434
+   },
+   "shown>=0.5": {
+    "clean": 0.033348055139703195,
+    "edges": 0.2157889950896195,
+    "glare": 0.17635827228428416
+   }
+  },
+  "first_try_auto": {
+   "shown>=0.2": {
+    "clean": 0.1866653336893564,
+    "edges": 0.15564693757956635,
+    "glare": 0.21595783472005833
+   },
+   "shown>=0.5": {
+    "clean": 0.1508533796669497,
+    "edges": 0.09631822498838079,
+    "glare": 0.18978353830344416
+   }
+  },
+  "prop_auto": {
+   "shown>=0.2": {
+    "clean": 0.052396132172293226,
+    "edges": 0.06116757936427749,
+    "glare": 0.1863758411509265
+   },
+   "shown>=0.5": {
+    "clean": 0.02126900283595141,
+    "edges": 0.03640855174086124,
+    "glare": 0.15778168197036496
+   }
+  },
+  "prop_auto_high": {
+   "shown>=0.2": {
+    "clean": 0.12050958541452853,
+    "edges": 0.10340089316386121,
+    "glare": 0.21203301620976564
+   },
+   "shown>=0.5": {
+    "clean": 0.05569651650002341,
+    "edges": 0.06315800109119567,
+    "glare": 0.18772831239433818
+   }
+  },
+  "prop_auto_fine_only": {
+   "shown>=0.2": {
+    "clean": 0.019763075937945688,
+    "edges": 0.011856649221007537,
+    "glare": 0.060609275035634964
+   },
+   "shown>=0.5": {
+    "clean": 0.006731113588649107,
+    "edges": 0.004349627174813587,
+    "glare": 0.02148705539165313
+   }
+  },
+  "prop_auto_no_plane": {
+   "shown>=0.2": {
+    "clean": 0.0628401781296388,
+    "edges": 0.05653504960898822,
+    "glare": 0.13217754499950277
+   },
+   "shown>=0.5": {
+    "clean": 0.03680156312681043,
+    "edges": 0.03522137126922222,
+    "glare": 0.10813140186296284
+   }
+  },
+  "prop_auto_no_edge_term": {
+   "shown>=0.2": {
+    "clean": 0.0736107191623503,
+    "edges": 0.211030169539475,
+    "glare": 0.21584512878310738
+   },
+   "shown>=0.5": {
+    "clean": 0.03199272093149804,
+    "edges": 0.148736031685089,
+    "glare": 0.18584546027115723
+   }
+  },
+  "prop_picks": {
+   "shown>=0.2": {
+    "clean": 0.11751291743597596,
+    "edges": 0.06201628710570453,
+    "glare": 0.2161832465939603
+   },
+   "shown>=0.5": {
+    "clean": 0.05786808839664343,
+    "edges": 0.03513043829692646,
+    "glare": 0.1886034408459575
+   }
+  },
+  "prop_badpick": {
+   "shown>=0.2": {
+    "clean": 0.1615100270687196,
+    "edges": 0.08580031119283853,
+    "glare": 0.297397818808632
+   },
+   "shown>=0.5": {
+    "clean": 0.09399008619216892,
+    "edges": 0.0544637985733627,
+    "glare": 0.21601750256903238
+   }
+  },
+  "warnings": {
+   "prop_auto": [
+    "At some tones the commonest colour was overruled as not the print's own (marked on the tone strip): a large area of one colour at those tones?",
+    "This capture has colour fringes along edges; the scale is widened there, but thin lines of colour along edges are the camera's.",
+    "The light's colour drifts across the frame (see the expected-tone picture). An even drift is allowed for; soft colour that spans the frame is the light's."
+   ],
+   "prop_picks": [
+    "At some tones the commonest colour was overruled as not the print's own (marked on the tone strip): a large area of one colour at those tones?",
+    "This capture has colour fringes along edges; the scale is widened there, but thin lines of colour along edges are the camera's.",
+    "The light's colour drifts across the frame (see the expected-tone picture). An even drift is allowed for; soft colour that spans the frame is the light's."
+   ],
+   "prop_badpick": [
+    "At some tones the commonest colour was overruled as not the print's own (marked on the tone strip): a large area of one colour at those tones?",
+    "This capture has colour fringes along edges; the scale is widened there, but thin lines of colour along edges are the camera's.",
+    "The light's colour drifts across the frame (see the expected-tone picture). An even drift is allowed for; soft colour that spans the frame is the light's."
+   ]
+  },
+  "seconds": 117.3
+ },
+ "U4_warm_aged_capture": {
+  "v41_raw": {
+   "shown>=0.2": {
+    "clean": 7.823971082602879e-06,
+    "edges": 0.0016970357616222175,
+    "foxing": 0.06362528766752402,
+    "adhesive": 0.06608936612400415,
+    "mirroring": 0.007699411850483643,
+    "glare": 0.0,
+    "yellowing_edge": 0.0003873990318644755
+   },
+   "shown>=0.5": {
+    "clean": 0.0,
+    "edges": 6.193561173803713e-05,
+    "foxing": 0.0001353729524840937,
+    "adhesive": 0.0034060732017088097,
+    "mirroring": 0.0005152384192874156,
+    "glare": 0.0,
+    "yellowing_edge": 1.4482206798671982e-05
+   }
+  },
+  "v41_lrc": {
+   "shown>=0.2": {
+    "clean": 5.215980721735252e-06,
+    "edges": 0.0035179427467205092,
+    "foxing": 0.0025720860971977797,
+    "adhesive": 0.009271446715159913,
+    "mirroring": 0.00952705001701259,
+    "glare": 0.0,
+    "yellowing_edge": 3.6205516996679953e-05
+   },
+   "shown>=0.5": {
+    "clean": 2.607990360867626e-06,
+    "edges": 0.00260129569299756,
+    "foxing": 0.0025720860971977797,
+    "adhesive": 0.007885925412769888,
+    "mirroring": 0.008836824964759637,
+    "glare": 0.0,
+    "yellowing_edge": 2.534386189767597e-05
+   }
+  },
+  "todo": {
+   "shown>=0.2": {
+    "clean": 0.07536570544835267,
+    "edges": 0.22844331033457618,
+    "foxing": 0.6056585894138351,
+    "adhesive": 0.871342801062233,
+    "mirroring": 0.1447333884217178,
+    "glare": 0.23183031741323049,
+    "yellowing_edge": 0.13316751206548855
+   },
+   "shown>=0.5": {
+    "clean": 0.05623088017066689,
+    "edges": 0.13369421149772695,
+    "foxing": 0.5045349939082171,
+    "adhesive": 0.8466805218796906,
+    "mirroring": 0.08119379769600933,
+    "glare": 0.1752717024891454,
+    "yellowing_edge": 0.1027078106161817
+   }
+  },
+  "todo_plane": {
+   "shown>=0.2": {
+    "clean": 0.06498590381209951,
+    "edges": 0.25892182487086424,
+    "foxing": 0.5921212941654257,
+    "adhesive": 0.8502828772659047,
+    "mirroring": 0.14867058766344238,
+    "glare": 0.26191985113670074,
+    "yellowing_edge": 0.1458539252211252
+   },
+   "shown>=0.5": {
+    "clean": 0.0347853754332524,
+    "edges": 0.16365246689541552,
+    "foxing": 0.4775957763638825,
+    "adhesive": 0.7795173767463341,
+    "mirroring": 0.05892188791134011,
+    "glare": 0.20745799735713708,
+    "yellowing_edge": 0.10739642506725175
+   }
+  },
+  "first_try_auto": {
+   "shown>=0.2": {
+    "clean": 0.03251642381929756,
+    "edges": 0.10797854550409394,
+    "foxing": 0.5922566671179098,
+    "adhesive": 0.9389793326405727,
+    "mirroring": 0.5372672920818549,
+    "glare": 0.25261589493271486,
+    "yellowing_edge": 0.10542684494263235
+   },
+   "shown>=0.5": {
+    "clean": 0.013749325182494125,
+    "edges": 0.06431393922877776,
+    "foxing": 0.4968187356166238,
+    "adhesive": 0.8998383558480545,
+    "mirroring": 0.4750984299810431,
+    "glare": 0.21773280116501711,
+    "yellowing_edge": 0.06107870717339908
+   }
+  },
+  "prop_auto": {
+   "shown>=0.2": {
+    "clean": 0.0021411600862723213,
+    "edges": 0.023640823000408775,
+    "foxing": 0.3292270204413158,
+    "adhesive": 0.7835584805449717,
+    "mirroring": 0.18520390803480288,
+    "glare": 0.2006688061271271,
+    "yellowing_edge": 0.02176675681840399
+   },
+   "shown>=0.5": {
+    "clean": 0.0004563983131518346,
+    "edges": 0.009110728486665262,
+    "foxing": 0.2913225937457696,
+    "adhesive": 0.7560558826925298,
+    "mirroring": 0.09732173236766636,
+    "glare": 0.16186861195760632,
+    "yellowing_edge": 0.007266447261233667
+   }
+  },
+  "prop_auto_high": {
+   "shown>=0.2": {
+    "clean": 0.00918534205097578,
+    "edges": 0.04697816150330117,
+    "foxing": 0.38472993095979424,
+    "adhesive": 0.8104145017896317,
+    "mirroring": 0.28313809361784864,
+    "glare": 0.23752056309161027,
+    "yellowing_edge": 0.05277678212606037
+   },
+   "shown>=0.5": {
+    "clean": 0.0023054634790069814,
+    "edges": 0.024662760594086387,
+    "foxing": 0.3315283606335454,
+    "adhesive": 0.7851633760535734,
+    "mirroring": 0.18924804355222866,
+    "glare": 0.2027183732909037,
+    "yellowing_edge": 0.02331997349756156
+   }
+  },
+  "prop_auto_fine_only": {
+   "shown>=0.2": {
+    "clean": 0.00017995133489986622,
+    "edges": 0.005010590989607204,
+    "foxing": 0.16840395289021254,
+    "adhesive": 0.4919755224569911,
+    "mirroring": 0.06334516113352452,
+    "glare": 0.05023462150427443,
+    "yellowing_edge": 0.0010970271649994026
+   },
+   "shown>=0.5": {
+    "clean": 0.0,
+    "edges": 0.0016165194663627692,
+    "foxing": 0.10802761608230675,
+    "adhesive": 0.14536427664242005,
+    "mirroring": 0.009206241189909104,
+    "glare": 0.012041207087187509,
+    "yellowing_edge": 0.0004851539277555114
+   }
+  },
+  "prop_auto_no_plane": {
+   "shown>=0.2": {
+    "clean": 0.0027540378210762135,
+    "edges": 0.020054751080776426,
+    "foxing": 0.325165831866793,
+    "adhesive": 0.823900242466228,
+    "mirroring": 0.16213483692217956,
+    "glare": 0.155706426471778,
+    "yellowing_edge": 0.022237428539360827
+   },
+   "shown>=0.5": {
+    "clean": 0.0011266518358948145,
+    "edges": 0.00992208500043355,
+    "foxing": 0.29403005279545147,
+    "adhesive": 0.7779240272485856,
+    "mirroring": 0.06552277256598454,
+    "glare": 0.12987783500984332,
+    "yellowing_edge": 0.011857306816412685
+   }
+  },
+  "prop_auto_no_edge_term": {
+   "shown>=0.2": {
+    "clean": 0.0027801177246848897,
+    "edges": 0.05498643610102937,
+    "foxing": 0.35900906998781645,
+    "adhesive": 0.7927491051841589,
+    "mirroring": 0.2014096145433335,
+    "glare": 0.2094805965319166,
+    "yellowing_edge": 0.028099101741123313
+   },
+   "shown>=0.5": {
+    "clean": 0.0006050537637212893,
+    "edges": 0.027790508986857265,
+    "foxing": 0.3129822661432246,
+    "adhesive": 0.7651310472231844,
+    "mirroring": 0.11198172361833471,
+    "glare": 0.17127369812033116,
+    "yellowing_edge": 0.010014446001281676
+   }
+  },
+  "prop_picks": {
+   "shown>=0.2": {
+    "clean": 0.1873475955632868,
+    "edges": 0.05833715269605718,
+    "foxing": 0.4476783538648978,
+    "adhesive": 0.814259323403764,
+    "mirroring": 0.5888300199290332,
+    "glare": 0.6870701976753594,
+    "yellowing_edge": 0.25044442272113426
+   },
+   "shown>=0.5": {
+    "clean": 0.16003411251392013,
+    "edges": 0.029444189820262853,
+    "foxing": 0.3921754433464194,
+    "adhesive": 0.7824962475464727,
+    "mirroring": 0.49853691731881594,
+    "glare": 0.637678325827243,
+    "yellowing_edge": 0.19024550961075448
+   }
+  },
+  "prop_badpick": {
+   "shown>=0.2": {
+    "clean": 0.04677430712216088,
+    "edges": 0.04933790831052038,
+    "foxing": 0.43576553404629753,
+    "adhesive": 0.8209329176769427,
+    "mirroring": 0.5858260827297914,
+    "glare": 0.27588926943717806,
+    "yellowing_edge": 0.16689295114789593
+   },
+   "shown>=0.5": {
+    "clean": 0.021737599657831664,
+    "edges": 0.023343532064066197,
+    "foxing": 0.3791796399079464,
+    "adhesive": 0.7896778662971943,
+    "mirroring": 0.49481359062849367,
+    "glare": 0.24180847334214287,
+    "yellowing_edge": 0.11986198456920866
+   }
+  },
+  "warnings": {
+   "prop_auto": [
+    "At some tones the commonest colour was overruled as not the print's own (marked on the tone strip): a large area of one colour at those tones?",
+    "This capture has colour fringes along edges; the scale is widened there, but thin lines of colour along edges are the camera's.",
+    "The light's colour drifts across the frame (see the expected-tone picture). An even drift is allowed for; soft colour that spans the frame is the light's."
+   ],
+   "prop_picks": [
+    "At some tones the commonest colour was overruled as not the print's own (marked on the tone strip): a large area of one colour at those tones?",
+    "Colour departs at one range of tones all over the print: the expected tone may be wrong there (or the print is coloured all over at those tones).",
+    "This capture has colour fringes along edges; the scale is widened there, but thin lines of colour along edges are the camera's.",
+    "The light's colour drifts across the frame (see the expected-tone picture). An even drift is allowed for; soft colour that spans the frame is the light's."
+   ],
+   "prop_badpick": [
+    "Unpainted pick 1 disagrees in colour with the other picks: it may hold colour, or the light or the print's tone differs there.",
+    "At some tones the commonest colour was overruled as not the print's own (marked on the tone strip): a large area of one colour at those tones?",
+    "This capture has colour fringes along edges; the scale is widened there, but thin lines of colour along edges are the camera's.",
+    "The light's colour drifts across the frame (see the expected-tone picture). An even drift is allowed for; soft colour that spans the frame is the light's."
+   ]
+  },
+  "seconds": 115.5
+ },
+ "U5_sepia_landscape_capture": {
+  "v41_raw": {
+   "shown>=0.2": {
+    "clean": 0.0,
+    "edges": 0.0,
+    "foxing": 0.0,
+    "adhesive": 0.004961630772873548,
+    "mirroring": 4.121841638844236e-05,
+    "glare": 0.0,
+    "yellowing_edge": 0.0
+   },
+   "shown>=0.5": {
+    "clean": 0.0,
+    "edges": 0.0,
+    "foxing": 0.0,
+    "adhesive": 0.0,
+    "mirroring": 0.0,
+    "glare": 0.0,
+    "yellowing_edge": 0.0
+   }
+  },
+  "v41_lrc": {
+   "shown>=0.2": {
+    "clean": 0.0,
+    "edges": 0.0010621968043420533,
+    "foxing": 0.023596853752832957,
+    "adhesive": 0.014766501996491342,
+    "mirroring": 0.002534932607889205,
+    "glare": 3.4913275423847164e-05,
+    "yellowing_edge": 0.0
+   },
+   "shown>=0.5": {
+    "clean": 0.0,
+    "edges": 0.0002525955815203663,
+    "foxing": 0.01679776029862685,
+    "adhesive": 0.0042190005704260975,
+    "mirroring": 0.0019166563620625695,
+    "glare": 1.3965310169538866e-05,
+    "yellowing_edge": 0.0
+   }
+  },
+  "todo": {
+   "shown>=0.2": {
+    "clean": 0.026600945087176146,
+    "edges": 0.09604461226578237,
+    "foxing": 0.34608718837488334,
+    "adhesive": 0.44883923670530496,
+    "mirroring": 0.6935616833601254,
+    "glare": 0.18008267463620367,
+    "yellowing_edge": 0.11665526321245671
+   },
+   "shown>=0.5": {
+    "clean": 0.013531712179739095,
+    "edges": 0.049275568825819155,
+    "foxing": 0.24796693774163445,
+    "adhesive": 0.3602617502394713,
+    "mirroring": 0.6308684720333044,
+    "glare": 0.11868418847582604,
+    "yellowing_edge": 0.08253198150567062
+   }
+  },
+  "todo_plane": {
+   "shown>=0.2": {
+    "clean": 0.047400531012470166,
+    "edges": 0.09728815974403648,
+    "foxing": 0.45913878149580056,
+    "adhesive": 0.2755588561342331,
+    "mirroring": 0.5773669675611063,
+    "glare": 0.23455436695249002,
+    "yellowing_edge": 0.046953204370632995
+   },
+   "shown>=0.5": {
+    "clean": 0.02315751133433657,
+    "edges": 0.053608554570360824,
+    "foxing": 0.29409412078389546,
+    "adhesive": 0.1579326897204912,
+    "mirroring": 0.33832076171633485,
+    "glare": 0.173107002206519,
+    "yellowing_edge": 0.017565466193941656
+   }
+  },
+  "first_try_auto": {
+   "shown>=0.2": {
+    "clean": 0.11203021211743619,
+    "edges": 0.1514861040046115,
+    "foxing": 0.4914011465137982,
+    "adhesive": 0.7745848266658056,
+    "mirroring": 0.9228803429372243,
+    "glare": 0.5891615227774208,
+    "yellowing_edge": 0.1887707076361676
+   },
+   "shown>=0.5": {
+    "clean": 0.08544843715553681,
+    "edges": 0.09370000712449077,
+    "foxing": 0.4099453406212505,
+    "adhesive": 0.7210831638199175,
+    "mirroring": 0.8708214830386216,
+    "glare": 0.4878013015669078,
+    "yellowing_edge": 0.12358856337210508
+   }
+  },
+  "prop_auto": {
+   "shown>=0.2": {
+    "clean": 0.04767610156332372,
+    "edges": 0.006787696652137023,
+    "foxing": 0.18944140781229168,
+    "adhesive": 0.2710062101105335,
+    "mirroring": 0.61908000494621,
+    "glare": 0.10143004776136078,
+    "yellowing_edge": 0.06453940411768365
+   },
+   "shown>=0.5": {
+    "clean": 0.04358088355107401,
+    "edges": 0.0017552154510774172,
+    "foxing": 0.1345153979469404,
+    "adhesive": 0.1854207699676041,
+    "mirroring": 0.4611310333456989,
+    "glare": 0.06407284305784432,
+    "yellowing_edge": 0.05123675644295163
+   }
+  },
+  "prop_auto_high": {
+   "shown>=0.2": {
+    "clean": 0.053180323783415924,
+    "edges": 0.01773350518468623,
+    "foxing": 0.26036528462871616,
+    "adhesive": 0.4149580790632097,
+    "mirroring": 0.726989819051152,
+    "glare": 0.21451414685920175,
+    "yellowing_edge": 0.09792457133378947
+   },
+   "shown>=0.5": {
+    "clean": 0.047951672114177266,
+    "edges": 0.007292887815177756,
+    "foxing": 0.1923743500866551,
+    "adhesive": 0.2797778567046592,
+    "mirroring": 0.6250154569061457,
+    "glare": 0.10412535262408178,
+    "yellowing_edge": 0.06487114096742759
+   }
+  },
+  "prop_auto_fine_only": {
+   "shown>=0.2": {
+    "clean": 0.03675631895254435,
+    "edges": 0.004423661081497697,
+    "foxing": 0.13278229569390748,
+    "adhesive": 0.05469632882373834,
+    "mirroring": 0.2685173735625077,
+    "glare": 0.014928916571237048,
+    "yellowing_edge": 0.007907777155771184
+   },
+   "shown>=0.5": {
+    "clean": 0.006477106077888219,
+    "edges": 0.0009261837989080099,
+    "foxing": 0.09425409945340621,
+    "adhesive": 0.011322419898184322,
+    "mirroring": 0.16703763241416264,
+    "glare": 0.0034633969220456387,
+    "yellowing_edge": 0.00014513487176297403
+   }
+  },
+  "prop_auto_no_plane": {
+   "shown>=0.2": {
+    "clean": 0.008612178780588332,
+    "edges": 0.012940665945581844,
+    "foxing": 0.14211438474870017,
+    "adhesive": 0.2810693874915243,
+    "mirroring": 0.5800255554181608,
+    "glare": 0.05970170097477865,
+    "yellowing_edge": 0.13925483610126269
+   },
+   "shown>=0.5": {
+    "clean": 0.004274937936719417,
+    "edges": 0.005531195554317765,
+    "foxing": 0.08985468604186109,
+    "adhesive": 0.21513674082205936,
+    "mirroring": 0.41150406001401424,
+    "glare": 0.04073680976454487,
+    "yellowing_edge": 0.06700669693765421
+   }
+  },
+  "prop_auto_no_edge_term": {
+   "shown>=0.2": {
+    "clean": 0.048009182490007574,
+    "edges": 0.018925238184679755,
+    "foxing": 0.19570723903479537,
+    "adhesive": 0.2820703238513448,
+    "mirroring": 0.6262726186059931,
+    "glare": 0.10618523587408876,
+    "yellowing_edge": 0.06465136530447223
+   },
+   "shown>=0.5": {
+    "clean": 0.04375820720988412,
+    "edges": 0.01102353024994009,
+    "foxing": 0.1409145447273697,
+    "adhesive": 0.2008007490878564,
+    "mirroring": 0.47300193726557027,
+    "glare": 0.06783649414853504,
+    "yellowing_edge": 0.05368331570981319
+   }
+  },
+  "prop_picks": {
+   "shown>=0.2": {
+    "clean": 0.6460404106240835,
+    "edges": 0.7319831343873262,
+    "foxing": 0.6753766164511399,
+    "adhesive": 0.5088093162420759,
+    "mirroring": 0.89004987428383,
+    "glare": 0.07782169091975533,
+    "yellowing_edge": 0.15232941469179573
+   },
+   "shown>=0.5": {
+    "clean": 0.511971743235342,
+    "edges": 0.5602893838610854,
+    "foxing": 0.6269830689241435,
+    "adhesive": 0.45643774283469485,
+    "mirroring": 0.8495321709739911,
+    "glare": 0.059261793704438175,
+    "yellowing_edge": 0.09649810287989052
+   }
+  },
+  "warnings": {
+   "prop_auto": [
+    "At some tones the commonest colour was overruled as not the print's own (marked on the tone strip): a large area of one colour at those tones?",
+    "The light's colour drifts across the frame (see the expected-tone picture). An even drift is allowed for; soft colour that spans the frame is the light's."
+   ],
+   "prop_picks": [
+    "Colour departs at one range of tones all over the print: the expected tone may be wrong there (or the print is coloured all over at those tones).",
+    "The light's colour drifts across the frame (see the expected-tone picture). An even drift is allowed for; soft colour that spans the frame is the light's."
+   ]
+  },
+  "seconds": 85.9
+ },
+ "P1_portrait_warm": {
+  "v41_raw": {
+   "shown>=0.2": {
+    "clean": 0.0,
+    "edges": 0.0,
+    "paint_rose": 0.0,
+    "paint_flesh": 0.0,
+    "paint_blue": 0.0,
+    "paint_yellow": 0.0,
+    "paint_gold": 0.0,
+    "paint_white": 0.0,
+    "paint_spotting": 0.0
+   },
+   "shown>=0.5": {
+    "clean": 0.0,
+    "edges": 0.0,
+    "paint_rose": 0.0,
+    "paint_flesh": 0.0,
+    "paint_blue": 0.0,
+    "paint_yellow": 0.0,
+    "paint_gold": 0.0,
+    "paint_white": 0.0,
+    "paint_spotting": 0.0
+   }
+  },
+  "v41_lrc": {
+   "shown>=0.2": {
+    "clean": 0.00024073084803527114,
+    "edges": 0.0004431491744391556,
+    "paint_rose": 0.33963453056080656,
+    "paint_flesh": 0.01796667052424488,
+    "paint_blue": 0.00011963237674346596,
+    "paint_yellow": 0.100967812092214,
+    "paint_gold": 0.4396135265700483,
+    "paint_white": 0.6098020735155514,
+    "paint_spotting": 0.0
+   },
+   "shown>=0.5": {
+    "clean": 1.893388692412245e-05,
+    "edges": 0.00015119207127924132,
+    "paint_rose": 0.2885948330182735,
+    "paint_flesh": 0.01362689503529684,
+    "paint_blue": 0.0001055579794795288,
+    "paint_yellow": 0.08003479773814702,
+    "paint_gold": 0.4082125603864734,
+    "paint_white": 0.5598491988689915,
+    "paint_spotting": 0.0
+   }
+  },
+  "todo": {
+   "shown>=0.2": {
+    "clean": 0.12760628334561783,
+    "edges": 0.26754740392786575,
+    "paint_rose": 0.9829867674858223,
+    "paint_flesh": 0.27771669945608146,
+    "paint_blue": 0.044862141278799735,
+    "paint_yellow": 0.5058721183123097,
+    "paint_gold": 0.9637681159420289,
+    "paint_white": 0.8934967012252591,
+    "paint_spotting": 0.7178423236514523
+   },
+   "shown>=0.5": {
+    "clean": 0.10476931087413699,
+    "edges": 0.1923736633838871,
+    "paint_rose": 0.868935097668557,
+    "paint_flesh": 0.14329938664506423,
+    "paint_blue": 0.0176070709771854,
+    "paint_yellow": 0.3613527620704654,
+    "paint_gold": 0.9396135265700483,
+    "paint_white": 0.8699340245051838,
+    "paint_spotting": 0.6556016597510373
+   }
+  },
+  "todo_plane": {
+   "shown>=0.2": {
+    "clean": 0.1262376338051027,
+    "edges": 0.2694294845393073,
+    "paint_rose": 0.994328922495274,
+    "paint_flesh": 0.31116190255757437,
+    "paint_blue": 0.04777554151243473,
+    "paint_yellow": 0.5020117442366246,
+    "paint_gold": 0.9782608695652174,
+    "paint_white": 0.8501413760603205,
+    "paint_spotting": 0.7053941908713693
+   },
+   "shown>=0.5": {
+    "clean": 0.10443526301197568,
+    "edges": 0.1835367474936004,
+    "paint_rose": 0.9262759924385633,
+    "paint_flesh": 0.18802800601782202,
+    "paint_blue": 0.021583088204247654,
+    "paint_yellow": 0.35140278381905177,
+    "paint_gold": 0.9299516908212561,
+    "paint_white": 0.7502356267672008,
+    "paint_spotting": 0.6721991701244814
+   }
+  },
+  "first_try_auto": {
+   "shown>=0.2": {
+    "clean": 0.09534564486790233,
+    "edges": 0.03756340943334254,
+    "paint_rose": 1.0,
+    "paint_flesh": 0.37472514755236663,
+    "paint_blue": 0.18362866110258827,
+    "paint_yellow": 0.8009460635058722,
+    "paint_gold": 0.9782608695652174,
+    "paint_white": 0.7219604147031102,
+    "paint_spotting": 0.4979253112033195
+   },
+   "shown>=0.5": {
+    "clean": 0.06267928024181278,
+    "edges": 0.01539031015228691,
+    "paint_rose": 1.0,
+    "paint_flesh": 0.22754889480384216,
+    "paint_blue": 0.10363682425300136,
+    "paint_yellow": 0.6565354501957372,
+    "paint_gold": 0.9130434782608695,
+    "paint_white": 0.6983977379830348,
+    "paint_spotting": 0.43568464730290457
+   }
+  },
+  "prop_auto": {
+   "shown>=0.2": {
+    "clean": 0.03492896411352218,
+    "edges": 0.008894264606978817,
+    "paint_rose": 1.0,
+    "paint_flesh": 0.2471357481772943,
+    "paint_blue": 0.14322106655782466,
+    "paint_yellow": 0.24565028273162245,
+    "paint_gold": 0.855072463768116,
+    "paint_white": 0.7332704995287465,
+    "paint_spotting": 0.5020746887966805
+   },
+   "shown>=0.5": {
+    "clean": 0.007254383532928058,
+    "edges": 0.0018560130129451693,
+    "paint_rose": 1.0,
+    "paint_flesh": 0.13705010994097905,
+    "paint_blue": 0.04752220236168386,
+    "paint_yellow": 0.12239016963897346,
+    "paint_gold": 0.7125603864734299,
+    "paint_white": 0.6927426955702167,
+    "paint_spotting": 0.45228215767634855
+   }
+  },
+  "prop_auto_high": {
+   "shown>=0.2": {
+    "clean": 0.1036968414219349,
+    "edges": 0.03158350233826358,
+    "paint_rose": 1.0,
+    "paint_flesh": 0.3489179493114223,
+    "paint_blue": 0.25673108049147797,
+    "paint_yellow": 0.4105045672031318,
+    "paint_gold": 0.9106280193236715,
+    "paint_white": 0.7813383600377003,
+    "paint_spotting": 0.5767634854771784
+   },
+   "shown>=0.5": {
+    "clean": 0.03736061616277733,
+    "edges": 0.009572022167885762,
+    "paint_rose": 1.0,
+    "paint_flesh": 0.2538768661034603,
+    "paint_blue": 0.15009640962125798,
+    "paint_yellow": 0.2519573727707699,
+    "paint_gold": 0.857487922705314,
+    "paint_white": 0.7351555136663525,
+    "paint_spotting": 0.5020746887966805
+   }
+  },
+  "prop_auto_fine_only": {
+   "shown>=0.2": {
+    "clean": 0.01259914932750891,
+    "edges": 0.005375138809961993,
+    "paint_rose": 0.9117832388153749,
+    "paint_flesh": 0.095127878717741,
+    "paint_blue": 0.03643157731770137,
+    "paint_yellow": 0.08775554588951719,
+    "paint_gold": 0.8140096618357487,
+    "paint_white": 0.6399622997172478,
+    "paint_spotting": 0.48132780082987553
+   },
+   "shown>=0.5": {
+    "clean": 0.004575238533164732,
+    "edges": 0.0016057640673795286,
+    "paint_rose": 0.8052930056710775,
+    "paint_flesh": 0.05497048952667515,
+    "paint_blue": 0.005826800467269989,
+    "paint_yellow": 0.045345802522836015,
+    "paint_gold": 0.6908212560386473,
+    "paint_white": 0.6003770028275212,
+    "paint_spotting": 0.3900414937759336
+   }
+  },
+  "prop_auto_no_plane": {
+   "shown>=0.2": {
+    "clean": 0.011492869362942327,
+    "edges": 0.005932985417785401,
+    "paint_rose": 0.8582230623818525,
+    "paint_flesh": 0.10881263742622381,
+    "paint_blue": 0.09540330185359812,
+    "paint_yellow": 0.27370595911265766,
+    "paint_gold": 0.8115942028985508,
+    "paint_white": 0.9283694627709708,
+    "paint_spotting": 0.5767634854771784
+   },
+   "shown>=0.5": {
+    "clean": 0.005135140617920924,
+    "edges": 0.001929002288735148,
+    "paint_rose": 0.7794580970384373,
+    "paint_flesh": 0.05615669482698762,
+    "paint_blue": 0.0028500654459472775,
+    "paint_yellow": 0.12065028273162244,
+    "paint_gold": 0.6570048309178744,
+    "paint_white": 0.8001885014137606,
+    "paint_spotting": 0.45643153526970953
+   }
+  },
+  "prop_auto_no_edge_term": {
+   "shown>=0.2": {
+    "clean": 0.037332215332391144,
+    "edges": 0.03127590467600582,
+    "paint_rose": 1.0,
+    "paint_flesh": 0.2625564170813563,
+    "paint_blue": 0.13928023532392225,
+    "paint_yellow": 0.3006198347107438,
+    "paint_gold": 0.9202898550724637,
+    "paint_white": 0.7266729500471254,
+    "paint_spotting": 0.5311203319502075
+   },
+   "shown>=0.5": {
+    "clean": 0.008218659345563723,
+    "edges": 0.0113394053459431,
+    "paint_rose": 0.9993698802772527,
+    "paint_flesh": 0.1464529568336998,
+    "paint_blue": 0.04748701636852402,
+    "paint_yellow": 0.19644410613310134,
+    "paint_gold": 0.8260869565217391,
+    "paint_white": 0.6936852026390198,
+    "paint_spotting": 0.4896265560165975
+   }
+  },
+  "prop_picks": {
+   "shown>=0.2": {
+    "clean": 0.1955437744703583,
+    "edges": 0.032866028184287494,
+    "paint_rose": 0.7485822306238186,
+    "paint_flesh": 0.19338039578752458,
+    "paint_blue": 0.14077915863253157,
+    "paint_yellow": 0.12032405393649413,
+    "paint_gold": 0.5990338164251208,
+    "paint_white": 0.07728557964184732,
+    "paint_spotting": 0.6348547717842323
+   },
+   "shown>=0.5": {
+    "clean": 0.14617501673620362,
+    "edges": 0.014451876606415757,
+    "paint_rose": 0.6748582230623819,
+    "paint_flesh": 0.14193959032519385,
+    "paint_blue": 0.029781424610491054,
+    "paint_yellow": 0.058829926054806435,
+    "paint_gold": 0.4830917874396135,
+    "paint_white": 0.05560791705937795,
+    "paint_spotting": 0.5892116182572614
+   }
+  },
+  "prop_badpick": {
+   "shown>=0.2": {
+    "clean": 0.04935929079069264,
+    "edges": 0.026197936488903024,
+    "paint_rose": 0.9552614996849401,
+    "paint_flesh": 0.2440111098252517,
+    "paint_blue": 0.16853387003701567,
+    "paint_yellow": 0.061874728142670726,
+    "paint_gold": 0.6231884057971014,
+    "paint_white": 0.6569274269557022,
+    "paint_spotting": 0.6141078838174274
+   },
+   "shown>=0.5": {
+    "clean": 0.012389524150848982,
+    "edges": 0.007001756956138659,
+    "paint_rose": 0.8431001890359168,
+    "paint_flesh": 0.17911700034718203,
+    "paint_blue": 0.03360966066628197,
+    "paint_yellow": 0.007666376685515441,
+    "paint_gold": 0.5289855072463768,
+    "paint_white": 0.6173421300659755,
+    "paint_spotting": 0.5394190871369294
+   }
+  },
+  "warnings": {
+   "prop_auto": [
+    "At some tones the commonest colour was overruled as not the print's own (marked on the tone strip): a large area of one colour at those tones?",
+    "The light's colour drifts across the frame (see the expected-tone picture). An even drift is allowed for; soft colour that spans the frame is the light's."
+   ],
+   "prop_picks": [
+    "At some tones the commonest colour was overruled as not the print's own (marked on the tone strip): a large area of one colour at those tones?",
+    "Colour departs at one range of tones all over the print: the expected tone may be wrong there (or the print is coloured all over at those tones).",
+    "The light's colour drifts across the frame (see the expected-tone picture). An even drift is allowed for; soft colour that spans the frame is the light's."
+   ],
+   "prop_badpick": [
+    "Unpainted pick 3 disagrees in colour with the other picks: it may hold colour, or the light or the print's tone differs there.",
+    "At some tones the commonest colour was overruled as not the print's own (marked on the tone strip): a large area of one colour at those tones?",
+    "The light's colour drifts across the frame (see the expected-tone picture). An even drift is allowed for; soft colour that spans the frame is the light's."
+   ]
+  },
+  "seconds": 122.2
+ },
+ "P2_portrait_aged_capture": {
+  "v41_raw": {
+   "shown>=0.2": {
+    "clean": 8.56176600693503e-06,
+    "edges": 0.0018607747176690394,
+    "foxing": 0.02498832321345166,
+    "adhesive": 0.023796508251050598,
+    "mirroring": 0.007153061918692234,
+    "glare": 0.0,
+    "yellowing_edge": 0.0,
+    "paint_rose": 0.0,
+    "paint_flesh": 0.0,
+    "paint_blue": 0.004115789928928741,
+    "paint_yellow": 0.00529067596165816,
+    "paint_gold": 0.0,
+    "paint_white": 0.0286368843069874,
+    "paint_spotting": 0.0
+   },
+   "shown>=0.5": {
+    "clean": 0.0,
+    "edges": 0.0,
+    "foxing": 0.0,
+    "adhesive": 0.00309200860979193,
+    "mirroring": 0.000262408521473764,
+    "glare": 0.0,
+    "yellowing_edge": 0.0,
+    "paint_rose": 0.0,
+    "paint_flesh": 0.0,
+    "paint_blue": 0.0,
+    "paint_yellow": 0.0,
+    "paint_gold": 0.0,
+    "paint_white": 0.0,
+    "paint_spotting": 0.0
+   }
+  },
+  "v41_lrc": {
+   "shown>=0.2": {
+    "clean": 1.1415688009246707e-05,
+    "edges": 0.004598987920092585,
+    "foxing": 0.004437178888369921,
+    "adhesive": 0.012692609928593392,
+    "mirroring": 0.009446706773055504,
+    "glare": 0.0,
+    "yellowing_edge": 3.649575838185917e-05,
+    "paint_rose": 0.1461794019933555,
+    "paint_flesh": 0.006390147554316254,
+    "paint_blue": 0.0008361324549137198,
+    "paint_yellow": 0.007967135565791112,
+    "paint_gold": 0.0,
+    "paint_white": 0.3161512027491409,
+    "paint_spotting": 0.0
+   },
+   "shown>=0.5": {
+    "clean": 1.1415688009246707e-05,
+    "edges": 0.003002957572823612,
+    "foxing": 0.004437178888369921,
+    "adhesive": 0.011274727527418087,
+    "mirroring": 0.008737231881663476,
+    "glare": 0.0,
+    "yellowing_edge": 1.6220337058604078e-05,
+    "paint_rose": 0.11162790697674418,
+    "paint_flesh": 0.004879749041477867,
+    "paint_blue": 0.0006847636484207188,
+    "paint_yellow": 0.006286567907382049,
+    "paint_gold": 0.0,
+    "paint_white": 0.2508591065292096,
+    "paint_spotting": 0.0
+   }
+  },
+  "todo": {
+   "shown>=0.2": {
+    "clean": 0.06793190542102484,
+    "edges": 0.2197832121812667,
+    "foxing": 0.47080803362914525,
+    "adhesive": 0.8179473162731901,
+    "mirroring": 0.14047602849562166,
+    "glare": 0.3021227462474465,
+    "yellowing_edge": 0.13674149648829703,
+    "paint_rose": 0.8498338870431894,
+    "paint_flesh": 0.16791565005228304,
+    "paint_blue": 0.265774792048092,
+    "paint_yellow": 0.4180878874642101,
+    "paint_gold": 0.9018087855297158,
+    "paint_white": 0.9301260022909508,
+    "paint_spotting": 0.0
+   },
+   "shown>=0.5": {
+    "clean": 0.043567973287290056,
+    "edges": 0.13256128832174763,
+    "foxing": 0.363148061653433,
+    "adhesive": 0.8017527076428986,
+    "mirroring": 0.0814924241687967,
+    "glare": 0.2559374722444267,
+    "yellowing_edge": 0.08001897779435857,
+    "paint_rose": 0.6877076411960132,
+    "paint_flesh": 0.09532938306029975,
+    "paint_blue": 0.19993656926204104,
+    "paint_yellow": 0.2810282584339599,
+    "paint_gold": 0.8165374677002584,
+    "paint_white": 0.9049255441008018,
+    "paint_spotting": 0.0
+   }
+  },
+  "todo_plane": {
+   "shown>=0.2": {
+    "clean": 0.07649081750595756,
+    "edges": 0.26013025423023683,
+    "foxing": 0.49065857076132646,
+    "adhesive": 0.8116095527691414,
+    "mirroring": 0.16963253088159544,
+    "glare": 0.3301181277200462,
+    "yellowing_edge": 0.14190361875719779,
+    "paint_rose": 0.9308970099667774,
+    "paint_flesh": 0.21970489136749158,
+    "paint_blue": 0.26408811106145574,
+    "paint_yellow": 0.4531308353043695,
+    "paint_gold": 0.9095607235142119,
+    "paint_white": 0.9828178694158075,
+    "paint_spotting": 0.18775510204081633
+   },
+   "shown>=0.5": {
+    "clean": 0.05818861570513278,
+    "edges": 0.1673940833415278,
+    "foxing": 0.3972442783745913,
+    "adhesive": 0.7603949571218696,
+    "mirroring": 0.08459273225583859,
+    "glare": 0.2865796251887379,
+    "yellowing_edge": 0.10227733532302802,
+    "paint_rose": 0.7694352159468438,
+    "paint_flesh": 0.12945858022539794,
+    "paint_blue": 0.20253146308763534,
+    "paint_yellow": 0.33293912610481763,
+    "paint_gold": 0.8268733850129198,
+    "paint_white": 0.9576174112256587,
+    "paint_spotting": 0.012244897959183673
+   }
+  },
+  "first_try_auto": {
+   "shown>=0.2": {
+    "clean": 0.03625337119536523,
+    "edges": 0.1029553035861516,
+    "foxing": 0.6071929005137786,
+    "adhesive": 0.9158324507157743,
+    "mirroring": 0.5245935097625689,
+    "glare": 0.3427480238031797,
+    "yellowing_edge": 0.11796240125869815,
+    "paint_rose": 0.9654485049833887,
+    "paint_flesh": 0.13064947136052052,
+    "paint_blue": 0.30166361526374214,
+    "paint_yellow": 0.1237395742561932,
+    "paint_gold": 0.6744186046511628,
+    "paint_white": 0.9003436426116839,
+    "paint_spotting": 0.2
+   },
+   "shown>=0.5": {
+    "clean": 0.016889510409680505,
+    "edges": 0.05826645386262037,
+    "foxing": 0.4981317141522653,
+    "adhesive": 0.86685571765349,
+    "mirroring": 0.46035201617214,
+    "glare": 0.32422062350119907,
+    "yellowing_edge": 0.0927154466269809,
+    "paint_rose": 0.8159468438538205,
+    "paint_flesh": 0.07040780759846636,
+    "paint_blue": 0.24615451151123732,
+    "paint_yellow": 0.053155732603012575,
+    "paint_gold": 0.5271317829457365,
+    "paint_white": 0.843069873997709,
+    "paint_spotting": 0.2
+   }
+  },
+  "prop_auto": {
+   "shown>=0.2": {
+    "clean": 0.0012785570570356313,
+    "edges": 0.02034749589646226,
+    "foxing": 0.24988323213451658,
+    "adhesive": 0.7278007448153336,
+    "mirroring": 0.18437600225476952,
+    "glare": 0.2968469668709477,
+    "yellowing_edge": 0.012339621417333052,
+    "paint_rose": 0.8112956810631229,
+    "paint_flesh": 0.04554432438712676,
+    "paint_blue": 0.20895382530598122,
+    "paint_yellow": 0.02520851487613594,
+    "paint_gold": 0.24031007751937986,
+    "paint_white": 0.8808705612829324,
+    "paint_spotting": 0.00816326530612245
+   },
+   "shown>=0.5": {
+    "clean": 0.000282538278228856,
+    "edges": 0.008101177734242036,
+    "foxing": 0.17234936945352639,
+    "adhesive": 0.7097782636919607,
+    "mirroring": 0.09716890361832195,
+    "glare": 0.27146282973621105,
+    "yellowing_edge": 0.001058376993073916,
+    "paint_rose": 0.6578073089700996,
+    "paint_flesh": 0.03012083188102707,
+    "paint_blue": 0.16800495913042224,
+    "paint_yellow": 0.007842649072575626,
+    "paint_gold": 0.165374677002584,
+    "paint_white": 0.8407789232531501,
+    "paint_spotting": 0.0
+   }
+  },
+  "prop_auto_high": {
+   "shown>=0.2": {
+    "clean": 0.0064127627391943375,
+    "edges": 0.04511244071617134,
+    "foxing": 0.33348902382064455,
+    "adhesive": 0.7526563941371417,
+    "mirroring": 0.27576219956654,
+    "glare": 0.31775468514077626,
+    "yellowing_edge": 0.04154028320708504,
+    "paint_rose": 0.9561461794019933,
+    "paint_flesh": 0.08176484257000116,
+    "paint_blue": 0.27112315654417807,
+    "paint_yellow": 0.0654798954313457,
+    "paint_gold": 0.35400516795865633,
+    "paint_white": 0.8877434135166093,
+    "paint_spotting": 0.2816326530612245
+   },
+   "shown>=0.5": {
+    "clean": 0.0013841521711211633,
+    "edges": 0.021376216878588233,
+    "foxing": 0.253619803829986,
+    "adhesive": 0.729235710137005,
+    "mirroring": 0.18867172693963633,
+    "glare": 0.2981437072564171,
+    "yellowing_edge": 0.01419685001054322,
+    "paint_rose": 0.8225913621262458,
+    "paint_flesh": 0.04731613802718717,
+    "paint_blue": 0.21195236928222352,
+    "paint_yellow": 0.027138055520975975,
+    "paint_gold": 0.2454780361757106,
+    "paint_white": 0.8808705612829324,
+    "paint_spotting": 0.02857142857142857
+   }
+  },
+  "prop_auto_fine_only": {
+   "shown>=0.2": {
+    "clean": 0.00017123532013870062,
+    "edges": 0.004924245289441238,
+    "foxing": 0.046940681924334426,
+    "adhesive": 0.6015921281902354,
+    "mirroring": 0.06095652765494251,
+    "glare": 0.09107380762057021,
+    "yellowing_edge": 0.0009813303920455467,
+    "paint_rose": 0.42724252491694353,
+    "paint_flesh": 0.020767979551527826,
+    "paint_blue": 0.050441852754191475,
+    "paint_yellow": 0.0029254325905639237,
+    "paint_gold": 0.20930232558139536,
+    "paint_white": 0.6597938144329897,
+    "paint_spotting": 0.0
+   },
+   "shown>=0.5": {
+    "clean": 2.8539220023116767e-06,
+    "edges": 0.0017700052192461593,
+    "foxing": 0.006071929005137786,
+    "adhesive": 0.16551641668659675,
+    "mirroring": 0.011254409920985878,
+    "glare": 0.01938005151434408,
+    "yellowing_edge": 0.00036495758381859173,
+    "paint_rose": 0.32425249169435216,
+    "paint_flesh": 0.01434878587196468,
+    "paint_blue": 0.014963887727593812,
+    "paint_yellow": 0.0008714054525084028,
+    "paint_gold": 0.165374677002584,
+    "paint_white": 0.5486827033218786,
+    "paint_spotting": 0.0
+   }
+  },
+  "prop_auto_no_plane": {
+   "shown>=0.2": {
+    "clean": 0.002648439618145236,
+    "edges": 0.021860320870176926,
+    "foxing": 0.23540401681457263,
+    "adhesive": 0.7794424134750076,
+    "mirroring": 0.16023441827918322,
+    "glare": 0.2855493383071321,
+    "yellowing_edge": 0.015170070234059464,
+    "paint_rose": 0.6272425249169435,
+    "paint_flesh": 0.028494248867201116,
+    "paint_blue": 0.1890452232329494,
+    "paint_yellow": 0.019170919955184863,
+    "paint_gold": 0.21963824289405684,
+    "paint_white": 0.7800687285223368,
+    "paint_spotting": 0.0
+   },
+   "shown>=0.5": {
+    "clean": 0.0009988727008090868,
+    "edges": 0.011202468930357102,
+    "foxing": 0.1877627276973377,
+    "adhesive": 0.743790358399672,
+    "mirroring": 0.06163684604394857,
+    "glare": 0.2645528022026823,
+    "yellowing_edge": 0.002096478564824577,
+    "paint_rose": 0.5083056478405316,
+    "paint_flesh": 0.02222028581387243,
+    "paint_blue": 0.1512462698401257,
+    "paint_yellow": 0.0023652433710942364,
+    "paint_gold": 0.10335917312661498,
+    "paint_white": 0.6918671248568156,
+    "paint_spotting": 0.0
+   }
+  },
+  "prop_auto_no_edge_term": {
+   "shown>=0.2": {
+    "clean": 0.0019321051955650053,
+    "edges": 0.05597452402744264,
+    "foxing": 0.2837459131247081,
+    "adhesive": 0.737982165431002,
+    "mirroring": 0.20293897544050615,
+    "glare": 0.3030109245936584,
+    "yellowing_edge": 0.017761269079171464,
+    "paint_rose": 0.840531561461794,
+    "paint_flesh": 0.06715464157081445,
+    "paint_blue": 0.22377355226548648,
+    "paint_yellow": 0.13687289929042698,
+    "paint_gold": 0.42118863049095606,
+    "paint_white": 0.8820160366552119,
+    "paint_spotting": 0.1510204081632653
+   },
+   "shown>=0.5": {
+    "clean": 0.00046233536437449165,
+    "edges": 0.029643805359938883,
+    "foxing": 0.2001401214385801,
+    "adhesive": 0.7196521917386997,
+    "mirroring": 0.11567356379928664,
+    "glare": 0.27823074873434583,
+    "yellowing_edge": 0.0014071142398339037,
+    "paint_rose": 0.7016611295681063,
+    "paint_flesh": 0.03976414546299523,
+    "paint_blue": 0.17862960773855002,
+    "paint_yellow": 0.0780530312461098,
+    "paint_gold": 0.29457364341085274,
+    "paint_white": 0.8602520045819015,
+    "paint_spotting": 0.0
+   }
+  },
+  "prop_picks": {
+   "shown>=0.2": {
+    "clean": 0.13693117767091426,
+    "edges": 0.03676164686126639,
+    "foxing": 0.38206445586174687,
+    "adhesive": 0.7830127438586901,
+    "mirroring": 0.5769391503795205,
+    "glare": 0.8022737365663025,
+    "yellowing_edge": 0.19865857812525345,
+    "paint_rose": 0.6358803986710964,
+    "paint_flesh": 0.06825839433019636,
+    "paint_blue": 0.2523245923854282,
+    "paint_yellow": 0.0005601892194696875,
+    "paint_gold": 0.10335917312661498,
+    "paint_white": 0.7869415807560137,
+    "paint_spotting": 0.44081632653061226
+   },
+   "shown>=0.5": {
+    "clean": 0.10923386463847944,
+    "edges": 0.017231076450610047,
+    "foxing": 0.2998598785614199,
+    "adhesive": 0.7550650859270901,
+    "mirroring": 0.4887407306619498,
+    "glare": 0.7049649169553246,
+    "yellowing_edge": 0.15433245202835316,
+    "paint_rose": 0.53421926910299,
+    "paint_flesh": 0.04438247937725107,
+    "paint_blue": 0.20844926261767122,
+    "paint_yellow": 0.0003112162330387153,
+    "paint_gold": 0.07751937984496124,
+    "paint_white": 0.7239404352806414,
+    "paint_spotting": 0.2979591836734694
+   }
+  },
+  "prop_badpick": {
+   "shown>=0.2": {
+    "clean": 0.04248919077041625,
+    "edges": 0.033198944048168345,
+    "foxing": 0.38510042036431574,
+    "adhesive": 0.7854556014896307,
+    "mirroring": 0.5739554683020225,
+    "glare": 0.3262811972644107,
+    "yellowing_edge": 0.16569074305364065,
+    "paint_rose": 0.6325581395348837,
+    "paint_flesh": 0.06268153828279308,
+    "paint_blue": 0.20777170700765493,
+    "paint_yellow": 0.0011826216855471182,
+    "paint_gold": 0.12144702842377261,
+    "paint_white": 0.736540664375716,
+    "paint_spotting": 0.40816326530612246
+   },
+   "shown>=0.5": {
+    "clean": 0.014937427760099316,
+    "edges": 0.015234147485306687,
+    "foxing": 0.3024287716020551,
+    "adhesive": 0.7583962554238273,
+    "mirroring": 0.4861749584519841,
+    "glare": 0.30812683186783907,
+    "yellowing_edge": 0.11883018929133347,
+    "paint_rose": 0.521594684385382,
+    "paint_flesh": 0.038311839200650635,
+    "paint_blue": 0.1691798693903441,
+    "paint_yellow": 0.0004357027262542014,
+    "paint_gold": 0.07751937984496124,
+    "paint_white": 0.6643757159221076,
+    "paint_spotting": 0.2979591836734694
+   }
+  },
+  "warnings": {
+   "prop_auto": [
+    "This capture has colour fringes along edges; the scale is widened there, but thin lines of colour along edges are the camera's.",
+    "The light's colour drifts across the frame (see the expected-tone picture). An even drift is allowed for; soft colour that spans the frame is the light's."
+   ],
+   "prop_picks": [
+    "At some tones the commonest colour was overruled as not the print's own (marked on the tone strip): a large area of one colour at those tones?",
+    "Colour departs at one range of tones all over the print: the expected tone may be wrong there (or the print is coloured all over at those tones).",
+    "This capture has colour fringes along edges; the scale is widened there, but thin lines of colour along edges are the camera's.",
+    "The light's colour drifts across the frame (see the expected-tone picture). An even drift is allowed for; soft colour that spans the frame is the light's."
+   ],
+   "prop_badpick": [
+    "Unpainted pick 1 disagrees in colour with the other picks: it may hold colour, or the light or the print's tone differs there.",
+    "At some tones the commonest colour was overruled as not the print's own (marked on the tone strip): a large area of one colour at those tones?",
+    "This capture has colour fringes along edges; the scale is widened there, but thin lines of colour along edges are the camera's.",
+    "The light's colour drifts across the frame (see the expected-tone picture). An even drift is allowed for; soft colour that spans the frame is the light's."
+   ]
+  },
+  "seconds": 111.1
+ },
+ "P3_heavy_aged_capture": {
+  "v41_raw": {
+   "shown>=0.2": {
+    "clean": 9.09955366689264e-06,
+    "edges": 0.0007353859388658406,
+    "foxing": 0.016656925774400935,
+    "adhesive": 0.014753459694767688,
+    "mirroring": 0.005393988258139244,
+    "glare": 0.0,
+    "yellowing_edge": 0.0,
+    "paint_rose": 0.0,
+    "paint_flesh": 0.0,
+    "paint_blue": 0.000308413520848754,
+    "paint_yellow": 0.003915962207856788,
+    "paint_red": 0.0026833520879447005,
+    "paint_gold": 0.0,
+    "paint_white": 0.023307436182019976,
+    "paint_spotting": 0.0
+   },
+   "shown>=0.5": {
+    "clean": 0.0,
+    "edges": 0.0,
+    "foxing": 0.0,
+    "adhesive": 0.0012365126954282906,
+    "mirroring": 0.00010220188278579621,
+    "glare": 0.0,
+    "yellowing_edge": 0.0,
+    "paint_rose": 0.0,
+    "paint_flesh": 0.0,
+    "paint_blue": 0.0,
+    "paint_yellow": 0.0,
+    "paint_red": 0.0,
+    "paint_gold": 0.0,
+    "paint_white": 0.0,
+    "paint_spotting": 0.0
+   }
+  },
+  "v41_lrc": {
+   "shown>=0.2": {
+    "clean": 0.00010009509033581902,
+    "edges": 0.0029554189618570576,
+    "foxing": 0.004091174751607247,
+    "adhesive": 0.023358232972542643,
+    "mirroring": 0.00975460192366655,
+    "glare": 0.0,
+    "yellowing_edge": 0.0001812201055469827,
+    "paint_rose": 0.13043478260869565,
+    "paint_flesh": 0.005663171957134144,
+    "paint_blue": 0.0005583907956419546,
+    "paint_yellow": 0.018212332173048233,
+    "paint_red": 0.007753279996042983,
+    "paint_gold": 0.0,
+    "paint_white": 0.07103218645948946,
+    "paint_spotting": 0.0
+   },
+   "shown>=0.5": {
+    "clean": 7.279642933514111e-05,
+    "edges": 0.002358785086928168,
+    "foxing": 0.0020455873758036236,
+    "adhesive": 0.016464251232278064,
+    "mirroring": 0.00893698686138018,
+    "glare": 0.0,
+    "yellowing_edge": 0.00012081340369798846,
+    "paint_rose": 0.08428093645484949,
+    "paint_flesh": 0.003659280341532832,
+    "paint_blue": 0.00026620956536418765,
+    "paint_yellow": 0.01336399801093983,
+    "paint_red": 0.00577477154410219,
+    "paint_gold": 0.0,
+    "paint_white": 0.05549389567147614,
+    "paint_spotting": 0.0
+   }
+  },
+  "todo": {
+   "shown>=0.2": {
+    "clean": 0.09310663311964548,
+    "edges": 0.2347546169749275,
+    "foxing": 0.6136762127410871,
+    "adhesive": 0.8128292426783204,
+    "mirroring": 0.11922417415200827,
+    "glare": 0.2724886387872623,
+    "yellowing_edge": 0.1263598372313961,
+    "paint_rose": 0.948494983277592,
+    "paint_flesh": 0.4206139459239683,
+    "paint_blue": 0.12792992844806317,
+    "paint_yellow": 0.4145325708602685,
+    "paint_red": 0.18417440552003858,
+    "paint_gold": 0.875968992248062,
+    "paint_white": 0.8201997780244173,
+    "paint_spotting": 0.2979591836734694
+   },
+   "shown>=0.5": {
+    "clean": 0.07497122266152845,
+    "edges": 0.14899196625549804,
+    "foxing": 0.5005844535359439,
+    "adhesive": 0.7611667259515219,
+    "mirroring": 0.059254380486253845,
+    "glare": 0.2390694469509294,
+    "yellowing_edge": 0.10259254581299183,
+    "paint_rose": 0.802675585284281,
+    "paint_flesh": 0.266662794412337,
+    "paint_blue": 0.08806342280571897,
+    "paint_yellow": 0.30196419691695675,
+    "paint_red": 0.11344272836315522,
+    "paint_gold": 0.7906976744186046,
+    "paint_white": 0.6182019977802442,
+    "paint_spotting": 0.2
+   }
+  },
+  "todo_plane": {
+   "shown>=0.2": {
+    "clean": 0.10734288483149901,
+    "edges": 0.23100831124862983,
+    "foxing": 0.6008182349503215,
+    "adhesive": 0.7752595829733896,
+    "mirroring": 0.09600163523012457,
+    "glare": 0.29524387642938,
+    "yellowing_edge": 0.12008852327580052,
+    "paint_rose": 0.8862876254180602,
+    "paint_flesh": 0.36162983184735575,
+    "paint_blue": 0.11187619307335697,
+    "paint_yellow": 0.4287046245648931,
+    "paint_red": 0.19127230459137617,
+    "paint_gold": 0.8733850129198967,
+    "paint_white": 0.9078801331853497,
+    "paint_spotting": 0.45714285714285713
+   },
+   "shown>=0.5": {
+    "clean": 0.06967983220423038,
+    "edges": 0.13912669450958082,
+    "foxing": 0.46990064289888955,
+    "adhesive": 0.7538492809593983,
+    "mirroring": 0.03631573568321959,
+    "glare": 0.2540317949895821,
+    "yellowing_edge": 0.09688136672908693,
+    "paint_rose": 0.7438127090301003,
+    "paint_flesh": 0.2103214939157204,
+    "paint_blue": 0.07411014583089849,
+    "paint_yellow": 0.31016907011437095,
+    "paint_red": 0.12063955285708985,
+    "paint_gold": 0.7855297157622739,
+    "paint_white": 0.634850166481687,
+    "paint_spotting": 0.3469387755102041
+   }
+  },
+  "first_try_auto": {
+   "shown>=0.2": {
+    "clean": 0.034364464423020054,
+    "edges": 0.11313843293418989,
+    "foxing": 0.6262419637638807,
+    "adhesive": 0.8494334061690126,
+    "mirroring": 0.4426590658747913,
+    "glare": 0.32009909274358933,
+    "yellowing_edge": 0.142823409244422,
+    "paint_rose": 1.0,
+    "paint_flesh": 0.5732291696918653,
+    "paint_blue": 0.1682574311426234,
+    "paint_yellow": 0.2692690203878667,
+    "paint_red": 0.25714427036317994,
+    "paint_gold": 0.6408268733850129,
+    "paint_white": 0.8368479467258602,
+    "paint_spotting": 0.5306122448979592
+   },
+   "shown>=0.5": {
+    "clean": 0.019341101318980303,
+    "edges": 0.06217479985014777,
+    "foxing": 0.4935710111046172,
+    "adhesive": 0.816809797245795,
+    "mirroring": 0.2784774190617867,
+    "glare": 0.29796728626974883,
+    "yellowing_edge": 0.11113734836544956,
+    "paint_rose": 0.9973244147157191,
+    "paint_flesh": 0.4340893909912003,
+    "paint_blue": 0.11930733569675483,
+    "paint_yellow": 0.1254351069119841,
+    "paint_red": 0.16731998664506795,
+    "paint_gold": 0.5012919896640827,
+    "paint_white": 0.7802441731409545,
+    "paint_spotting": 0.22448979591836735
+   }
+  },
+  "prop_auto": {
+   "shown>=0.2": {
+    "clean": 0.0034214321787516323,
+    "edges": 0.007104105673571895,
+    "foxing": 0.25306838106370544,
+    "adhesive": 0.7347256805054457,
+    "mirroring": 0.17881922758088142,
+    "glare": 0.2797073154725772,
+    "yellowing_edge": 0.0008896259726851877,
+    "paint_rose": 0.6301003344481605,
+    "paint_flesh": 0.058025731130020616,
+    "paint_blue": 0.05818951523887439,
+    "paint_yellow": 0.017777225261064147,
+    "paint_red": 0.05015518925669911,
+    "paint_gold": 0.16795865633074936,
+    "paint_white": 0.7624861265260822,
+    "paint_spotting": 0.1346938775510204
+   },
+   "shown>=0.5": {
+    "clean": 0.0007734620616858743,
+    "edges": 0.002733415659557936,
+    "foxing": 0.19696084161309177,
+    "adhesive": 0.7155682029913444,
+    "mirroring": 0.08276081352698697,
+    "glare": 0.25066854789756043,
+    "yellowing_edge": 0.0002745759174954283,
+    "paint_rose": 0.5384615384615384,
+    "paint_flesh": 0.029709871344349898,
+    "paint_blue": 0.028205228096147103,
+    "paint_yellow": 0.000870213823968175,
+    "paint_red": 0.02032917434369165,
+    "paint_gold": 0.14470284237726097,
+    "paint_white": 0.6847946725860156,
+    "paint_spotting": 0.012244897959183673
+   }
+  },
+  "prop_auto_high": {
+   "shown>=0.2": {
+    "clean": 0.009631877556405858,
+    "edges": 0.01880090466345687,
+    "foxing": 0.33489187609585036,
+    "adhesive": 0.7660111455527889,
+    "mirroring": 0.27113023926596336,
+    "glare": 0.3009039751940019,
+    "yellowing_edge": 0.010889680887868687,
+    "paint_rose": 0.8234113712374582,
+    "paint_flesh": 0.1373682223448436,
+    "paint_blue": 0.14811640500214265,
+    "paint_yellow": 0.0602312282446544,
+    "paint_red": 0.1074453746182097,
+    "paint_gold": 0.24031007751937986,
+    "paint_white": 0.8412874583795783,
+    "paint_spotting": 0.5428571428571428
+   },
+   "shown>=0.5": {
+    "clean": 0.003658020574090841,
+    "edges": 0.007506486658989052,
+    "foxing": 0.25628287551139683,
+    "adhesive": 0.735725053779833,
+    "mirroring": 0.18302086053985306,
+    "glare": 0.2810198021426345,
+    "yellowing_edge": 0.0009500326745341819,
+    "paint_rose": 0.6327759197324415,
+    "paint_flesh": 0.059971538930676964,
+    "paint_blue": 0.060565922578466894,
+    "paint_yellow": 0.019517652909000496,
+    "paint_red": 0.05307348922331177,
+    "paint_gold": 0.17054263565891473,
+    "paint_white": 0.7658157602663707,
+    "paint_spotting": 0.14285714285714285
+   }
+  },
+  "prop_auto_fine_only": {
+   "shown>=0.2": {
+    "clean": 0.00020019018067163804,
+    "edges": 0.002192282610203827,
+    "foxing": 0.10520163646990065,
+    "adhesive": 0.421786337381642,
+    "mirroring": 0.06286551367801865,
+    "glare": 0.09180844257050515,
+    "yellowing_edge": 0.00031850806429469685,
+    "paint_rose": 0.39531772575250834,
+    "paint_flesh": 0.023843406034908372,
+    "paint_blue": 0.011989169815731037,
+    "paint_yellow": 0.002672799602187966,
+    "paint_red": 0.01705226972016471,
+    "paint_gold": 0.16795865633074936,
+    "paint_white": 0.46170921198668147,
+    "paint_spotting": 0.1346938775510204
+   },
+   "shown>=0.5": {
+    "clean": 1.819910733378528e-05,
+    "edges": 0.0005688834621414994,
+    "foxing": 0.05201636469900643,
+    "adhesive": 0.09646492877348103,
+    "mirroring": 0.013899456058868285,
+    "glare": 0.02216461864059193,
+    "yellowing_edge": 1.64745550497257e-05,
+    "paint_rose": 0.29899665551839466,
+    "paint_flesh": 0.013882031771846775,
+    "paint_blue": 0.003473710182191229,
+    "paint_yellow": 0.00031079065141720536,
+    "paint_red": 0.0034871211465456477,
+    "paint_gold": 0.14470284237726097,
+    "paint_white": 0.33518312985571586,
+    "paint_spotting": 0.012244897959183673
+   }
+  },
+  "prop_auto_no_plane": {
+   "shown>=0.2": {
+    "clean": 0.009613678449072073,
+    "edges": 0.012723564263018412,
+    "foxing": 0.2206312098188194,
+    "adhesive": 0.7729051272930535,
+    "mirroring": 0.16526044446463248,
+    "glare": 0.2723573901202566,
+    "yellowing_edge": 0.016150555467081093,
+    "paint_rose": 0.611371237458194,
+    "paint_flesh": 0.04812244068190399,
+    "paint_blue": 0.06699715610269197,
+    "paint_yellow": 0.01858528095474888,
+    "paint_red": 0.04697721005576921,
+    "paint_gold": 0.16795865633074936,
+    "paint_white": 0.6703662597114317,
+    "paint_spotting": 0.012244897959183673
+   },
+   "shown>=0.5": {
+    "clean": 0.003516977492254005,
+    "edges": 0.005536207351084348,
+    "foxing": 0.17708942139099942,
+    "adhesive": 0.7440418720463439,
+    "mirroring": 0.07293807701479656,
+    "glare": 0.24277722179384115,
+    "yellowing_edge": 0.0013399304773776901,
+    "paint_rose": 0.5137123745819397,
+    "paint_flesh": 0.02526645950106003,
+    "paint_blue": 0.046492526653421115,
+    "paint_yellow": 0.0004351069119840875,
+    "paint_red": 0.015654948125981526,
+    "paint_gold": 0.11627906976744186,
+    "paint_white": 0.5882352941176471,
+    "paint_spotting": 0.0
+   }
+  },
+  "prop_auto_no_edge_term": {
+   "shown>=0.2": {
+    "clean": 0.005145797598627788,
+    "edges": 0.05078325540092409,
+    "foxing": 0.2831677381648159,
+    "adhesive": 0.7488862916476108,
+    "mirroring": 0.19159446292910595,
+    "glare": 0.2835463389824947,
+    "yellowing_edge": 0.001658438541672387,
+    "paint_rose": 0.6702341137123746,
+    "paint_flesh": 0.09964278453808846,
+    "paint_blue": 0.06981183528770112,
+    "paint_yellow": 0.15825459970164096,
+    "paint_red": 0.08815491721178696,
+    "paint_gold": 0.3643410852713178,
+    "paint_white": 0.7746947835738068,
+    "paint_spotting": 0.2816326530612245
+   },
+   "shown>=0.5": {
+    "clean": 0.0016606685442079065,
+    "edges": 0.025391627700462046,
+    "foxing": 0.22793687901811807,
+    "adhesive": 0.7280857767162966,
+    "mirroring": 0.08914275331872225,
+    "glare": 0.2554919364100208,
+    "yellowing_edge": 0.0005766094267403995,
+    "paint_rose": 0.5892976588628762,
+    "paint_flesh": 0.058229024482328,
+    "paint_blue": 0.038636098017063386,
+    "paint_yellow": 0.09416956737941323,
+    "paint_red": 0.052034772286042856,
+    "paint_gold": 0.28165374677002586,
+    "paint_white": 0.7003329633740288,
+    "paint_spotting": 0.08571428571428572
+   }
+  },
+  "prop_picks": {
+   "shown>=0.2": {
+    "clean": 0.06887452170471038,
+    "edges": 0.01856502615476405,
+    "foxing": 0.2679719462302747,
+    "adhesive": 0.10945678134051527,
+    "mirroring": 0.5860823747175253,
+    "glare": 0.38057191606647744,
+    "yellowing_edge": 0.031587213548674074,
+    "paint_rose": 0.8127090301003345,
+    "paint_flesh": 0.08375686115064038,
+    "paint_blue": 0.2521881127689691,
+    "paint_yellow": 0.0,
+    "paint_red": 0.2183531390273158,
+    "paint_gold": 0.028423772609819122,
+    "paint_white": 0.7991120976692564,
+    "paint_spotting": 0.7959183673469388
+   },
+   "shown>=0.5": {
+    "clean": 0.007980308565864845,
+    "edges": 0.007575862690957528,
+    "foxing": 0.22150789012273525,
+    "adhesive": 0.0767146027067771,
+    "mirroring": 0.4936464496201497,
+    "glare": 0.2924384361721326,
+    "yellowing_edge": 0.009093954387448585,
+    "paint_rose": 0.5846153846153846,
+    "paint_flesh": 0.0391484912729068,
+    "paint_blue": 0.14440894983572922,
+    "paint_yellow": 0.0,
+    "paint_red": 0.11319541480666263,
+    "paint_gold": 0.012919896640826873,
+    "paint_white": 0.6925638179800222,
+    "paint_spotting": 0.6204081632653061
+   }
+  },
+  "prop_badpick": {
+   "shown>=0.2": {
+    "clean": 0.0389369901406336,
+    "edges": 0.02024392612840116,
+    "foxing": 0.3287551139684395,
+    "adhesive": 0.8051222114944865,
+    "mirroring": 0.5974267837067487,
+    "glare": 0.30694141387626533,
+    "yellowing_edge": 0.2022526208271325,
+    "paint_rose": 0.7377926421404682,
+    "paint_flesh": 0.20500682484825603,
+    "paint_blue": 0.13371187034944876,
+    "paint_yellow": 0.004661859771258081,
+    "paint_red": 0.241971583672359,
+    "paint_gold": 0.17571059431524547,
+    "paint_white": 0.7214206437291898,
+    "paint_spotting": 0.7183673469387755
+   },
+   "shown>=0.5": {
+    "clean": 0.01336269455983184,
+    "edges": 0.009948522984279392,
+    "foxing": 0.24547048509643482,
+    "adhesive": 0.7761403865372563,
+    "mirroring": 0.5071143866183668,
+    "glare": 0.2863681853231178,
+    "yellowing_edge": 0.16310907802898422,
+    "paint_rose": 0.6321070234113713,
+    "paint_flesh": 0.11047541602532454,
+    "paint_blue": 0.08132052930253093,
+    "paint_yellow": 0.0004972650422675286,
+    "paint_red": 0.13372243999554836,
+    "paint_gold": 0.07751937984496124,
+    "paint_white": 0.6548279689234184,
+    "paint_spotting": 0.5142857142857142
+   }
+  },
+  "warnings": {
+   "prop_auto": [
+    "This capture has colour fringes along edges; the scale is widened there, but thin lines of colour along edges are the camera's.",
+    "The light's colour drifts across the frame (see the expected-tone picture). An even drift is allowed for; soft colour that spans the frame is the light's."
+   ],
+   "prop_picks": [
+    "This capture has colour fringes along edges; the scale is widened there, but thin lines of colour along edges are the camera's.",
+    "The light's colour drifts across the frame (see the expected-tone picture). An even drift is allowed for; soft colour that spans the frame is the light's."
+   ],
+   "prop_badpick": [
+    "This capture has colour fringes along edges; the scale is widened there, but thin lines of colour along edges are the camera's.",
+    "The light's colour drifts across the frame (see the expected-tone picture). An even drift is allowed for; soft colour that spans the frame is the light's."
+   ]
+  },
+  "seconds": 98.0
+ },
+ "P4_landscape_sepia_capture": {
+  "v41_raw": {
+   "shown>=0.2": {
+    "clean": 0.0,
+    "edges": 0.0,
+    "foxing": 0.0,
+    "adhesive": 0.0021396216966744815,
+    "mirroring": 2.3055818135706546e-05,
+    "glare": 0.0,
+    "yellowing_edge": 0.0,
+    "paint_blue": 0.0,
+    "paint_green": 0.0007426229801549666
+   },
+   "shown>=0.5": {
+    "clean": 0.0,
+    "edges": 0.0,
+    "foxing": 0.0,
+    "adhesive": 0.0,
+    "mirroring": 0.0,
+    "glare": 0.0,
+    "yellowing_edge": 0.0,
+    "paint_blue": 0.0,
+    "paint_green": 0.0
+   }
+  },
+  "v41_lrc": {
+   "shown>=0.2": {
+    "clean": 0.0,
+    "edges": 0.009648595885268058,
+    "foxing": 0.002050020500205002,
+    "adhesive": 0.0,
+    "mirroring": 0.003919489083070112,
+    "glare": 0.0,
+    "yellowing_edge": 1.893813857035992e-05,
+    "paint_blue": 0.0,
+    "paint_green": 0.0
+   },
+   "shown>=0.5": {
+    "clean": 0.0,
+    "edges": 0.0029659107974170295,
+    "foxing": 0.0012300123001230013,
+    "adhesive": 0.0,
+    "mirroring": 0.002236414359163535,
+    "glare": 0.0,
+    "yellowing_edge": 0.0,
+    "paint_blue": 0.0,
+    "paint_green": 0.0
+   }
+  },
+  "todo": {
+   "shown>=0.2": {
+    "clean": 0.049547461637920516,
+    "edges": 0.188804625319117,
+    "foxing": 0.5953259532595326,
+    "adhesive": 0.7223044180911843,
+    "mirroring": 0.7271113365457773,
+    "glare": 0.5893621653000508,
+    "yellowing_edge": 0.0825892223053396,
+    "paint_blue": 0.11258905282171912,
+    "paint_green": 0.0988642938520361
+   },
+   "shown>=0.5": {
+    "clean": 0.026435071113171185,
+    "edges": 0.11420633728788106,
+    "foxing": 0.3997539975399754,
+    "adhesive": 0.21129902351307672,
+    "mirroring": 0.6629700504922417,
+    "glare": 0.413758072708802,
+    "yellowing_edge": 0.07047828268959444,
+    "paint_blue": 0.08300026286168757,
+    "paint_green": 0.0504655560128602
+   }
+  },
+  "todo_plane": {
+   "shown>=0.2": {
+    "clean": 0.10959966821985313,
+    "edges": 0.19796515993392402,
+    "foxing": 0.5748257482574826,
+    "adhesive": 0.17233059431406916,
+    "mirroring": 0.6560763608696655,
+    "glare": 0.7044239653629393,
+    "yellowing_edge": 0.04465613074890869,
+    "paint_blue": 0.11193526862442457,
+    "paint_green": 0.06713132795304476
+   },
+   "shown>=0.5": {
+    "clean": 0.07020077578004928,
+    "edges": 0.12036341793062022,
+    "foxing": 0.46863468634686345,
+    "adhesive": 0.09817221678464935,
+    "mirroring": 0.388513591404791,
+    "glare": 0.5720920107394238,
+    "yellowing_edge": 0.009828893918016798,
+    "paint_blue": 0.06934830521611948,
+    "paint_green": 0.02605741758077889
+   }
+  },
+  "first_try_auto": {
+   "shown>=0.2": {
+    "clean": 0.14642238540167354,
+    "edges": 0.11495720078089804,
+    "foxing": 0.6793767937679377,
+    "adhesive": 0.41169508114629094,
+    "mirroring": 0.9628109653471053,
+    "glare": 0.7648695063251336,
+    "yellowing_edge": 0.20649199390191939,
+    "paint_blue": 0.17824381432528796,
+    "paint_green": 0.09741781937261779
+   },
+   "shown>=0.5": {
+    "clean": 0.11609865580249323,
+    "edges": 0.05860489562997447,
+    "foxing": 0.6592865928659286,
+    "adhesive": 0.32415268704618394,
+    "mirroring": 0.8970096603877988,
+    "glare": 0.6744551677430278,
+    "yellowing_edge": 0.1738331739373337,
+    "paint_blue": 0.11217791018218337,
+    "paint_green": 0.08151852978544459
+   }
+  },
+  "prop_auto": {
+   "shown>=0.2": {
+    "clean": 0.08835598058110317,
+    "edges": 0.014754467637783451,
+    "foxing": 0.32759327593275933,
+    "adhesive": 0.12006919627614777,
+    "mirroring": 0.7064994351324557,
+    "glare": 0.30638802215610866,
+    "yellowing_edge": 0.13859876712717906,
+    "paint_blue": 0.018123976355928204,
+    "paint_green": 0.06000632273380694
+   },
+   "shown>=0.5": {
+    "clean": 0.0813642018979776,
+    "edges": 0.004805526355308605,
+    "foxing": 0.2562525625256253,
+    "adhesive": 0.07393075819998635,
+    "mirroring": 0.568671754317202,
+    "glare": 0.17262898193164503,
+    "yellowing_edge": 0.12323993674661718,
+    "paint_blue": 0.009914603651755444,
+    "paint_green": 0.04070110767138486
+   }
+  },
+  "prop_auto_high": {
+   "shown>=0.2": {
+    "clean": 0.09897294528067137,
+    "edges": 0.03224958702507884,
+    "foxing": 0.43296432964329645,
+    "adhesive": 0.21776341246898687,
+    "mirroring": 0.8249141170774444,
+    "glare": 0.44583121689282346,
+    "yellowing_edge": 0.15241413921425664,
+    "paint_blue": 0.04515828991622126,
+    "paint_green": 0.08116660403581293
+   },
+   "shown>=0.5": {
+    "clean": 0.0888682881608158,
+    "edges": 0.015768133353356358,
+    "foxing": 0.33456334563345635,
+    "adhesive": 0.12525891698723055,
+    "mirroring": 0.7133700689368963,
+    "glare": 0.31536172991800304,
+    "yellowing_edge": 0.1394793905707008,
+    "paint_blue": 0.018929411526822003,
+    "paint_green": 0.06126490465198122
+   }
+  },
+  "prop_auto_fine_only": {
+   "shown>=0.2": {
+    "clean": 0.06428728257422361,
+    "edges": 0.006307253341342544,
+    "foxing": 0.2074620746207462,
+    "adhesive": 0.018164022488789747,
+    "mirroring": 0.27888317616950636,
+    "glare": 0.03862806279176644,
+    "yellowing_edge": 0.01642883520978723,
+    "paint_blue": 0.00551672541737718,
+    "paint_green": 0.015150701763804139
+   },
+   "shown>=0.5": {
+    "clean": 0.025098192286111584,
+    "edges": 0.0024027631776543023,
+    "foxing": 0.1877818778187782,
+    "adhesive": 0.005508387772289623,
+    "mirroring": 0.18290180527056002,
+    "glare": 0.005780906078417144,
+    "yellowing_edge": 0.0012309790070733947,
+    "paint_blue": 0.0016277204499652888,
+    "paint_green": 0.002904878645264809
+   }
+  },
+  "prop_auto_no_plane": {
+   "shown>=0.2": {
+    "clean": 0.016584128223268522,
+    "edges": 0.021099264153776845,
+    "foxing": 0.22591225912259122,
+    "adhesive": 0.04966653768237999,
+    "mirroring": 0.6294468909229244,
+    "glare": 0.1923179256464214,
+    "yellowing_edge": 0.07371670438512598,
+    "paint_blue": 0.09890339495979564,
+    "paint_green": 0.0625175217269414
+   },
+   "shown>=0.5": {
+    "clean": 0.009182503476372863,
+    "edges": 0.007170746358312059,
+    "foxing": 0.1902419024190242,
+    "adhesive": 0.023171647736325768,
+    "mirroring": 0.46452862379821547,
+    "glare": 0.12640592119584937,
+    "yellowing_edge": 0.01676025263476853,
+    "paint_blue": 0.05440899930577554,
+    "paint_green": 0.040936718978341655
+   }
+  },
+  "prop_auto_no_edge_term": {
+   "shown>=0.2": {
+    "clean": 0.08858529921202216,
+    "edges": 0.03698002703108575,
+    "foxing": 0.3296432964329643,
+    "adhesive": 0.12107072132565498,
+    "mirroring": 0.7096119705807761,
+    "glare": 0.326222093220134,
+    "yellowing_edge": 0.13794540134650166,
+    "paint_blue": 0.020459401349356664,
+    "paint_green": 0.06455451568455522
+   },
+   "shown>=0.5": {
+    "clean": 0.08143738869507941,
+    "edges": 0.02267607748911248,
+    "foxing": 0.25584255842558423,
+    "adhesive": 0.075159902578927,
+    "mirroring": 0.571576787402301,
+    "glare": 0.18569044336405197,
+    "yellowing_edge": 0.12206577215525485,
+    "paint_blue": 0.012303948991352525,
+    "paint_green": 0.04369247654325406
+   }
+  },
+  "prop_picks": {
+   "shown>=0.2": {
+    "clean": 0.5738918299138835,
+    "edges": 0.6461180357411023,
+    "foxing": 0.6789667896678967,
+    "adhesive": 0.256504222338561,
+    "mirroring": 0.9600212113526848,
+    "glare": 0.22018237670222288,
+    "yellowing_edge": 0.2736466332724157,
+    "paint_blue": 0.08090747942601792,
+    "paint_green": 0.8423670883810819
+   },
+   "shown>=0.5": {
+    "clean": 0.48969285940816276,
+    "edges": 0.5615708064273915,
+    "foxing": 0.6555965559655597,
+    "adhesive": 0.1562151457901805,
+    "mirroring": 0.9325156203167869,
+    "glare": 0.19108434317780518,
+    "yellowing_edge": 0.20675712784190442,
+    "paint_blue": 0.044197833750092674,
+    "paint_green": 0.6778119762122052
+   }
+  },
+  "warnings": {
+   "prop_auto": [
+    "At some tones the commonest colour was overruled as not the print's own (marked on the tone strip): a large area of one colour at those tones?",
+    "The light's colour drifts across the frame (see the expected-tone picture). An even drift is allowed for; soft colour that spans the frame is the light's."
+   ],
+   "prop_picks": [
+    "Colour departs at one range of tones all over the print: the expected tone may be wrong there (or the print is coloured all over at those tones).",
+    "The light's colour drifts across the frame (see the expected-tone picture). An even drift is allowed for; soft colour that spans the frame is the light's."
+   ]
+  },
+  "seconds": 61.2
+ },
+ "P5_portrait_semantic": {
+  "v41_raw": {
+   "shown>=0.2": {
+    "clean": 8.575618373548219e-06,
+    "edges": 0.0019128151021306635,
+    "foxing": 0.027790751985053715,
+    "adhesive": 0.02475315179883153,
+    "mirroring": 0.00730856326475076,
+    "glare": 0.0,
+    "semantic": null,
+    "yellowing_edge": 0.0,
+    "paint_rose": 0.0,
+    "paint_flesh": 0.0034409354678797423,
+    "paint_blue": 0.004807761615753889,
+    "paint_yellow": 0.005352919208265903,
+    "paint_gold": 0.0,
+    "paint_white": 0.0286368843069874,
+    "paint_spotting": 0.0
+   },
+   "shown>=0.5": {
+    "clean": 0.0,
+    "edges": 0.0,
+    "foxing": 0.0,
+    "adhesive": 0.003245754894256722,
+    "mirroring": 0.00028184618973107984,
+    "glare": 0.0,
+    "semantic": null,
+    "yellowing_edge": 0.0,
+    "paint_rose": 0.0,
+    "paint_flesh": 0.0,
+    "paint_blue": 0.0,
+    "paint_yellow": 0.0,
+    "paint_gold": 0.0,
+    "paint_white": 0.0,
+    "paint_spotting": 0.0
+   }
+  },
+  "v41_lrc": {
+   "shown>=0.2": {
+    "clean": 1.4292697289247031e-05,
+    "edges": 0.005207107778022362,
+    "foxing": 0.004437178888369921,
+    "adhesive": 0.01641668659674058,
+    "mirroring": 0.009660521123885978,
+    "glare": 0.0,
+    "semantic": null,
+    "yellowing_edge": 3.650626893762701e-05,
+    "paint_rose": 0.16358463726884778,
+    "paint_flesh": 0.00670690811535882,
+    "paint_blue": 0.0008217163781048625,
+    "paint_yellow": 0.006597784140420764,
+    "paint_gold": 0.0,
+    "paint_white": 0.28751431844215347,
+    "paint_spotting": 0.0
+   },
+   "shown>=0.5": {
+    "clean": 1.1434157831397626e-05,
+    "edges": 0.00378008698754393,
+    "foxing": 0.004437178888369921,
+    "adhesive": 0.01142847381188288,
+    "mirroring": 0.00890245206185066,
+    "glare": 0.0,
+    "semantic": null,
+    "yellowing_edge": 2.0281260520903896e-05,
+    "paint_rose": 0.1379800853485064,
+    "paint_flesh": 0.00565713119295483,
+    "paint_blue": 0.000756844032465005,
+    "paint_yellow": 0.005477405701481389,
+    "paint_gold": 0.0,
+    "paint_white": 0.21534936998854526,
+    "paint_spotting": 0.0
+   }
+  },
+  "todo": {
+   "shown>=0.2": {
+    "clean": 0.06550914875553485,
+    "edges": 0.21370395391026467,
+    "foxing": 0.48435310602522186,
+    "adhesive": 0.8180498137961666,
+    "mirroring": 0.14049546616387898,
+    "glare": 0.2997192907650215,
+    "semantic": null,
+    "yellowing_edge": 0.12011373730900123,
+    "paint_rose": 0.9914651493598862,
+    "paint_flesh": 0.7142857142857143,
+    "paint_blue": 0.26567387951043003,
+    "paint_yellow": 0.4032739947715673,
+    "paint_gold": 0.8940568475452196,
+    "paint_white": 0.9266895761741123,
+    "paint_spotting": 0.004081632653061225
+   },
+   "shown>=0.5": {
+    "clean": 0.04223492048972498,
+    "edges": 0.12697448820810214,
+    "foxing": 0.35427370387669316,
+    "adhesive": 0.8013768833919847,
+    "mirroring": 0.08215330488954545,
+    "glare": 0.25313577088441175,
+    "semantic": null,
+    "yellowing_edge": 0.07951470999825581,
+    "paint_rose": 0.957325746799431,
+    "paint_flesh": 0.5716326947190389,
+    "paint_blue": 0.1910130177173584,
+    "paint_yellow": 0.2697622307979584,
+    "paint_gold": 0.8165374677002584,
+    "paint_white": 0.9026345933562429,
+    "paint_spotting": 0.0
+   }
+  },
+  "todo_plane": {
+   "shown>=0.2": {
+    "clean": 0.07642876948451958,
+    "edges": 0.2586702898825744,
+    "foxing": 0.4939280709948622,
+    "adhesive": 0.811148313915747,
+    "mirroring": 0.16660025463345418,
+    "glare": 0.3252140852076893,
+    "semantic": null,
+    "yellowing_edge": 0.149748715182146,
+    "paint_rose": 1.0,
+    "paint_flesh": 0.7557227422506051,
+    "paint_blue": 0.26516931682212,
+    "paint_yellow": 0.44746669986306487,
+    "paint_gold": 0.896640826873385,
+    "paint_white": 0.9873997709049256,
+    "paint_spotting": 0.22857142857142856
+   },
+   "shown>=0.5": {
+    "clean": 0.05673343261993717,
+    "edges": 0.16652877192716123,
+    "foxing": 0.3967772069126576,
+    "adhesive": 0.7593358160511121,
+    "mirroring": 0.08016094389317058,
+    "glare": 0.28255694133532316,
+    "semantic": null,
+    "yellowing_edge": 0.09869672619892672,
+    "paint_rose": 0.9928876244665719,
+    "paint_flesh": 0.6633132126089872,
+    "paint_blue": 0.20155116986463303,
+    "paint_yellow": 0.32546993651188844,
+    "paint_gold": 0.8165374677002584,
+    "paint_white": 0.9587628865979382,
+    "paint_spotting": 0.012244897959183673
+   }
+  },
+  "first_try_auto": {
+   "shown>=0.2": {
+    "clean": 0.03447970294057954,
+    "edges": 0.10052906036753376,
+    "foxing": 0.6130312937879495,
+    "adhesive": 0.9133041784823533,
+    "mirroring": 0.521862517372416,
+    "glare": 0.3415058806808087,
+    "semantic": null,
+    "yellowing_edge": 0.11743661092024192,
+    "paint_rose": 1.0,
+    "paint_flesh": 0.8662409238036917,
+    "paint_blue": 0.29955166001124456,
+    "paint_yellow": 0.11571019544379435,
+    "paint_gold": 0.6589147286821705,
+    "paint_white": 0.8991981672394044,
+    "paint_spotting": 0.2
+   },
+   "shown>=0.5": {
+    "clean": 0.015524727795580126,
+    "edges": 0.05585875530388711,
+    "foxing": 0.5093414292386735,
+    "adhesive": 0.8606717004339062,
+    "mirroring": 0.4574946789383146,
+    "glare": 0.32340191166542304,
+    "semantic": null,
+    "yellowing_edge": 0.09208503526911205,
+    "paint_rose": 1.0,
+    "paint_flesh": 0.8048581343131251,
+    "paint_blue": 0.2448354404832269,
+    "paint_yellow": 0.048176272874393126,
+    "paint_gold": 0.5142118863049095,
+    "paint_white": 0.8419243986254296,
+    "paint_spotting": 0.2
+   }
+  },
+  "prop_auto": {
+   "shown>=0.2": {
+    "clean": 0.0008890057713911654,
+    "edges": 0.011833645810403588,
+    "foxing": 0.19360112097150864,
+    "adhesive": 0.7209675766168985,
+    "mirroring": 0.17963321119998446,
+    "glare": 0.2853995664996624,
+    "semantic": null,
+    "yellowing_edge": 0.001910494741069147,
+    "paint_rose": 1.0,
+    "paint_flesh": 0.5965357361560668,
+    "paint_blue": 0.17581126472241845,
+    "paint_yellow": 0.00790489231918337,
+    "paint_gold": 0.19896640826873385,
+    "paint_white": 0.8831615120274914,
+    "paint_spotting": 0.02857142857142857
+   },
+   "shown>=0.5": {
+    "clean": 0.0002515514722907478,
+    "edges": 0.004683360785772299,
+    "foxing": 0.11840261560018683,
+    "adhesive": 0.7000751648501828,
+    "mirroring": 0.08917030313043647,
+    "glare": 0.2537931279536652,
+    "semantic": null,
+    "yellowing_edge": 0.0009329379839615792,
+    "paint_rose": 1.0,
+    "paint_flesh": 0.48027294199982506,
+    "paint_blue": 0.11057851716233943,
+    "paint_yellow": 0.0009336486991161459,
+    "paint_gold": 0.14728682170542637,
+    "paint_white": 0.8316151202749141,
+    "paint_spotting": 0.0
+   }
+  },
+  "prop_auto_high": {
+   "shown>=0.2": {
+    "clean": 0.004756609657861412,
+    "edges": 0.03178916526874293,
+    "foxing": 0.3047641289117235,
+    "adhesive": 0.748641907820561,
+    "mirroring": 0.2685896999795904,
+    "glare": 0.31384358455033223,
+    "semantic": null,
+    "yellowing_edge": 0.022110630219889425,
+    "paint_rose": 1.0,
+    "paint_flesh": 0.7093575948444288,
+    "paint_blue": 0.24981619502068708,
+    "paint_yellow": 0.0304991908377941,
+    "paint_gold": 0.29457364341085274,
+    "paint_white": 0.8900343642611683,
+    "paint_spotting": 0.2897959183673469
+   },
+   "shown>=0.5": {
+    "clean": 0.0009576107183795512,
+    "edges": 0.012600289958479767,
+    "foxing": 0.19733769266697804,
+    "adhesive": 0.7225050394615463,
+    "mirroring": 0.18347215068080433,
+    "glare": 0.28731833848559146,
+    "semantic": null,
+    "yellowing_edge": 0.0023161199514872247,
+    "paint_rose": 1.0,
+    "paint_flesh": 0.6030093605108915,
+    "paint_blue": 0.17911975435005117,
+    "paint_yellow": 0.008900784264907258,
+    "paint_gold": 0.20155038759689922,
+    "paint_white": 0.8831615120274914,
+    "paint_spotting": 0.07346938775510205
+   }
+  },
+  "prop_auto_fine_only": {
+   "shown>=0.2": {
+    "clean": 0.00011434157831397625,
+    "edges": 0.004045755751728744,
+    "foxing": 0.03993460999532929,
+    "adhesive": 0.3748334415251631,
+    "mirroring": 0.060451148280252304,
+    "glare": 0.09316703976121948,
+    "semantic": null,
+    "yellowing_edge": 0.0007585191434818057,
+    "paint_rose": 0.8186344238975818,
+    "paint_flesh": 0.18881404368238416,
+    "paint_blue": 0.04251301050931999,
+    "paint_yellow": 0.002054027138055521,
+    "paint_gold": 0.19896640826873385,
+    "paint_white": 0.6666666666666666,
+    "paint_spotting": 0.0
+   },
+   "shown>=0.5": {
+    "clean": 1.7151236747096437e-05,
+    "edges": 0.0015029261516740927,
+    "foxing": 0.004670714619336758,
+    "adhesive": 0.103454166524309,
+    "mirroring": 0.011303004091629168,
+    "glare": 0.019525281597555344,
+    "semantic": null,
+    "yellowing_edge": 0.00031638766412610074,
+    "paint_rose": 0.5789473684210527,
+    "paint_flesh": 0.07514653136208556,
+    "paint_blue": 0.011431948909423789,
+    "paint_yellow": 0.0004357027262542014,
+    "paint_gold": 0.14728682170542637,
+    "paint_white": 0.5429553264604811,
+    "paint_spotting": 0.0
+   }
+  },
+  "prop_auto_no_plane": {
+   "shown>=0.2": {
+    "clean": 0.0015807723201907218,
+    "edges": 0.0163803769460237,
+    "foxing": 0.2080803362914526,
+    "adhesive": 0.770781372783491,
+    "mirroring": 0.16025385594744054,
+    "glare": 0.2761610347155598,
+    "semantic": null,
+    "yellowing_edge": 0.004543002356682473,
+    "paint_rose": 0.9992887624466572,
+    "paint_flesh": 0.32245647799842536,
+    "paint_blue": 0.15953551400521862,
+    "paint_yellow": 0.0044815137557575,
+    "paint_gold": 0.16795865633074936,
+    "paint_white": 0.7514318442153494,
+    "paint_spotting": 0.0
+   },
+   "shown>=0.5": {
+    "clean": 0.00033444911656838055,
+    "edges": 0.008273684370327076,
+    "foxing": 0.15646893974778142,
+    "adhesive": 0.7349072397417062,
+    "mirroring": 0.06209363124799549,
+    "glare": 0.24556728138435846,
+    "semantic": null,
+    "yellowing_edge": 0.002056519816819655,
+    "paint_rose": 0.7709815078236131,
+    "paint_flesh": 0.1363543580322515,
+    "paint_blue": 0.1221546268398518,
+    "paint_yellow": 0.0003734594796464584,
+    "paint_gold": 0.07751937984496124,
+    "paint_white": 0.6781214203894617,
+    "paint_spotting": 0.0
+   }
+  },
+  "prop_auto_no_edge_term": {
+   "shown>=0.2": {
+    "clean": 0.0012434646641644917,
+    "edges": 0.04999886141958206,
+    "foxing": 0.24194301728164408,
+    "adhesive": 0.7351293177081554,
+    "mirroring": 0.1994887893248326,
+    "glare": 0.29341221618164376,
+    "semantic": null,
+    "yellowing_edge": 0.005484052844852413,
+    "paint_rose": 1.0,
+    "paint_flesh": 0.6373895547196221,
+    "paint_blue": 0.19583519540992114,
+    "paint_yellow": 0.12187227685796091,
+    "paint_gold": 0.3979328165374677,
+    "paint_white": 0.8831615120274914,
+    "paint_spotting": 0.18775510204081633
+   },
+   "shown>=0.5": {
+    "clean": 0.00034874181385762757,
+    "edges": 0.027530874505666336,
+    "foxing": 0.15530126109294723,
+    "adhesive": 0.7128702723017527,
+    "mirroring": 0.10874403506555354,
+    "glare": 0.26152151511921257,
+    "semantic": null,
+    "yellowing_edge": 0.001338563194379657,
+    "paint_rose": 1.0,
+    "paint_flesh": 0.5227014259469863,
+    "paint_blue": 0.13671486441679762,
+    "paint_yellow": 0.06815635503547865,
+    "paint_gold": 0.2842377260981912,
+    "paint_white": 0.8373424971363116,
+    "paint_spotting": 0.0
+   }
+  },
+  "prop_picks": {
+   "shown>=0.2": {
+    "clean": 0.1332279485119873,
+    "edges": 0.039318977099352524,
+    "foxing": 0.3935077066791219,
+    "adhesive": 0.7725921623560764,
+    "mirroring": 0.5956576249113157,
+    "glare": 0.8197242653590591,
+    "semantic": null,
+    "yellowing_edge": 0.19998539749242494,
+    "paint_rose": 0.813655761024182,
+    "paint_flesh": 0.40261861021199663,
+    "paint_blue": 0.2568512405034094,
+    "paint_yellow": 0.0004979459728619445,
+    "paint_gold": 0.09819121447028424,
+    "paint_white": 0.8018327605956472,
+    "paint_spotting": 0.5306122448979592
+   },
+   "shown>=0.5": {
+    "clean": 0.10525428137747299,
+    "edges": 0.01796679899501302,
+    "foxing": 0.31807566557683326,
+    "adhesive": 0.7438245242406641,
+    "mirroring": 0.49637973428707494,
+    "glare": 0.7392779732082578,
+    "semantic": null,
+    "yellowing_edge": 0.15465272397610055,
+    "paint_rose": 0.6586059743954481,
+    "paint_flesh": 0.300090397457207,
+    "paint_blue": 0.2094511799558868,
+    "paint_yellow": 0.0003112162330387153,
+    "paint_gold": 0.06459948320413436,
+    "paint_white": 0.7342497136311569,
+    "paint_spotting": 0.2897959183673469
+   }
+  },
+  "prop_badpick": {
+   "shown>=0.2": {
+    "clean": 0.029966069136635326,
+    "edges": 0.03430163272431932,
+    "foxing": 0.3916394208313872,
+    "adhesive": 0.7744712836106461,
+    "mirroring": 0.5908565208517587,
+    "glare": 0.326351135273425,
+    "semantic": null,
+    "yellowing_edge": 0.1495580713332495,
+    "paint_rose": 0.8477951635846372,
+    "paint_flesh": 0.48919604584025894,
+    "paint_blue": 0.20513356495163407,
+    "paint_yellow": 0.0007469189592929168,
+    "paint_gold": 0.10594315245478036,
+    "paint_white": 0.7491408934707904,
+    "paint_spotting": 0.49795918367346936
+   },
+   "shown>=0.5": {
+    "clean": 0.009613268196747553,
+    "edges": 0.015029261516740928,
+    "foxing": 0.31293787949556284,
+    "adhesive": 0.7456694796542417,
+    "mirroring": 0.4915300360568746,
+    "glare": 0.30774970685427994,
+    "semantic": null,
+    "yellowing_edge": 0.10802204978643833,
+    "paint_rose": 0.7539118065433855,
+    "paint_flesh": 0.3795818388592424,
+    "paint_blue": 0.16438652385139907,
+    "paint_yellow": 0.0004357027262542014,
+    "paint_gold": 0.06459948320413436,
+    "paint_white": 0.6735395189003437,
+    "paint_spotting": 0.2816326530612245
+   }
+  },
+  "warnings": {
+   "prop_auto": [
+    "This capture has colour fringes along edges; the scale is widened there, but thin lines of colour along edges are the camera's.",
+    "The light's colour drifts across the frame (see the expected-tone picture). An even drift is allowed for; soft colour that spans the frame is the light's."
+   ],
+   "prop_picks": [
+    "At some tones the commonest colour was overruled as not the print's own (marked on the tone strip): a large area of one colour at those tones?",
+    "Colour departs at one range of tones all over the print: the expected tone may be wrong there (or the print is coloured all over at those tones).",
+    "This capture has colour fringes along edges; the scale is widened there, but thin lines of colour along edges are the camera's.",
+    "The light's colour drifts across the frame (see the expected-tone picture). An even drift is allowed for; soft colour that spans the frame is the light's."
+   ],
+   "prop_badpick": [
+    "Unpainted pick 1 disagrees in colour with the other picks: it may hold colour, or the light or the print's tone differs there.",
+    "At some tones the commonest colour was overruled as not the print's own (marked on the tone strip): a large area of one colour at those tones?",
+    "This capture has colour fringes along edges; the scale is widened there, but thin lines of colour along edges are the camera's.",
+    "The light's colour drifts across the frame (see the expected-tone picture). An even drift is allowed for; soft colour that spans the frame is the light's."
+   ]
+  },
+  "seconds": 86.7
+ },
+ "U6_unpainted_semantic": {
+  "v41_raw": {
+   "shown>=0.2": {
+    "clean": 8.300936622348888e-06,
+    "edges": 0.0018671082309490224,
+    "foxing": 0.06362528766752402,
+    "adhesive": 0.06608936612400415,
+    "mirroring": 0.007699411850483643,
+    "glare": 0.0,
+    "semantic": 0.0,
+    "yellowing_edge": 0.00038867820350754837
+   },
+   "shown>=0.5": {
+    "clean": 0.0,
+    "edges": 6.814263616602272e-05,
+    "foxing": 0.0001353729524840937,
+    "adhesive": 0.0034060732017088097,
+    "mirroring": 0.0005152384192874156,
+    "glare": 0.0,
+    "semantic": 0.0,
+    "yellowing_edge": 1.4530026299347602e-05
+   }
+  },
+  "v41_lrc": {
+   "shown>=0.2": {
+    "clean": 1.9368852118814073e-05,
+    "edges": 0.005274240039250158,
+    "foxing": 0.0025720860971977797,
+    "adhesive": 0.01587576492321903,
+    "mirroring": 0.01042142614105867,
+    "glare": 0.0,
+    "semantic": 0.0,
+    "yellowing_edge": 3.995757232320591e-05
+   },
+   "shown>=0.5": {
+    "clean": 8.300936622348888e-06,
+    "edges": 0.003884130261463295,
+    "foxing": 0.0025720860971977797,
+    "adhesive": 0.009271446715159913,
+    "mirroring": 0.009507607057794196,
+    "glare": 0.0,
+    "semantic": 0.0,
+    "yellowing_edge": 3.26925591735321e-05
+   }
+  },
+  "todo": {
+   "shown>=0.2": {
+    "clean": 0.07059393201532907,
+    "edges": 0.20833248155038125,
+    "foxing": 0.5651820766210911,
+    "adhesive": 0.8606281029904168,
+    "mirroring": 0.14378068342001651,
+    "glare": 0.20752287268829095,
+    "semantic": 0.42332771219786397,
+    "yellowing_edge": 0.1246458306089534
+   },
+   "shown>=0.5": {
+    "clean": 0.05635782570800072,
+    "edges": 0.12171637671974977,
+    "foxing": 0.45728983349126845,
+    "adhesive": 0.814305507447177,
+    "mirroring": 0.08027025713313567,
+    "glare": 0.16001105709912958,
+    "semantic": 0.2801573917931422,
+    "yellowing_edge": 0.09967961292009939
+   }
+  },
+  "todo_plane": {
+   "shown>=0.2": {
+    "clean": 0.058073352609952826,
+    "edges": 0.25242758141341454,
+    "foxing": 0.5727629619602004,
+    "adhesive": 0.8365777623830967,
+    "mirroring": 0.14435425071695912,
+    "glare": 0.2533221863390889,
+    "semantic": 0.5643620011242271,
+    "yellowing_edge": 0.14338229952196213
+   },
+   "shown>=0.5": {
+    "clean": 0.032880009961123946,
+    "edges": 0.15854747156748505,
+    "foxing": 0.4575605793962366,
+    "adhesive": 0.7559981526382635,
+    "mirroring": 0.056870655713799644,
+    "glare": 0.19420041666385746,
+    "semantic": 0.41242270938729625,
+    "yellowing_edge": 0.08715836275663659
+   }
+  },
+  "first_try_auto": {
+   "shown>=0.2": {
+    "clean": 0.02607324193079786,
+    "edges": 0.10780846467826455,
+    "foxing": 0.5653174495735752,
+    "adhesive": 0.9347304006465766,
+    "mirroring": 0.5300733971710494,
+    "glare": 0.24821164905846105,
+    "semantic": 0.7523046655424396,
+    "yellowing_edge": 0.09107783735088561
+   },
+   "shown>=0.5": {
+    "clean": 0.011759660214994258,
+    "edges": 0.06310689535335363,
+    "foxing": 0.47285772302693924,
+    "adhesive": 0.8901743447638841,
+    "mirroring": 0.4689544548680309,
+    "glare": 0.2128491582446181,
+    "semantic": 0.6513490725126475,
+    "yellowing_edge": 0.05354677941967075
+   }
+  },
+  "prop_auto": {
+   "shown>=0.2": {
+    "clean": 0.0016574203455956614,
+    "edges": 0.01572050616350144,
+    "foxing": 0.3039122783267903,
+    "adhesive": 0.7566331832351922,
+    "mirroring": 0.17923491955475623,
+    "glare": 0.19063382798120293,
+    "semantic": 0.36419336706014616,
+    "yellowing_edge": 0.007007105182860381
+   },
+   "shown>=0.5": {
+    "clean": 0.00031266861277514144,
+    "edges": 0.006180537100258261,
+    "foxing": 0.2549072695275484,
+    "adhesive": 0.7203440711234269,
+    "mirroring": 0.08496573178437758,
+    "glare": 0.14768643684980548,
+    "semantic": 0.20905002810567735,
+    "yellowing_edge": 0.0011515045842232974
+   }
+  },
+  "prop_auto_high": {
+   "shown>=0.2": {
+    "clean": 0.006256139234376946,
+    "edges": 0.03788730570830863,
+    "foxing": 0.36686070123189385,
+    "adhesive": 0.7910864796212909,
+    "mirroring": 0.27130705293345647,
+    "glare": 0.23738378247180103,
+    "semantic": 0.5170601461495222,
+    "yellowing_edge": 0.02380018307833137
+   },
+   "shown>=0.5": {
+    "clean": 0.0018013032470497088,
+    "edges": 0.016476889424944293,
+    "foxing": 0.3062136185190199,
+    "adhesive": 0.758422814917446,
+    "mirroring": 0.1828999173674233,
+    "glare": 0.19318235448790125,
+    "semantic": 0.3736087689713322,
+    "yellowing_edge": 0.00755924618223559
+   }
+  },
+  "prop_auto_fine_only": {
+   "shown>=0.2": {
+    "clean": 0.0001328149859575822,
+    "edges": 0.004899455540337033,
+    "foxing": 0.16177067821849195,
+    "adhesive": 0.401062232998499,
+    "mirroring": 0.062363291692995676,
+    "glare": 0.05067387625487962,
+    "semantic": 0.03957279370432827,
+    "yellowing_edge": 0.0010752219461517226
+   },
+   "shown>=0.5": {
+    "clean": 0.0,
+    "edges": 0.0016149804771347384,
+    "foxing": 0.10220657912549072,
+    "adhesive": 0.10916753261748066,
+    "mirroring": 0.008584066494920528,
+    "glare": 0.01426635473061805,
+    "semantic": 0.00907813378302417,
+    "yellowing_edge": 0.00046859334815396015
+   }
+  },
+  "prop_auto_no_plane": {
+   "shown>=0.2": {
+    "clean": 0.002174845395055409,
+    "edges": 0.018241783701644282,
+    "foxing": 0.31812643833762017,
+    "adhesive": 0.8051957048839626,
+    "mirroring": 0.16195012880960483,
+    "glare": 0.14761901551364945,
+    "semantic": 0.0739460370994941,
+    "yellowing_edge": 0.016796710402045827
+   },
+   "shown>=0.5": {
+    "clean": 0.0006336381621726318,
+    "edges": 0.009376426736444727,
+    "foxing": 0.2799512657371057,
+    "adhesive": 0.7548435515529385,
+    "mirroring": 0.06538667185145579,
+    "glare": 0.12054934904699942,
+    "semantic": 0.026025857223159077,
+    "yellowing_edge": 0.008972291239847144
+   }
+  },
+  "prop_auto_no_edge_term": {
+   "shown>=0.2": {
+    "clean": 0.0023131943387612237,
+    "edges": 0.0506913070439043,
+    "foxing": 0.3403276025450115,
+    "adhesive": 0.7657660778201132,
+    "mirroring": 0.19690856948427551,
+    "glare": 0.19988403530181162,
+    "semantic": 0.39418212478920744,
+    "yellowing_edge": 0.010294523633087777
+   },
+   "shown>=0.5": {
+    "clean": 0.00043718266211037476,
+    "edges": 0.0254921601897091,
+    "foxing": 0.2790036550697171,
+    "adhesive": 0.7299272601316246,
+    "mirroring": 0.10147280416079327,
+    "glare": 0.15606690893400124,
+    "semantic": 0.23532883642495783,
+    "yellowing_edge": 0.0014747976693837816
+   }
+  },
+  "prop_picks": {
+   "shown>=0.2": {
+    "clean": 0.17858081653546576,
+    "edges": 0.0584936388849139,
+    "foxing": 0.4433464193854068,
+    "adhesive": 0.8138090289804872,
+    "mirroring": 0.5776308754192389,
+    "glare": 0.683227594204462,
+    "semantic": 0.6249859471613266,
+    "yellowing_edge": 0.2866701538729785
+   },
+   "shown>=0.5": {
+    "clean": 0.1534428134641192,
+    "edges": 0.028020251991468542,
+    "foxing": 0.3912278326790307,
+    "adhesive": 0.7822306892968479,
+    "mirroring": 0.4885140718417343,
+    "glare": 0.634771879909116,
+    "semantic": 0.5050590219224284,
+    "yellowing_edge": 0.23228789794109528
+   }
+  },
+  "prop_badpick": {
+   "shown>=0.2": {
+    "clean": 0.03162933551002338,
+    "edges": 0.04397925738155106,
+    "foxing": 0.472586977121971,
+    "adhesive": 0.8313474194665743,
+    "mirroring": 0.5689593156078355,
+    "glare": 0.2780321060402775,
+    "semantic": 0.6730747611017426,
+    "yellowing_edge": 0.10574226639350218
+   },
+   "shown>=0.5": {
+    "clean": 0.011361215257121512,
+    "edges": 0.01736955795871919,
+    "foxing": 0.39366454582374444,
+    "adhesive": 0.8077011892391179,
+    "mirroring": 0.4787148203956642,
+    "glare": 0.23482851383148712,
+    "semantic": 0.5494378864530636,
+    "yellowing_edge": 0.0561113290615056
+   }
+  },
+  "warnings": {
+   "prop_auto": [
+    "At some tones the commonest colour was overruled as not the print's own (marked on the tone strip): a large area of one colour at those tones?",
+    "This capture has colour fringes along edges; the scale is widened there, but thin lines of colour along edges are the camera's.",
+    "The light's colour drifts across the frame (see the expected-tone picture). An even drift is allowed for; soft colour that spans the frame is the light's."
+   ],
+   "prop_picks": [
+    "At some tones the commonest colour was overruled as not the print's own (marked on the tone strip): a large area of one colour at those tones?",
+    "Colour departs at one range of tones all over the print: the expected tone may be wrong there (or the print is coloured all over at those tones).",
+    "This capture has colour fringes along edges; the scale is widened there, but thin lines of colour along edges are the camera's.",
+    "The light's colour drifts across the frame (see the expected-tone picture). An even drift is allowed for; soft colour that spans the frame is the light's."
+   ],
+   "prop_badpick": [
+    "Unpainted pick 1 disagrees in colour with the other picks: it may hold colour, or the light or the print's tone differs there.",
+    "At some tones the commonest colour was overruled as not the print's own (marked on the tone strip): a large area of one colour at those tones?",
+    "This capture has colour fringes along edges; the scale is widened there, but thin lines of colour along edges are the camera's.",
+    "The light's colour drifts across the frame (see the expected-tone picture). An even drift is allowed for; soft colour that spans the frame is the light's."
+   ]
+  },
+  "seconds": 82.4
+ },
+ "P6_portrait_table": {
+  "v41_raw": {
+   "shown>=0.2": {
+    "clean": 0.0,
+    "edges": 0.004945973559552928,
+    "foxing": 0.004649000464900047,
+    "adhesive": 0.008337945028592511,
+    "mirroring": 0.012606177606177606,
+    "glare": 0.0003741561584511527,
+    "yellowing_edge": 0.0,
+    "table": 9.836936142012815e-05,
+    "paint_rose": 0.0,
+    "paint_flesh": 0.0,
+    "paint_blue": 0.0009518710214765899,
+    "paint_yellow": 0.0,
+    "paint_gold": 0.0,
+    "paint_white": 0.0,
+    "paint_spotting": 0.0
+   },
+   "shown>=0.5": {
+    "clean": 0.0,
+    "edges": 0.0035140406823740674,
+    "foxing": 0.004649000464900047,
+    "adhesive": 0.005921416712783619,
+    "mirroring": 0.010096525096525097,
+    "glare": 3.184307731499172e-05,
+    "yellowing_edge": 0.0,
+    "table": 0.0,
+    "paint_rose": 0.0,
+    "paint_flesh": 0.0,
+    "paint_blue": 0.0,
+    "paint_yellow": 0.0,
+    "paint_gold": 0.0,
+    "paint_white": 0.0,
+    "paint_spotting": 0.0
+   }
+  },
+  "v41_lrc": {
+   "shown>=0.2": {
+    "clean": 6.695510500792302e-05,
+    "edges": 0.011548345150004644,
+    "foxing": 0.027429102742910275,
+    "adhesive": 0.015827338129496403,
+    "mirroring": 0.022239382239382238,
+    "glare": 0.05128327601579417,
+    "yellowing_edge": 0.000704421600198167,
+    "table": 2.588667405792846e-05,
+    "paint_rose": 0.06299782766111513,
+    "paint_flesh": 0.002548554354512699,
+    "paint_blue": 0.004186745196025938,
+    "paint_yellow": 0.0,
+    "paint_gold": 0.0,
+    "paint_white": 0.0,
+    "paint_spotting": 0.1469387755102041
+   },
+   "shown>=0.5": {
+    "clean": 2.231836833597434e-05,
+    "edges": 0.009675222143100405,
+    "foxing": 0.023477452347745235,
+    "adhesive": 0.014572957019000184,
+    "mirroring": 0.019893822393822393,
+    "glare": 0.03259138963189403,
+    "yellowing_edge": 0.00029415407480802574,
+    "table": 1.627162369355503e-05,
+    "paint_rose": 0.03475742215785663,
+    "paint_flesh": 0.0014060989542139027,
+    "paint_blue": 0.0031679457433517757,
+    "paint_yellow": 0.0,
+    "paint_gold": 0.0,
+    "paint_white": 0.0,
+    "paint_spotting": 0.10204081632653061
+   }
+  },
+  "todo": {
+   "shown>=0.2": {
+    "clean": 0.24315862302044045,
+    "edges": 0.3635638874268553,
+    "foxing": 0.5620641562064156,
+    "adhesive": 0.11634384799852426,
+    "mirroring": 0.5186679536679537,
+    "glare": 0.19200579544007132,
+    "yellowing_edge": 0.18016937081991577,
+    "table": 0.040534833478421975,
+    "paint_rose": 0.8848660391020999,
+    "paint_flesh": 0.4332835339953716,
+    "paint_blue": 0.3325599381283836,
+    "paint_yellow": 0.4337731856093614,
+    "paint_gold": 0.8553921568627451,
+    "paint_white": 0.8686868686868687,
+    "paint_spotting": 0.4326530612244898
+   },
+   "shown>=0.5": {
+    "clean": 0.2292765979154644,
+    "edges": 0.29577541100343663,
+    "foxing": 0.4695490469549047,
+    "adhesive": 0.09140380003689356,
+    "mirroring": 0.37533783783783786,
+    "glare": 0.16435804356132977,
+    "yellowing_edge": 0.15844067376764925,
+    "table": 0.008447931173990253,
+    "paint_rose": 0.8225923244026068,
+    "paint_flesh": 0.3509974514456455,
+    "paint_blue": 0.2626717829734071,
+    "paint_yellow": 0.32634134196439685,
+    "paint_gold": 0.7450980392156863,
+    "paint_white": 0.696969696969697,
+    "paint_spotting": 0.4
+   }
+  },
+  "todo_plane": {
+   "shown>=0.2": {
+    "clean": 0.2570820965237547,
+    "edges": 0.36183782779652623,
+    "foxing": 0.5269642026964203,
+    "adhesive": 0.09750968456004427,
+    "mirroring": 0.21728764478764478,
+    "glare": 0.23688861291555216,
+    "yellowing_edge": 0.20363202873420858,
+    "table": 0.04434017456493746,
+    "paint_rose": 0.8950036205648081,
+    "paint_flesh": 0.43255119079005183,
+    "paint_blue": 0.24751621155333453,
+    "paint_yellow": 0.4045811029503299,
+    "paint_gold": 0.821078431372549,
+    "paint_white": 0.8787878787878788,
+    "paint_spotting": 0.5836734693877551
+   },
+   "shown>=0.5": {
+    "clean": 0.2269076625335174,
+    "edges": 0.284629555094585,
+    "foxing": 0.43491399349139936,
+    "adhesive": 0.08107360265633647,
+    "mirroring": 0.08802123552123552,
+    "glare": 0.18108361992102917,
+    "yellowing_edge": 0.14586945751795888,
+    "table": 0.014820490707793442,
+    "paint_rose": 0.7653874004344677,
+    "paint_flesh": 0.34768726015760026,
+    "paint_blue": 0.18346570289725742,
+    "paint_yellow": 0.2944727997012324,
+    "paint_gold": 0.7426470588235294,
+    "paint_white": 0.7474747474747475,
+    "paint_spotting": 0.46122448979591835
+   }
+  },
+  "first_try_auto": {
+   "shown>=0.2": {
+    "clean": 0.4460038961494438,
+    "edges": 0.49517786928387875,
+    "foxing": 0.49837284983728497,
+    "adhesive": 0.191883416343848,
+    "mirroring": 0.42777027027027026,
+    "glare": 0.6423465163673417,
+    "yellowing_edge": 0.39300532573693336,
+    "table": 0.05598621941397008,
+    "paint_rose": 0.8240405503258509,
+    "paint_flesh": 0.48164747927468726,
+    "paint_blue": 0.4363138794693319,
+    "paint_yellow": 0.21181376820614964,
+    "paint_gold": 0.6642156862745098,
+    "paint_white": 0.9494949494949495,
+    "paint_spotting": 0.6489795918367347
+   },
+   "shown>=0.5": {
+    "clean": 0.435039200619813,
+    "edges": 0.4492631350815815,
+    "foxing": 0.44723384472338445,
+    "adhesive": 0.10217672016233167,
+    "mirroring": 0.33943050193050195,
+    "glare": 0.520904980257292,
+    "yellowing_edge": 0.3758437577408967,
+    "table": 0.03891210882461926,
+    "paint_rose": 0.7574221578566256,
+    "paint_flesh": 0.4367694876526936,
+    "paint_blue": 0.367689928014754,
+    "paint_yellow": 0.13874019668865928,
+    "paint_gold": 0.5220588235294118,
+    "paint_white": 0.9494949494949495,
+    "paint_spotting": 0.6244897959183674
+   }
+  },
+  "prop_auto": {
+   "shown>=0.2": {
+    "clean": 0.004227736630500282,
+    "edges": 0.012051456701445865,
+    "foxing": 0.13668061366806136,
+    "adhesive": 0.3281866814240915,
+    "mirroring": 0.2918146718146718,
+    "glare": 0.6601945612023946,
+    "yellowing_edge": 0.014227768144661878,
+    "table": 0.9751273439458835,
+    "paint_rose": 0.5655322230267922,
+    "paint_flesh": 0.038228315317690484,
+    "paint_blue": 0.06686150276637516,
+    "paint_yellow": 0.004668243495580729,
+    "paint_gold": 0.20588235294117646,
+    "paint_white": 0.9494949494949495,
+    "paint_spotting": 0.2
+   },
+   "shown>=0.5": {
+    "clean": 0.0016324292268598375,
+    "edges": 0.006509489457877953,
+    "foxing": 0.08391445839144585,
+    "adhesive": 0.15240730492529053,
+    "mirroring": 0.21142857142857144,
+    "glare": 0.6080754044070819,
+    "yellowing_edge": 0.005294773346544463,
+    "table": 0.8729023473296417,
+    "paint_rose": 0.4380883417813179,
+    "paint_flesh": 0.022438995810996867,
+    "paint_blue": 0.03910851329644833,
+    "paint_yellow": 0.0004357027262542014,
+    "paint_gold": 0.15931372549019607,
+    "paint_white": 0.9494949494949495,
+    "paint_spotting": 0.07346938775510205
+   }
+  },
+  "prop_auto_high": {
+   "shown>=0.2": {
+    "clean": 0.02653016327480607,
+    "edges": 0.0228954456794328,
+    "foxing": 0.200836820083682,
+    "adhesive": 0.5881018262313227,
+    "mirroring": 0.39705598455598456,
+    "glare": 0.7184116673035282,
+    "yellowing_edge": 0.03435409957889522,
+    "table": 1.0,
+    "paint_rose": 0.7632150615496017,
+    "paint_flesh": 0.07118375955707883,
+    "paint_blue": 0.12955856981379024,
+    "paint_yellow": 0.014066973733349931,
+    "paint_gold": 0.2622549019607843,
+    "paint_white": 0.9696969696969697,
+    "paint_spotting": 0.24489795918367346
+   },
+   "shown>=0.5": {
+    "clean": 0.004396718562186945,
+    "edges": 0.012399764698597479,
+    "foxing": 0.13923756392375639,
+    "adhesive": 0.3424091496033942,
+    "mirroring": 0.29708494208494207,
+    "glare": 0.66346643739651,
+    "yellowing_edge": 0.014839298984394352,
+    "table": 0.978562875403,
+    "paint_rose": 0.5814627081824765,
+    "paint_flesh": 0.03983947036939391,
+    "paint_blue": 0.06949402106014635,
+    "paint_yellow": 0.005352919208265903,
+    "paint_gold": 0.22058823529411764,
+    "paint_white": 0.9494949494949495,
+    "paint_spotting": 0.20408163265306123
+   }
+  },
+  "prop_auto_fine_only": {
+   "shown>=0.2": {
+    "clean": 0.0034625354304097336,
+    "edges": 0.00739960989504319,
+    "foxing": 0.06555090655509066,
+    "adhesive": 0.23801881571665745,
+    "mirroring": 0.10471042471042472,
+    "glare": 0.6014918481722074,
+    "yellowing_edge": 0.007431260837255388,
+    "table": 0.8158244498896858,
+    "paint_rose": 0.4873280231716148,
+    "paint_flesh": 0.03160793274160002,
+    "paint_blue": 0.024689154619549052,
+    "paint_yellow": 0.0015560811651935764,
+    "paint_gold": 0.20588235294117646,
+    "paint_white": 0.0,
+    "paint_spotting": 0.0326530612244898
+   },
+   "shown>=0.5": {
+    "clean": 0.0011382367851346914,
+    "edges": 0.0033592371280844607,
+    "foxing": 0.050674105067410505,
+    "adhesive": 0.08961446227633278,
+    "mirroring": 0.049536679536679534,
+    "glare": 0.5649439561839256,
+    "yellowing_edge": 0.0016410701015605648,
+    "table": 0.6283923561828841,
+    "paint_rose": 0.3598841419261405,
+    "paint_flesh": 0.018542929958695845,
+    "paint_blue": 0.01003926467963591,
+    "paint_yellow": 0.0004357027262542014,
+    "paint_gold": 0.15931372549019607,
+    "paint_white": 0.0,
+    "paint_spotting": 0.0
+   }
+  },
+  "prop_auto_no_plane": {
+   "shown>=0.2": {
+    "clean": 0.24049636051179207,
+    "edges": 0.06289668410786711,
+    "foxing": 0.0695025569502557,
+    "adhesive": 0.5245342187788231,
+    "mirroring": 0.1605791505791506,
+    "glare": 0.18015220990956565,
+    "yellowing_edge": 0.15518949715135003,
+    "table": 4.141867849268553e-05,
+    "paint_rose": 0.2548877624909486,
+    "paint_flesh": 0.0969915341125465,
+    "paint_blue": 0.1456585757629841,
+    "paint_yellow": 0.0,
+    "paint_gold": 0.13725490196078433,
+    "paint_white": 0.9494949494949495,
+    "paint_spotting": 0.40408163265306124
+   },
+   "shown>=0.5": {
+    "clean": 0.13457338438925784,
+    "edges": 0.015286850986098641,
+    "foxing": 0.05485820548582055,
+    "adhesive": 0.31429625530344957,
+    "mirroring": 0.07251930501930502,
+    "glare": 0.11625907527703477,
+    "yellowing_edge": 0.07300439682932872,
+    "table": 0.0,
+    "paint_rose": 0.13830557566980448,
+    "paint_flesh": 0.03497671148607083,
+    "paint_blue": 0.09831786542923433,
+    "paint_yellow": 0.0,
+    "paint_gold": 0.0661764705882353,
+    "paint_white": 0.9494949494949495,
+    "paint_spotting": 0.35918367346938773
+   }
+  },
+  "prop_auto_no_edge_term": {
+   "shown>=0.2": {
+    "clean": 0.3253794919701699,
+    "edges": 0.3133920554815939,
+    "foxing": 0.25871687587168757,
+    "adhesive": 0.2602287400848552,
+    "mirroring": 0.21006756756756756,
+    "glare": 0.15832378041013884,
+    "yellowing_edge": 0.2419417265296012,
+    "table": 0.0020080662876364504,
+    "paint_rose": 0.7559739319333816,
+    "paint_flesh": 0.3212936110378768,
+    "paint_blue": 0.24862424891427212,
+    "paint_yellow": 0.17527698244740444,
+    "paint_gold": 0.4877450980392157,
+    "paint_white": 0.98989898989899,
+    "paint_spotting": 0.4816326530612245
+   },
+   "shown>=0.5": {
+    "clean": 0.29689806563513294,
+    "edges": 0.2477553484628007,
+    "foxing": 0.16271501627150162,
+    "adhesive": 0.1109573879358052,
+    "mirroring": 0.10650579150579151,
+    "glare": 0.12426760922175518,
+    "yellowing_edge": 0.20198321773594252,
+    "table": 0.0008978977801807186,
+    "paint_rose": 0.6770456191165822,
+    "paint_flesh": 0.24788352813662595,
+    "paint_blue": 0.206347789874472,
+    "paint_yellow": 0.1027636001493838,
+    "paint_gold": 0.37254901960784315,
+    "paint_white": 0.9494949494949495,
+    "paint_spotting": 0.4530612244897959
+   }
+  },
+  "prop_picks": {
+   "shown>=0.2": {
+    "clean": 0.01695877159700679,
+    "edges": 0.04113904455246292,
+    "foxing": 0.4537424453742445,
+    "adhesive": 0.20621656520937096,
+    "mirroring": 0.6308494208494209,
+    "glare": 0.6963046108775952,
+    "yellowing_edge": 0.044014738667327226,
+    "table": 1.0,
+    "paint_rose": 0.7118030412744388,
+    "paint_flesh": 0.06046225503119782,
+    "paint_blue": 0.13854185257897556,
+    "paint_yellow": 0.01605875762479771,
+    "paint_gold": 0.0196078431372549,
+    "paint_white": 0.9494949494949495,
+    "paint_spotting": 0.40408163265306124
+   },
+   "shown>=0.5": {
+    "clean": 0.0026654508469820784,
+    "edges": 0.02318957243258305,
+    "foxing": 0.3688981868898187,
+    "adhesive": 0.15510053495665008,
+    "mirroring": 0.5641795366795367,
+    "glare": 0.6836947522608585,
+    "yellowing_edge": 0.017633762695070596,
+    "table": 1.0,
+    "paint_rose": 0.499637943519189,
+    "paint_flesh": 0.02610071183759557,
+    "paint_blue": 0.09210095782021537,
+    "paint_yellow": 0.0063488111539897925,
+    "paint_gold": 0.0,
+    "paint_white": 0.9494949494949495,
+    "paint_spotting": 0.4
+   }
+  },
+  "prop_badpick": {
+   "shown>=0.2": {
+    "clean": 0.02009928485571175,
+    "edges": 0.03247004551224496,
+    "foxing": 0.3484425848442585,
+    "adhesive": 0.6571112340896513,
+    "mirroring": 0.5712934362934363,
+    "glare": 0.7313877213093873,
+    "yellowing_edge": 0.03739627198414664,
+    "table": 1.0,
+    "paint_rose": 0.49746560463432293,
+    "paint_flesh": 0.05586313970178985,
+    "paint_blue": 0.1841126777321673,
+    "paint_yellow": 0.03280219096228059,
+    "paint_gold": 0.23774509803921567,
+    "paint_white": 0.9494949494949495,
+    "paint_spotting": 0.2
+   },
+   "shown>=0.5": {
+    "clean": 0.0024709622086257306,
+    "edges": 0.019729712994210346,
+    "foxing": 0.23686657368665737,
+    "adhesive": 0.5924183729939125,
+    "mirroring": 0.5057528957528957,
+    "glare": 0.7135635587823207,
+    "yellowing_edge": 0.015056044092147634,
+    "table": 1.0,
+    "paint_rose": 0.3396089790007241,
+    "paint_flesh": 0.023317807657380556,
+    "paint_blue": 0.12591468855970017,
+    "paint_yellow": 0.01605875762479771,
+    "paint_gold": 0.15931372549019607,
+    "paint_white": 0.9494949494949495,
+    "paint_spotting": 0.2
+   }
+  },
+  "prop_auto_box": {
+   "shown>=0.2": {
+    "clean": 0.0038036876321167696,
+    "edges": 0.026084398897798695,
+    "foxing": 0.36285448628544864,
+    "adhesive": 0.627965320051651,
+    "mirroring": 0.2943725868725869,
+    "glare": 0.23850464908928798,
+    "yellowing_edge": 0.018051771117166212,
+    "table": 0.0,
+    "paint_rose": 0.7914554670528603,
+    "paint_flesh": 0.05308023552157483,
+    "paint_blue": 0.13529210541971562,
+    "paint_yellow": 0.001058135192331632,
+    "paint_gold": 0.2107843137254902,
+    "paint_white": 0.9494949494949495,
+    "paint_spotting": 0.4
+   },
+   "shown>=0.5": {
+    "clean": 0.000997949898451424,
+    "edges": 0.012531347719743645,
+    "foxing": 0.2789400278940028,
+    "adhesive": 0.5817007932115846,
+    "mirroring": 0.2131081081081081,
+    "glare": 0.22321201120876322,
+    "yellowing_edge": 0.006734580133762695,
+    "table": 0.0,
+    "paint_rose": 0.6292541636495294,
+    "paint_flesh": 0.029352315669215222,
+    "paint_blue": 0.09300077339520495,
+    "paint_yellow": 0.00012448649321548613,
+    "paint_gold": 0.16666666666666666,
+    "paint_white": 0.9494949494949495,
+    "paint_spotting": 0.4
+   }
+  },
+  "warnings": {
+   "prop_auto": [
+    "At some tones the commonest colour was overruled as not the print's own (marked on the tone strip): a large area of one colour at those tones?",
+    "Colour departs at one range of tones all over the print: the expected tone may be wrong there (or the print is coloured all over at those tones).",
+    "This capture has colour fringes along edges; the scale is widened there, but thin lines of colour along edges are the camera's.",
+    "The light's colour drifts across the frame (see the expected-tone picture). An even drift is allowed for; soft colour that spans the frame is the light's."
+   ],
+   "prop_picks": [
+    "At some tones the commonest colour was overruled as not the print's own (marked on the tone strip): a large area of one colour at those tones?",
+    "Colour departs at one range of tones all over the print: the expected tone may be wrong there (or the print is coloured all over at those tones).",
+    "The light's colour drifts across the frame (see the expected-tone picture). An even drift is allowed for; soft colour that spans the frame is the light's."
+   ],
+   "prop_badpick": [
+    "At some tones the commonest colour was overruled as not the print's own (marked on the tone strip): a large area of one colour at those tones?",
+    "Colour departs at one range of tones all over the print: the expected tone may be wrong there (or the print is coloured all over at those tones).",
+    "The light's colour drifts across the frame (see the expected-tone picture). An even drift is allowed for; soft colour that spans the frame is the light's."
+   ],
+   "prop_auto_box": [
+    "At some tones the commonest colour was overruled as not the print's own (marked on the tone strip): a large area of one colour at those tones?",
+    "Colour departs at one range of tones all over the print: the expected tone may be wrong there (or the print is coloured all over at those tones).",
+    "This capture has colour fringes along edges; the scale is widened there, but thin lines of colour along edges are the camera's.",
+    "The light's colour drifts across the frame (see the expected-tone picture). An even drift is allowed for; soft colour that spans the frame is the light's."
+   ]
+  },
+  "seconds": 211.8
+ }
+}

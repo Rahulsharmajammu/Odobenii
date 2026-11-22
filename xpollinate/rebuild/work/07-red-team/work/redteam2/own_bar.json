@@ -1,0 +1,62 @@
+{
+ "normal": {
+  "kappa2_unpainted": 0.19322442066065112,
+  "kappa2_painted": 0.26230456417661113,
+  "regions": {
+   "wash": {
+    "T_unpainted": 0.03999999910593033,
+    "T_painted": 0.03999999910593033,
+    "edge_T_unpainted": 0.03999999910593033,
+    "edge_T_painted": 0.03999999910593033
+   },
+   "cheeks": {
+    "T_unpainted": 0.08607105910778046,
+    "T_painted": 0.10196778923273087,
+    "edge_T_unpainted": 0.08344695717096329,
+    "edge_T_painted": 0.09556253999471664
+   },
+   "lips": {
+    "T_unpainted": 0.13223066926002502,
+    "T_painted": 0.2490575909614563,
+    "edge_T_unpainted": 0.12451401352882385,
+    "edge_T_painted": 0.2800213694572449
+   },
+   "patch_yellow": {
+    "T_unpainted": 0.24813838303089142,
+    "T_painted": 0.28374698758125305,
+    "edge_T_unpainted": 0.24839170277118683,
+    "edge_T_painted": 0.300454318523407
+   }
+  }
+ },
+ "extensive": {
+  "kappa2_unpainted": 0.19322442066065112,
+  "kappa2_painted": 0.33437979497017495,
+  "regions": {
+   "wash": {
+    "T_unpainted": 0.0640142634510994,
+    "T_painted": 0.07971251755952835,
+    "edge_T_unpainted": 0.31007152795791626,
+    "edge_T_painted": 0.3997734785079956
+   },
+   "cheeks": {
+    "T_unpainted": 0.08607105910778046,
+    "T_painted": 0.10861986875534058,
+    "edge_T_unpainted": 0.08344695717096329,
+    "edge_T_painted": 0.10174332559108734
+   },
+   "lips": {
+    "T_unpainted": 0.13246458768844604,
+    "T_painted": 0.27040961384773254,
+    "edge_T_unpainted": 0.12451401352882385,
+    "edge_T_painted": 0.30458569526672363
+   },
+   "patch_yellow": {
+    "T_unpainted": 0.2509373128414154,
+    "T_painted": 0.32314008474349976,
+    "edge_T_unpainted": 0.24881792068481445,
+    "edge_T_painted": 0.34767112135887146
+   }
+  }
+ }
+}

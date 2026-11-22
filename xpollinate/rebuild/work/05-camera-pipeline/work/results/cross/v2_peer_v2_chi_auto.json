@@ -1,0 +1,70 @@
+{
+ "N1_neutral_even|v2_chi_auto": {
+  "FC": 0.041270708884811096,
+  "FCbord": 0.0,
+  "FCglare": null,
+  "notes": []
+ },
+ "N2_split_even|v2_chi_auto": {
+  "FC": 0.05826021360225513,
+  "FCbord": 0.0,
+  "FCglare": null,
+  "notes": []
+ },
+ "N3_split_mixed|v2_chi_auto": {
+  "FC": 0.2642904168447314,
+  "FCbord": 0.0045600858369098714,
+  "FCglare": 0.18466285475210933,
+  "notes": [
+   "a gentle colour gradient across the frame was taken out"
+  ]
+ },
+ "P1_touches|v2_chi_auto": {
+  "FC": 0.27241613433301104,
+  "FCbord": 0.003103172599511908,
+  "FCglare": 0.03361379027293249,
+  "DET:touch": 0.8289787572418493,
+  "DET:wash": 0.328884652049571,
+  "DET:lowchroma": 0.41765682743135146,
+  "AUC": 0.6123735380555556,
+  "AUC_R": 0.6933019222222223,
+  "R99:touch": 0.7733159150289673,
+  "R99:wash": 0.0,
+  "R99:lowchroma": 0.009718388922673902,
+  "notes": [
+   "a gentle colour gradient across the frame was taken out"
+  ]
+ },
+ "P2_backdrop|v2_chi_auto": {
+  "FC": 0.35109146540185987,
+  "FCbord": 0.0027139611209290584,
+  "FCglare": 0.34901126064268057,
+  "DET:large": 0.8614197887201985,
+  "DET:wash": 0.39773731059319156,
+  "DET:touch": 1.0,
+  "AUC": 0.6829402370833335,
+  "AUC_R": 0.5419987872222223,
+  "R99:large": 0.0,
+  "R99:wash": 0.06346402119997283,
+  "R99:touch": 1.0,
+  "notes": [
+   "a gentle colour gradient across the frame was taken out"
+  ]
+ },
+ "P3_full|v2_chi_auto": {
+  "FC": 0.7352337030705416,
+  "FCbord": 0.0004470672389127325,
+  "FCglare": 0.4954803230795669,
+  "DET:large": 0.5212901039313149,
+  "DET:wash": 0.6229192355117139,
+  "DET:touch": 1.0,
+  "AUC": 0.34418618763888886,
+  "AUC_R": 0.31783007763888893,
+  "R99:large": 0.01769543605964754,
+  "R99:wash": 0.038506987258528566,
+  "R99:touch": 0.6812450301033739,
+  "notes": [
+   "a gentle colour gradient across the frame was taken out"
+  ]
+ }
+}

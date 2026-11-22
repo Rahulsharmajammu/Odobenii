@@ -1,0 +1,8 @@
+U1_warm | as benched (local mean, no fringe term) | {'clean': 0.02, 'edges': 0.02, 'overruled_warning': True, 'warnings': 1, 'fringe_coef': [0.0, 0.0], 'kappa': 0.38}
+U1_warm | local-linear | {'clean': 0.05, 'edges': 0.02, 'overruled_warning': True, 'warnings': 1, 'fringe_coef': [0.0, 0.0], 'kappa': 0.38}
+U1_warm | local-linear + fringe term | {'clean': 0.05, 'edges': 0.02, 'overruled_warning': True, 'warnings': 1, 'fringe_coef': [0.01, -0.02], 'kappa': 0.38}
+U3_warm_capture | as benched (local mean, no fringe term) | {'clean': 0.05, 'edges': 0.06, 'glare': 0.19, 'overruled_warning': True, 'warnings': 3, 'fringe_coef': [0.0, 0.0], 'kappa': 1.08}
+U3_warm_capture | local-linear | {'clean': 0.05, 'edges': 0.07, 'glare': 0.19, 'overruled_warning': False, 'warnings': 2, 'fringe_coef': [0.0, 0.0], 'kappa': 1.07}
+U3_warm_capture | local-linear + fringe term | {'clean': 0.06, 'edges': 0.03, 'glare': 0.21, 'overruled_warning': False, 'warnings': 1, 'fringe_coef': [-0.65, -2.01], 'kappa': 0.52}
+U4_warm_aged_capture | as benched (local mean, no fringe term) | {'clean': 0.0, 'edges': 0.02, 'foxing': 0.33, 'adhesive': 0.78, 'mirroring': 0.19, 'glare': 0.2, 'yellowing_edge': 0.02, 'overruled_warning': True, 'warnings': 3, 'fringe_coef': [0.0, 0.0], 'kappa': 0.88}
+U4_warm_aged_capture | local-linear | {'clean': 0.0, 'edges': 0.02, 'foxing': 0.33, 'adhesive': 0.81, 'mirroring': 0.18, 'glare': 0.19, 'yellowing_edge': 0.03, 'overruled_warning': False, 'warnings': 2, 'fringe_coef': [0.0, 0.0], 'kappa': 0.87}

@@ -1,0 +1,17 @@
+{
+ "A+C (same-sign fringing)": {
+  "fp": 0.03135533033675634,
+  "on_edges": 0.9819979341891693,
+  "edge_share_of_unpainted": 0.3914697030335137
+ },
+ "A+C' (C's lens fringing reversed)": {
+  "fp": 0.00043542809761927374,
+  "on_edges": 0.5585106382978723,
+  "edge_share_of_unpainted": 0.39214700793729834
+ },
+ "A+C'' (C with no fringing)": {
+  "fp": 0.00414807133201237,
+  "on_edges": 0.9352678571428571,
+  "edge_share_of_unpainted": 0.39165015462676617
+ }
+}

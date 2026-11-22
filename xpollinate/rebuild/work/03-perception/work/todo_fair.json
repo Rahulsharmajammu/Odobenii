@@ -1,0 +1,352 @@
+{
+ "scan": {
+  "auc": 0.9993003606250002,
+  "left_out_share": 0.17007174744897957,
+  "false_shown": {
+   "margin": 0.0,
+   "light": 0.0032149241681563925,
+   "mid": 0.0028952168385811333,
+   "dark": 0.004482597367893647
+  },
+  "false_shown_all": 0.0035295742389966625,
+  "objects": {
+   "cheeks (faint pink)": {
+    "shown": 0.9551788202508128,
+    "usable": 1.0,
+    "pooled_d_score": 30.683089317190344,
+    "pooled_d_display": 241.56244229084913
+   },
+   "lips (red)": {
+    "shown": 1.0,
+    "usable": 1.0,
+    "pooled_d_score": 286.6427889024398,
+    "pooled_d_display": 167.35070396463777
+   },
+   "backdrop (faint blue wash)": {
+    "shown": 0.9757721620537505,
+    "usable": 0.9997593840230992,
+    "pooled_d_score": 93.074896594814,
+    "pooled_d_display": 285.8056714873257
+   },
+   "flag canton (blue)": {
+    "shown": 0.7899520237853909,
+    "usable": 0.9994934657076284,
+    "pooled_d_score": 28.28636959354273,
+    "pooled_d_display": 127.89877962609621
+   },
+   "flag stripes (red, over dark silver)": {
+    "shown": 1.0,
+    "usable": 0.9885246291931529,
+    "pooled_d_score": 449.67114780693373,
+    "pooled_d_display": 3453.909465164973
+   },
+   "mission patch (green)": {
+    "shown": 1.0,
+    "usable": 1.0,
+    "pooled_d_score": 68.22069387496427,
+    "pooled_d_display": 314.57522055649036
+   },
+   "small gold touches": {
+    "shown": 1.0,
+    "usable": 1.0,
+    "pooled_d_score": 289.71368827704913,
+    "pooled_d_display": 203.88646219710586
+   }
+  },
+  "stain_shown": 0.3859161454713922
+ },
+ "phone": {
+  "auc": 0.9029154464166667,
+  "left_out_share": 0.1427335778061225,
+  "false_shown": {
+   "margin": 0.12220091458917244,
+   "light": 0.0284249025999841,
+   "mid": 0.050922591899115015,
+   "dark": 0.043630451676232807
+  },
+  "false_shown_all": 0.05076356514495091,
+  "objects": {
+   "cheeks (faint pink)": {
+    "shown": 0.805387830933581,
+    "usable": 1.0,
+    "pooled_d_score": 12.291198492956392,
+    "pooled_d_display": 23.741810106774707
+   },
+   "lips (red)": {
+    "shown": 1.0,
+    "usable": 0.8468770987239759,
+    "pooled_d_score": 135.76606032684222,
+    "pooled_d_display": 29.973465790720667
+   },
+   "backdrop (faint blue wash)": {
+    "shown": 0.4632252808007915,
+    "usable": 0.9844057931160914,
+    "pooled_d_score": 20.028157220026443,
+    "pooled_d_display": 49.5133483431774
+   },
+   "flag canton (blue)": {
+    "shown": 0.39373225365443265,
+    "usable": 0.9633269172322966,
+    "pooled_d_score": 12.197373107051177,
+    "pooled_d_display": 18.088911110879447
+   },
+   "flag stripes (red, over dark silver)": {
+    "shown": 0.8459586628236395,
+    "usable": 0.9664309692164845,
+    "pooled_d_score": 223.10807995199158,
+    "pooled_d_display": 499.29629925104666
+   },
+   "mission patch (green)": {
+    "shown": 0.939433714607163,
+    "usable": 0.7803058014485332,
+    "pooled_d_score": 16.827595157678044,
+    "pooled_d_display": 36.8880285701032
+   },
+   "small gold touches": {
+    "shown": 1.0,
+    "usable": 0.9361702127659575,
+    "pooled_d_score": 68.00966298239246,
+    "pooled_d_display": 30.402162584288924
+   }
+  },
+  "stain_shown": 0.26119235095613047
+ },
+ "phone_mixed": {
+  "auc": 0.518330641625,
+  "left_out_share": 0.12071428571428566,
+  "false_shown": {
+   "margin": 0.12656562662121099,
+   "light": 0.2779743414729276,
+   "mid": 0.1889738250257005,
+   "dark": 0.05169406977383599
+  },
+  "false_shown_all": 0.15632658223845436,
+  "objects": {
+   "cheeks (faint pink)": {
+    "shown": 0.09103576405016256,
+    "usable": 1.0,
+    "pooled_d_score": 0.15194711716781198,
+    "pooled_d_display": -0.08050054858006055
+   },
+   "lips (red)": {
+    "shown": 1.0,
+    "usable": 0.948959032907992,
+    "pooled_d_score": 8.549037009079585,
+    "pooled_d_display": 5.36664368719872
+   },
+   "backdrop (faint blue wash)": {
+    "shown": 0.012978307850547216,
+    "usable": 0.9914409459645264,
+    "pooled_d_score": -0.3664165417794497,
+    "pooled_d_display": -1.081388323401603
+   },
+   "flag canton (blue)": {
+    "shown": 0.022564356086019987,
+    "usable": 0.9563029750447438,
+    "pooled_d_score": -0.8452893797122727,
+    "pooled_d_display": -0.6361311231825232
+   },
+   "flag stripes (red, over dark silver)": {
+    "shown": 0.3999556562869531,
+    "usable": 0.9664071613932338,
+    "pooled_d_score": NaN,
+    "pooled_d_display": NaN
+   },
+   "mission patch (green)": {
+    "shown": 0.22359384508389116,
+    "usable": 0.8415392493964445,
+    "pooled_d_score": 1.357771554144962,
+    "pooled_d_display": 0.46434347290076716
+   },
+   "small gold touches": {
+    "shown": 0.8150851581508516,
+    "usable": 0.9716312056737588,
+    "pooled_d_score": 7.763390177758118,
+    "pooled_d_display": 9.688009139289555
+   }
+  },
+  "stain_shown": 0.05617691916624301
+ },
+ "toned": {
+  "auc": 0.8842007103333333,
+  "left_out_share": 0.15337053571428572,
+  "false_shown": {
+   "margin": 0.10881787514962458,
+   "light": 0.020764027937629086,
+   "mid": 0.038757601621679294,
+   "dark": 0.031410798519103195
+  },
+  "false_shown_all": 0.04058852300196582,
+  "objects": {
+   "cheeks (faint pink)": {
+    "shown": 0.5544669932353627,
+    "usable": 0.9955875522526707,
+    "pooled_d_score": 8.063316743072043,
+    "pooled_d_display": 15.119615542556646
+   },
+   "lips (red)": {
+    "shown": 1.0,
+    "usable": 0.8643384822028207,
+    "pooled_d_score": 79.80919207510958,
+    "pooled_d_display": 27.174510937024973
+   },
+   "backdrop (faint blue wash)": {
+    "shown": 0.2591404746632457,
+    "usable": 0.9824579494935607,
+    "pooled_d_score": NaN,
+    "pooled_d_display": NaN
+   },
+   "flag canton (blue)": {
+    "shown": 0.33883682879666815,
+    "usable": 0.908114679363793,
+    "pooled_d_score": 13.897971262329433,
+    "pooled_d_display": 24.047533234808895
+   },
+   "flag stripes (red, over dark silver)": {
+    "shown": 0.4079635108481262,
+    "usable": 0.9656453110492108,
+    "pooled_d_score": NaN,
+    "pooled_d_display": NaN
+   },
+   "mission patch (green)": {
+    "shown": 0.8419104035542392,
+    "usable": 0.7904016387446046,
+    "pooled_d_score": 20.46413587492341,
+    "pooled_d_display": 41.665910916303304
+   },
+   "small gold touches": {
+    "shown": 1.0,
+    "usable": 0.9219858156028369,
+    "pooled_d_score": 64.00152168780409,
+    "pooled_d_display": 35.84492609819561
+   }
+  },
+  "stain_shown": 0.25624082232011747
+ },
+ "control": {
+  "auc": NaN,
+  "left_out_share": 0.12194754464285718,
+  "false_shown": {
+   "margin": 0.12381934643361199,
+   "light": 0.2614043023948475,
+   "mid": 0.1842995364381199,
+   "dark": 0.07891858647789271
+  },
+  "false_shown_all": 0.1635492329760893,
+  "objects": {},
+  "stain_shown": 0.11635621331972441
+ },
+ "phone_glare": {
+  "auc": 0.8626868022916666,
+  "left_out_share": 0.1402160395408163,
+  "false_shown": {
+   "margin": 0.010318997804468552,
+   "light": 0.06659739996452194,
+   "mid": 0.06621154225355866,
+   "dark": 0.1227102034121856,
+   "glare": 0.4083406505589045
+  },
+  "false_shown_all": 0.0803969194861488,
+  "objects": {
+   "cheeks (faint pink)": {
+    "shown": 0.6424043202629726,
+    "usable": 0.9890849976776591,
+    "pooled_d_score": 2.8469153716222912,
+    "pooled_d_display": 4.325083815975085
+   },
+   "lips (red)": {
+    "shown": 0.9984532095901005,
+    "usable": 0.8683680322364002,
+    "pooled_d_score": 15.927469109088143,
+    "pooled_d_display": 4.304059045995151
+   },
+   "backdrop (faint blue wash)": {
+    "shown": 0.3812901950294812,
+    "usable": 0.9852307621797516,
+    "pooled_d_score": 39.03764488563922,
+    "pooled_d_display": 99.86464432237516
+   },
+   "flag canton (blue)": {
+    "shown": 0.38067901669366766,
+    "usable": 0.9588356465066018,
+    "pooled_d_score": 1.4233235473773174,
+    "pooled_d_display": 1.85023696708271
+   },
+   "flag stripes (red, over dark silver)": {
+    "shown": 0.5399684589226751,
+    "usable": 0.9661690831607266,
+    "pooled_d_score": NaN,
+    "pooled_d_display": NaN
+   },
+   "mission patch (green)": {
+    "shown": 0.8863615602448159,
+    "usable": 0.8008632672470554,
+    "pooled_d_score": 2.2827654850781776,
+    "pooled_d_display": 4.623491089768641
+   },
+   "small gold touches": {
+    "shown": 1.0,
+    "usable": 0.9385342789598109,
+    "pooled_d_score": 13.147012152311374,
+    "pooled_d_display": 12.05207413060513
+   }
+  },
+  "stain_shown": 0.2673434856175973
+ },
+ "majority": {
+  "auc": 0.5699006565416667,
+  "left_out_share": 0.164554368622449,
+  "false_shown": {
+   "margin": 0.00672360530619662,
+   "light": 0.8993475321825343,
+   "mid": 0.12100383322567294,
+   "dark": 0.03951907997909043
+  },
+  "false_shown_all": 0.14976966901931457,
+  "objects": {
+   "cheeks (faint pink)": {
+    "shown": 0.8453777569216331,
+    "usable": 0.9897816999535531,
+    "pooled_d_score": 6.987869379925119,
+    "pooled_d_display": 9.473290152112089
+   },
+   "lips (red)": {
+    "shown": 1.0,
+    "usable": 0.8495634654130289,
+    "pooled_d_score": 52.00685147119044,
+    "pooled_d_display": 9.328958300772255
+   },
+   "backdrop (faint blue wash)": {
+    "shown": 0.128374388075988,
+    "usable": 0.9877178904855105,
+    "pooled_d_score": NaN,
+    "pooled_d_display": NaN
+   },
+   "flag canton (blue)": {
+    "shown": 0.3358012561844275,
+    "usable": 0.9623813865532029,
+    "pooled_d_score": 14.060821065164529,
+    "pooled_d_display": 21.061864911935988
+   },
+   "flag stripes (red, over dark silver)": {
+    "shown": 0.7164502697775259,
+    "usable": 0.9663357379234817,
+    "pooled_d_score": NaN,
+    "pooled_d_display": NaN
+   },
+   "mission patch (green)": {
+    "shown": 0.8902929888608069,
+    "usable": 0.7815494915502231,
+    "pooled_d_score": 10.429403483261602,
+    "pooled_d_display": 12.097896919262292
+   },
+   "small gold touches": {
+    "shown": 1.0,
+    "usable": 0.9290780141843972,
+    "pooled_d_score": 40.45774782064599,
+    "pooled_d_display": 14.82663494048227
+   }
+  },
+  "stain_shown": 0.2058550185873606
+ }
+}

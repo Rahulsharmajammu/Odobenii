@@ -1,0 +1,51 @@
+S1_benign              D_todo_baseline      AUC 0.948 TPRc 0.81 TPRf 0.71 TPRt 1.00 FPR 0.068 (L 0.040 M 0.105 D 0.093 l 0.076 r 0.059 sheen nan) 6s
+S1_benign              E0_edges             AUC 0.967 TPRc 0.79 TPRf 0.66 TPRt 1.00 FPR 0.031 (L 0.022 M 0.035 D 0.051 l 0.030 r 0.032 sheen nan) 7s
+S1_benign              E2_aniso_pool        AUC 0.976 TPRc 0.92 TPRf 0.70 TPRt 1.00 FPR 0.029 (L 0.021 M 0.035 D 0.046 l 0.027 r 0.032 sheen nan) 8s
+S1_benign              E3_full              AUC 0.976 TPRc 0.92 TPRf 0.70 TPRt 1.00 FPR 0.029 (L 0.021 M 0.035 D 0.046 l 0.027 r 0.032 sheen nan) 13s
+S1_benign              E3_full_picks        AUC 0.975 TPRc 0.92 TPRf 0.74 TPRt 1.00 FPR 0.031 (L 0.021 M 0.038 D 0.046 l 0.029 r 0.032 sheen nan) 15s
+S2_tone_shift          D_todo_baseline      AUC 0.918 TPRc 0.33 TPRf 0.42 TPRt 1.00 FPR 0.041 (L 0.030 M 0.049 D 0.066 l 0.044 r 0.039 sheen nan) 6s
+S2_tone_shift          E0_edges             AUC 0.953 TPRc 0.65 TPRf 0.45 TPRt 1.00 FPR 0.018 (L 0.015 M 0.019 D 0.028 l 0.017 r 0.019 sheen nan) 7s
+S2_tone_shift          E2_aniso_pool        AUC 0.942 TPRc 0.77 TPRf 0.71 TPRt 1.00 FPR 0.046 (L 0.065 M 0.022 D 0.029 l 0.017 r 0.076 sheen nan) 7s
+S2_tone_shift          E3_full              AUC 0.959 TPRc 0.73 TPRf 0.68 TPRt 1.00 FPR 0.018 (L 0.015 M 0.019 D 0.029 l 0.017 r 0.020 sheen nan) 11s
+S2_tone_shift          E3_full_picks        AUC 0.949 TPRc 0.81 TPRf 0.73 TPRt 1.00 FPR 0.021 (L 0.016 M 0.024 D 0.030 l 0.018 r 0.023 sheen nan) 15s
+S3_mixed_light         D_todo_baseline      AUC 0.498 TPRc 0.03 TPRf 0.06 TPRt 1.00 FPR 0.050 (L 0.055 M 0.039 D 0.054 l 0.075 r 0.025 sheen nan) 5s
+S3_mixed_light         E0_edges             AUC 0.495 TPRc 0.02 TPRf 0.05 TPRt 1.00 FPR 0.038 (L 0.047 M 0.025 D 0.029 l 0.057 r 0.018 sheen nan) 8s
+S3_mixed_light         E2_aniso_pool        AUC 0.654 TPRc 0.02 TPRf 0.12 TPRt 1.00 FPR 0.019 (L 0.017 M 0.017 D 0.025 l 0.016 r 0.022 sheen nan) 11s
+S3_mixed_light         E3_full              AUC 0.973 TPRc 0.89 TPRf 0.63 TPRt 1.00 FPR 0.023 (L 0.013 M 0.032 D 0.039 l 0.028 r 0.017 sheen nan) 13s
+S3_mixed_light         E3_full_picks        AUC 0.750 TPRc 0.04 TPRf 0.58 TPRt 1.00 FPR 0.067 (L 0.049 M 0.120 D 0.030 l 0.096 r 0.036 sheen nan) 11s
+S4_sheen               D_todo_baseline      AUC 0.895 TPRc 0.47 TPRf 0.67 TPRt 1.00 FPR 0.068 (L 0.064 M 0.106 D 0.044 l 0.046 r 0.087 sheen 0.086) 4s
+S4_sheen               E0_edges             AUC 0.903 TPRc 0.45 TPRf 0.65 TPRt 1.00 FPR 0.048 (L 0.047 M 0.068 D 0.033 l 0.019 r 0.073 sheen 0.070) 5s
+S4_sheen               E2_aniso_pool        AUC 0.960 TPRc 0.84 TPRf 0.67 TPRt 1.00 FPR 0.029 (L 0.013 M 0.055 D 0.031 l 0.014 r 0.041 sheen 0.039) 6s
+S4_sheen               E3_full              AUC 0.970 TPRc 0.84 TPRf 0.74 TPRt 1.00 FPR 0.032 (L 0.020 M 0.051 D 0.033 l 0.019 r 0.042 sheen 0.042) 8s
+S4_sheen               E3_full_picks        AUC 0.944 TPRc 0.86 TPRf 0.66 TPRt 1.00 FPR 0.017 (L 0.005 M 0.026 D 0.028 l 0.011 r 0.021 sheen 0.021) 11s
+S5_extensive           D_todo_baseline      AUC 0.908 TPRc 0.51 TPRf 0.43 TPRt 0.98 FPR 0.050 (L 0.039 M 0.062 D 0.067 l 0.050 r 0.050 sheen nan) 5s
+S5_extensive           E0_edges             AUC 0.918 TPRc 0.49 TPRf 0.35 TPRt 0.97 FPR 0.032 (L 0.036 M 0.022 D 0.035 l 0.032 r 0.032 sheen nan) 6s
+S5_extensive           E2_aniso_pool        AUC 0.967 TPRc 0.65 TPRf 0.44 TPRt 1.00 FPR 0.030 (L 0.026 M 0.030 D 0.046 l 0.033 r 0.028 sheen nan) 7s
+S5_extensive           E3_full              AUC 0.967 TPRc 0.65 TPRf 0.44 TPRt 1.00 FPR 0.030 (L 0.026 M 0.030 D 0.046 l 0.033 r 0.028 sheen nan) 11s
+S5_extensive           E3_full_picks        AUC 0.984 TPRc 0.94 TPRf 0.74 TPRt 1.00 FPR 0.038 (L 0.035 M 0.039 D 0.048 l 0.037 r 0.039 sheen nan) 14s
+/usr/local/lib/python3.13/site-packages/sklearn/metrics/_ranking.py:469: UndefinedMetricWarning: Only one class is present in y_true. ROC AUC score is not defined in that case.
+  warnings.warn(
+S6_unpainted_unruly    D_todo_baseline      AUC nan TPRc nan TPRf nan TPRt nan FPR 0.077 (L 0.040 M 0.141 D 0.058 l 0.026 r 0.130 sheen 0.099) 6s
+/usr/local/lib/python3.13/site-packages/sklearn/metrics/_ranking.py:469: UndefinedMetricWarning: Only one class is present in y_true. ROC AUC score is not defined in that case.
+  warnings.warn(
+S6_unpainted_unruly    E0_edges             AUC nan TPRc nan TPRf nan TPRt nan FPR 0.067 (L 0.038 M 0.126 D 0.041 l 0.009 r 0.127 sheen 0.092) 8s
+/usr/local/lib/python3.13/site-packages/sklearn/metrics/_ranking.py:469: UndefinedMetricWarning: Only one class is present in y_true. ROC AUC score is not defined in that case.
+  warnings.warn(
+S6_unpainted_unruly    E2_aniso_pool        AUC nan TPRc nan TPRf nan TPRt nan FPR 0.031 (L 0.032 M 0.022 D 0.039 l 0.006 r 0.057 sheen 0.046) 7s
+/usr/local/lib/python3.13/site-packages/sklearn/metrics/_ranking.py:469: UndefinedMetricWarning: Only one class is present in y_true. ROC AUC score is not defined in that case.
+  warnings.warn(
+S6_unpainted_unruly    E3_full              AUC nan TPRc nan TPRf nan TPRt nan FPR 0.027 (L 0.012 M 0.035 D 0.040 l 0.008 r 0.046 sheen 0.041) 11s
+/usr/local/lib/python3.13/site-packages/sklearn/metrics/_ranking.py:469: UndefinedMetricWarning: Only one class is present in y_true. ROC AUC score is not defined in that case.
+  warnings.warn(
+S6_unpainted_unruly    E3_full_picks        AUC nan TPRc nan TPRf nan TPRt nan FPR 0.031 (L 0.031 M 0.024 D 0.040 l 0.018 r 0.044 sheen 0.041) 16s
+S7_extensive_unruly    D_todo_baseline      AUC 0.690 TPRc 0.32 TPRf 0.34 TPRt 0.99 FPR 0.042 (L 0.037 M 0.061 D 0.034 l 0.035 r 0.045 sheen 0.050) 5s
+S7_extensive_unruly    E0_edges             AUC 0.697 TPRc 0.32 TPRf 0.34 TPRt 0.99 FPR 0.038 (L 0.040 M 0.049 D 0.027 l 0.024 r 0.045 sheen 0.047) 7s
+S7_extensive_unruly    E2_aniso_pool        AUC 0.750 TPRc 0.31 TPRf 0.38 TPRt 1.00 FPR 0.034 (L 0.036 M 0.037 D 0.028 l 0.010 r 0.047 sheen 0.048) 6s
+S7_extensive_unruly    E3_full              AUC 0.826 TPRc 0.34 TPRf 0.56 TPRt 1.00 FPR 0.035 (L 0.037 M 0.041 D 0.029 l 0.030 r 0.038 sheen 0.047) 10s
+S7_extensive_unruly    E3_full_picks        AUC 0.895 TPRc 0.38 TPRf 0.56 TPRt 1.00 FPR 0.032 (L 0.031 M 0.040 D 0.029 l 0.032 r 0.033 sheen 0.042) 12s
+S8_basic_unruly        D_todo_baseline      AUC 0.496 TPRc 0.02 TPRf 0.27 TPRt 0.99 FPR 0.045 (L 0.037 M 0.063 D 0.043 l 0.052 r 0.039 sheen 0.051) 4s
+S8_basic_unruly        E0_edges             AUC 0.493 TPRc 0.02 TPRf 0.27 TPRt 1.00 FPR 0.036 (L 0.035 M 0.048 D 0.028 l 0.033 r 0.039 sheen 0.044) 5s
+S8_basic_unruly        E2_aniso_pool        AUC 0.665 TPRc 0.02 TPRf 0.38 TPRt 0.99 FPR 0.026 (L 0.029 M 0.025 D 0.023 l 0.007 r 0.042 sheen 0.036) 5s
+S8_basic_unruly        E3_full              AUC 0.846 TPRc 0.02 TPRf 0.59 TPRt 1.00 FPR 0.016 (L 0.006 M 0.023 D 0.024 l 0.006 r 0.024 sheen 0.022) 7s
+S8_basic_unruly        E3_full_picks        AUC 0.730 TPRc 0.02 TPRf 0.62 TPRt 1.00 FPR 0.019 (L 0.014 M 0.023 D 0.024 l 0.012 r 0.026 sheen 0.026) 10s
+EVAL_DONE

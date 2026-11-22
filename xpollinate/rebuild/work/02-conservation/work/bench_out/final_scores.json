@@ -1,0 +1,1412 @@
+{
+ "U0_neutral_clean": {
+  "final_auto": {
+   "shown>=0.2": {
+    "clean": 0.06575091051041722,
+    "edges": 0.0684203909736627
+   },
+   "shown>=0.5": {
+    "clean": 0.040848297314862884,
+    "edges": 0.04035451631152178
+   },
+   "warnings": [],
+   "odd_picks": []
+  },
+  "final_auto_high": {
+   "shown>=0.2": {
+    "clean": 0.09690651275532101,
+    "edges": 0.10566738952794016
+   },
+   "shown>=0.5": {
+    "clean": 0.06727864684458579,
+    "edges": 0.07048683135332202
+   },
+   "warnings": [],
+   "odd_picks": []
+  },
+  "final_picks": {
+   "shown>=0.2": {
+    "clean": 0.05505777806845076,
+    "edges": 0.04898170846690553
+   },
+   "shown>=0.5": {
+    "clean": 0.03180450697547038,
+    "edges": 0.027189798227418443
+   },
+   "warnings": [],
+   "odd_picks": []
+  },
+  "final_badpick": {
+   "shown>=0.2": {
+    "clean": 0.06012230065851056,
+    "edges": 0.053436733924193854
+   },
+   "shown>=0.5": {
+    "clean": 0.03645209550242599,
+    "edges": 0.030254101452008297
+   },
+   "warnings": [],
+   "odd_picks": []
+  }
+ },
+ "U1_warm": {
+  "final_auto": {
+   "shown>=0.2": {
+    "clean": 0.045702952260891945,
+    "edges": 0.02032717491952908
+   },
+   "shown>=0.5": {
+    "clean": 0.017343075200260488,
+    "edges": 0.00876662030152043
+   },
+   "warnings": [],
+   "odd_picks": []
+  },
+  "final_auto_high": {
+   "shown>=0.2": {
+    "clean": 0.11702670653175896,
+    "edges": 0.05321703297804537
+   },
+   "shown>=0.5": {
+    "clean": 0.04846842803492816,
+    "edges": 0.021625933482717293
+   },
+   "warnings": [],
+   "odd_picks": []
+  },
+  "final_picks": {
+   "shown>=0.2": {
+    "clean": 0.16401449399713552,
+    "edges": 0.04414977412023137
+   },
+   "shown>=0.5": {
+    "clean": 0.11897816000158404,
+    "edges": 0.02235147453190577
+   },
+   "warnings": [
+    "Colour departs at one range of tones all over the print: the expected tone may be wrong there (or the print is coloured all over at those tones)."
+   ],
+   "odd_picks": []
+  },
+  "final_badpick": {
+   "shown>=0.2": {
+    "clean": 0.04759940422367573,
+    "edges": 0.023125117750101214
+   },
+   "shown>=0.5": {
+    "clean": 0.016681957085624147,
+    "edges": 0.008782654357856086
+   },
+   "warnings": [
+    "Unpainted pick 6 disagrees in colour with the other picks: it may hold colour, or the light or the print's tone differs there."
+   ],
+   "odd_picks": [
+    6
+   ]
+  }
+ },
+ "U2_warm_aged": {
+  "final_auto": {
+   "shown>=0.2": {
+    "clean": 0.004653589361463261,
+    "edges": 0.0028429807445948876,
+    "foxing": 0.5649732620320855,
+    "adhesive": 0.8050966115933912,
+    "mirroring": 0.4910058562081529,
+    "yellowing_edge": 0.019091070768978206
+   },
+   "shown>=0.5": {
+    "clean": 9.465673724830663e-05,
+    "edges": 0.00047300892804351684,
+    "foxing": 0.48970588235294116,
+    "adhesive": 0.7818753635051591,
+    "mirroring": 0.38980981630200484,
+    "yellowing_edge": 0.011652324992817762
+   },
+   "warnings": [
+    "The light's colour drifts across the frame (see the expected-tone picture). An even drift is allowed for; soft colour that spans the frame is the light's."
+   ],
+   "odd_picks": []
+  },
+  "final_auto_high": {
+   "shown>=0.2": {
+    "clean": 0.02813726547692687,
+    "edges": 0.009918405959912493,
+    "foxing": 0.645855614973262,
+    "adhesive": 0.8283609417745514,
+    "mirroring": 0.6145203441237624,
+    "yellowing_edge": 0.03670123260872539
+   },
+   "shown>=0.5": {
+    "clean": 0.005646384442835035,
+    "edges": 0.003054849326947713,
+    "foxing": 0.5705882352941176,
+    "adhesive": 0.8063244512418414,
+    "mirroring": 0.4981496671308395,
+    "yellowing_edge": 0.019754572691081714
+   },
+   "warnings": [],
+   "odd_picks": []
+  },
+  "final_picks": {
+   "shown>=0.2": {
+    "clean": 0.23667486291282996,
+    "edges": 0.04698555351898934,
+    "foxing": 0.6768716577540107,
+    "adhesive": 0.8823104926437326,
+    "mirroring": 0.9377658661274632,
+    "yellowing_edge": 0.16034173769101331
+   },
+   "shown>=0.5": {
+    "clean": 0.17495206626852136,
+    "edges": 0.02368000946017856,
+    "foxing": 0.6179144385026738,
+    "adhesive": 0.8601986084483985,
+    "mirroring": 0.8857562520267821,
+    "yellowing_edge": 0.09677893757609751
+   },
+   "warnings": [
+    "Colour departs at one range of tones all over the print: the expected tone may be wrong there (or the print is coloured all over at those tones).",
+    "The light's colour drifts across the frame (see the expected-tone picture). An even drift is allowed for; soft colour that spans the frame is the light's."
+   ],
+   "odd_picks": []
+  },
+  "final_badpick": {
+   "shown>=0.2": {
+    "clean": 0.07724650155303088,
+    "edges": 0.023054258065787658,
+    "foxing": 0.7537433155080214,
+    "adhesive": 0.8893328737910088,
+    "mirroring": 0.9358010796787669,
+    "yellowing_edge": 0.15544755598724982
+   },
+   "shown>=0.5": {
+    "clean": 0.029537304660413453,
+    "edges": 0.009691755848558309,
+    "foxing": 0.6870320855614973,
+    "adhesive": 0.8699890140663034,
+    "mirroring": 0.8840585239303359,
+    "yellowing_edge": 0.09237041191840978
+   },
+   "warnings": [
+    "The light's colour drifts across the frame (see the expected-tone picture). An even drift is allowed for; soft colour that spans the frame is the light's."
+   ],
+   "odd_picks": []
+  }
+ },
+ "U3_warm_capture": {
+  "final_auto": {
+   "shown>=0.2": {
+    "clean": 0.058410981370798434,
+    "edges": 0.02970982278174066,
+    "glare": 0.20867835714522492
+   },
+   "shown>=0.5": {
+    "clean": 0.02935418514801743,
+    "edges": 0.012750823448582456,
+    "glare": 0.1845460271157225
+   },
+   "warnings": [
+    "The light's colour drifts across the frame (see the expected-tone picture). An even drift is allowed for; soft colour that spans the frame is the light's."
+   ],
+   "odd_picks": []
+  },
+  "final_auto_high": {
+   "shown>=0.2": {
+    "clean": 0.11461116081654141,
+    "edges": 0.06345100733525977,
+    "glare": 0.23459409288295158
+   },
+   "shown>=0.5": {
+    "clean": 0.0606913849592071,
+    "edges": 0.031205164992826398,
+    "glare": 0.21005071767162795
+   },
+   "warnings": [],
+   "odd_picks": []
+  },
+  "final_picks": {
+   "shown>=0.2": {
+    "clean": 0.2180898519509346,
+    "edges": 0.11226685796269728,
+    "glare": 0.2364305366791527
+   },
+   "shown>=0.5": {
+    "clean": 0.12744064559971957,
+    "edges": 0.06305696445531149,
+    "glare": 0.21727715715848445
+   },
+   "warnings": [
+    "The light's colour drifts across the frame (see the expected-tone picture). An even drift is allowed for; soft colour that spans the frame is the light's."
+   ],
+   "odd_picks": []
+  },
+  "final_badpick": {
+   "shown>=0.2": {
+    "clean": 0.28595780114425134,
+    "edges": 0.11418150221270233,
+    "glare": 0.2569297576822356
+   },
+   "shown>=0.5": {
+    "clean": 0.2138732566365186,
+    "edges": 0.06491603855558026,
+    "glare": 0.22728809626412969
+   },
+   "warnings": [
+    "Colour departs at one range of tones all over the print: the expected tone may be wrong there (or the print is coloured all over at those tones).",
+    "The light's colour drifts across the frame (see the expected-tone picture). An even drift is allowed for; soft colour that spans the frame is the light's."
+   ],
+   "odd_picks": []
+  }
+ },
+ "U4_warm_aged_capture": {
+  "final_auto": {
+   "shown>=0.2": {
+    "clean": 0.0009440925106340807,
+    "edges": 0.00760569312143096,
+    "foxing": 0.37985650467036686,
+    "adhesive": 0.8191548320055421,
+    "mirroring": 0.18727458319156176,
+    "glare": 0.20790971117283785,
+    "yellowing_edge": 0.039431428561084135
+   },
+   "shown>=0.5": {
+    "clean": 0.0001277915276825137,
+    "edges": 0.0027375540388212415,
+    "foxing": 0.33261134425341815,
+    "adhesive": 0.7765615979679021,
+    "mirroring": 0.10075341466971273,
+    "glare": 0.1774763355896551,
+    "yellowing_edge": 0.015792846513951797
+   },
+   "warnings": [
+    "The light's colour drifts across the frame (see the expected-tone picture). An even drift is allowed for; soft colour that spans the frame is the light's."
+   ],
+   "odd_picks": []
+  },
+  "final_auto_high": {
+   "shown>=0.2": {
+    "clean": 0.00847075269209805,
+    "edges": 0.02086610759454471,
+    "foxing": 0.45552998510897524,
+    "adhesive": 0.8599815263826348,
+    "mirroring": 0.2900014582219414,
+    "glare": 0.24080391575200238,
+    "yellowing_edge": 0.08538347073327034
+   },
+   "shown>=0.5": {
+    "clean": 0.0010666680575948592,
+    "edges": 0.00818788787176851,
+    "foxing": 0.3828347096250169,
+    "adhesive": 0.8218796905669091,
+    "mirroring": 0.1916200845768726,
+    "glare": 0.20980421239988134,
+    "yellowing_edge": 0.04130325378981249
+   },
+   "warnings": [],
+   "odd_picks": []
+  },
+  "final_picks": {
+   "shown>=0.2": {
+    "clean": 0.22886941009866027,
+    "edges": 0.043354928216625996,
+    "foxing": 0.5647759577636389,
+    "adhesive": 0.8525805334257014,
+    "mirroring": 0.5761434890390318,
+    "glare": 0.7714462932499123,
+    "yellowing_edge": 0.24928946672894015
+   },
+   "shown>=0.5": {
+    "clean": 0.19090489441551023,
+    "edges": 0.024439792391829453,
+    "foxing": 0.4792202517936916,
+    "adhesive": 0.8278027941346265,
+    "mirroring": 0.4886307295970447,
+    "glare": 0.7245354763895256,
+    "yellowing_edge": 0.2147240596522098
+   },
+   "warnings": [
+    "Colour departs at one range of tones all over the print: the expected tone may be wrong there (or the print is coloured all over at those tones).",
+    "The light's colour drifts across the frame (see the expected-tone picture). An even drift is allowed for; soft colour that spans the frame is the light's."
+   ],
+   "odd_picks": []
+  },
+  "final_badpick": {
+   "shown>=0.2": {
+    "clean": 0.05028205415752783,
+    "edges": 0.035334266496550186,
+    "foxing": 0.5957763638824963,
+    "adhesive": 0.8598660662741023,
+    "mirroring": 0.5736061828610315,
+    "glare": 0.2766174051400987,
+    "yellowing_edge": 0.15770399093413853
+   },
+   "shown>=0.5": {
+    "clean": 0.024791556370407655,
+    "edges": 0.020110493131340657,
+    "foxing": 0.49600649790171925,
+    "adhesive": 0.8363699341877381,
+    "mirroring": 0.4858115005103777,
+    "glare": 0.25467220409374075,
+    "yellowing_edge": 0.12220086096719418
+   },
+   "warnings": [
+    "The light's colour drifts across the frame (see the expected-tone picture). An even drift is allowed for; soft colour that spans the frame is the light's."
+   ],
+   "odd_picks": []
+  }
+ },
+ "U5_sepia_landscape_capture": {
+  "final_auto": {
+   "shown>=0.2": {
+    "clean": 0.04957154770006422,
+    "edges": 0.005492334695622324,
+    "foxing": 0.39954672710305295,
+    "adhesive": 0.3596697986288248,
+    "mirroring": 0.5726680680928239,
+    "glare": 0.10724659944697372,
+    "yellowing_edge": 0.041222450291306424
+   },
+   "shown>=0.5": {
+    "clean": 0.04301057232409014,
+    "edges": 0.00226040661411815,
+    "foxing": 0.32342354352752967,
+    "adhesive": 0.2708447687621754,
+    "mirroring": 0.44895099130291416,
+    "glare": 0.06694969695276932,
+    "yellowing_edge": 0.030868113868673674
+   },
+   "warnings": [
+    "The light's colour drifts across the frame (see the expected-tone picture). An even drift is allowed for; soft colour that spans the frame is the light's."
+   ],
+   "odd_picks": []
+  },
+  "final_auto_high": {
+   "shown>=0.2": {
+    "clean": 0.05996894439705164,
+    "edges": 0.014980861027092495,
+    "foxing": 0.473670177309692,
+    "adhesive": 0.4369248651964741,
+    "mirroring": 0.6893367956803099,
+    "glare": 0.1535066893835712,
+    "yellowing_edge": 0.05467023283780141
+   },
+   "shown>=0.5": {
+    "clean": 0.05002683817538748,
+    "edges": 0.005932757760837322,
+    "foxing": 0.40327956272497,
+    "adhesive": 0.364922023828743,
+    "mirroring": 0.5799225093771897,
+    "glare": 0.1102421584783398,
+    "yellowing_edge": 0.04191909767576869
+   },
+   "warnings": [],
+   "odd_picks": []
+  },
+  "final_picks": {
+   "shown>=0.2": {
+    "clean": 0.42093761082728676,
+    "edges": 0.4442055221280206,
+    "foxing": 0.7045727236368484,
+    "adhesive": 0.9444103623820133,
+    "mirroring": 0.9083920695766868,
+    "glare": 0.09906292768762394,
+    "yellowing_edge": 0.29675934564906387
+   },
+   "shown>=0.5": {
+    "clean": 0.31455060433819937,
+    "edges": 0.3376360939655563,
+    "foxing": 0.6163178242900946,
+    "adhesive": 0.8852259640739186,
+    "mirroring": 0.8703062528337662,
+    "glare": 0.07512638605703433,
+    "yellowing_edge": 0.20242997242437435
+   },
+   "warnings": [
+    "Colour departs at one range of tones all over the print: the expected tone may be wrong there (or the print is coloured all over at those tones).",
+    "The light's colour drifts across the frame (see the expected-tone picture). An even drift is allowed for; soft colour that spans the frame is the light's."
+   ],
+   "odd_picks": []
+  }
+ },
+ "P1_portrait_warm": {
+  "final_auto": {
+   "shown>=0.2": {
+    "clean": 0.031299067506068985,
+    "edges": 0.005453341605451256,
+    "paint_rose": 1.0,
+    "paint_flesh": 0.26024187015391737,
+    "paint_blue": 0.14597964842155634,
+    "paint_yellow": 0.33987603305785125,
+    "paint_gold": 0.9202898550724637,
+    "paint_white": 0.7615457115928369,
+    "paint_spotting": 0.49377593360995853
+   },
+   "shown>=0.5": {
+    "clean": 0.00819431577666128,
+    "edges": 0.0007194657185012174,
+    "paint_rose": 1.0,
+    "paint_flesh": 0.14836245804883694,
+    "paint_blue": 0.057768363569830124,
+    "paint_yellow": 0.16072205306655069,
+    "paint_gold": 0.7584541062801933,
+    "paint_white": 0.705937794533459,
+    "paint_spotting": 0.4190871369294606
+   },
+   "warnings": [],
+   "odd_picks": []
+  },
+  "final_auto_high": {
+   "shown>=0.2": {
+    "clean": 0.08215278294327272,
+    "edges": 0.024331496436559286,
+    "paint_rose": 1.0,
+    "paint_flesh": 0.3896250433977549,
+    "paint_blue": 0.2512983631475982,
+    "paint_yellow": 0.6163005654632449,
+    "paint_gold": 0.9927536231884058,
+    "paint_white": 0.8039585296889726,
+    "paint_spotting": 0.5477178423236515
+   },
+   "shown>=0.5": {
+    "clean": 0.03348728386629971,
+    "edges": 0.0061310991663582,
+    "paint_rose": 1.0,
+    "paint_flesh": 0.26828492072676774,
+    "paint_blue": 0.1522146064094805,
+    "paint_yellow": 0.3526533275337103,
+    "paint_gold": 0.9227053140096618,
+    "paint_white": 0.764373232799246,
+    "paint_spotting": 0.49377593360995853
+   },
+   "warnings": [],
+   "odd_picks": []
+  },
+  "final_picks": {
+   "shown>=0.2": {
+    "clean": 0.2364761331593219,
+    "edges": 0.03775630966221606,
+    "paint_rose": 1.0,
+    "paint_flesh": 0.3992593449832195,
+    "paint_blue": 0.6075987670827997,
+    "paint_yellow": 0.787026968247064,
+    "paint_gold": 0.966183574879227,
+    "paint_white": 0.9613572101790764,
+    "paint_spotting": 0.6099585062240664
+   },
+   "shown>=0.5": {
+    "clean": 0.17976373213959684,
+    "edges": 0.018252532467193928,
+    "paint_rose": 1.0,
+    "paint_flesh": 0.320854067816225,
+    "paint_blue": 0.5354815555023856,
+    "paint_yellow": 0.6164093083949543,
+    "paint_gold": 0.9251207729468599,
+    "paint_white": 0.8689915174363808,
+    "paint_spotting": 0.5726141078838174
+   },
+   "warnings": [
+    "Colour departs at one range of tones all over the print: the expected tone may be wrong there (or the print is coloured all over at those tones).",
+    "The light's colour drifts across the frame (see the expected-tone picture). An even drift is allowed for; soft colour that spans the frame is the light's."
+   ],
+   "odd_picks": []
+  },
+  "final_badpick": {
+   "shown>=0.2": {
+    "clean": 0.16129778270659914,
+    "edges": 0.02756387865011548,
+    "paint_rose": 1.0,
+    "paint_flesh": 0.3713111908343942,
+    "paint_blue": 0.4901901451070358,
+    "paint_yellow": 0.7720204436711614,
+    "paint_gold": 0.9710144927536232,
+    "paint_white": 0.7954759660697456,
+    "paint_spotting": 0.6099585062240664
+   },
+   "shown>=0.5": {
+    "clean": 0.12470939864622708,
+    "edges": 0.011542732614215182,
+    "paint_rose": 1.0,
+    "paint_flesh": 0.2902441847008448,
+    "paint_blue": 0.3741256280699779,
+    "paint_yellow": 0.5887342322749022,
+    "paint_gold": 0.9299516908212561,
+    "paint_white": 0.7756833176248822,
+    "paint_spotting": 0.5601659751037344
+   },
+   "warnings": [
+    "Colour departs at one range of tones all over the print: the expected tone may be wrong there (or the print is coloured all over at those tones).",
+    "The light's colour drifts across the frame (see the expected-tone picture). An even drift is allowed for; soft colour that spans the frame is the light's."
+   ],
+   "odd_picks": []
+  }
+ },
+ "P2_portrait_aged_capture": {
+  "final_auto": {
+   "shown>=0.2": {
+    "clean": 0.001033119764836827,
+    "edges": 0.0063916855139444645,
+    "foxing": 0.3152732368052312,
+    "adhesive": 0.7734121425398887,
+    "mirroring": 0.17402544390774882,
+    "glare": 0.30421884714450664,
+    "yellowing_edge": 0.02967105156445151,
+    "paint_rose": 0.8584717607973422,
+    "paint_flesh": 0.053212501452306264,
+    "paint_blue": 0.22608012455490362,
+    "paint_yellow": 0.048300759367608616,
+    "paint_gold": 0.3643410852713178,
+    "paint_white": 0.8831615120274914,
+    "paint_spotting": 0.024489795918367346
+   },
+   "shown>=0.5": {
+    "clean": 8.276373806703863e-05,
+    "edges": 0.0017321845949032928,
+    "foxing": 0.22372723026623073,
+    "adhesive": 0.7295944514674229,
+    "mirroring": 0.0904823457378053,
+    "glare": 0.28144595434763303,
+    "yellowing_edge": 0.002919660670548734,
+    "paint_rose": 0.7136212624584718,
+    "paint_flesh": 0.03488439642151737,
+    "paint_blue": 0.18516009053296237,
+    "paint_yellow": 0.01612100087140545,
+    "paint_gold": 0.26098191214470284,
+    "paint_white": 0.872852233676976,
+    "paint_spotting": 0.0
+   },
+   "warnings": [
+    "The light's colour drifts across the frame (see the expected-tone picture). An even drift is allowed for; soft colour that spans the frame is the light's."
+   ],
+   "odd_picks": []
+  },
+  "final_auto_high": {
+   "shown>=0.2": {
+    "clean": 0.006866536337561895,
+    "edges": 0.016406586839935552,
+    "foxing": 0.423633815973844,
+    "adhesive": 0.8226109535686221,
+    "mirroring": 0.2665681824808296,
+    "glare": 0.32590816235900166,
+    "yellowing_edge": 0.07842938476261536,
+    "paint_rose": 0.9900332225913622,
+    "paint_flesh": 0.08368188683629604,
+    "paint_blue": 0.2705537215102282,
+    "paint_yellow": 0.12037843893937508,
+    "paint_gold": 0.5581395348837209,
+    "paint_white": 0.8877434135166093,
+    "paint_spotting": 0.1469387755102041
+   },
+   "shown>=0.5": {
+    "clean": 0.0011957933189685925,
+    "edges": 0.006815276506584571,
+    "foxing": 0.3194768799626343,
+    "adhesive": 0.7762308244217432,
+    "mirroring": 0.17823369908545772,
+    "glare": 0.30571098676614267,
+    "yellowing_edge": 0.03133769119722308,
+    "paint_rose": 0.8704318936877077,
+    "paint_flesh": 0.05486813059137911,
+    "paint_blue": 0.22855248172762266,
+    "paint_yellow": 0.051412921697995766,
+    "paint_gold": 0.37467700258397935,
+    "paint_white": 0.8831615120274914,
+    "paint_spotting": 0.04897959183673469
+   },
+   "warnings": [],
+   "odd_picks": []
+  },
+  "final_picks": {
+   "shown>=0.2": {
+    "clean": 0.2050828350861171,
+    "edges": 0.03245765981104816,
+    "foxing": 0.5938813638486689,
+    "adhesive": 0.7976186408828453,
+    "mirroring": 0.5477923668276754,
+    "glare": 0.9476330047073452,
+    "yellowing_edge": 0.2362086584159219,
+    "paint_rose": 1.0,
+    "paint_flesh": 0.2199663064947136,
+    "paint_blue": 0.632534202142229,
+    "paint_yellow": 0.02097597410680941,
+    "paint_gold": 0.30749354005167956,
+    "paint_white": 0.9232531500572738,
+    "paint_spotting": 0.3346938775510204
+   },
+   "shown>=0.5": {
+    "clean": 0.1705760641561666,
+    "edges": 0.01825979743273602,
+    "foxing": 0.45165810368986453,
+    "adhesive": 0.7650927602582938,
+    "mirroring": 0.47359878708950076,
+    "glare": 0.9201350031086242,
+    "yellowing_edge": 0.2062537509529448,
+    "paint_rose": 0.9946843853820598,
+    "paint_flesh": 0.16463343789938423,
+    "paint_blue": 0.5691899606441103,
+    "paint_yellow": 0.008402838292045313,
+    "paint_gold": 0.24806201550387597,
+    "paint_white": 0.9060710194730813,
+    "paint_spotting": 0.12244897959183673
+   },
+   "warnings": [
+    "Colour departs at one range of tones all over the print: the expected tone may be wrong there (or the print is coloured all over at those tones).",
+    "The light's colour drifts across the frame (see the expected-tone picture). An even drift is allowed for; soft colour that spans the frame is the light's."
+   ],
+   "odd_picks": []
+  },
+  "final_badpick": {
+   "shown>=0.2": {
+    "clean": 0.056593273305840554,
+    "edges": 0.026429052290795216,
+    "foxing": 0.6177020084072863,
+    "adhesive": 0.8012743858690081,
+    "mirroring": 0.5428746367585744,
+    "glare": 0.33862687627675636,
+    "yellowing_edge": 0.17846425848729136,
+    "paint_rose": 1.0,
+    "paint_flesh": 0.1588242128500058,
+    "paint_blue": 0.37695157639799903,
+    "paint_yellow": 0.02788497448026889,
+    "paint_gold": 0.38242894056847543,
+    "paint_white": 0.8888888888888888,
+    "paint_spotting": 0.1673469387755102
+   },
+   "shown>=0.5": {
+    "clean": 0.02559968036073574,
+    "edges": 0.01501478786411806,
+    "foxing": 0.47804764128911725,
+    "adhesive": 0.7683385151525505,
+    "mirroring": 0.4696335027650083,
+    "glare": 0.325037747579714,
+    "yellowing_edge": 0.1504030753759063,
+    "paint_rose": 0.9906976744186047,
+    "paint_flesh": 0.11577785523411177,
+    "paint_blue": 0.30319892744388544,
+    "paint_yellow": 0.012448649321548612,
+    "paint_gold": 0.2661498708010336,
+    "paint_white": 0.8854524627720504,
+    "paint_spotting": 0.11428571428571428
+   },
+   "warnings": [
+    "The light's colour drifts across the frame (see the expected-tone picture). An even drift is allowed for; soft colour that spans the frame is the light's."
+   ],
+   "odd_picks": []
+  }
+ },
+ "P3_heavy_aged_capture": {
+  "final_auto": {
+   "shown>=0.2": {
+    "clean": 0.0037808645485938913,
+    "edges": 0.005508456938296957,
+    "foxing": 0.35125657510227937,
+    "adhesive": 0.7926893304199062,
+    "mirroring": 0.1702115578973666,
+    "glare": 0.2878283267435565,
+    "yellowing_edge": 0.010510766121724996,
+    "paint_rose": 0.7110367892976589,
+    "paint_flesh": 0.05625417477419917,
+    "paint_blue": 0.06467269209292661,
+    "paint_yellow": 0.04307558428642466,
+    "paint_red": 0.021664667548751685,
+    "paint_gold": 0.2971576227390181,
+    "paint_white": 0.8712541620421753,
+    "paint_spotting": 0.24081632653061225
+   },
+   "shown>=0.5": {
+    "clean": 0.0007643625080189817,
+    "edges": 0.001706650386424498,
+    "foxing": 0.2489772063120982,
+    "adhesive": 0.7418737401968257,
+    "mirroring": 0.07942221868931763,
+    "glare": 0.25919971125293256,
+    "yellowing_edge": 6.58982201989028e-05,
+    "paint_rose": 0.5959866220735786,
+    "paint_flesh": 0.02921615891731769,
+    "paint_blue": 0.040424896437986156,
+    "paint_yellow": 0.01323968175037295,
+    "paint_red": 0.006071547811893309,
+    "paint_gold": 0.2454780361757106,
+    "paint_white": 0.8601553829078802,
+    "paint_spotting": 0.12653061224489795
+   },
+   "warnings": [
+    "The light's colour drifts across the frame (see the expected-tone picture). An even drift is allowed for; soft colour that spans the frame is the light's."
+   ],
+   "odd_picks": []
+  },
+  "final_auto_high": {
+   "shown>=0.2": {
+    "clean": 0.013531036302669355,
+    "edges": 0.017205255928181933,
+    "foxing": 0.4555815312682642,
+    "adhesive": 0.8419126988159967,
+    "mirroring": 0.261773089108686,
+    "glare": 0.308171870129444,
+    "yellowing_edge": 0.06529964469876276,
+    "paint_rose": 0.9953177257525083,
+    "paint_flesh": 0.1962942526065112,
+    "paint_blue": 0.1376757957068838,
+    "paint_yellow": 0.13519393336648433,
+    "paint_red": 0.05975095524861195,
+    "paint_gold": 0.4186046511627907,
+    "paint_white": 0.8779134295227525,
+    "paint_spotting": 0.33877551020408164
+   },
+   "shown>=0.5": {
+    "clean": 0.004140296918436151,
+    "edges": 0.006049589987651066,
+    "foxing": 0.35885447106955,
+    "adhesive": 0.7953656181716551,
+    "mirroring": 0.17460623885715584,
+    "glare": 0.2894033107476252,
+    "yellowing_edge": 0.012311984140495006,
+    "paint_rose": 0.7197324414715719,
+    "paint_flesh": 0.06046525135770917,
+    "paint_blue": 0.06629916760813952,
+    "paint_yellow": 0.04686723023371457,
+    "paint_red": 0.02308672049858413,
+    "paint_gold": 0.3023255813953488,
+    "paint_white": 0.8712541620421753,
+    "paint_spotting": 0.24489795918367346
+   },
+   "warnings": [],
+   "odd_picks": []
+  },
+  "final_picks": {
+   "shown>=0.2": {
+    "clean": 0.15770891437774978,
+    "edges": 0.025932760749816153,
+    "foxing": 0.55406195207481,
+    "adhesive": 0.8033944814269017,
+    "mirroring": 0.5611564710825451,
+    "glare": 0.7403245123291716,
+    "yellowing_edge": 0.24625066584659994,
+    "paint_rose": 0.9933110367892977,
+    "paint_flesh": 0.47492231289751113,
+    "paint_blue": 0.3265644681652317,
+    "paint_yellow": 0.017528592739930383,
+    "paint_red": 0.19186585712695842,
+    "paint_gold": 0.2739018087855297,
+    "paint_white": 0.951165371809101,
+    "paint_spotting": 0.5510204081632653
+   },
+   "shown>=0.5": {
+    "clean": 0.121583686320186,
+    "edges": 0.012071429562514743,
+    "foxing": 0.4286966686148451,
+    "adhesive": 0.7738028693869946,
+    "mirroring": 0.4866740100612076,
+    "glare": 0.5849424966777681,
+    "yellowing_edge": 0.20485010900663925,
+    "paint_rose": 0.9866220735785953,
+    "paint_flesh": 0.29802805448261843,
+    "paint_blue": 0.28896074382848314,
+    "paint_yellow": 0.00634012928891099,
+    "paint_red": 0.08513769182257726,
+    "paint_gold": 0.1731266149870801,
+    "paint_white": 0.8990011098779135,
+    "paint_spotting": 0.49387755102040815
+   },
+   "warnings": [
+    "Colour departs at one range of tones all over the print: the expected tone may be wrong there (or the print is coloured all over at those tones).",
+    "The light's colour drifts across the frame (see the expected-tone picture). An even drift is allowed for; soft colour that spans the frame is the light's."
+   ],
+   "odd_picks": []
+  },
+  "final_badpick": {
+   "shown>=0.2": {
+    "clean": 0.048596166358040135,
+    "edges": 0.027847539232146078,
+    "foxing": 0.6008182349503215,
+    "adhesive": 0.8061385232989481,
+    "mirroring": 0.5557851943539137,
+    "glare": 0.31952487982543926,
+    "yellowing_edge": 0.21701931367003663,
+    "paint_rose": 0.9933110367892977,
+    "paint_flesh": 0.5824064124531699,
+    "paint_blue": 0.27455296271767504,
+    "paint_yellow": 0.028033316757831925,
+    "paint_red": 0.1867464665075616,
+    "paint_gold": 0.3359173126614987,
+    "paint_white": 0.8723640399556049,
+    "paint_spotting": 0.5387755102040817
+   },
+   "shown>=0.5": {
+    "clean": 0.02250774599505894,
+    "edges": 0.011988178324152571,
+    "foxing": 0.48889538281706607,
+    "adhesive": 0.7753273370936871,
+    "mirroring": 0.4820408580415848,
+    "glare": 0.30730234771053105,
+    "yellowing_edge": 0.18012180187700097,
+    "paint_rose": 0.9852842809364548,
+    "paint_flesh": 0.42372143002352397,
+    "paint_blue": 0.22748905943615516,
+    "paint_yellow": 0.014109895574341124,
+    "paint_red": 0.08273875032459904,
+    "paint_gold": 0.25064599483204136,
+    "paint_white": 0.8668146503884573,
+    "paint_spotting": 0.4857142857142857
+   },
+   "warnings": [
+    "Colour departs at one range of tones all over the print: the expected tone may be wrong there (or the print is coloured all over at those tones).",
+    "The light's colour drifts across the frame (see the expected-tone picture). An even drift is allowed for; soft colour that spans the frame is the light's."
+   ],
+   "odd_picks": []
+  }
+ },
+ "P4_landscape_sepia_capture": {
+  "final_auto": {
+   "shown>=0.2": {
+    "clean": 0.08672635456563636,
+    "edges": 0.012764679381288481,
+    "foxing": 0.3944239442394424,
+    "adhesive": 0.07315685247991259,
+    "mirroring": 0.6402831254467065,
+    "glare": 0.3159906150980819,
+    "yellowing_edge": 0.04477922864961603,
+    "paint_blue": 0.030529025996346895,
+    "paint_green": 0.0500062630853748
+   },
+   "shown>=0.5": {
+    "clean": 0.05483154838867069,
+    "edges": 0.005744105721579817,
+    "foxing": 0.33210332103321033,
+    "adhesive": 0.04734482052215874,
+    "mirroring": 0.5054296451709589,
+    "glare": 0.1808528650557531,
+    "yellowing_edge": 0.012679083772855966,
+    "paint_blue": 0.0162435042832975,
+    "paint_green": 0.032281731474688186
+   },
+   "warnings": [
+    "The light's colour drifts across the frame (see the expected-tone picture). An even drift is allowed for; soft colour that spans the frame is the light's."
+   ],
+   "odd_picks": []
+  },
+  "final_auto_high": {
+   "shown>=0.2": {
+    "clean": 0.11115610743821815,
+    "edges": 0.034164288932272115,
+    "foxing": 0.48462484624846247,
+    "adhesive": 0.10129060159788769,
+    "mirroring": 0.760450049570009,
+    "glare": 0.46281111675495246,
+    "yellowing_edge": 0.0830153304231727,
+    "paint_blue": 0.047995848133345016,
+    "paint_green": 0.06963059725975103
+   },
+   "shown>=0.5": {
+    "clean": 0.08851211241492035,
+    "edges": 0.013327827001051208,
+    "foxing": 0.3977039770397704,
+    "adhesive": 0.07475018778594679,
+    "mirroring": 0.6479146012496253,
+    "glare": 0.32636722056938294,
+    "yellowing_edge": 0.04776198547444772,
+    "paint_blue": 0.03135131127541839,
+    "paint_green": 0.051121688766410774
+   },
+   "warnings": [],
+   "odd_picks": []
+  },
+  "final_picks": {
+   "shown>=0.2": {
+    "clean": 0.6057329657729745,
+    "edges": 0.6730740351404114,
+    "foxing": 0.7556375563755637,
+    "adhesive": 0.7729952427560148,
+    "mirroring": 0.9613815046226916,
+    "glare": 0.2725733497810996,
+    "yellowing_edge": 0.5909362068802257,
+    "paint_blue": 0.16390437226606994,
+    "paint_green": 0.4829465132508992
+   },
+   "shown>=0.5": {
+    "clean": 0.5255495108682394,
+    "edges": 0.6085748610902538,
+    "foxing": 0.7236572365723657,
+    "adhesive": 0.7170919354471582,
+    "mirroring": 0.9372190072164711,
+    "glare": 0.2439106983044288,
+    "yellowing_edge": 0.5270957417595424,
+    "paint_blue": 0.10150168164079613,
+    "paint_green": 0.3403121998938258
+   },
+   "warnings": [
+    "Colour departs at one range of tones all over the print: the expected tone may be wrong there (or the print is coloured all over at those tones).",
+    "The light's colour drifts across the frame (see the expected-tone picture). An even drift is allowed for; soft colour that spans the frame is the light's."
+   ],
+   "odd_picks": []
+  }
+ },
+ "P5_portrait_semantic": {
+  "final_auto": {
+   "shown>=0.2": {
+    "clean": 0.0004859517078343991,
+    "edges": 0.003977440926652649,
+    "foxing": 0.25291919663708545,
+    "adhesive": 0.7664593938979808,
+    "mirroring": 0.16979775106178263,
+    "glare": 0.29271932629783604,
+    "semantic": null,
+    "yellowing_edge": 0.01685778374497532,
+    "paint_rose": 1.0,
+    "paint_flesh": 0.6758230542676348,
+    "paint_blue": 0.18808655412516037,
+    "paint_yellow": 0.023278974231295903,
+    "paint_gold": 0.31007751937984496,
+    "paint_white": 0.8854524627720504,
+    "paint_spotting": 0.04897959183673469
+   },
+   "shown>=0.5": {
+    "clean": 3.144393403634347e-05,
+    "edges": 0.001093037201217522,
+    "foxing": 0.16207379729098553,
+    "adhesive": 0.7199255184666371,
+    "mirroring": 0.08804291837151215,
+    "glare": 0.25892761965675304,
+    "semantic": null,
+    "yellowing_edge": 0.0008680379502946867,
+    "paint_rose": 1.0,
+    "paint_flesh": 0.5655381564750824,
+    "paint_blue": 0.14862975189931812,
+    "paint_yellow": 0.00834059504543757,
+    "paint_gold": 0.2532299741602067,
+    "paint_white": 0.8774341351660939,
+    "paint_spotting": 0.0
+   },
+   "warnings": [
+    "The light's colour drifts across the frame (see the expected-tone picture). An even drift is allowed for; soft colour that spans the frame is the light's."
+   ],
+   "odd_picks": []
+  },
+  "final_auto_high": {
+   "shown>=0.2": {
+    "clean": 0.004173467608460133,
+    "edges": 0.011287127209794828,
+    "foxing": 0.364549276039234,
+    "adhesive": 0.8164440192695344,
+    "mirroring": 0.26226273896183416,
+    "glare": 0.31464307287780263,
+    "semantic": null,
+    "yellowing_edge": 0.06441733966649495,
+    "paint_rose": 1.0,
+    "paint_flesh": 0.7603009360510892,
+    "paint_blue": 0.24222613058082373,
+    "paint_yellow": 0.06018921946968754,
+    "paint_gold": 0.4728682170542636,
+    "paint_white": 0.8888888888888888,
+    "paint_spotting": 0.1469387755102041
+   },
+   "shown>=0.5": {
+    "clean": 0.0005545566548227849,
+    "edges": 0.004455644702185315,
+    "foxing": 0.2580569827183559,
+    "adhesive": 0.7691072465748744,
+    "mirroring": 0.17378247305453237,
+    "glare": 0.2943716021746082,
+    "semantic": null,
+    "yellowing_edge": 0.018707434704481753,
+    "paint_rose": 1.0,
+    "paint_flesh": 0.6810136179395212,
+    "paint_blue": 0.19052287110585725,
+    "paint_yellow": 0.02607992032864434,
+    "paint_gold": 0.32041343669250644,
+    "paint_white": 0.8865979381443299,
+    "paint_spotting": 0.04897959183673469
+   },
+   "warnings": [],
+   "odd_picks": []
+  },
+  "final_picks": {
+   "shown>=0.2": {
+    "clean": 0.19770230598378064,
+    "edges": 0.03114396969857981,
+    "foxing": 0.5205511443250818,
+    "adhesive": 0.793467491202296,
+    "mirroring": 0.5479187116713479,
+    "glare": 0.9505205557332196,
+    "semantic": null,
+    "yellowing_edge": 0.23611849123646733,
+    "paint_rose": 1.0,
+    "paint_flesh": 0.8870323389613041,
+    "paint_blue": 0.6327504432943619,
+    "paint_yellow": 0.014191460226565417,
+    "paint_gold": 0.29457364341085274,
+    "paint_white": 0.9564719358533792,
+    "paint_spotting": 0.363265306122449
+   },
+   "shown>=0.5": {
+    "clean": 0.16529790268959976,
+    "edges": 0.017071115732904214,
+    "foxing": 0.40378327884166276,
+    "adhesive": 0.7602582937579009,
+    "mirroring": 0.4734724422458282,
+    "glare": 0.9260739793199019,
+    "semantic": null,
+    "yellowing_edge": 0.2047474374627332,
+    "paint_rose": 1.0,
+    "paint_flesh": 0.807365934738868,
+    "paint_blue": 0.5723326653884412,
+    "paint_yellow": 0.0043570272625420145,
+    "paint_gold": 0.22997416020671835,
+    "paint_white": 0.9243986254295533,
+    "paint_spotting": 0.13877551020408163
+   },
+   "warnings": [
+    "Colour departs at one range of tones all over the print: the expected tone may be wrong there (or the print is coloured all over at those tones).",
+    "The light's colour drifts across the frame (see the expected-tone picture). An even drift is allowed for; soft colour that spans the frame is the light's."
+   ],
+   "odd_picks": []
+  },
+  "final_badpick": {
+   "shown>=0.2": {
+    "clean": 0.039842322963505025,
+    "edges": 0.026293617118177057,
+    "foxing": 0.5609528257823447,
+    "adhesive": 0.7989852745225323,
+    "mirroring": 0.5461012896892888,
+    "glare": 0.3379881320399389,
+    "semantic": null,
+    "yellowing_edge": 0.164939379312303,
+    "paint_rose": 1.0,
+    "paint_flesh": 0.8955180357507363,
+    "paint_blue": 0.3601784710308937,
+    "paint_yellow": 0.020415784887339725,
+    "paint_gold": 0.3333333333333333,
+    "paint_white": 0.8888888888888888,
+    "paint_spotting": 0.1836734693877551
+   },
+   "shown>=0.5": {
+    "clean": 0.016207918726006135,
+    "edges": 0.014816726505393075,
+    "foxing": 0.42573563755254556,
+    "adhesive": 0.7657589941576411,
+    "mirroring": 0.4718979911169856,
+    "glare": 0.3242369328074477,
+    "semantic": null,
+    "yellowing_edge": 0.13792068404635485,
+    "paint_rose": 1.0,
+    "paint_flesh": 0.8199632578077158,
+    "paint_blue": 0.28718987414764946,
+    "paint_yellow": 0.007842649072575626,
+    "paint_gold": 0.24289405684754523,
+    "paint_white": 0.8865979381443299,
+    "paint_spotting": 0.1346938775510204
+   },
+   "warnings": [
+    "The light's colour drifts across the frame (see the expected-tone picture). An even drift is allowed for; soft colour that spans the frame is the light's."
+   ],
+   "odd_picks": []
+  }
+ },
+ "U6_unpainted_semantic": {
+  "final_auto": {
+   "shown>=0.2": {
+    "clean": 0.00044825057760684,
+    "edges": 0.00641903632683934,
+    "foxing": 0.3498037092188981,
+    "adhesive": 0.7966632028634107,
+    "mirroring": 0.1804306615466874,
+    "glare": 0.1929328955441239,
+    "semantic": 0.47060146149522203,
+    "yellowing_edge": 0.018816384057655143
+   },
+   "shown>=0.5": {
+    "clean": 8.024238734937258e-05,
+    "edges": 0.002562163119842454,
+    "foxing": 0.29308244212806284,
+    "adhesive": 0.7461378593695878,
+    "mirroring": 0.09199436154182666,
+    "glare": 0.16143364729202203,
+    "semantic": 0.32490163012928613,
+    "yellowing_edge": 0.0053143571189863854
+   },
+   "warnings": [
+    "The light's colour drifts across the frame (see the expected-tone picture). An even drift is allowed for; soft colour that spans the frame is the light's."
+   ],
+   "odd_picks": []
+  },
+  "final_auto_high": {
+   "shown>=0.2": {
+    "clean": 0.004263914445013213,
+    "edges": 0.018050984320379417,
+    "foxing": 0.40842019764451065,
+    "adhesive": 0.8443251356656275,
+    "mirroring": 0.278209303455986,
+    "glare": 0.2261918406698984,
+    "semantic": 0.5940134907251264,
+    "yellowing_edge": 0.0599799485637069
+   },
+   "shown>=0.5": {
+    "clean": 0.0005367939015785614,
+    "edges": 0.006725678189586443,
+    "foxing": 0.35359415188845267,
+    "adhesive": 0.7994111534464843,
+    "mirroring": 0.18485393476887182,
+    "glare": 0.19490834069349586,
+    "semantic": 0.479229904440697,
+    "yellowing_edge": 0.020363831858535665
+   },
+   "warnings": [],
+   "odd_picks": []
+  },
+  "final_picks": {
+   "shown>=0.2": {
+    "clean": 0.21206126091227293,
+    "edges": 0.03922971564077928,
+    "foxing": 0.5395965886015974,
+    "adhesive": 0.8537697725435862,
+    "mirroring": 0.5621931657998347,
+    "glare": 0.7655894984526803,
+    "semantic": 0.8294828555368184,
+    "yellowing_edge": 0.2675123141972887
+   },
+   "shown>=0.5": {
+    "clean": 0.1760600987811458,
+    "edges": 0.0218942290001431,
+    "foxing": 0.4637877352105049,
+    "adhesive": 0.8288188430897125,
+    "mirroring": 0.4778884946288825,
+    "glare": 0.7190080973024724,
+    "semantic": 0.741849353569421,
+    "yellowing_edge": 0.2313071211658893
+   },
+   "warnings": [
+    "Colour departs at one range of tones all over the print: the expected tone may be wrong there (or the print is coloured all over at those tones).",
+    "The light's colour drifts across the frame (see the expected-tone picture). An even drift is allowed for; soft colour that spans the frame is the light's."
+   ],
+   "odd_picks": []
+  },
+  "final_badpick": {
+   "shown>=0.2": {
+    "clean": 0.04278302735158617,
+    "edges": 0.03293333605903878,
+    "foxing": 0.5589549208068227,
+    "adhesive": 0.8597275141438633,
+    "mirroring": 0.5598891751324552,
+    "glare": 0.2719911543206963,
+    "semantic": 0.8276559865092749,
+    "yellowing_edge": 0.14412333086322887
+   },
+   "shown>=0.5": {
+    "clean": 0.02111204880950734,
+    "edges": 0.018541611300774783,
+    "foxing": 0.4704210098822255,
+    "adhesive": 0.8360120078512874,
+    "mirroring": 0.47441792640839936,
+    "glare": 0.2503489054146075,
+    "semantic": 0.7418774592467678,
+    "yellowing_edge": 0.10751492960202258
+   },
+   "warnings": [
+    "The light's colour drifts across the frame (see the expected-tone picture). An even drift is allowed for; soft colour that spans the frame is the light's."
+   ],
+   "odd_picks": []
+  }
+ },
+ "P6_portrait_table": {
+  "final_auto": {
+   "shown>=0.2": {
+    "clean": 0.0015846041518541782,
+    "edges": 0.01147868355057432,
+    "foxing": 0.08879590887959089,
+    "adhesive": 0.15249953883047407,
+    "mirroring": 0.2631177606177606,
+    "glare": 0.11235033753661954,
+    "yellowing_edge": 0.0033208446866485014,
+    "table": 0.009702325436911586,
+    "paint_rose": 0.3750905141202028,
+    "paint_flesh": 0.020652078390016697,
+    "paint_blue": 0.04460408114700458,
+    "paint_yellow": 0.0057263786879123615,
+    "paint_gold": 0.22549019607843138,
+    "paint_white": 0.9494949494949495,
+    "paint_spotting": 0.2897959183673469
+   },
+   "shown>=0.5": {
+    "clean": 0.0005930309300701753,
+    "edges": 0.007995603579058175,
+    "foxing": 0.07159460715946071,
+    "adhesive": 0.08223574986164914,
+    "mirroring": 0.178503861003861,
+    "glare": 0.09576009425550885,
+    "yellowing_edge": 0.0016797745850879366,
+    "table": 0.0011508475666896195,
+    "paint_rose": 0.23244026068066617,
+    "paint_flesh": 0.00984269267949732,
+    "paint_blue": 0.021528645368552563,
+    "paint_yellow": 0.002054027138055521,
+    "paint_gold": 0.11274509803921569,
+    "paint_white": 0.9494949494949495,
+    "paint_spotting": 0.20408163265306123
+   },
+   "warnings": [
+    "The light's colour drifts across the frame (see the expected-tone picture). An even drift is allowed for; soft colour that spans the frame is the light's."
+   ],
+   "odd_picks": []
+  },
+  "final_auto_high": {
+   "shown>=0.2": {
+    "clean": 0.0069633309208239945,
+    "edges": 0.022516176971423264,
+    "foxing": 0.11041376104137611,
+    "adhesive": 0.2758531636229478,
+    "mirroring": 0.3630888030888031,
+    "glare": 0.1622882435358553,
+    "yellowing_edge": 0.007918937329700273,
+    "table": 0.10766119816840687,
+    "paint_rose": 0.503258508327299,
+    "paint_flesh": 0.03775961566628585,
+    "paint_blue": 0.0915580938782795,
+    "paint_yellow": 0.013071081787626043,
+    "paint_gold": 0.32598039215686275,
+    "paint_white": 0.9494949494949495,
+    "paint_spotting": 0.3795918367346939
+   },
+   "shown>=0.5": {
+    "clean": 0.0017248910385374455,
+    "edges": 0.011857952258583857,
+    "foxing": 0.0908879590887959,
+    "adhesive": 0.15952776240546024,
+    "mirroring": 0.2681853281853282,
+    "glare": 0.11367182524519169,
+    "yellowing_edge": 0.0034911444141689373,
+    "table": 0.011124613271580056,
+    "paint_rose": 0.38233164373642287,
+    "paint_flesh": 0.021384421595336437,
+    "paint_blue": 0.046262418942233326,
+    "paint_yellow": 0.005975351674343334,
+    "paint_gold": 0.23284313725490197,
+    "paint_white": 0.9494949494949495,
+    "paint_spotting": 0.2979591836734694
+   },
+   "warnings": [],
+   "odd_picks": []
+  },
+  "final_picks": {
+   "shown>=0.2": {
+    "clean": 0.12337275182293245,
+    "edges": 0.04541936282857054,
+    "foxing": 0.6171548117154811,
+    "adhesive": 0.8147020844862571,
+    "mirroring": 0.6542664092664092,
+    "glare": 0.8547398420583365,
+    "yellowing_edge": 0.05568801089918256,
+    "table": 1.0,
+    "paint_rose": 1.0,
+    "paint_flesh": 0.2409409145501948,
+    "paint_blue": 0.3838048069486585,
+    "paint_yellow": 0.13519233163201794,
+    "paint_gold": 0.3946078431372549,
+    "paint_white": 0.9494949494949495,
+    "paint_spotting": 0.4
+   },
+   "shown>=0.5": {
+    "clean": 0.05883440727196207,
+    "edges": 0.02774079692869748,
+    "foxing": 0.5141794514179452,
+    "adhesive": 0.7454344216934145,
+    "mirroring": 0.594488416988417,
+    "glare": 0.7917940389759266,
+    "yellowing_edge": 0.023470398810998265,
+    "table": 1.0,
+    "paint_rose": 1.0,
+    "paint_flesh": 0.18399390690453174,
+    "paint_blue": 0.31102385626747575,
+    "paint_yellow": 0.017303622556952572,
+    "paint_gold": 0.1715686274509804,
+    "paint_white": 0.9494949494949495,
+    "paint_spotting": 0.4
+   },
+   "warnings": [
+    "Colour departs at one range of tones all over the print: the expected tone may be wrong there (or the print is coloured all over at those tones).",
+    "The light's colour drifts across the frame (see the expected-tone picture). An even drift is allowed for; soft colour that spans the frame is the light's."
+   ],
+   "odd_picks": []
+  },
+  "final_badpick": {
+   "shown>=0.2": {
+    "clean": 0.15546018881339613,
+    "edges": 0.05108517291557014,
+    "foxing": 0.7259414225941423,
+    "adhesive": 0.8236118797269877,
+    "mirroring": 0.6532142857142857,
+    "glare": 0.8288195771239333,
+    "yellowing_edge": 0.09848742878375032,
+    "table": 1.0,
+    "paint_rose": 1.0,
+    "paint_flesh": 0.2742478835281366,
+    "paint_blue": 0.4172392765780237,
+    "paint_yellow": 0.25289431096726006,
+    "paint_gold": 0.6348039215686274,
+    "paint_white": 1.0,
+    "paint_spotting": 0.4
+   },
+   "shown>=0.5": {
+    "clean": 0.10203639169374097,
+    "edges": 0.032462305334530484,
+    "foxing": 0.6290097629009763,
+    "adhesive": 0.7584578491053311,
+    "mirroring": 0.5933783783783784,
+    "glare": 0.8188526939243409,
+    "yellowing_edge": 0.05128344067376765,
+    "table": 1.0,
+    "paint_rose": 1.0,
+    "paint_flesh": 0.22389196473035122,
+    "paint_blue": 0.3606475697542983,
+    "paint_yellow": 0.05184862442424997,
+    "paint_gold": 0.47549019607843135,
+    "paint_white": 1.0,
+    "paint_spotting": 0.4
+   },
+   "warnings": [
+    "Colour departs at one range of tones all over the print: the expected tone may be wrong there (or the print is coloured all over at those tones).",
+    "The light's colour drifts across the frame (see the expected-tone picture). An even drift is allowed for; soft colour that spans the frame is the light's."
+   ],
+   "odd_picks": []
+  },
+  "final_auto_box": {
+   "shown>=0.2": {
+    "clean": 0.0068613040941452545,
+    "edges": 0.02213690826341373,
+    "foxing": 0.42515109251510924,
+    "adhesive": 0.11595646559675336,
+    "mirroring": 0.36643822393822395,
+    "glare": 0.1574719780919628,
+    "yellowing_edge": 0.006471389645776567,
+    "table": 0.0,
+    "paint_rose": 0.9102099927588704,
+    "paint_flesh": 0.07341008290125084,
+    "paint_blue": 0.19708192039978584,
+    "paint_yellow": 0.05128843520478028,
+    "paint_gold": 0.4730392156862745,
+    "paint_white": 0.9494949494949495,
+    "paint_spotting": 0.4
+   },
+   "shown>=0.5": {
+    "clean": 0.001728079376871156,
+    "edges": 0.013313105668906158,
+    "foxing": 0.35518363551836357,
+    "adhesive": 0.08788046485888212,
+    "mirroring": 0.2752702702702703,
+    "glare": 0.13966373710355368,
+    "yellowing_edge": 0.0019197423829576418,
+    "table": 0.0,
+    "paint_rose": 0.7306299782766111,
+    "paint_flesh": 0.04162638779037408,
+    "paint_blue": 0.1430334939615682,
+    "paint_yellow": 0.02527075812274368,
+    "paint_gold": 0.3946078431372549,
+    "paint_white": 0.9494949494949495,
+    "paint_spotting": 0.4
+   },
+   "warnings": [
+    "The light's colour drifts across the frame (see the expected-tone picture). An even drift is allowed for; soft colour that spans the frame is the light's."
+   ],
+   "odd_picks": []
+  }
+ }
+}

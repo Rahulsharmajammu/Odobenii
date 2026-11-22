@@ -1,0 +1,21 @@
+S1_benign              E4_proposed          AUC 0.976 TPRc 0.92 TPRf 0.72 TPRt 1.00 FPR 0.029 (L 0.021 M 0.036 D 0.045 l 0.027 r 0.032 sheen nan) 11s
+S1_benign              E4_proposed_picks    AUC 0.975 TPRc 0.92 TPRf 0.74 TPRt 1.00 FPR 0.031 (L 0.021 M 0.038 D 0.046 l 0.029 r 0.033 sheen nan) 20s
+S2_tone_shift          E4_proposed          AUC 0.963 TPRc 0.78 TPRf 0.72 TPRt 1.00 FPR 0.019 (L 0.015 M 0.021 D 0.029 l 0.017 r 0.021 sheen nan) 14s
+S2_tone_shift          E4_proposed_picks    AUC 0.962 TPRc 0.81 TPRf 0.73 TPRt 1.00 FPR 0.019 (L 0.014 M 0.024 D 0.030 l 0.018 r 0.021 sheen nan) 19s
+S3_mixed_light         E4_proposed          AUC 0.974 TPRc 0.89 TPRf 0.65 TPRt 1.00 FPR 0.023 (L 0.013 M 0.033 D 0.039 l 0.029 r 0.017 sheen nan) 15s
+S3_mixed_light         E4_proposed_picks    AUC 0.948 TPRc 0.84 TPRf 0.65 TPRt 1.00 FPR 0.033 (L 0.015 M 0.063 D 0.036 l 0.046 r 0.019 sheen nan) 21s
+S4_sheen               E4_proposed          AUC 0.971 TPRc 0.86 TPRf 0.75 TPRt 1.00 FPR 0.032 (L 0.019 M 0.053 D 0.034 l 0.020 r 0.042 sheen 0.042) 14s
+S4_sheen               E4_proposed_picks    AUC 0.964 TPRc 0.88 TPRf 0.74 TPRt 1.00 FPR 0.022 (L 0.008 M 0.036 D 0.033 l 0.017 r 0.027 sheen 0.027) 18s
+S5_extensive           E4_proposed          AUC 0.983 TPRc 0.94 TPRf 0.71 TPRt 1.00 FPR 0.037 (L 0.035 M 0.037 D 0.046 l 0.035 r 0.038 sheen nan) 13s
+S5_extensive           E4_proposed_picks    AUC 0.984 TPRc 0.94 TPRf 0.75 TPRt 1.00 FPR 0.038 (L 0.035 M 0.039 D 0.047 l 0.037 r 0.040 sheen nan) 17s
+/usr/local/lib/python3.13/site-packages/sklearn/metrics/_ranking.py:469: UndefinedMetricWarning: Only one class is present in y_true. ROC AUC score is not defined in that case.
+  warnings.warn(
+S6_unpainted_unruly    E4_proposed          AUC nan TPRc nan TPRf nan TPRt nan FPR 0.027 (L 0.011 M 0.035 D 0.040 l 0.008 r 0.046 sheen 0.041) 12s
+/usr/local/lib/python3.13/site-packages/sklearn/metrics/_ranking.py:469: UndefinedMetricWarning: Only one class is present in y_true. ROC AUC score is not defined in that case.
+  warnings.warn(
+S6_unpainted_unruly    E4_proposed_picks    AUC nan TPRc nan TPRf nan TPRt nan FPR 0.027 (L 0.020 M 0.024 D 0.040 l 0.015 r 0.039 sheen 0.036) 19s
+S7_extensive_unruly    E4_proposed          AUC 0.808 TPRc 0.35 TPRf 0.55 TPRt 1.00 FPR 0.034 (L 0.036 M 0.039 D 0.029 l 0.030 r 0.037 sheen 0.045) 14s
+S7_extensive_unruly    E4_proposed_picks    AUC 0.896 TPRc 0.40 TPRf 0.66 TPRt 1.00 FPR 0.033 (L 0.033 M 0.040 D 0.029 l 0.034 r 0.033 sheen 0.042) 16s
+S8_basic_unruly        E4_proposed          AUC 0.851 TPRc 0.02 TPRf 0.60 TPRt 1.00 FPR 0.016 (L 0.006 M 0.023 D 0.024 l 0.006 r 0.024 sheen 0.022) 10s
+S8_basic_unruly        E4_proposed_picks    AUC 0.810 TPRc 0.02 TPRf 0.69 TPRt 1.00 FPR 0.024 (L 0.025 M 0.023 D 0.024 l 0.019 r 0.029 sheen 0.030) 16s
+ALL_DONE
