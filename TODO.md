@@ -37,7 +37,7 @@ All of it comes from synthetic test images, so the real-capture gate below comes
   - The departure picture comes from that one photograph.
   - It takes no infrared, ultraviolet, second capture or session control. Infrared goes to the Woodii module.
   - The known-unpainted print checks the capture setup (the gate below); it is not an input.
-- **Two codebases, no shared code** (your choice: redundancy is good). The single-photograph viewer stays here; the
+- **Two codebases, no shared code** (redundancy is good). The single-photograph viewer stays here; the
   module for VIS and NIRR goes in Woodii.
 - **The captures are controlled and ICC-calibrated**, so decoding through the embedded profile matters. It is now
   correct for every matrix/TRC profile, ProPhoto included.
@@ -55,31 +55,33 @@ All of it comes from synthetic test images, so the real-capture gate below comes
 
 ## Still open
 
-Nothing. The gate's test captures are next: run the web app on them.
+One below The gate's test captures are next: run the web app on them.
 
+[ ] rename the app to 'Odobenii'. I will provide an image of a walrus with an ottoman turban as a logo. The walrus is selected, as it is a monochromat; and this piepleine is built to ingest monochromatic images (prints and photographs) with a paint layer on top. 
 ## The gate: test captures, before anything more is built
 
-- [ ] One print known to be unpainted, of the Van Der Zee kind.
-- [ ] One print whose **faint washes** (and some moderate or strong paint) a conservator has marked under
+- [x] One print known to be unpainted, of the Van Der Zee kind.
+- [x] One print whose **faint washes** (and some moderate or strong paint) a conservator has marked under
       magnification, raking light and UV.
-- [ ] Both captured exactly as real captures will be (same camera, lights and profile) and exported as 16-bit ProPhoto
+- [x] Both captured exactly as real captures will be (same camera, lights and profile) and exported as 16-bit ProPhoto
       TIFF. At 8 bits, rounding alone moved colours by up to 0.65 ΔE in tests, against about 1.3 ΔE for a faint wash.
-- [ ] Measure how faint the marked washes really are. The plan assumes about 1.3 ΔE, a guess from the test benches.
-- [ ] Judge every build by eye, side by side with:
+- [x] Measure how faint the marked washes really are. The plan assumes about 1.3 ΔE, a guess from the test benches. (note that this is not quantitative, the washes can be seen, which is what matters) 
+- [x] Judge every build by eye, side by side with:
   - 4.1.5;
   - DStretch, in its own colour spaces;
   - a plain boost of the profiled image.
+        This seems to work, with some low frequency noise appearing as a false colour. This can be flagged as a known issue. The user should be reminded that this is not a quantitative tool, but a way to quickly visualise paint distributions. 
 
 **Pass criteria** (these numbers are for the developer's test, never for the tool's output):
 1. **(a) The unpainted print stays quiet.** In its departure picture, a person who does not know it is unpainted marks
-   no coloured area larger than a fingertip at print scale.
+   no coloured area larger than a fingertip at print scale. [x] this passed
 2. **(c) Faint washes show.** The marked faint washes show at least as well as with the baselines, judged by someone
-   who knows neither the print nor the tool.
-3. **(b) Strong paint comes through.** Moderate and strong paint is not lost or distorted.
+   who knows neither the print nor the tool. [x] this passed
+3. **(b) Strong paint comes through.** Moderate and strong paint is not lost or distorted. [x] this passed
 4. **No ghost.** A print with a broad wash must not show its *unpainted* areas in colour. This is the known weak point
-   (below).
+   (below). [x] this passed
 5. **A wrong reference is visible.** Shown a dozen pictures, one made with a deliberately wrong reference, people pick
-   the wrong one better than chance.
+   the wrong one better than chance. [x] this passed
 
 **The setup check.** The unpainted print's capture also checks the capture setup. Repeat it whenever the camera,
 lights or profile change. If its departure picture shows colour, departure pictures from that setup are not to be
