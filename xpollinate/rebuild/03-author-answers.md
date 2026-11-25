@@ -2,7 +2,8 @@
 
 22 November 2026, after the run. These are the author's words, verbatim: answers to the four questions in TODO.md
 (§1-4), then later notes on the captures (§5), the inputs (§6), the stretch (§7), the infrared band and where the
-code lives (§8), the web app (§9), and the Woodii note (§10). Where they conflict with the synthesis, they win.
+code lives (§8), the web app (§9), the Woodii note (§10), and the gate and the name (§11). Where they conflict with
+the synthesis, they win.
 
 ## 1. Which part of Chroma mode failed?
 
@@ -277,3 +278,33 @@ The guards carry over.
 > for woodii"
 
 So the stretch stays a to-do in Woodii's TODO until most of that list is validated.
+
+## 11. The gate, and the name (23 Nov, in TODO.md)
+
+Your notes, made in `TODO.md` itself (commit `85f7892`), verbatim:
+
+> "(note that this is not quantitative, the washes can be seen, which is what matters)"
+
+> "This seems to work, with some low frequency noise appearing as a false colour. This can be flagged as a known
+> issue. The user should be reminded that this is not a quantitative tool, but a way to quickly visualise paint
+> distributions."
+
+> "[x] this passed" (each of the five pass criteria)
+
+> "rename the app to 'Odobenii'. I will provide an image of a walrus with an ottoman turban as a logo. The walrus is
+> selected, as it is a monochromat; and this piepleine is built to ingest monochromatic images (prints and
+> photographs) with a paint layer on top."
+
+**What it settles.**
+- **The gate passed** on your real test captures, judged by eye beside 4.1.5, DStretch and a plain boost: all five
+  criteria. The design is no longer resting on synthetic prints alone.
+- **A known issue:** low-frequency noise shows as false colour in the boost and the stretch. The app says so, in its
+  list of what the pictures cannot show and under the picture.
+- **The reminder:** the app, the README and the plan now call it a way to see quickly how paint is distributed, not a
+  quantitative tool.
+- **The name: Odobenii.** The package is `odobenii`, the command `python -m odobenii.app`, and the session folder
+  `~/odobenii_sessions` (an older `~/handpaint_sessions` is used while it is the only one). The repository keeps its
+  name. The logo waits for your image.
+
+**Still open** (in `TODO.md`): the logo; which colour spaces and emphases stay; and whether the false colour was a
+gradient (which the light term could remove) or blotches.

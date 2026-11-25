@@ -1,7 +1,7 @@
-/* The handpaint visualiser's page.  Every picture is drawn by the local server; this page picks and shows. */
+/* Odobenii's page.  Every picture is drawn by the local server; this page picks and shows. */
 "use strict";
 const $ = id => document.getElementById(id);
-const TOKEN = document.querySelector('meta[name="handpaint-token"]')?.content || "";
+const TOKEN = document.querySelector('meta[name="odobenii-token"]')?.content || "";
 const store = {
   get(k, d) { try { const v = localStorage.getItem("hpv:" + k); return v === null ? d : JSON.parse(v); } catch (e) { return d; } },
   put(k, v) { try { localStorage.setItem("hpv:" + k, JSON.stringify(v)); } catch (e) { /* private window: not kept */ } },
@@ -19,9 +19,9 @@ const STRIP_HUES = ["pink-red", "orange", "yellow", "green", "blue", "purple"];
 let ST = null;
 
 // -- talking to the server ------------------------------------------------------------------------------------------
-function apiGet(url) { return fetch(url, { headers: { "X-Handpaint-Token": TOKEN } }); }
+function apiGet(url) { return fetch(url, { headers: { "X-Odobenii-Token": TOKEN } }); }
 async function api(method, url, body) {
-  const opt = { method, headers: { "X-Handpaint-Token": TOKEN } };
+  const opt = { method, headers: { "X-Odobenii-Token": TOKEN } };
   if (body instanceof FormData) opt.body = body;
   else if (body !== undefined) { opt.headers["Content-Type"] = "application/json"; opt.body = JSON.stringify(body); }
   let r;

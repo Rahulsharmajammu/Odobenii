@@ -6,7 +6,7 @@ import numpy as np
 import pytest
 
 import synth
-from handpaint import engine
+from odobenii import engine
 
 S = engine.Settings()
 H, W = 480, 640

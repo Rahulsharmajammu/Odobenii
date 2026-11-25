@@ -10,7 +10,7 @@ from PIL import Image
 
 import iccmake as mk
 import synth
-from handpaint.app.server import TOKEN_HEADER, create_app
+from odobenii.app.server import TOKEN_HEADER, create_app
 
 ROMM = [(0.7347, 0.2653), (0.1596, 0.8404), (0.0366, 0.0001)]
 
@@ -32,7 +32,7 @@ def env(tmp_path):
     app = create_app(tmp_path / "session")
     app.testing = True
     c = app.test_client()
-    tok = app.config["HANDPAINT_TOKEN"]
+    tok = app.config["ODOBENII_TOKEN"]
     H = {TOKEN_HEADER: tok}
 
     def call(method, url, body=None, **kw):
@@ -101,7 +101,7 @@ def test_session_remembers(env):
     call("post", "/api/crop", {"box": [20, 20, 400, 300]})
     app2 = create_app(env["tmp"] / "session")
     c2 = app2.test_client()
-    H2 = {TOKEN_HEADER: app2.config["HANDPAINT_TOKEN"]}
+    H2 = {TOKEN_HEADER: app2.config["ODOBENII_TOKEN"]}
     st = c2.get("/api/state", headers=H2).get_json()["state"]
     assert st["folder"] == str(photos.resolve())
     r = c2.post("/api/open", headers=H2, json={"path": str(photos / "a_unpainted.tif")})
@@ -136,8 +136,8 @@ def test_batch(env):
         time.sleep(0.1)
     assert b["finished"] and b["done"] == 2 and not b["errors"], b
     names = sorted(p.name for p in out.iterdir())
-    assert "handpaint_run.json" in names and len([n for n in names if n.endswith(".png")]) == 6
-    rec = json.loads((out / "handpaint_run.json").read_text())
+    assert "odobenii_run.json" in names and len([n for n in names if n.endswith(".png")]) == 6
+    rec = json.loads((out / "odobenii_run.json").read_text())
     assert "No boxes are used in batch runs" in rec["note"]
     assert call("post", "/api/batch", {"folder_in": str(photos), "folder_out": str(photos), "looks": looks}).status_code == 400
 
