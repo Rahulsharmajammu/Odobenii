@@ -478,3 +478,57 @@ Numbered for your answers, most important first.
   join the fit (item 5).
 - **`04-divergence.md`, section 2:** the expected-unpainted picture plus the boost equals the capture ×4 only at the
   default strength, 4.
+
+## Your answers (25 Nov)
+
+> "1) i think that ps perhaps not feasible. this is a visualisation tol that can be used for aready captured images. the
+> viewer has to visually inspect the photograph before making any calls on presence or lack thereof.
+> 2) the strip can perhaps go, as it hints towards quantifiable, when nothing is actually quantifiable. assuming we have
+> the colour accuracy for a de1.3 measurement is false.
+> 3) what is the reccomendations for a fix.
+> 4) perhaps when colour departs is better left our?
+> 5) perhaps we should specify 2 or more boxes in areas that are dosconnected?
+> 7) can be adressed?
+> 8) true
+> 9) hm. fair."
+
+- **1, the blotches:** the test is not feasible. Odobenii works on photographs already taken, and the viewer inspects
+  the photograph before any call. The known issue now says the patches may come from the capture or from the print
+  itself, and that no picture can tell them apart.
+- **2, the strip:** removed, with the "about 1.3 ΔE for a faint wash" the page gave. It suggested a measurement, and
+  the colour accuracy it assumed is not there.
+- **3, the fix for the edge term:** it depends on 4.
+  - If "Where colour departs" goes, nothing needs fixing: the edge term only sets that picture's threshold.
+  - If it stays, fit the edge term as the slope of the leftover colour against the squared gradient, so blotches,
+    which do not grow with the gradient, fall into the intercept. About ten lines.
+  - Tried on the synthetic print with faint lens-like fringes added: the current fit went from 0.18 to its cap of 0.5
+    once blotches of 0.3 ΔE per axis were added, while the slope stayed at 0.09 (0.10 without them). Without fringes
+    the slope finds no edge term, with or without blotches.
+- **4, leave "Where colour departs" out?** Recommended: yes, for your own reasons in 1 and 2.
+  - It is the one picture that makes a call: a fixed cut-off, T0 = 2 ΔE, decides what is drawn and what is left
+    blank. In 1 you put that call with the viewer, and in 2 you set aside the ΔE accuracy it rests on.
+  - On photographs already taken, nothing can give it the checks the reviewers required: no second photograph, no
+    setup check.
+  - Its faults would all need work: it goes blind along sharp edges on blotchy captures (3), judges the tones where
+    the reference is guessing at full strength (4), is weaker over the darks (9), and draws a broad wash's ghost
+    brightly.
+  - Leaving it out also removes T0, the noise model and the edge term, and with them the ΔE figure left in Settings.
+  - What it costs: you found it useful at the gate, and it is the one picture that does not rely on hue, for
+    colour-deficient viewers. The boost and the stretch would carry everything, and the colour-deficiency to-do would
+    move to them. The gate's criteria would then be read on the boost and the stretch.
+  - Your call. Nothing is removed yet.
+- **5, boxes:** done as you suggest. A box is used only where a box in another part of the print (at least a tenth of
+  the print's shorter side away) covers the same tones and agrees with it, and only at those tones. That also settles
+  the lone box. On its own, the rule would not stop two boxes on the margin from agreeing with each other, so boxes
+  outside the print area are not used either. The hint asks for boxes on the image, not on the margin or the mount.
+- **6:** not answered. Its three sentences were wrong whatever you decide, so they are corrected in the app and the
+  README.
+- **7, more evidence:** yes, without new photography. It can come from photographs already taken: prints known from
+  the collection's records or past examination to be unpainted, of several kinds (warm, toned, yellowed, mirrored,
+  glossy), and a painted print with a broad wash for criterion 4, run as a batch and judged by eye with the gate's
+  criteria. I cannot supply them; `TODO.md` lists it.
+- **8, small boxes:** done. A box too small to judge is not used ("draw it larger"), so the boxes always hold enough
+  pixels for the edge term and the stretch's statistics. Those statistics never fall back to pixels outside the print
+  area.
+- **9, the dark tones:** fair, and it waits on 4.
+

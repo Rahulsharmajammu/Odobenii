@@ -19,6 +19,9 @@ The plan that came out of it is `../../TODO.md`. This folder holds the reasoning
 >   renamed Odobenii.
 > - **§12:** your answers to the divergence check (`04-divergence.md`): the strip from the print itself; the departure
 >   picture stays.
+> - **§13:** your answers to the reviewers' points (`05-reviewers.md`): Odobenii works on photographs already taken;
+>   the strip is removed; boxes in two or more places, inside the print area; whether "Where colour departs" stays
+>   is open.
 
 > **Read this first: limits of everything here.**
 > - **No real capture of any print was available.** Every number comes from synthetic test images that the agents

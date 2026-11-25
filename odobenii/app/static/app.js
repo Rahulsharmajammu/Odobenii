@@ -9,13 +9,12 @@ const store = {
 const LOOK0 = { cs: "lab", emph: "balanced", k: 4, tone: true, unpainted: true, cap: true, hatch: true };
 const UI = {
   tab: store.get("tab", "photos"), view: store.get("view", "boost"), cmp: store.get("cmp", ""), flip: store.get("flip", false),
-  look: Object.assign({}, LOOK0, store.get("look", {})), tool: null, drag: null, leaving: false, imgKey: "", stripSeq: 0,
+  look: Object.assign({}, LOOK0, store.get("look", {})), tool: null, drag: null, leaving: false, imgKey: "",
 };
 const VIEWS = ["original", "boost", "stretch", "expected", "departs"];
 const VIEW_NAMES = { original: "The photograph", boost: "Boost", stretch: "Stretch", expected: "Expected unpainted ×4", departs: "Where colour departs" };
 const SPACE_NAMES = { lab: "CIELAB", density: "Density" };
 const EMPH_NAMES = { balanced: "balanced", redgreen: "red–green", yellowblue: "yellow–blue" };
-const STRIP_HUES = ["pink-red", "orange", "yellow", "green", "blue", "purple"];
 let ST = null;
 
 // -- talking to the server ------------------------------------------------------------------------------------------
@@ -64,7 +63,6 @@ function applyState(st) {
     V.pic = null; V2.pic = null; fitView();
   }
   scheduleFetch(0);
-  refreshStrip();
 }
 const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
 
@@ -137,7 +135,6 @@ function setTab(t) {
   UI.tab = t; store.put("tab", t);
   document.querySelectorAll("#flow button").forEach(b => b.classList.toggle("on", b.dataset.tab === t));
   document.querySelectorAll("[data-pane]").forEach(p => { p.hidden = p.dataset.pane !== t; });
-  if (t === "check") refreshStrip();
 }
 function describe(view) {
   const L = UI.look;
@@ -150,7 +147,7 @@ function setView(v) {
   if (!VIEWS.includes(v)) return;
   if (v === UI.cmp && !UI.flip) { UI.cmp = UI.view; store.put("cmp", UI.cmp); $("cmpSel").value = UI.cmp; }
   UI.view = v; store.put("view", v);
-  renderViewbar(); labelViews(); refreshStrip(); scheduleFetch(0);
+  renderViewbar(); labelViews(); scheduleFetch(0);
 }
 function renderViewbar() {
   document.querySelectorAll("#viewbar button").forEach(b => b.classList.toggle("on", b.dataset.view === UI.view));
@@ -168,29 +165,11 @@ function renderLook() {
 let lookTimer = null;
 function lookChanged() {
   store.put("look", UI.look); renderLook(); renderViewbar(); labelViews();
-  clearTimeout(lookTimer); lookTimer = setTimeout(() => { scheduleFetch(0); refreshStrip(); }, 60);
+  clearTimeout(lookTimer); lookTimer = setTimeout(() => scheduleFetch(0), 60);
 }
 function lookParams(view) {
   const L = UI.look;
   return { view, cs: L.cs, emph: L.emph, k: L.k, tone: L.tone ? 1 : 0, unpainted: L.unpainted ? 1 : 0, cap: L.cap ? 1 : 0, hatch: L.hatch ? 1 : 0 };
-}
-async function refreshStrip() {
-  if (!ST || !ST.image || UI.tab !== "check") return;
-  const seq = ++UI.stripSeq;
-  const q = new URLSearchParams({ ...lookParams(UI.view), screen: VIEW_SPACE });
-  try {
-    const r = await apiGet(`/api/strip?${q}`);
-    if (!r.ok || seq !== UI.stripSeq) return;
-    const url = URL.createObjectURL(await r.blob());
-    const img = $("strip"), old = img.dataset.url;
-    img.src = url; img.dataset.url = url;
-    if (old) URL.revokeObjectURL(old);
-  } catch (e) { /* the strip is redrawn with the next change */ }
-}
-function buildStripLabels() {
-  $("stripHues").style.gridTemplateRows = `repeat(${STRIP_HUES.length}, 1fr)`;
-  $("stripHues").innerHTML = STRIP_HUES.map(h => `<span>${h}</span>`).join("");
-  $("stripTones").innerHTML = "<span>darker</span><span>tone</span><span>lighter</span>";
 }
 
 // -- the image well --------------------------------------------------------------------------------------------------
@@ -313,7 +292,7 @@ function flip() {
   const a = UI.view; UI.view = UI.cmp; UI.cmp = a; store.put("view", UI.view); store.put("cmp", UI.cmp);
   $("cmpSel").value = UI.cmp;
   [V.pic, V2.pic] = [V2.pic, V.pic]; [V.rect, V2.rect] = [V2.rect, V.rect];
-  renderViewbar(); labelViews(); refreshStrip(); draw(); scheduleFetch(0);
+  renderViewbar(); labelViews(); draw(); scheduleFetch(0);
 }
 
 // pointer: pan, or drag a box with a tool
@@ -439,7 +418,7 @@ function wire() {
 }
 
 async function start() {
-  buildStripLabels(); wire(); renderLook(); setTab(UI.tab); renderViewbar();
+  wire(); renderLook(); setTab(UI.tab); renderViewbar();
   $("cmpSel").value = UI.cmp; $("zFlip").disabled = !UI.cmp; layoutWell(); labelViews();
   try { const d = await (await apiGet("/api/state")).json(); if (d.ok) applyState(d.state); else status(d.error || "The state could not be read.", "bad"); }
   catch (e) { status("The visualiser's server is not answering. Is it still running?", "bad"); }

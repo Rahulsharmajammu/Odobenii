@@ -328,3 +328,28 @@ is recorded at the end of `04-divergence.md`. In short:
 - T0 stays visible, and the records stay as they are;
 - density for the departure picture, boxes as checks and the lone-box rule are open;
 - the colour-deficiency check stays a to-do.
+
+## 13. The reviewers, point by point (25 Nov)
+
+> "1) i think that ps perhaps not feasible. this is a visualisation tol that can be used for aready captured images. the
+> viewer has to visually inspect the photograph before making any calls on presence or lack thereof.
+> 2) the strip can perhaps go, as it hints towards quantifiable, when nothing is actually quantifiable. assuming we have
+> the colour accuracy for a de1.3 measurement is false.
+> 3) what is the reccomendations for a fix.
+> 4) perhaps when colour departs is better left our?
+> 5) perhaps we should specify 2 or more boxes in areas that are dosconnected?
+> 7) can be adressed?
+> 8) true
+> 9) hm. fair."
+
+The numbers are the items of `05-reviewers.md` §2, where each answer is recorded. What they change:
+- **Odobenii works on photographs already taken.** Nothing in it may depend on a second shot, or on a check made when
+  the photograph was taken; the viewer inspects the photograph before any call on presence or absence. So the test of
+  turning the print is dropped, and the setup check applies only to new photography.
+- **The strip is removed,** with the ΔE figure the page gave for a faint wash: both implied a colour accuracy that is
+  not there.
+- **Boxes:** two or more, in different parts of the print, at the same tones. A box is used only where a box elsewhere
+  covers its tones and agrees with it. Boxes outside the print area, or too small to judge, are not used.
+- **Open:** whether "Where colour departs" stays. The recommendation is to leave it out. The edge term's fix (3), the
+  safeguards (4) and the dark tones (9) wait on it. More evidence (7) can come from photographs already taken.
+- **Item 6** was not answered. Its three sentences were wrong whatever is decided, so they are corrected.

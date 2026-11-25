@@ -59,6 +59,3 @@ def exported(an: "engine.Analysis", look: "engine.Look", edge: Optional[int] = N
     extra = engine.BLANK_LABEL if look.view == "departs" else None
     return png(with_words(whole(an, look, edge), look.describe(), extra), "srgb", fast=False)
 
-
-def strip_png(an: "engine.Analysis", look: "engine.Look", space: str = "srgb", cell: int = 40) -> bytes:
-    return png(colour.lab_to_screen(an.strip(look, cell), space), space)

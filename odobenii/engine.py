@@ -1,17 +1,17 @@
 """The analysis behind every picture: what this print looks like unpainted, and how far each place departs from it.
 
-The design is the rebuild plan's (TODO.md, build step 1), tested so far only on synthetic prints:
+The design is the rebuild plan's (TODO.md, build step 1). It passed the gate on real test captures (23 Nov), judged by
+eye:
 
 - **The reference**, "this print unpainted": the print's own tone as a smooth, stiff curve of a*b* against L*, fitted
   to place votes (each tile of a 10 x 10 grid votes once per 2 L* band) with a high-breakdown fit (least trimmed
   squares, then Tukey biweight steps), so paint that is local cannot become the reference.  Boxes the user has
-  examined on the object, and that agree with one another, join the fit as anchors.
+  examined on the object join the fit as anchors, at the tones where a box in another part of the print agrees.
 - **Departures**: each pixel's a*b* minus the reference at its L*.
 - **Pictures**: the original; the boost (departures x k, the print's tone drawn neutral grey); the decorrelation
   stretch in two spaces with three emphases and three guards; the expected-unpainted picture x 4; and "where colour
-  departs", drawn bright on a dimmed print from a threshold the paint cannot raise: T = max(T0, 3 sigma), sigma from
-  pixel noise and an edge term.
-- **The strip**: a thin wash set into this capture's own noise, at each tone, drawn as the current picture draws.
+  departs", drawn bright on a dimmed print from a threshold that the paint's colour cannot raise: T = max(T0, 3 sigma),
+  sigma from pixel noise and an edge term (so sharp changes in lightness raise it, the paint's own included).
 
 No picture or answer here is a measurement: the server sends pictures, settings and words, never figures about paint.
 """
@@ -37,19 +37,14 @@ LTS_STARTS = 16
 BIWEIGHT_C = 4.685
 SCALE_FLOOR = 0.25            # ΔE: the fit's scale never goes below this
 BOX_WEIGHT = 5.0              # one box vote counts as this many place votes
+MIN_BOX_PX = 400              # judged analysis pixels a box needs (about 20 x 20)
+BOX_APART = 0.1               # boxes corroborate one another only this far apart (share of the print's shorter side)
 NOISE_LAG = 3                 # px at analysis size, for the shift-difference noise
 CAP = 2.0                     # guard 3: largest ratio between the stretch's two gains
 EXPECTED_X = 4.0              # the expected-unpainted picture's exaggeration
-WASH_DE = 1.3                 # the strip's thin wash, ΔE: a faint one (the gate judged washes by eye, not measured)
-STRIP_TOUCH_DE = 4.0          # the strip's small clear touch, ΔE
-STRIP_TONE_TOL = 4.0          # L*: a strip window's mean tone within this of its column's
-STRIP_TONE_SD = 6.0           # L*: and its tone this even
 EMPHASES = ("balanced", "redgreen", "yellowblue")
 SPACES = ("lab", "density")
 VIEWS = ("original", "boost", "stretch", "expected", "departs")
-STRIP_HUES = (("pink-red", 10.0), ("orange", 55.0), ("yellow", 92.0), ("green", 160.0), ("blue", 260.0),
-              ("purple", 310.0))
-STRIP_TONES = (15.0, 25.0, 35.0, 45.0, 55.0, 65.0, 75.0, 85.0, 93.0)
 VIS_LABEL = "Visualisation only - not a measurement"
 BLANK_LABEL = "Blank does not mean unpainted"
 
@@ -407,57 +402,76 @@ class Analysis:
         self._px_key[ys, xs] = key
 
     def set_boxes(self, boxes: Sequence[Sequence[float]]):
-        """Boxes the user examined on the object: checked against one another, then used as anchors and for the
-        stretch's statistics.  Refits the reference."""
+        """Boxes the user examined on the object and knows are unpainted.  A box counts only inside the print area,
+        only if it is large enough to judge, and only where a box in another part of the print covers the same tones
+        and agrees with it.  There it anchors the reference, and the boxes set the stretch's statistics.  Refits the
+        reference."""
         boxes = [self._check_box(b) for b in boxes][:12]
-        lo, hi = self.settings.near_black, self.settings.near_white
-        self._box_px = np.zeros((self.h, self.w), bool)
-        per_box = []
+        lo = self.settings.near_black
+        px0, py0, px1, py1 = self._to_a(self.crop) if self.crop else (0, 0, self.w, self.h)
+        apart_px = BOX_APART * min(px1 - px0, py1 - py0)
+        no_tones = "Not used: no judged tones in it (too dark, too light or clipped)."
+        rects, per_box, why = [], [], []
         for b in boxes:
             x0, y0, x1, y1 = self._to_a(b)
-            sub = self.lab[y0:y1, x0:x1][self.valid[y0:y1, x0:x1]]
+            rects.append((x0, y0, x1, y1))
+            inside = self.in_print[y0:y1, x0:x1]
+            sub = self.lab[y0:y1, x0:x1][self.valid[y0:y1, x0:x1] & inside]
             bands = {}
-            if len(sub):
+            if not inside.any():
+                why.append("Not used: it lies outside the print area. Boxes go on the image, not on the margin or "
+                           "the mount.")
+            elif not len(sub):
+                why.append(no_tones)
+            elif len(sub) < MIN_BOX_PX:
+                why.append("Not used: too small to judge. Draw it larger.")
+            else:
                 bi = np.minimum(((sub[:, 0] - lo) / BAND).astype(int), self.nb - 1)
                 for k in np.unique(bi):
                     sel = sub[bi == k]
                     if len(sel) >= 20:
                         bands[int(k)] = np.median(sel, axis=0)
+                why.append(None if bands else no_tones)
             per_box.append(bands)
+
+        def apart(i, j):
+            (ax0, ay0, ax1, ay1), (bx0, by0, bx1, by1) = rects[i], rects[j]
+            return math.hypot(max(0, bx0 - ax1, ax0 - bx1), max(0, by0 - ay1, ay0 - by1)) >= apart_px
+
         # a first fit from places only gives the capture's scatter for the cross-check
         self._fit(np.zeros((0, 3)))
         thr = max(1.0, 3.0 * self.fit_scale)
-        disagree = [set() for _ in boxes]
-        for i in range(len(boxes)):
-            for j in range(i + 1, len(boxes)):
-                common = set(per_box[i]) & set(per_box[j])
-                if not common:
-                    continue
-                gap = np.median([np.linalg.norm(per_box[i][c][1:] - per_box[j][c][1:]) for c in common])
-                if gap > thr:
-                    disagree[i].add(j)
-                    disagree[j].add(i)
         results, anchors = [], []
         for i, b in enumerate(boxes):
-            if not per_box[i]:
-                results.append(BoxResult(b, False, "Not used: no judged tones in it (too dark, too light or clipped)."))
+            if why[i]:
+                results.append(BoxResult(b, False, why[i]))
                 continue
-            partners = [j for j in range(len(boxes)) if j != i and set(per_box[i]) & set(per_box[j])]
-            if disagree[i] and len(disagree[i]) * 2 > len(partners):      # most of the boxes at its tones
+            partners = [j for j in range(len(boxes)) if j != i and not why[j] and apart(i, j)
+                        and set(per_box[i]) & set(per_box[j])]
+            if not partners:
+                results.append(BoxResult(b, False, "Not used yet: no box in another part of the print covers its "
+                                                   "tones. Draw a second one at the same tones, away from it."))
+                continue
+            agree = []
+            for j in partners:
+                common = set(per_box[i]) & set(per_box[j])
+                if np.median([np.linalg.norm(per_box[i][c][1:] - per_box[j][c][1:]) for c in common]) <= thr:
+                    agree.append(j)
+            if 2 * (len(partners) - len(agree)) > len(partners):          # most of the boxes at its tones disagree
                 results.append(BoxResult(b, False, "Not used: it disagrees with the other boxes at the same tones. "
                                                    "One of them may hold paint."))
                 continue
-            note = ("Used: it agrees with the other boxes at its tones." if partners else
-                    "Used, but not cross-checked: no other box covers its tones.")
-            results.append(BoxResult(b, True, note))
-            anchors.extend(per_box[i].values())
+            shared = set().union(*(set(per_box[i]) & set(per_box[j]) for j in agree))
+            n = len(agree)
+            results.append(BoxResult(b, True, f"Used: it agrees with {n} box{'es' if n > 1 else ''} elsewhere, at the "
+                                              "tones they share."))
+            anchors.extend(per_box[i][c] for c in sorted(shared))
         self.boxes = results
         self._box_px = np.zeros((self.h, self.w), bool)
-        for r in results:
+        for r, (x0, y0, x1, y1) in zip(results, rects):
             if r.used:
-                x0, y0, x1, y1 = self._to_a(r.box)
                 self._box_px[y0:y1, x0:x1] = True
-        self._box_px &= self.valid
+        self._box_px &= self.valid & self.in_print
         self._fit(np.array(anchors, np.float64).reshape(-1, 3))
 
     def _fit(self, anchors: np.ndarray):
@@ -559,8 +573,10 @@ class Analysis:
                 sel = self._box_px if self._box_px.any() else (self.inlier_px & self.valid)
             else:
                 sel = self.valid & self.in_print
-            if sel.sum() < 100:
-                sel = self.valid if self.valid.sum() >= 100 else np.ones_like(self.valid)
+            if sel.sum() < 100:                        # never the frame outside the print area
+                sel = self.valid & self.in_print
+                if sel.sum() < 100:
+                    sel = self.in_print
             ys, xs = np.nonzero(sel)
             if len(ys) > 200_000:
                 pick = np.random.default_rng(1).choice(len(ys), 200_000, replace=False)
@@ -655,66 +671,6 @@ class Analysis:
             out[..., 0][on] = np.where(L[on] > 50, L[on] - 30, L[on] + 30)
             out[..., 1:][on] = 0.0
         return out
-
-    def _strip_windows(self, size: int):
-        """For each strip tone, the top-left corner of a size x size window of the print (analysis pixels) whose tone is
-        even and near that tone, and which the reference holds as unpainted; None where the print has no such surface."""
-        b = size // 2
-        nh, nw = self.h // b, self.w // b
-        if nh < 2 or nw < 2:
-            return [None] * len(STRIP_TONES)
-        L = self.lab[: nh * b, : nw * b, 0].reshape(nh, b, nw, b)
-        sup = (self.inlier_px & self.valid & self.in_print)[: nh * b, : nw * b].reshape(nh, b, nw, b)
-        bm, bv, bs = L.mean((1, 3)), L.var((1, 3)), sup.mean((1, 3))
-        quads = lambda a: (a[:-1, :-1] + a[1:, :-1] + a[:-1, 1:] + a[1:, 1:]) / 4.0   # windows of 2 x 2 blocks
-        m = quads(bm)
-        sd = np.sqrt(quads(bv) + quads(bm ** 2) - m ** 2)
-        s = quads(bs)
-        out = []
-        for Lc in STRIP_TONES:
-            ok = (np.abs(m - Lc) <= STRIP_TONE_TOL) & (sd <= STRIP_TONE_SD) & (s >= 0.6)
-            if not ok.any():
-                out.append(None)
-                continue
-            score = np.where(ok, np.abs(m - Lc) + 0.5 * sd - s, np.inf)
-            i, j = np.unravel_index(int(np.argmin(score)), score.shape)
-            out.append((int(i) * b, int(j) * b))
-        return out
-
-    def strip(self, look: Look, cell: int = 40) -> np.ndarray:
-        """CIELAB of the strip: rows of hues, columns of tones.
-
-        Each column is a window of this print where the reference holds and the tone is even, at that tone, so it
-        carries the capture's own residual: its noise, its texture and its low-frequency blotches. In each cell the
-        right half adds a thin wash of WASH_DE and a small clear touch of STRIP_TOUCH_DE, in the row's hue. A column is
-        hatched where the print has no such surface at that tone. Drawn as ``look`` draws."""
-        rows, cols = len(STRIP_HUES), len(STRIP_TONES)
-        lab = np.zeros((rows * cell, cols * cell, 3), np.float32)
-        clip = np.zeros(lab.shape[:2], bool)
-        size = 2 * cell
-        wins = self._strip_windows(size)
-        yy, xx = np.mgrid[0:cell, 0:cell]
-        touch = (xx - 0.75 * cell) ** 2 + (yy - 0.7 * cell) ** 2 <= (cell / 9.0) ** 2
-        for j, (Lc, win) in enumerate(zip(STRIP_TONES, wins)):
-            cols_ = slice(j * cell, (j + 1) * cell)
-            if win is None:
-                lab[:, cols_, 0] = Lc
-                clip[:, cols_] = True
-                continue
-            y0, x0 = win
-            patch = cv2.resize(self.lab[y0:y0 + size, x0:x0 + size], (cell, cell), interpolation=cv2.INTER_AREA)
-            for i, (_, hue) in enumerate(STRIP_HUES):
-                blk = lab[i * cell:(i + 1) * cell, cols_]
-                blk[...] = patch
-                h = math.radians(hue)
-                dab = np.array([math.cos(h), math.sin(h)], np.float32)
-                blk[:, cell // 2:, 1:] += WASH_DE * dab
-                blk[..., 1:][touch] += (STRIP_TOUCH_DE - WASH_DE) * dab
-        if look.view == "original":
-            return lab
-        if look.view in ("expected", "departs"):
-            look = Look(view="boost", k=look.k)
-        return self.draw(Look(**{**asdict(look), "hatch": True}), lab, clip, None)
 
     def summary(self) -> dict:
         """What the page shows about the analysis, in words and settings only."""

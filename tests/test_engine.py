@@ -63,13 +63,13 @@ def test_faint_wash_shows_in_the_boost():
 
 def test_broad_wash_does_not_become_the_reference():
     """The known weak point (B1): a wash over 80 % of the sky.  The clear fifth must not glow in the opposite colour;
-    boxes on it make the reference closer still."""
+    two boxes apart on it make the reference closer still."""
     L, masks = synth.scene(H, W, 0)
     xx = np.mgrid[0:H, 0:W][1] / W
     painted, clear = masks["sky"] & (xx < 0.8), masks["sky"] & (xx >= 0.8)
     lab = synth.lab_print(L, 1, 0.35, [(painted, -2.5, -2.5)])
     Lg = np.arange(80, 89, 2.0)
-    for boxes, tol in (((), 0.3), ([[600, 10, 30, 80], [560, 10, 30, 80]], 0.15)):
+    for boxes, tol in (((), 0.3), ([[600, 10, 30, 80], [515, 10, 30, 80]], 0.15)):
         an, _ = analyse(lab=lab, boxes=boxes)
         assert np.linalg.norm(an.ref(Lg) - synth.tone(Lg), axis=1).max() < tol
         assert (an.dep_alpha[clear] > 0).mean() < 0.01
@@ -120,46 +120,25 @@ def test_every_view_draws_any_region(view, space):
         an.picture(lk, W + 5, 0, 10, 10, 10, 10)
 
 
-def test_strip_from_the_print_itself():
-    """The strip's columns are windows of the print at each tone; tones the print lacks are hatched; the right half of
-    each cell carries the wash."""
-    an, _ = analyse()
-    s = an.strip(engine.Look(view="boost"))
-    cell = s.shape[0] // len(engine.STRIP_HUES)
-    assert s.shape == (cell * len(engine.STRIP_HUES), cell * len(engine.STRIP_TONES), 3)
-    wins = an._strip_windows(2 * cell)
-    assert wins[0] is None and wins[-1] is None          # the scene has no surface at L* 15 or 93
-    used = [j for j, w in enumerate(wins) if w is not None]
-    assert len(used) >= 4
-    for j in used:
-        blk = s[:cell, j * cell:(j + 1) * cell, 1:]
-        left, right = blk[:, : cell // 2].mean((0, 1)), blk[:, cell // 2:].mean((0, 1))
-        assert np.linalg.norm(right - left) > 3.0          # 1.3 ΔE x 4, less the residual
-        y0, x0 = wins[j]
-        assert abs(an.lab[y0:y0 + 2 * cell, x0:x0 + 2 * cell, 0].mean() - engine.STRIP_TONES[j]) <= engine.STRIP_TONE_TOL
-    hatched = s[:, :cell]                                  # stripes in the hatched first column
-    assert hatched[..., 0].std() > 5.0
+def test_a_box_needs_a_second_one_elsewhere():
+    """A lone box is not used, nor are two side by side, which are one place. Two apart, at the same tones, are."""
+    for boxes, used in (([[600, 10, 30, 80]], [False]),
+                        ([[600, 10, 30, 80], [570, 10, 25, 80]], [False, False]),
+                        ([[600, 10, 30, 80], [450, 10, 30, 80]], [True, True])):
+        an, _ = analyse(boxes=boxes)
+        assert [b.used for b in an.boxes] == used, [b.note for b in an.boxes]
+    an, _ = analyse(boxes=[[600, 10, 30, 80]])
+    assert "another part of the print" in an.boxes[0].note
 
 
-def test_strip_shows_the_capture_s_blotches():
-    """Low-frequency colour blotches in an unpainted print show in the strip, as they do in the boost. White noise at
-    the measured pixel noise could not show them: shift differences cancel them out of that measure."""
-    L, _ = synth.scene(H, W, 0)
-    rng = np.random.default_rng(9)
-    field = cv2.GaussianBlur(rng.normal(0, 1, (H, W, 2)).astype(np.float32), (0, 0), 25)
-    field /= field.std()                                   # about 1 ΔE per axis, in soft blotches
-    clean = synth.lab_print(L, 1, 0.35)
-    blotchy = clean.copy()
-    blotchy[..., 1:] += field
-    drawn = []
-    for lab in (clean, blotchy):
-        an, _ = analyse(lab=lab)
-        s = an.strip(engine.Look(view="boost"))
-        cell = s.shape[0] // len(engine.STRIP_HUES)
-        lefts = [s[:cell, j * cell:j * cell + cell // 2, 1:].reshape(-1, 2).mean(0)
-                 for j, w in enumerate(an._strip_windows(2 * cell)) if w is not None]
-        drawn.append(np.mean([np.hypot(*v) for v in lefts]))   # the unwashed halves' drawn colour
-    assert drawn[1] > 1.5 * drawn[0], drawn
+def test_boxes_outside_the_print_area_or_too_small_are_not_used():
+    """A margin is unpainted, but it is not the image's tone: boxes outside the drawn print area stay out of the fit."""
+    lin, clip, info, _ = synth.make(())
+    an = engine.Analysis(lin, clip, info, S, crop=[40, 40, 560, 400],
+                         boxes=[[5, 5, 30, 30], [600, 420, 30, 30], [300, 60, 12, 12]])
+    notes = [b.note for b in an.boxes]
+    assert [b.used for b in an.boxes] == [False, False, False], notes
+    assert "outside the print area" in notes[0] and "outside the print area" in notes[1] and "too small" in notes[2]
 
 
 def test_look_checks_its_values():

@@ -29,7 +29,7 @@ The design came from synthetic test images. The gate on your real test captures 
 - [x] **The web app** (`python -m odobenii.app`), your request of 22 Nov, built like Woodii's: a first build of
       steps 1 and 2 below, with the guarded decorrelation stretch in two colour spaces and three emphases.
 - [x] **The gate** (23 Nov): your two test captures, judged by eye beside 4.1.5, DStretch and a plain boost. All five
-      pass criteria passed. One known issue came out of it: low-frequency noise shows as false colour (below).
+      pass criteria passed. One known issue came out of it: broad, soft patches of colour (below).
 - [x] **Renamed Odobenii** (your note of 23 Nov): the package, the command, the page and the session folder. The
       logo waits for your image.
 - [x] The xpollinate review, and your answers and notes of 22 Nov (`xpollinate/rebuild/03-author-answers.md`).
@@ -59,6 +59,9 @@ The design came from synthetic test images. The gate on your real test captures 
   (your note of 23 Nov).
 - **The name is Odobenii,** for the walrus, a monochromat: the tool looks at monochrome prints and photographs with a
   paint layer on top (your note of 23 Nov).
+- **It works on photographs already taken** (your answer of 25 Nov). Nothing in it may depend on a second shot, or on
+  a check made when the photograph was taken. The viewer inspects the photograph before any call on presence or
+  absence.
 
 ## Still open
 
@@ -69,9 +72,8 @@ The design came from synthetic test images. The gate on your real test captures 
 
 **From the divergence check** (25 Nov, `xpollinate/rebuild/04-divergence.md`): where the build differs from the review
 with no decision of yours behind it. Your answers of 25 Nov:
-- [x] **The strip from the print's own surface**, not white noise (your "good to try"). Done: each column is a patch of
-      the print at that tone where the reference holds, so it carries the capture's noise, texture and blotches; the
-      review's small clear touch is added; tones with no clean surface are hatched.
+- [x] **The strip:** rebuilt from the print's own surface (your "good to try"), then removed the same day (your word:
+      it hints at a measurement, and the colour accuracy that a 1.3 ΔE wash assumes is not there).
 - [x] **The departure picture earns its place** (the review's criterion iii): it was useful. It stays.
 - [x] **The light term:** not the remedy, since the false colour was blotches.
 - [x] **T0 and the developer settings stay visible; the records stay as they are** (your word).
@@ -80,25 +82,28 @@ with no decision of yours behind it. Your answers of 25 Nov:
       them, not on the print, and they anchor the reference. What they cannot do is test it, since a box that sets the
       reference cannot also check it. A box could be marked "check": kept out of the fit, judged like the print, and
       named if it shows colour. Proposed.
-- [ ] **A lone box** used only if its correction exceeds the capture's scatter, as the review specified. Proposed.
+- [x] **A lone box** is no longer used: a box needs a second one, in another part of the print, at the same tones
+      (your rule of 25 Nov).
 - [ ] **A colour-deficiency check** of "Where colour departs": kept as a to-do (your word).
 
 **From the reviewers, point by point** (25 Nov, `xpollinate/rebuild/05-reviewers.md`): what the twelve reports add to
-the divergence check. Proposals, each your call:
-- [ ] **What the blotches are:** photograph the setup-check print twice, turned 180° between the shots. Blotches that
-      stay put are the capture's (a flat field would remove them); blotches that turn with the print are the print's.
-- [ ] **The strip under "Where colour departs":** draw it through that picture's threshold, scale its wash with tone,
-      and restore the full blank sentence.
-- [ ] **The edge term:** take out what calm places hold before fitting it, so blotches do not raise the threshold at
-      edges.
-- [ ] **Safeguards for one photograph:** the setup check in the README and the app; stripes over guessed tones in the
-      departure picture; the premise in its words.
-- [ ] **Boxes outside the print area** (the margin, the mount) become check boxes, not anchors.
-- [ ] **Three sentences reworded:** neutral media do show where the print's tone is not neutral; a wash over the whole
-      print leaves no sign; edges can raise the threshold.
-- [ ] **More prints at the next setup check**, and your word on whether criterion 4 (no ghost) met a broad wash.
-- [ ] **Small boxes:** pool them with the inlier places, or ask for a minimum size.
-- [ ] **Dark tones:** [01]'s normalisation, beside the density option.
+the divergence check. Your answers of 25 Nov:
+- [x] **What the blotches are:** the test (a second shot, the print turned) is not feasible, since Odobenii works on
+      photographs already taken. The known issue now says the patches may come from the capture or from the print.
+- [x] **The strip:** removed (your word), with the ΔE figure the page gave for a faint wash.
+- [ ] **"Where colour departs": keep it, or leave it out?** Your question. The recommendation (`05-reviewers.md`) is to
+      leave it out. The three items below wait on it.
+  - [ ] **The edge term,** if it stays: fit it as the slope of the leftover colour against the squared gradient, so
+        blotches fall into the intercept. Tried on a synthetic print.
+  - [ ] **Safeguards,** if it stays: stripes over the tones where the reference is guessing; its premise in its words.
+  - [ ] **Dark tones,** if it stays: [01]'s normalisation (your "fair").
+- [x] **Boxes:** two or more, in different parts of the print, at the same tones (your rule). Boxes outside the print
+      area, or too small to judge, are not used, and the stretch's statistics never come from outside the print area.
+- [x] **Three sentences corrected:** neutral media show where the print's tone is not neutral; a wash over the whole
+      print leaves no sign; sharp changes in lightness can raise the threshold.
+- [ ] **More evidence, from photographs already taken:** prints known to be unpainted, of several kinds (warm, toned,
+      yellowed, mirrored, glossy), and a painted print with a broad wash (criterion 4), run as a batch and judged by
+      eye with the gate's criteria.
 
 ## The gate: passed on your test captures (23 Nov)
 
@@ -134,7 +139,7 @@ stretch, so it stays (your answer of 25 Nov).
 
 **The setup check.** The unpainted print's capture also checks the capture setup. Repeat it whenever the camera,
 lights or profile change. If its departure picture shows colour, departure pictures from that setup are not to be
-trusted.
+trusted. It applies only to new photography: photographs already taken have none (your answer of 25 Nov).
 
 ## Build the visualiser (each step tried on the test captures before the next)
 
@@ -178,15 +183,16 @@ on 23 Nov.
      - T = max(T0, 3σ), with σ from shift-difference noise by tone plus an edge term. The edge term is fitted on the
        places the reference holds as unpainted, so paint's own edges can still raise it;
      - faded in from T to 2T. T0 is 2 ΔE, as it passed the gate.
-   - **The check sheet:** the expected-unpainted picture ×4 (hatched where the reference is guessing), the strip (from
-     the print's own surface at each tone, since 25 Nov), and the words.
+   - **The check sheet:** the expected-unpainted picture ×4 (hatched where the reference is guessing) and the words.
+     The strip was removed on 25 Nov (your word).
    - [x] The line-up check (pass criterion 5): passed at the gate.
 2. [x] **Single view**, as the web app rather than a Tk window, through the gate:
    - folders or files in, export of the picture shown, and batch runs;
    - keys 1-5 flip between the photograph, the boost, the stretch, the expected-unpainted picture and the departure
      picture; two pictures side by side, or flipped;
-   - the user may draw the print area, and box unpainted areas. Boxes are cross-checked: a box that disagrees with
-     most of the others at its tones is not used. The reference is then refitted.
+   - the user may draw the print area, and box unpainted areas. A box is used only inside the print area, and only
+     where a box in another part of the print covers its tones and agrees with it; a box that disagrees with most of
+     the others at its tones is not used. The reference is then refitted.
 3. [ ] **Housekeeping:**
    - the version in git only;
    - remove `Chroma Diagnostic Tool v3.0`, which does not parse;
@@ -216,18 +222,17 @@ following one band of tone.
 - **On your test captures** (23 Nov), pass criterion 4 passed. It stays possible on other prints.
 - **The Woodii module may resist it** (its note, in Woodii).
 
-## Known issue: low-frequency false colour (from the gate, 23 Nov)
+## Known issue: broad, soft patches of colour (from the gate, 23 Nov)
 
-Broad, soft patches or gradients of colour can show in the boost and the stretch where there is no paint. This is
-low-frequency noise in the capture, exaggerated with everything else. A faint wash can look the same, so no picture can
-tell them apart by colour alone.
+Broad, soft patches of colour can show in the boost and the stretch where there is no paint. They may come from the
+capture (its light, lens or noise) or from the print itself (uneven toning, local yellowing, mat burn), exaggerated with
+everything else. A faint wash looks the same, so no picture can tell them apart by colour alone.
 - **The app says so:** in the Check tab's list of what the pictures cannot show, and under the picture.
 - **The reminder:** every picture is labelled a visualisation, not a measurement. Odobenii is a way to see quickly how
   paint is distributed, not a quantitative tool.
-- **It is blotches** (your answer of 25 Nov), not a gradient across the frame, so the light term would not remove it,
-  and no picture can tell blotches from a faint wash by colour alone.
-- **The strip now carries them:** its patches come from the print itself, so it shows how a thin wash compares with
-  this capture's own blotches at each tone.
+- **It is blotches** (your answer of 25 Nov), not a gradient across the frame, so the light term would not remove it.
+- **Telling them apart is the viewer's,** at the photograph and the object (your answer of 25 Nov). Odobenii works on
+  photographs already taken, so a second shot is not part of it.
 
 ## Not now
 
