@@ -141,6 +141,45 @@ def test_boxes_outside_the_print_area_or_too_small_are_not_used():
     assert "outside the print area" in notes[0] and "outside the print area" in notes[1] and "too small" in notes[2]
 
 
+def test_edge_term_ignores_blotches_but_finds_fringes():
+    """The edge term is how leftover colour grows with the lightness gradient. Soft blotches do not grow with it and
+    must not raise it (they pushed the earlier estimate to its cap); a lens's colour fringes do, and must."""
+    L, _ = synth.scene(H, W, 0)
+    clean = synth.lab_print(L, 1, 0.35)
+    field = cv2.GaussianBlur(np.random.default_rng(9).normal(0, 1, (H, W, 2)).astype(np.float32), (0, 0), 25)
+    field /= field.std()
+    shift = np.float32([[1, 0, 0.25], [0, 1, 0]])                  # the red channel a quarter pixel off
+    info = {"name": "t", "size": [W, H], "bits": 16, "profile": None, "colour": "", "grey_file": False}
+    k = {}
+    for blotches in (0.0, 0.3):
+        for fringes in (False, True):
+            lab = clean.copy()
+            lab[..., 1:] += blotches * field
+            lin = synth.linear(lab)
+            if fringes:
+                lin[..., 0] = cv2.warpAffine(lin[..., 0], shift, (W, H), flags=cv2.INTER_LINEAR,
+                                             borderMode=cv2.BORDER_REFLECT)
+            k[blotches, fringes] = engine.Analysis(lin, np.zeros((H, W), bool), info, S).kappa2
+    assert k[0.0, False] < 0.03 and k[0.3, False] < 0.03, k
+    assert k[0.0, True] > 0.04 and abs(k[0.3, True] - k[0.0, True]) < 0.04, k
+
+
+def test_departures_hatched_where_the_reference_is_guessing():
+    """A tone too few places hold is hatched in "Where colour departs" too: stripes that leave the colour between."""
+    L, _ = synth.scene(H, W, 0)
+    yy, xx = np.mgrid[0:H, 0:W]
+    r2 = (yy - 400) ** 2 + (xx - 560) ** 2
+    L = np.where(r2 < 12 ** 2, 15.0, L)                            # one small dark spot: a tone no other place has
+    an, _ = analyse(lab=synth.lab_print(L, 1, 0.35))
+    core = r2 < 8 ** 2
+    assert an.unsupported[core].mean() > 0.9
+    on = an.picture(engine.Look(view="departs"), 0, 0, W, H, W, H)
+    off = an.picture(engine.Look(view="departs", hatch=False), 0, 0, W, H, W, H)
+    changed = np.abs(on - off).max(-1) > 1e-3
+    assert 0.15 < changed[core].mean() < 0.5
+    assert not changed[an.valid & ~an.unsupported].any()
+
+
 def test_look_checks_its_values():
     assert engine.Look.parse({"view": "stretch", "cs": "density", "emph": "redgreen", "k": "6", "tone": "0"}).k == 6
     for bad in ({"view": "x"}, {"cs": "rgb"}, {"emph": "x"}, {"k": "40"}, {"k": "nan"}, {"tone": "maybe"}):

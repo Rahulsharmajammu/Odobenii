@@ -532,3 +532,10 @@ Numbered for your answers, most important first.
   area.
 - **9, the dark tones:** fair, and it waits on 4.
 
+**Later the same day** (`03-author-answers.md` §14): "Where colour departs" stays.
+- You had read its ΔE as absolute. It is a difference within the photograph, and the app, exported pictures and the
+  README now say so.
+- With the picture kept, the edge term is fitted as a slope (3), and the tones where the reference is guessing are
+  hatched in it (4). The dark tones (9) stay open.
+- The strip's 1.3 ΔE was a difference within the photograph too. The strip stays removed unless you want it back.
+

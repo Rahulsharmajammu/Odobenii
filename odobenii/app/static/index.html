@@ -224,9 +224,9 @@ body.stopped > :not(#stopped) { display: none !important; }
   </section>
   <section aria-labelledby="hs3">
     <h3 id="hs3">For the test captures <span class="xp" title="Developer settings: change them only while testing on the gate's captures">gate</span></h3>
-    <div class="field"><span>Departure floor T0 (ΔE)</span><input id="t0" type="number" min="0.5" max="10" step="0.1"></div>
+    <div class="field"><span>Departure floor T0 (ΔE within the photograph)</span><input id="t0" type="number" min="0.5" max="10" step="0.1"></div>
     <div class="field"><span>Analysis size (long edge, px)</span><input id="anaEdge" type="number" min="800" max="6000" step="100"></div>
-    <p class="hint">T0 is the smallest departure "Where colour departs" draws. Measured noise and sharp changes in lightness can raise it; the paint's colour cannot. Pictures are drawn from the full photograph when you zoom in.</p>
+    <p class="hint">T0 is the smallest departure "Where colour departs" draws: a colour difference within this photograph, between a place and the print's own tone at the same lightness, not an absolute colour difference. Measured noise and sharp changes in lightness can raise it; the paint's colour cannot. Pictures are drawn from the full photograph when you zoom in.</p>
     <div class="row"><button type="button" class="primary" id="btnSaveSettings">Apply</button></div>
   </section>
   <section aria-labelledby="hs4">
@@ -236,7 +236,7 @@ body.stopped > :not(#stopped) { display: none !important; }
   </section>
   <section aria-labelledby="hs5">
     <h3 id="hs5">About</h3>
-    <p class="hint">Odobenii <span id="ver"></span>, the handpaint visualiser. It runs on this computer; photographs stay here. It is a way to see quickly how paint is distributed, not a quantitative tool: it shows where colour departs from a print's own tone, with no areas, counts or statistics, no claim to colorimetric accuracy, and never a claim that a place is unpainted.</p>
+    <p class="hint">Odobenii <span id="ver"></span>, the handpaint visualiser. It runs on this computer; photographs stay here. It is a way to see quickly how paint is distributed, not a quantitative tool: it shows where colour departs from a print's own tone within the same photograph, with no areas, counts or statistics, no claim to colorimetric accuracy, and never a claim that a place is unpainted.</p>
     <p class="hint">Named for the walrus (<i>Odobenus</i>), a monochromat: Odobenii looks at monochrome prints and photographs with a paint layer on top.</p>
   </section>
 </div>
@@ -313,11 +313,16 @@ body.stopped > :not(#stopped) { display: none !important; }
     </section>
 
     <!-- 3 Check -->
+    <section class="step" data-pane="check" aria-labelledby="hc1" hidden>
+      <h2 id="hc1">Differences within the photograph</h2>
+      <p class="hint">The boost, the stretch and "Where colour departs" compare colours within this one photograph: each place against the print's own tone at the same lightness, as this capture recorded both. A departure, and T0 in Settings, are such internal differences, not absolute colour measurements. They need a capture that is even across the frame, not one that is colorimetrically exact, and they do not carry from one photograph to another.</p>
+      <p class="hint">The print's own tone is read from most places at each lightness, so it assumes that, at each tone, most of the print is unpainted. The next two sections show where that can fail.</p>
+    </section>
     <section class="step" data-pane="check" aria-labelledby="hc2" hidden>
       <h2 id="hc2">The expected-unpainted picture</h2>
       <p class="hint">The print as the tool assumes it unpainted, its colour ×4. It should look like the print's own tone: colour that changes smoothly with lightness, with no forms or washes in it. If a face or a sky shows here in a colour of its own, the reference has taken in paint: box unpainted areas at those tones.</p>
       <div class="row"><button type="button" id="btnShowExpected">Show it (4)</button><button type="button" id="btnCompareExpected">Beside the boost</button></div>
-      <p class="hint warntext" id="guessHint" hidden>Some tones have too few places to judge: they are hatched in this picture, and the reference is guessing there.</p>
+      <p class="hint warntext" id="guessHint" hidden>Some tones have too few places to judge: the reference is guessing there, so they are hatched in this picture and in "Where colour departs".</p>
     </section>
     <section class="step" data-pane="check" aria-labelledby="hc3" hidden>
       <h2 id="hc3">What the pictures cannot show</h2>
@@ -392,7 +397,7 @@ body.stopped > :not(#stopped) { display: none !important; }
       <span id="viewDesc"></span>
       <span class="keys">Keys: 1–5 pictures · F flip · W wide · Esc stop a tool</span>
     </div>
-    <p class="note" id="viewNote">The boost and the stretches draw the print's own tone as neutral grey and exaggerate how colour departs from it. Their hue is the direction of departure from the print's own tone, not the paint's own colour. Odobenii is a way to see quickly how paint is distributed, not a quantitative tool: nothing here is a measurement, broad soft patches of colour need not be paint, and blank does not mean unpainted.</p>
+    <p class="note" id="viewNote">The boost and the stretches draw the print's own tone as neutral grey and exaggerate how colour departs from it. Every departure is a colour difference within this photograph, not an absolute colour. Their hue is the direction of departure from the print's own tone, not the paint's own colour. Odobenii is a way to see quickly how paint is distributed, not a quantitative tool: nothing here is a measurement, broad soft patches of colour need not be paint, and blank does not mean unpainted.</p>
   </section>
 </div>
 

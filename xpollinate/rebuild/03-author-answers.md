@@ -353,3 +353,21 @@ The numbers are the items of `05-reviewers.md` §2, where each answer is recorde
 - **Open:** whether "Where colour departs" stays. The recommendation is to leave it out. The edge term's fix (3), the
   safeguards (4) and the dark tones (9) wait on it. More evidence (7) can come from photographs already taken.
 - **Item 6** was not answered. Its three sentences were wrong whatever is decided, so they are corrected.
+
+## 14. The departure picture stays (25 Nov)
+
+> "hm. i see about 4. lets keep in in, bas i was confulsed between absolute de and referenceial de, i.e. colour
+> differences internal to the photographs, but that distinction should be made clear to the user."
+
+- **"Where colour departs" stays.** Its ΔE, like T0's, is a colour difference within the photograph: a place against
+  the print's own tone at the same lightness, as the capture recorded both. It is not an absolute colour difference,
+  which would need the colorimetric accuracy you rule out. Settings, the Check tab, the note under the picture,
+  exported pictures and the README now say so.
+- **The items that waited on it:**
+  - the edge term is fitted as a slope against the squared gradient, so blotches no longer raise the threshold at
+    edges (item 3);
+  - the tones where the reference is guessing are hatched in the departure picture too (item 4);
+  - its premise, that at each tone most of the print is unpainted, is in the Check tab and the README (item 4);
+  - the dark tones (item 9) stay open.
+- **The strip's 1.3 ΔE** was also a difference within the photograph. The strip stays removed unless you want it back.
+

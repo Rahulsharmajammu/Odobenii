@@ -47,6 +47,7 @@ SPACES = ("lab", "density")
 VIEWS = ("original", "boost", "stretch", "expected", "departs")
 VIS_LABEL = "Visualisation only - not a measurement"
 BLANK_LABEL = "Blank does not mean unpainted"
+RELATIVE_LABEL = "Colour differences within this photograph, not absolute colour"
 
 
 @dataclass
@@ -509,21 +510,25 @@ class Analysis:
         L = self.lab_blur[..., 0]
         d = self.lab_blur[..., 1:] - self.ref(L)
         de = np.sqrt((d ** 2).sum(-1))
-        # the edge term, fitted on places the reference holds as unpainted (paint's own edges can still raise it)
-        sel = self._box_px if self._box_px.any() else (self.inlier_px & self.valid)
+        # the edge term: how the colour left over after pixel noise grows with the squared lightness gradient, on the
+        # places the reference holds as unpainted, with any boxes (boxes alone are mostly flat and cannot show it).
+        # It is a slope, so leftover colour that does not grow with the gradient (blotches, a misfit of the reference)
+        # falls into the intercept and cannot raise the threshold at edges.  Paint's own edges still can.
+        sel = (self.inlier_px & self.valid) | self._box_px
         kappa2 = 0.0
         if sel.sum() > 500:
             G, r2, nv = self.G[sel], (d[sel] ** 2).sum(-1), self.noise_at(L[sel])
-            qs = np.quantile(G, np.linspace(0.5, 1.0, 6))
-            est = []
+            qs = np.quantile(G, np.linspace(0.0, 1.0, 11))
+            xs, ys = [], []
             for a, b in zip(qs[:-1], qs[1:]):
                 m = (G >= a) & (G <= b)
                 if m.sum() > 50:
-                    g2 = float(np.median(G[m])) ** 2
-                    if g2 > 1e-6:
-                        est.append((np.median(r2[m]) / 1.386 - np.median(nv[m])) / g2)
-            if est:
-                kappa2 = float(np.clip(np.median(est), 0.0, 0.5))
+                    xs.append(float(np.median(G[m])) ** 2)
+                    ys.append(float(np.median(r2[m]) / 1.386 - np.median(nv[m])))
+            slopes = [(ys[j] - ys[i]) / (xs[j] - xs[i]) for i in range(len(xs)) for j in range(i + 1, len(xs))
+                      if xs[j] - xs[i] > 1e-6]
+            if slopes:                                    # Theil-Sen: a bin or two holding paint does not move it
+                kappa2 = float(np.clip(np.median(slopes), 0.0, 0.5))
         self.kappa2 = kappa2
         sigma = np.sqrt(self.noise_at(L) + kappa2 * self.G ** 2)
         self.T = np.maximum(self.settings.T0, 3.0 * sigma).astype(np.float32)
@@ -664,6 +669,8 @@ class Analysis:
             out[..., 0] = (1 - alpha) * dim + alpha * 80.0
             nrm = np.maximum(np.sqrt((dirs ** 2).sum(-1)), 1e-6)[..., None]
             out[..., 1:] = alpha[..., None] * 42.0 * dirs / nrm
+            if amap is not None:                          # where the reference is guessing: stripes, not blanking
+                hat = hat | amap(self.unsupported)
         if look.hatch and hat.any():
             yy, xx = np.indices(L.shape)
             stripe = ((xx + yy + origin[0] + origin[1]) % 7) < 2

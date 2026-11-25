@@ -22,6 +22,7 @@ The plan that came out of it is `../../TODO.md`. This folder holds the reasoning
 > - **§13:** your answers to the reviewers' points (`05-reviewers.md`): Odobenii works on photographs already taken;
 >   the strip is removed; boxes in two or more places, inside the print area; whether "Where colour departs" stays
 >   is open.
+> - **§14:** "Where colour departs" stays; its ΔE is a difference within the photograph, not an absolute colour.
 
 > **Read this first: limits of everything here.**
 > - **No real capture of any print was available.** Every number comes from synthetic test images that the agents

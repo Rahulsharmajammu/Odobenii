@@ -2,7 +2,7 @@
 from __future__ import annotations
 
 import io
-from typing import Optional
+from typing import Optional, Sequence
 
 import numpy as np
 from PIL import Image, ImageDraw, ImageFont
@@ -25,11 +25,11 @@ def _font(size: int):
         return ImageFont.load_default()
 
 
-def with_words(rgb8: np.ndarray, title: str, extra: Optional[str] = None) -> np.ndarray:
-    """The picture with a footer: what it is, and that it is a visualisation, not a measurement."""
+def with_words(rgb8: np.ndarray, title: str, words: Sequence[str] = ()) -> np.ndarray:
+    """The picture with a footer: what it is, then its words (that it is a visualisation, not a measurement)."""
     h, w = rgb8.shape[:2]
     size = max(12, min(28, w // 70))
-    lines = [title, engine.VIS_LABEL + (f". {extra}" if extra else "")]
+    lines = [title] + (list(words) or [engine.VIS_LABEL])
     foot = int(size * 1.5 * len(lines) + size)
     out = Image.new("RGB", (w, h + foot), (24, 26, 30))
     out.paste(Image.fromarray(rgb8, "RGB"), (0, 0))
@@ -56,6 +56,8 @@ def whole(an: "engine.Analysis", look: "engine.Look", edge: Optional[int] = None
 
 def exported(an: "engine.Analysis", look: "engine.Look", edge: Optional[int] = None) -> bytes:
     """An exported picture: PNG, sRGB, with its words under it."""
-    extra = engine.BLANK_LABEL if look.view == "departs" else None
-    return png(with_words(whole(an, look, edge), look.describe(), extra), "srgb", fast=False)
+    words = [engine.VIS_LABEL + (f". {engine.BLANK_LABEL}" if look.view == "departs" else "")]
+    if look.view in ("boost", "departs") or (look.view == "stretch" and look.tone):
+        words.append(engine.RELATIVE_LABEL)
+    return png(with_words(whole(an, look, edge), look.describe(), words), "srgb", fast=False)
 

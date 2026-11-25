@@ -59,6 +59,8 @@ The design came from synthetic test images. The gate on your real test captures 
   (your note of 23 Nov).
 - **The name is Odobenii,** for the walrus, a monochromat: the tool looks at monochrome prints and photographs with a
   paint layer on top (your note of 23 Nov).
+- **"Where colour departs" stays, as a difference within the photograph** (your answer of 25 Nov). Its ΔE compares a
+  place with the print's own tone at the same lightness, as the capture recorded both; it is not an absolute colour.
 - **It works on photographs already taken** (your answer of 25 Nov). Nothing in it may depend on a second shot, or on
   a check made when the photograph was taken. The viewer inspects the photograph before any call on presence or
   absence.
@@ -91,12 +93,14 @@ the divergence check. Your answers of 25 Nov:
 - [x] **What the blotches are:** the test (a second shot, the print turned) is not feasible, since Odobenii works on
       photographs already taken. The known issue now says the patches may come from the capture or from the print.
 - [x] **The strip:** removed (your word), with the ΔE figure the page gave for a faint wash.
-- [ ] **"Where colour departs": keep it, or leave it out?** Your question. The recommendation (`05-reviewers.md`) is to
-      leave it out. The three items below wait on it.
-  - [ ] **The edge term,** if it stays: fit it as the slope of the leftover colour against the squared gradient, so
-        blotches fall into the intercept. Tried on a synthetic print.
-  - [ ] **Safeguards,** if it stays: stripes over the tones where the reference is guessing; its premise in its words.
-  - [ ] **Dark tones,** if it stays: [01]'s normalisation (your "fair").
+- [x] **"Where colour departs" stays** (your word). Its ΔE is a colour difference within the photograph, not an
+      absolute colour; the app, exported pictures and the README now say so.
+  - [x] **The edge term** is fitted as the slope of the leftover colour against the squared gradient, so blotches no
+        longer raise the threshold at edges. Worth a look at your unpainted print: the picture may now show a little
+        more along edges than it did at the gate.
+  - [x] **Safeguards:** the tones where the reference is guessing are hatched in it too; its premise is in the Check
+        tab and the README.
+  - [ ] **Dark tones:** [01]'s normalisation (your "fair"). Open.
 - [x] **Boxes:** two or more, in different parts of the print, at the same tones (your rule). Boxes outside the print
       area, or too small to judge, are not used, and the stretch's statistics never come from outside the print area.
 - [x] **Three sentences corrected:** neutral media show where the print's tone is not neutral; a wash over the whole
@@ -180,9 +184,11 @@ on 23 Nov.
      No space separates a yellow wash from uneven yellowing of the paper: they are the same colour change.
    - **The departure picture**, "where colour departs from the print's own tone":
      - drawn bright on a dimmed print, so colour-deficient viewers see it too;
-     - T = max(T0, 3σ), with σ from shift-difference noise by tone plus an edge term. The edge term is fitted on the
-       places the reference holds as unpainted, so paint's own edges can still raise it;
-     - faded in from T to 2T. T0 is 2 ΔE, as it passed the gate.
+     - T = max(T0, 3σ), with σ from shift-difference noise by tone plus an edge term. The edge term is how leftover
+       colour grows with the squared lightness gradient (a slope, so blotches do not raise it), fitted on the places
+       the reference holds as unpainted, with any boxes. Paint's own edges can still raise it;
+     - faded in from T to 2T. T0 is 2 ΔE, as it passed the gate: a difference within the photograph, not absolute;
+     - hatched, like the expected-unpainted picture, where the reference is guessing.
    - **The check sheet:** the expected-unpainted picture ×4 (hatched where the reference is guessing) and the words.
      The strip was removed on 25 Nov (your word).
    - [x] The line-up check (pass criterion 5): passed at the gate.
