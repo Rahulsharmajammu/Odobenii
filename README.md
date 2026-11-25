@@ -6,7 +6,7 @@ Named for the walrus (*Odobenus*), a monochromat: Odobenii looks at monochrome p
 **A way to see quickly how paint is distributed, not a quantitative tool.** Its pictures show where colour stands out from a monochrome print. They are qualitative: the tool reports no areas, counts or statistics, and its colour handling is only as careful as a legible picture needs. It does not identify pigments, and a place where nothing is drawn is not shown to be unpainted.
 
 There are two programs:
-- **the web app** (`python -m odobenii.app`): one photograph at a time, with the decorrelation stretch, and batch runs. It passed the gate on real test captures on 23 Nov, judged by eye (`TODO.md`);
+- **the web app** (`python -m odobenii.app`): one photograph at a time, with the decorrelation stretch, and batch runs. 
 - **the batch tool** (`Chroma_diagnoser_v4.1`), described further below.
 
 ## The web app
