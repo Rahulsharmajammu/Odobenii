@@ -319,7 +319,9 @@ gradient (which the light term could remove) or blotches.
 > 6 is okay, as is 7.
 > 8 is deep to do."
 
-The numbers are the items of `04-divergence.md` §3, where each answer and what it changed is recorded. In short:
+The numbers are those of the list in my chat message, which had eight items. Its 4 joined items 4 and 5 of
+`04-divergence.md` §3, its 5 to 7 are items 6 to 8, and its 8 joined items 9 and 10. Each answer, and what it changed,
+is recorded at the end of `04-divergence.md`. In short:
 - the strip is now drawn from the print's own surface, so it carries the capture's blotches;
 - the light term is not the remedy for blotches;
 - the departure picture stays (criterion iii);

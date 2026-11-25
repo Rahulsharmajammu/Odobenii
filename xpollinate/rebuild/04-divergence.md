@@ -51,7 +51,8 @@ low-frequency false colour you saw at the gate:
 - **The broad-wash ghost** (B1, criterion iv): it passed on your test print. It stays possible on other prints, and no
   mechanism prevents it.
 - **Can viewers see a wrong reference?** (residual 10, criterion vi): the line-up check passed.
-- **B and C used different measures** (B13): both are now CIELAB. In a\*b\*, D + B equals the capture ×4 exactly.
+- **B and C used different measures** (B13): both are now CIELAB. In a\*b\*, at the default strength of 4, D + B equals
+  the capture ×4 exactly.
 - **The fixed threshold or the median-spread fallback** (B3): the fallback was tied to criterion (iv), which passed,
   so the fixed threshold stays.
 - **T0** (residuals 11 and 15): 2 ΔE passed the gate.
@@ -84,8 +85,9 @@ Ordered by how much they matter.
 4. **No paper border, so no in-photograph negative control** (B4).
    - The review: find the print and its border automatically; keep the border out of the fit, but judge it, outline
      it, and warn when it shows colour.
-   - Now: neither is built. The user may draw the print area, which keeps the rest out of the fit, but nothing
-     outside it is judged or warned about.
+   - Now: neither is built. The user may draw the print area, which keeps the rest out of the places' votes, but
+     nothing outside it is judged or warned about. Boxes drawn outside it still join the fit (`05-reviewers.md`,
+     item 5).
 5. **The edge term is fitted on the judged print** (B5 not adopted).
    - The review: fit κ² on the session control, or failing that on the border ring. On the red team's bench, fitting
      it on the print let paint raise κ² from 0.19 to 0.33.
@@ -145,14 +147,19 @@ Ordered by how much they matter.
 > 6 is okay, as is 7.
 > 8 is deep to do."
 
+Your numbers follow the list in my chat message, which had eight items: its 4 joined items 4 and 5 above (the border and
+the edge term), its 5 to 7 are items 6 to 8, and its 8 joined items 9 and 10 (the two dropped checks).
+
 - **1, the strip:** done. Each column is now a patch of the print at that tone where the reference holds. The review's
   small clear touch is added, and tones with no clean surface are hatched.
 - **2, the light field:** not needed for this, since the false colour is blotches, not a gradient.
 - **3, "Where colour departs" in density:** open.
-- **4, the border:** yes, boxes do part of it. With boxes, the edge term is fitted on them rather than on the print
-  (the review's remedy for B5, with boxes in the control's place), and they anchor the reference. What they cannot do
+- **4 (items 4 and 5), the border and the edge term:** yes, boxes do part of it. With boxes, the edge term is fitted on
+  them rather than on the print (the review's remedy for B5, with boxes in the control's place; but small boxes switch
+  it off, `05-reviewers.md` item 8), and they anchor the reference. What they cannot do
   is be the control: a box that sets the reference cannot test it. A box marked "check", kept out of the fit and
   judged, would give back that part. Proposed in `TODO.md`.
-- **5, the lone box:** not answered; it stays a proposal.
-- **6 and 7:** T0 stays visible, and the records stay as they are.
-- **8:** the departure picture earns its place (criterion iii). The colour-deficiency check stays a to-do.
+- **5 (item 6), the lone box:** not answered; it stays a proposal.
+- **6 and 7 (items 7 and 8):** T0 stays visible, and the records stay as they are.
+- **8 (items 9 and 10):** the colour-deficiency check stays a to-do ("deep to do"). The departure picture earns its
+  place (criterion iii), from your "the colour departs was useful".

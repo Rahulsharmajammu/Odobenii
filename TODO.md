@@ -83,6 +83,23 @@ with no decision of yours behind it. Your answers of 25 Nov:
 - [ ] **A lone box** used only if its correction exceeds the capture's scatter, as the review specified. Proposed.
 - [ ] **A colour-deficiency check** of "Where colour departs": kept as a to-do (your word).
 
+**From the reviewers, point by point** (25 Nov, `xpollinate/rebuild/05-reviewers.md`): what the twelve reports add to
+the divergence check. Proposals, each your call:
+- [ ] **What the blotches are:** photograph the setup-check print twice, turned 180° between the shots. Blotches that
+      stay put are the capture's (a flat field would remove them); blotches that turn with the print are the print's.
+- [ ] **The strip under "Where colour departs":** draw it through that picture's threshold, scale its wash with tone,
+      and restore the full blank sentence.
+- [ ] **The edge term:** take out what calm places hold before fitting it, so blotches do not raise the threshold at
+      edges.
+- [ ] **Safeguards for one photograph:** the setup check in the README and the app; stripes over guessed tones in the
+      departure picture; the premise in its words.
+- [ ] **Boxes outside the print area** (the margin, the mount) become check boxes, not anchors.
+- [ ] **Three sentences reworded:** neutral media do show where the print's tone is not neutral; a wash over the whole
+      print leaves no sign; edges can raise the threshold.
+- [ ] **More prints at the next setup check**, and your word on whether criterion 4 (no ghost) met a broad wash.
+- [ ] **Small boxes:** pool them with the inlier places, or ask for a minimum size.
+- [ ] **Dark tones:** [01]'s normalisation, beside the density option.
+
 ## The gate: passed on your test captures (23 Nov)
 
 - [x] One print known to be unpainted, of the Van Der Zee kind.
