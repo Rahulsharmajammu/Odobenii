@@ -1,2 +1,0 @@
-visualiser _compute_lrc (criticised, reply-1:61)     0.50 s per 1.92 MP image (best of 3)
-pickref.py feat (favoured, same loop shape)          1.09 s per 1.92 MP image (best of 3)

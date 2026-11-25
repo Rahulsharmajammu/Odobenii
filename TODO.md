@@ -13,7 +13,9 @@ is distributed, not a quantitative tool:
 - **A Woodii module** comes later, in Woodii, like Chroma mode. It takes a registered visible and near-infrared pair
   (NIRR, at 850 nm) from Woodii's linear output.
 
-The reasoning and evidence are in `xpollinate/rebuild/`: start with its `README.md`, then `03-author-answers.md`.
+The reasoning and evidence were in `xpollinate/rebuild/`, removed on 25 Nov to keep the repository small. Commit
+`07f580d` is the last to hold them, and paths below that start with `xpollinate/` refer to it: for example
+`git show 07f580d:xpollinate/rebuild/03-author-answers.md`, or browse the repository at that commit.
 The design came from synthetic test images. The gate on your real test captures passed on 23 Nov (below).
 
 ## Done

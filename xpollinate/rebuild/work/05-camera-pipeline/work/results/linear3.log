@@ -1,6 +1,0 @@
-L0_tests_world   Woodii: TPR 0.92 FPR 0.000 (L 0.000 M 0.000 D 0.001) noise picks sigma0 0.001129 | proposed: TPR 0.89 FPR 0.000 (L 0.000 M 0.000 D 0.000)
-L1_texture       Woodii: TPR 0.92 FPR 0.000 (L 0.000 M 0.000 D 0.001) noise picks sigma0 0.001167 | proposed: TPR 0.89 FPR 0.000 (L 0.000 M 0.000 D 0.000)
-L2_tone_shift    Woodii: TPR 0.90 FPR 0.445 (L 0.464 M 1.000 D 0.094) noise picks sigma0 0.001174 | proposed: TPR 0.12 FPR 0.000 (L 0.000 M 0.000 D 0.000)
-L3_stain         Woodii: TPR 0.92 FPR 0.010 (L 0.016 M 0.004 D 0.001) noise picks sigma0 0.001931 | proposed: TPR 0.89 FPR 0.000 (L 0.000 M 0.000 D 0.000)
-L4_sheen_0.5pc   Woodii: TPR 0.92 FPR 0.411 (L 0.379 M 1.000 D 0.159) noise picks sigma0 0.001164 | proposed: TPR 0.82 FPR 0.000 (L 0.000 M 0.000 D 0.000)
-L5_all           Woodii: TPR 0.91 FPR 0.501 (L 0.464 M 1.000 D 0.270) noise picks sigma0 0.002008 | proposed: TPR 0.12 FPR 0.000 (L 0.000 M 0.000 D 0.000)
