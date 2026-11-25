@@ -1,5 +1,5 @@
 # Odobenii
-A quick tool to visualise colour applied to monochrome photographs, initially developed for the Van Der Zee applied media project at The Metropolitan Museum of Art. The repository keeps its first name, handpaint_visualiser.
+A quick tool to visualise colour applied to monochrome photographs, initially developed for the Van Der Zee applied media project at The Metropolitan Museum of Art. The repository was first called handpaint_visualiser.
 
 Named for the walrus (*Odobenus*), a monochromat: Odobenii looks at monochrome prints and photographs with a paint layer on top.
 
