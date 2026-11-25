@@ -33,13 +33,13 @@ Open a folder of photographs (16-bit ProPhoto TIFF from your raw converter is be
 
 The other tabs:
 - **Look:** draw the print area, and box areas you have examined on the object and know are unpainted. Boxes are cross-checked, and a box that disagrees with the others is not used.
-- **Check:** the strip, a thin wash set into this capture's own noise at each tone, and what the pictures cannot show.
+- **Check:** the strip, a thin wash and a small clear touch set into patches of the print itself at each tone (so its noise and blotches are in them), and what the pictures cannot show.
 - **Export:** the picture shown as a PNG with its words printed under it, or a batch run over a folder (no boxes are used in batch runs).
 
 Compare puts two pictures side by side, panned and zoomed together, or one at a time (F flips).
 
 **Known issues:**
-- **Low-frequency noise shows as false colour.** Broad, soft patches or gradients of colour in the boost and the stretch can be noise in the capture, not paint, and a faint wash can look the same. Found at the gate (23 Nov). Compare with the photograph and the object.
+- **Low-frequency noise shows as false colour.** Soft blotches of colour in the boost and the stretch can be noise in the capture, not paint, and a faint wash can look the same. Found at the gate (23 Nov). The strip shows how a thin wash compares with this capture's own blotches. Compare with the photograph and the object.
 - **A broad wash can enter the reference.** Where a wash covers most of the print at some tone, unpainted areas at that tone may show in the opposite colour, following one band of tone. Box unpainted areas at those tones. It passed the gate's test (23 Nov), but stays possible.
 
 Tests: `python -m pytest tests` (needs pytest and tifffile).
