@@ -9,7 +9,7 @@ Woodii:
 - the ``Host`` header must name this machine (127.0.0.1, localhost or [::1]), which refuses DNS rebinding;
 - a request carrying an ``Origin`` header must come from this server's own page;
 - every /api request must carry the per-launch token that the page receives when it loads, in the
-  ``X-Handpaint-Token`` header (pictures too, so another site's <img> can neither draw nor probe), except
+  ``X-Odobenii-Token`` header (pictures too, so another site's <img> can neither draw nor probe), except
   /api/instance, which the launcher asks;
 - an /api request the browser marks as cross-site (``Sec-Fetch-Site``) is refused, every /api answer says
   ``Cross-Origin-Resource-Policy: same-origin``, and JSON bodies must be sent as ``application/json``.
@@ -30,8 +30,8 @@ from .session import Session, SessionError
 
 STATIC = Path(__file__).with_name("static")
 LOCAL_HOSTS = ("127.0.0.1", "localhost", "[::1]", "::1")
-TOKEN_HEADER = "X-Handpaint-Token"
-TOKEN_PLACEHOLDER = '<meta name="handpaint-token" content="">'
+TOKEN_HEADER = "X-Odobenii-Token"
+TOKEN_PLACEHOLDER = '<meta name="odobenii-token" content="">'
 SAFE_METHODS = ("GET", "HEAD", "OPTIONS")
 OPEN_READS = ("/api/instance",)
 OWN_SITE = ("same-origin", "none")
@@ -52,8 +52,8 @@ def create_app(session_dir) -> Flask:
     app.config["MAX_CONTENT_LENGTH"] = 2 * 1024 ** 3        # 2 GB per upload
     session = Session(session_dir)
     token = secrets.token_urlsafe(32)                        # new on every launch; never written to disk
-    app.config.update(HANDPAINT_SESSION=session, HANDPAINT_TOKEN=token,
-                      HANDPAINT_INSTANCE=secrets.token_hex(8), HANDPAINT_STOP=None)
+    app.config.update(ODOBENII_SESSION=session, ODOBENII_TOKEN=token,
+                      ODOBENII_INSTANCE=secrets.token_hex(8), ODOBENII_STOP=None)
 
     def refuse(why: str, code: int = 403):
         return jsonify({"ok": False, "error": f"refused: {why}"}), code
@@ -97,8 +97,8 @@ def create_app(session_dir) -> Flask:
         if isinstance(getattr(exc, "code", None), int) and exc.code < 500:
             return jsonify({"ok": False, "error": str(exc)}), exc.code
         traceback.print_exc()
-        return jsonify({"ok": False, "error": f"{type(exc).__name__}: {exc}. Something went wrong inside the "
-                                              "visualiser; the console has the details."}), 500
+        return jsonify({"ok": False, "error": f"{type(exc).__name__}: {exc}. Something went wrong inside "
+                                              "Odobenii; the console has the details."}), 500
 
     def body() -> dict:
         if not request.get_data(cache=True):
@@ -121,7 +121,7 @@ def create_app(session_dir) -> Flask:
     page = (STATIC / "index.html").read_text(encoding="utf-8")
     if TOKEN_PLACEHOLDER not in page:
         raise RuntimeError("index.html has no session-token placeholder")
-    page = page.replace(TOKEN_PLACEHOLDER, f'<meta name="handpaint-token" content="{token}">')
+    page = page.replace(TOKEN_PLACEHOLDER, f'<meta name="odobenii-token" content="{token}">')
 
     @app.get("/")
     def index():
@@ -146,11 +146,11 @@ def create_app(session_dir) -> Flask:
 
     @app.get("/api/instance")
     def instance():
-        return jsonify({"ok": True, "instance": app.config["HANDPAINT_INSTANCE"], "version": __version__})
+        return jsonify({"ok": True, "instance": app.config["ODOBENII_INSTANCE"], "version": __version__})
 
     @app.post("/api/shutdown")
     def shutdown():
-        stop = app.config.get("HANDPAINT_STOP")
+        stop = app.config.get("ODOBENII_STOP")
         if stop is None:
             return jsonify({"ok": False, "error": "this server was not started by the launcher; stop it where it "
                                                   "was started"}), 400

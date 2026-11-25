@@ -11,7 +11,7 @@ import tifffile
 from PIL import Image, ImageCms
 
 import iccmake as mk
-from handpaint import colour
+from odobenii import colour
 
 ROOT = Path(__file__).resolve().parents[1]
 LAB_D50 = np.array([[50, 0, 0], [80, 2, 8], [30, 1, 4], [60, 20, 10], [55, -15, -25], [70, -20, 30],

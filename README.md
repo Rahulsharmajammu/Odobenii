@@ -1,22 +1,22 @@
-# handpaint_visualiser
-A quick tool to visualise colour applied to monochrome photographs, initially developed for the Van Der Zee applied media project at The Metropolitan Museum of Art
+# Odobenii
+A quick tool to visualise colour applied to monochrome photographs, initially developed for the Van Der Zee applied media project at The Metropolitan Museum of Art. The repository keeps its first name, handpaint_visualiser.
 
-**A visualiser, not a measuring tool.** Its pictures show where colour stands out from a monochrome substrate. They are qualitative: the tool reports no areas, counts or statistics, and its colour handling is only as careful as a legible picture needs.
+Named for the walrus (*Odobenus*), a monochromat: Odobenii looks at monochrome prints and photographs with a paint layer on top.
 
-The program boosts the colour in a photograph and draws where colour stands out from the image's own colour statistics, to help the eye find faint colour on paper, parchment or canvas. It does not identify pigments, and a place where nothing is drawn is not shown to be unpainted.
+**A way to see quickly how paint is distributed, not a quantitative tool.** Its pictures show where colour stands out from a monochrome print. They are qualitative: the tool reports no areas, counts or statistics, and its colour handling is only as careful as a legible picture needs. It does not identify pigments, and a place where nothing is drawn is not shown to be unpainted.
 
 There are two programs:
-- **the web app** (`python -m handpaint.app`), new: one photograph at a time, with the decorrelation stretch, and batch runs. It is built and tested on synthetic prints only; real captures decide (`TODO.md`, the gate);
+- **the web app** (`python -m odobenii.app`): one photograph at a time, with the decorrelation stretch, and batch runs. It passed the gate on real test captures on 23 Nov, judged by eye (`TODO.md`);
 - **the batch tool** (`Chroma_diagnoser_v4.1`), described further below.
 
 ## The web app
 
 ```bash
 pip install -r requirements.txt
-python -m handpaint.app            # opens http://127.0.0.1:8766/ in your browser
+python -m odobenii.app             # opens http://127.0.0.1:8766/ in your browser
 ```
 
-It is built like Woodii's app: a local server on 127.0.0.1, so photographs stay on this computer, with Woodii's checks against other web pages (a per-launch token, local host names only, no cross-site requests). Options: `--session FOLDER` (default `~/handpaint_sessions/default`), `--port`, `--no-browser`. Stop it with the page's Stop server button or Ctrl+C. The session folder keeps files added from the browser, each photograph's print area and boxes, and the settings.
+It is built like Woodii's app: a local server on 127.0.0.1, so photographs stay on this computer, with Woodii's checks against other web pages (a per-launch token, local host names only, no cross-site requests). Options: `--session FOLDER` (default `~/odobenii_sessions/default`; a session from before the rename, in `~/handpaint_sessions/default`, is used while it is the only one), `--port`, `--no-browser`. Stop it with the page's Stop server button or Ctrl+C. The session folder keeps files added from the browser, each photograph's print area and boxes, and the settings.
 
 Open a folder of photographs (16-bit ProPhoto TIFF from your raw converter is best; any ICC-tagged file is read through its profile), pick one, and flip between five pictures with keys 1-5:
 
@@ -38,9 +38,15 @@ The other tabs:
 
 Compare puts two pictures side by side, panned and zoomed together, or one at a time (F flips).
 
+**Known issues:**
+- **Low-frequency noise shows as false colour.** Broad, soft patches or gradients of colour in the boost and the stretch can be noise in the capture, not paint, and a faint wash can look the same. Found at the gate (23 Nov). Compare with the photograph and the object.
+- **A broad wash can enter the reference.** Where a wash covers most of the print at some tone, unpainted areas at that tone may show in the opposite colour, following one band of tone. Box unpainted areas at those tones. It passed the gate's test (23 Nov), but stays possible.
+
 Tests: `python -m pytest tests` (needs pytest and tifffile).
 
 ## The batch tool (4.1)
+
+The batch tool boosts the colour in a photograph and draws where colour stands out from the image's own colour statistics, to help the eye find faint colour on paper, parchment or canvas.
 
 **Known limitation.** With the default `noise_floor` threshold, the threshold is set from the image's own chroma histogram, so it rises with the paint: the Segmented panel can miss large painted areas, and a blue wash over a warm print can lower chroma and disappear. The Chroma Boosted panel still shows them. The web app addresses this; see `TODO.md`.
 

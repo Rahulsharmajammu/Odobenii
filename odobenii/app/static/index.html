@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="handpaint-token" content="">
-<title>Handpaint visualiser</title>
-<link rel="icon" type="image/svg+xml" href="/static/handpaint.svg">
+<meta name="odobenii-token" content="">
+<title>Odobenii</title>
+<link rel="icon" type="image/svg+xml" href="/static/logo.svg">
 <style>
 /* Woodii's instrument console: controls on the left follow the workflow tabs; a dark image well on the right (dark in
    both themes, so pictures read true). No web fonts: the app runs offline. */
@@ -199,8 +199,8 @@ body.stopped > :not(#stopped) { display: none !important; }
 <body>
 <header class="top">
   <div>
-    <h1><img class="logo" src="/static/handpaint.svg" alt="" aria-hidden="true">Handpaint visualiser</h1>
-    <div class="sub">A visualiser, not a measuring tool</div>
+    <h1><img class="logo" src="/static/logo.svg" alt="" aria-hidden="true">Odobenii</h1>
+    <div class="sub">A quick way to see how paint is distributed: not a quantitative tool</div>
   </div>
   <div class="right">
     <div class="status" id="status" role="status" aria-live="polite"></div>
@@ -241,7 +241,8 @@ body.stopped > :not(#stopped) { display: none !important; }
   </section>
   <section aria-labelledby="hs5">
     <h3 id="hs5">About</h3>
-    <p class="hint">Handpaint visualiser <span id="ver"></span>. It runs on this computer; photographs stay here. It shows where colour departs from a print's own tone: no areas, counts or statistics, no claim to colorimetric accuracy, and never a claim that a place is unpainted.</p>
+    <p class="hint">Odobenii <span id="ver"></span>, the handpaint visualiser. It runs on this computer; photographs stay here. It is a way to see quickly how paint is distributed, not a quantitative tool: it shows where colour departs from a print's own tone, with no areas, counts or statistics, no claim to colorimetric accuracy, and never a claim that a place is unpainted.</p>
+    <p class="hint">Named for the walrus (<i>Odobenus</i>), a monochromat: Odobenii looks at monochrome prints and photographs with a paint layer on top.</p>
   </section>
 </div>
 
@@ -319,7 +320,7 @@ body.stopped > :not(#stopped) { display: none !important; }
     <!-- 3 Check -->
     <section class="step" data-pane="check" aria-labelledby="hc1" hidden>
       <h2 id="hc1">The strip</h2>
-      <p class="hint">A thin wash (about 1.3 ΔE, a guess to measure on the test print) set into this capture's own noise and the print's own tone, at each tone, drawn as the picture you are looking at draws. In each cell the right half carries the wash. Where you cannot see it here, a wash that thin would not show in the picture either.</p>
+      <p class="hint">A thin wash (about 1.3 ΔE, a faint one) set into this capture's own noise and the print's own tone, at each tone, drawn as the picture you are looking at draws. In each cell the right half carries the wash. Where you cannot see it here, a wash that thin would not show in the picture either.</p>
       <div class="stripwrap">
         <div class="hues" id="stripHues"></div>
         <img id="strip" alt="The strip: a thin wash in this capture's noise, rows of hues, columns of tones">
@@ -339,6 +340,7 @@ body.stopped > :not(#stopped) { display: none !important; }
         <li>Neutral or tone-matched media never show: graphite, grey retouching, black spotting, white gouache, varnish.</li>
         <li>Colour that is not paint shows like paint: foxing, stains, silver mirroring, uneven toning. Telling them apart is for you, at the object.</li>
         <li>A broad wash over most of the print at some tone can enter the reference. Its sign: colour opposite to paint you can see, following one band of tone. Box unpainted areas at those tones.</li>
+        <li><b>Known issue: low-frequency noise shows as false colour.</b> Broad, soft patches or gradients of colour in the boost and the stretch can be noise in the capture, not paint; a faint wash can look the same. Compare with the photograph and the object.</li>
       </ul>
     </section>
 
@@ -368,7 +370,7 @@ body.stopped > :not(#stopped) { display: none !important; }
       <div class="field"><span>Size</span><select id="bEdge"><option value="full">Full size</option><option value="4000">4000 px long edge</option><option value="2000" selected>2000 px</option></select></div>
       <div class="row"><button type="button" class="primary" id="btnBatch">Run</button><button type="button" id="btnBatchCancel" disabled>Cancel</button></div>
       <div class="out" id="bOutMsg"></div>
-      <p class="hint">No boxes are used in batch runs. A photograph's print area, if you drew one, is. Each run writes handpaint_run.json beside the pictures: what was read and drawn, never figures about paint.</p>
+      <p class="hint">No boxes are used in batch runs. A photograph's print area, if you drew one, is. Each run writes odobenii_run.json beside the pictures: what was read and drawn, never figures about paint.</p>
     </section>
   </aside>
 
@@ -404,7 +406,7 @@ body.stopped > :not(#stopped) { display: none !important; }
       <span id="viewDesc"></span>
       <span class="keys">Keys: 1–5 pictures · F flip · W wide · Esc stop a tool</span>
     </div>
-    <p class="note" id="viewNote">The boost and the stretches draw the print's own tone as neutral grey and exaggerate how colour departs from it. Their hue is the direction of departure from the print's own tone, not the paint's own colour. Nothing here is a measurement, and blank does not mean unpainted.</p>
+    <p class="note" id="viewNote">The boost and the stretches draw the print's own tone as neutral grey and exaggerate how colour departs from it. Their hue is the direction of departure from the print's own tone, not the paint's own colour. Odobenii is a way to see quickly how paint is distributed, not a quantitative tool: nothing here is a measurement, broad soft patches of colour can be noise, and blank does not mean unpainted.</p>
   </section>
 </div>
 
@@ -417,9 +419,9 @@ body.stopped > :not(#stopped) { display: none !important; }
   </div>
 </dialog>
 <main id="stopped" hidden>
-  <h1>The handpaint visualiser has stopped</h1>
+  <h1>Odobenii has stopped</h1>
   <p>The session is saved in its folder. You can close this tab, and the console window.</p>
-  <p>To start again, run <code>python -m handpaint.app</code> (with the same <code>--session</code> folder, if you gave one).</p>
+  <p>To start again, run <code>python -m odobenii.app</code> (with the same <code>--session</code> folder, if you gave one).</p>
 </main>
 <script src="/static/app.js"></script>
 </body>

@@ -1,20 +1,20 @@
-# Rebuild plan
+# Odobenii: the rebuild plan
 
-The aim: help a person see where paint is, or may be, on a monochrome photograph. It is a visualiser, not a measuring
-tool:
+The aim: help a person see where paint is, or may be, on a monochrome photograph. It is a way to see quickly how paint
+is distributed, not a quantitative tool:
 - no areas, counts or statistics;
 - no claim to colorimetric accuracy;
 - it never claims a place is unpainted.
 
 **Two tools, written separately on purpose (redundancy):**
-- **The visualiser** (this repository) is a viewer. It takes one visible photograph per print and nothing else. The
-  photographs are ProPhoto RGB, taken under controlled lighting with DSLR or mirrorless cameras and calibrated with ICC
-  profiles.
+- **Odobenii** (this repository, the visualiser) is a viewer. It takes one visible photograph per print and nothing
+  else. The photographs are ProPhoto RGB, taken under controlled lighting with DSLR or mirrorless cameras and calibrated
+  with ICC profiles.
 - **A Woodii module** comes later, in Woodii, like Chroma mode. It takes a registered visible and near-infrared pair
   (NIRR, at 850 nm) from Woodii's linear output.
 
 The reasoning and evidence are in `xpollinate/rebuild/`: start with its `README.md`, then `03-author-answers.md`.
-All of it comes from synthetic test images, so the real-capture gate below comes before any new code.
+The design came from synthetic test images. The gate on your real test captures passed on 23 Nov (below).
 
 ## Done
 
@@ -26,9 +26,12 @@ All of it comes from synthetic test images, so the real-capture gate below comes
 - [x] 4.1.5: a matrix/TRC profile is applied from its own tone curves, whatever its name. Before, Woodii's linear
       ProPhoto export was decoded with ProPhoto's gamma 1.8, about 24 ΔE wrong. Woodii's 32-bit float TIFFs are still
       not read; the error now says to save them as 16-bit.
-- [x] **The web app** (`python -m handpaint.app`), your request of 22 Nov, built like Woodii's: a first build of
-      steps 1 and 2 below, with the guarded decorrelation stretch in two colour spaces and three emphases. It is built
-      and tested on synthetic prints only (34 tests), and not yet tried on a real capture.
+- [x] **The web app** (`python -m odobenii.app`), your request of 22 Nov, built like Woodii's: a first build of
+      steps 1 and 2 below, with the guarded decorrelation stretch in two colour spaces and three emphases.
+- [x] **The gate** (23 Nov): your two test captures, judged by eye beside 4.1.5, DStretch and a plain boost. All five
+      pass criteria passed. One known issue came out of it: low-frequency noise shows as false colour (below).
+- [x] **Renamed Odobenii** (your note of 23 Nov): the package, the command, the page and the session folder. The
+      logo waits for your image.
 - [x] The xpollinate review, and your answers and notes of 22 Nov (`xpollinate/rebuild/03-author-answers.md`).
 
 ## Decided
@@ -52,36 +55,49 @@ All of it comes from synthetic test images, so the real-capture gate below comes
   unpainted.
 - **Single view is a local web app like Woodii's** (your request of 22 Nov), not a Tk window. It runs batches too; the
   4.1 batch tool stays as it is.
+- **It is a way to see quickly how paint is distributed, not a quantitative tool,** and the app reminds the user so
+  (your note of 23 Nov).
+- **The name is Odobenii,** for the walrus, a monochromat: the tool looks at monochrome prints and photographs with a
+  paint layer on top (your note of 23 Nov).
 
 ## Still open
 
-One below The gate's test captures are next: run the web app on them.
+- [ ] **The logo:** your image of a walrus in an Ottoman turban. It replaces the stand-in,
+      `odobenii/app/static/logo.svg` (a PNG works too: say which and I will point the page at it).
+- [ ] **Which colour spaces and emphases stay.** The plan keeps density, red-green and yellow-blue only if one showed
+      a marked faint wash that balanced CIELAB missed. Your call, from what you saw at the gate.
+- [ ] **The low-frequency false colour** (the known issue, below): was it a smooth gradient across the frame, or
+      blotches? A gradient could be removed by the light term (step 1, not built); blotches cannot be told from a
+      faint wash.
 
-[ ] rename the app to 'Odobenii'. I will provide an image of a walrus with an ottoman turban as a logo. The walrus is selected, as it is a monochromat; and this piepleine is built to ingest monochromatic images (prints and photographs) with a paint layer on top. 
-## The gate: test captures, before anything more is built
+## The gate: passed on your test captures (23 Nov)
 
 - [x] One print known to be unpainted, of the Van Der Zee kind.
 - [x] One print whose **faint washes** (and some moderate or strong paint) a conservator has marked under
       magnification, raking light and UV.
 - [x] Both captured exactly as real captures will be (same camera, lights and profile) and exported as 16-bit ProPhoto
       TIFF. At 8 bits, rounding alone moved colours by up to 0.65 ΔE in tests, against about 1.3 ΔE for a faint wash.
-- [x] Measure how faint the marked washes really are. The plan assumes about 1.3 ΔE, a guess from the test benches. (note that this is not quantitative, the washes can be seen, which is what matters) 
-- [x] Judge every build by eye, side by side with:
+- [x] How faint the marked washes really are. Your note: not measured, since the tool is not quantitative; the washes
+      can be seen, which is what matters.
+- [x] Every build judged by eye, side by side with:
   - 4.1.5;
   - DStretch, in its own colour spaces;
   - a plain boost of the profiled image.
-        This seems to work, with some low frequency noise appearing as a false colour. This can be flagged as a known issue. The user should be reminded that this is not a quantitative tool, but a way to quickly visualise paint distributions. 
 
-**Pass criteria** (these numbers are for the developer's test, never for the tool's output):
+  Your note: "This seems to work, with some low frequency noise appearing as a false colour." It is flagged as a known
+  issue (below), and the user is reminded that this is not a quantitative tool, but a way to quickly visualise paint
+  distributions.
+
+**Pass criteria** (these numbers are for the developer's test, never for the tool's output). All five passed:
 1. **(a) The unpainted print stays quiet.** In its departure picture, a person who does not know it is unpainted marks
-   no coloured area larger than a fingertip at print scale. [x] this passed
+   no coloured area larger than a fingertip at print scale. **Passed.**
 2. **(c) Faint washes show.** The marked faint washes show at least as well as with the baselines, judged by someone
-   who knows neither the print nor the tool. [x] this passed
-3. **(b) Strong paint comes through.** Moderate and strong paint is not lost or distorted. [x] this passed
+   who knows neither the print nor the tool. **Passed.**
+3. **(b) Strong paint comes through.** Moderate and strong paint is not lost or distorted. **Passed.**
 4. **No ghost.** A print with a broad wash must not show its *unpainted* areas in colour. This is the known weak point
-   (below). [x] this passed
+   (below). **Passed.**
 5. **A wrong reference is visible.** Shown a dozen pictures, one made with a deliberately wrong reference, people pick
-   the wrong one better than chance. [x] this passed
+   the wrong one better than chance. **Passed.**
 
 **The setup check.** The unpainted print's capture also checks the capture setup. Repeat it whenever the camera,
 lights or profile change. If its departure picture shows colour, departure pictures from that setup are not to be
@@ -89,19 +105,20 @@ trusted.
 
 ## Build the visualiser (each step tried on the test captures before the next)
 
-The web app (`handpaint/`) is a first build of steps 1 and 2, made before the gate at your request. It is the
-instrument for the gate: what the gate rejects comes out.
+The web app (`odobenii/`) is a first build of steps 1 and 2, made before the gate at your request. It passed the gate
+on 23 Nov.
 
-1. [ ] **Batch, one photograph per print.** Built, except where marked:
+1. [x] **Batch, one photograph per print.** Built and through the gate, except where marked:
    - Load: through the embedded ICC profile (4.1.5's decoding), held as linear ProPhoto RGB and CIELAB. Analysed at
      3,000 px long edge; drawn from the full photograph when zoomed in.
-   - **Not built: finding the print and its paper border.** The user draws the print area instead.
+   - [ ] **Not built: finding the print and its paper border.** The user draws the print area instead.
    - Hatch what cannot be judged: clipped, near-white, near-black.
    - The reference, "this print unpainted":
      - the print's own tone as a stiff smooth curve in lightness (a P-spline);
      - fitted to votes of places (10 × 10 tiles, one vote per 2 L\* band);
      - least trimmed squares, then Tukey biweight steps, so paint cannot take it over;
-     - **not built:** a light term across the frame, only if the setup check shows a gradient.
+     - [ ] **not built:** a light term across the frame, only if the setup check shows a gradient. It may answer
+       the known issue, if that false colour is a gradient across the frame.
    - **The boosted picture**, the print's own tone drawn neutral grey with departures exaggerated. Two candidates for
      the gate:
      - the plain boost (×4 by default);
@@ -119,18 +136,19 @@ instrument for the gate: what the gate rejects comes out.
      - three emphases: balanced, red-green and yellow-blue. An emphasis gives 2:1 along its axis, to both directions
        alike, so noise gains no cast;
      - the strength means the same in all of them: the guards and the emphasis only share it out between directions;
-     - the gate keeps a space or an emphasis only if it shows a marked faint wash that balanced CIELAB misses.
+     - a space or an emphasis stays only if it showed a marked faint wash that balanced CIELAB missed (still open,
+       above).
 
      No space separates a yellow wash from uneven yellowing of the paper: they are the same colour change.
    - **The departure picture**, "where colour departs from the print's own tone":
      - drawn bright on a dimmed print, so colour-deficient viewers see it too;
      - T = max(T0, 3σ), with σ from shift-difference noise by tone plus an edge term. The edge term is fitted on the
        places the reference holds as unpainted, so paint's own edges can still raise it;
-     - faded in from T to 2T. T0 is 2 ΔE for now, a developer setting for the gate.
+     - faded in from T to 2T. T0 is 2 ΔE, as it passed the gate.
    - **The check sheet:** the expected-unpainted picture ×4 (hatched where the reference is guessing), the strip, and
      the words.
-   - [ ] **Not built: the line-up check** (pass criterion 5). It needs the test captures.
-2. [x] **Single view**, as the web app rather than a Tk window:
+   - [x] The line-up check (pass criterion 5): passed at the gate.
+2. [x] **Single view**, as the web app rather than a Tk window, through the gate:
    - folders or files in, export of the picture shown, and batch runs;
    - keys 1-5 flip between the photograph, the boost, the stretch, the expected-unpainted picture and the departure
      picture; two pictures side by side, or flipped;
@@ -139,7 +157,8 @@ instrument for the gate: what the gate rejects comes out.
 3. [ ] **Housekeeping:**
    - the version in git only;
    - remove `Chroma Diagnostic Tool v3.0`, which does not parse;
-   - rewrite the README around what the pictures cannot show, including the known weak point (begun for the web app).
+   - rewrite the README around what the pictures cannot show, including the known weak point and the known issue
+     (begun for the web app).
 
 ## The Woodii module
 
@@ -149,8 +168,9 @@ it differs from Chroma mode, the redundancy with this tool as a cross-check, and
 whether a decorrelation stretch can be used on Woodii's stacks: yes, on a composite, across the Analysis tab's planes,
 or noise-adjusted with MNF's noise.
 
-The two tools share the design but no code, by your choice. The module is tried after this visualiser's step 1
-passes the gate.
+The two tools share the design but no code, by your choice. This visualiser's step 1 has passed the gate; the module
+waits in Woodii's TODO, under "After 1.0", and the stretch on Woodii's stacks stays a to-do until most of Woodii's list
+is validated (your word of 22 Nov).
 
 ## The known weak point
 
@@ -159,9 +179,20 @@ areas at that tone then show in the opposite colour. The signature is colour com
 following one band of tone.
 - **The remedy:** box unpainted areas at those tones in single view.
 - **On a synthetic bench** (a wash over 80 % of a sky), the stiff curve held without boxes, and boxes brought it closer
-  still. Real prints decide.
+  still.
+- **On your test captures** (23 Nov), pass criterion 4 passed. It stays possible on other prints.
 - **The Woodii module may resist it** (its note, in Woodii).
-- **Pass criterion 4 tests it.**
+
+## Known issue: low-frequency false colour (from the gate, 23 Nov)
+
+Broad, soft patches or gradients of colour can show in the boost and the stretch where there is no paint. This is
+low-frequency noise in the capture, exaggerated with everything else. A faint wash can look the same, so no picture can
+tell them apart by colour alone.
+- **The app says so:** in the Check tab's list of what the pictures cannot show, and under the picture.
+- **The reminder:** every picture is labelled a visualisation, not a measurement. Odobenii is a way to see quickly how
+  paint is distributed, not a quantitative tool.
+- **A possible remedy, not built:** if the false colour is a smooth gradient across the frame (from the light or the
+  lens), the light term of step 1 would remove it. Blotchy noise has no such remedy.
 
 ## Not now
 

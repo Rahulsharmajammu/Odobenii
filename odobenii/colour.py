@@ -423,10 +423,10 @@ def _matrix_trc_profile(rgb_to_xyz_d50: np.ndarray, description: str) -> bytes:
         table += struct.pack(">4sII", sig, offset + len(body), len(data))
         body += pad(data)
     size = offset + len(body)
-    head = struct.pack(">I", size) + b"hpvz" + bytes([2, 0x10, 0, 0]) + b"mntr" + b"RGB " + b"XYZ "
+    head = struct.pack(">I", size) + b"odbn" + bytes([2, 0x10, 0, 0]) + b"mntr" + b"RGB " + b"XYZ "
     head += struct.pack(">6H", 2026, 1, 1, 0, 0, 0) + b"acsp" + b"\0" * 24 + b"\0" * 4 + b"".join(s15(v) for v in d50)
-    head += b"hpvz" + b"\0" * (128 - len(head) - 4)
+    head += b"odbn" + b"\0" * (128 - len(head) - 4)
     return head[:128] + struct.pack(">I", len(tags)) + table + body
 
 
-_P3_PROFILE = _matrix_trc_profile(BRADFORD_D65_TO_D50 @ M_P3_TO_XYZ, "Display P3 (handpaint)")
+_P3_PROFILE = _matrix_trc_profile(BRADFORD_D65_TO_D50 @ M_P3_TO_XYZ, "Display P3 (Odobenii)")

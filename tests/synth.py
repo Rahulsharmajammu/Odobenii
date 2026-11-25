@@ -2,7 +2,7 @@
 noise, with optional washes.  They encode their author's assumptions; real captures decide (TODO.md, the gate)."""
 import numpy as np
 
-from handpaint import colour
+from odobenii import colour
 
 
 def tone(L):

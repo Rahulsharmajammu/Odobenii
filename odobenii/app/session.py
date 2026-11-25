@@ -93,7 +93,7 @@ class Session:
             (self.root / "session.json").replace(self.root / f"session.damaged.{int(time.time())}.json")
 
     def _save(self):
-        d = {"handpaint": __version__, "settings": asdict(self.settings),
+        d = {"odobenii": __version__, "settings": asdict(self.settings),
              "folder": str(self.folder) if self.folder else None, "memory": self.memory,
              "export_folder": self.export_folder}
         tmp = self.root / "session.json.tmp"
@@ -309,7 +309,7 @@ class Session:
         self._cancel.set()
 
     def _run_batch(self, files, out, looks, edge, settings):
-        record = {"handpaint": __version__, "started": time.strftime("%Y-%m-%d %H:%M:%S"),
+        record = {"odobenii": __version__, "started": time.strftime("%Y-%m-%d %H:%M:%S"),
                   "settings": asdict(settings), "pictures": [lk.describe() for lk in looks],
                   "note": "No boxes are used in batch runs. " + engine.VIS_LABEL + ".", "files": []}
         for i, p in enumerate(files):
@@ -339,7 +339,7 @@ class Session:
                 self.batch["done"] = i + 1
         record["finished"] = time.strftime("%Y-%m-%d %H:%M:%S")
         try:
-            (out / "handpaint_run.json").write_text(json.dumps(record, indent=1), encoding="utf-8")
+            (out / "odobenii_run.json").write_text(json.dumps(record, indent=1), encoding="utf-8")
         except OSError as exc:
             with self.lock:
                 self.batch["errors"].append(f"the run record could not be written: {exc}")
