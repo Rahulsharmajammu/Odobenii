@@ -134,3 +134,25 @@ Ordered by how much they matter.
 - **Compare and flip** in the viewer, batch export, and a session that keeps each print's area and boxes.
 - **The Woodii module's note** (`docs/colour-maps-vis-irr.md` in Woodii). The IR is the measured witness the review
   could not have from one visible photograph.
+
+## Your answers (25 Nov)
+
+> "the colour was blotches. the colour departs was useful
+> 1) this would be good to try.
+> 2) th colour as blotches, so is okay
+> 3) hm
+> 4) hm. but it does call for unpainted areas, which is something, no?
+> 6 is okay, as is 7.
+> 8 is deep to do."
+
+- **1, the strip:** done. Each column is now a patch of the print at that tone where the reference holds. The review's
+  small clear touch is added, and tones with no clean surface are hatched.
+- **2, the light field:** not needed for this, since the false colour is blotches, not a gradient.
+- **3, "Where colour departs" in density:** open.
+- **4, the border:** yes, boxes do part of it. With boxes, the edge term is fitted on them rather than on the print
+  (the review's remedy for B5, with boxes in the control's place), and they anchor the reference. What they cannot do
+  is be the control: a box that sets the reference cannot test it. A box marked "check", kept out of the fit and
+  judged, would give back that part. Proposed in `TODO.md`.
+- **5, the lone box:** not answered; it stays a proposal.
+- **6 and 7:** T0 stays visible, and the records stay as they are.
+- **8:** the departure picture earns its place (criterion iii). The colour-deficiency check stays a to-do.

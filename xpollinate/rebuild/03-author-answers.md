@@ -2,8 +2,8 @@
 
 22 November 2026, after the run. These are the author's words, verbatim: answers to the four questions in TODO.md
 (§1-4), then later notes on the captures (§5), the inputs (§6), the stretch (§7), the infrared band and where the
-code lives (§8), the web app (§9), the Woodii note (§10), and the gate and the name (§11). Where they conflict with
-the synthesis, they win.
+code lives (§8), the web app (§9), the Woodii note (§10), the gate and the name (§11), and the divergence check
+(§12). Where they conflict with the synthesis, they win.
 
 ## 1. Which part of Chroma mode failed?
 
@@ -308,3 +308,21 @@ Your notes, made in `TODO.md` itself (commit `85f7892`), verbatim:
 
 **Still open** (in `TODO.md`): the logo; which colour spaces and emphases stay; and whether the false colour was a
 gradient (which the light term could remove) or blotches.
+
+## 12. The divergence check (25 Nov)
+
+> "the colour was blotches. the colour departs was useful
+> 1) this would be good to try.
+> 2) th colour as blotches, so is okay
+> 3) hm
+> 4) hm. but it does call for unpainted areas, which is something, no?
+> 6 is okay, as is 7.
+> 8 is deep to do."
+
+The numbers are the items of `04-divergence.md` §3, where each answer and what it changed is recorded. In short:
+- the strip is now drawn from the print's own surface, so it carries the capture's blotches;
+- the light term is not the remedy for blotches;
+- the departure picture stays (criterion iii);
+- T0 stays visible, and the records stay as they are;
+- density for the departure picture, boxes as checks and the lone-box rule are open;
+- the colour-deficiency check stays a to-do.

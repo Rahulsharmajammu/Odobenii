@@ -41,6 +41,9 @@ NOISE_LAG = 3                 # px at analysis size, for the shift-difference no
 CAP = 2.0                     # guard 3: largest ratio between the stretch's two gains
 EXPECTED_X = 4.0              # the expected-unpainted picture's exaggeration
 WASH_DE = 1.3                 # the strip's thin wash, ΔE: a faint one (the gate judged washes by eye, not measured)
+STRIP_TOUCH_DE = 4.0          # the strip's small clear touch, ΔE
+STRIP_TONE_TOL = 4.0          # L*: a strip window's mean tone within this of its column's
+STRIP_TONE_SD = 6.0           # L*: and its tone this even
 EMPHASES = ("balanced", "redgreen", "yellowblue")
 SPACES = ("lab", "density")
 VIEWS = ("original", "boost", "stretch", "expected", "departs")
@@ -653,27 +656,64 @@ class Analysis:
             out[..., 1:][on] = 0.0
         return out
 
-    def strip(self, look: Look, cell: int = 40, seed: int = 7) -> np.ndarray:
-        """CIELAB of the strip: rows of hues, columns of tones; each cell's left half the print's own tone in this
-        capture's noise, its right half the same with a thin wash of WASH_DE, drawn as ``look`` draws."""
-        rng = np.random.default_rng(seed)
+    def _strip_windows(self, size: int):
+        """For each strip tone, the top-left corner of a size x size window of the print (analysis pixels) whose tone is
+        even and near that tone, and which the reference holds as unpainted; None where the print has no such surface."""
+        b = size // 2
+        nh, nw = self.h // b, self.w // b
+        if nh < 2 or nw < 2:
+            return [None] * len(STRIP_TONES)
+        L = self.lab[: nh * b, : nw * b, 0].reshape(nh, b, nw, b)
+        sup = (self.inlier_px & self.valid & self.in_print)[: nh * b, : nw * b].reshape(nh, b, nw, b)
+        bm, bv, bs = L.mean((1, 3)), L.var((1, 3)), sup.mean((1, 3))
+        quads = lambda a: (a[:-1, :-1] + a[1:, :-1] + a[:-1, 1:] + a[1:, 1:]) / 4.0   # windows of 2 x 2 blocks
+        m = quads(bm)
+        sd = np.sqrt(quads(bv) + quads(bm ** 2) - m ** 2)
+        s = quads(bs)
+        out = []
+        for Lc in STRIP_TONES:
+            ok = (np.abs(m - Lc) <= STRIP_TONE_TOL) & (sd <= STRIP_TONE_SD) & (s >= 0.6)
+            if not ok.any():
+                out.append(None)
+                continue
+            score = np.where(ok, np.abs(m - Lc) + 0.5 * sd - s, np.inf)
+            i, j = np.unravel_index(int(np.argmin(score)), score.shape)
+            out.append((int(i) * b, int(j) * b))
+        return out
+
+    def strip(self, look: Look, cell: int = 40) -> np.ndarray:
+        """CIELAB of the strip: rows of hues, columns of tones.
+
+        Each column is a window of this print where the reference holds and the tone is even, at that tone, so it
+        carries the capture's own residual: its noise, its texture and its low-frequency blotches. In each cell the
+        right half adds a thin wash of WASH_DE and a small clear touch of STRIP_TOUCH_DE, in the row's hue. A column is
+        hatched where the print has no such surface at that tone. Drawn as ``look`` draws."""
         rows, cols = len(STRIP_HUES), len(STRIP_TONES)
         lab = np.zeros((rows * cell, cols * cell, 3), np.float32)
-        for j, Lc in enumerate(STRIP_TONES):
-            ref = self.ref(np.array([Lc], np.float32))[0]
-            sd = math.sqrt(float(self.noise_at(np.array([Lc]))[0]))
+        clip = np.zeros(lab.shape[:2], bool)
+        size = 2 * cell
+        wins = self._strip_windows(size)
+        yy, xx = np.mgrid[0:cell, 0:cell]
+        touch = (xx - 0.75 * cell) ** 2 + (yy - 0.7 * cell) ** 2 <= (cell / 9.0) ** 2
+        for j, (Lc, win) in enumerate(zip(STRIP_TONES, wins)):
+            cols_ = slice(j * cell, (j + 1) * cell)
+            if win is None:
+                lab[:, cols_, 0] = Lc
+                clip[:, cols_] = True
+                continue
+            y0, x0 = win
+            patch = cv2.resize(self.lab[y0:y0 + size, x0:x0 + size], (cell, cell), interpolation=cv2.INTER_AREA)
             for i, (_, hue) in enumerate(STRIP_HUES):
-                blk = lab[i * cell:(i + 1) * cell, j * cell:(j + 1) * cell]
-                blk[..., 0] = Lc
-                blk[..., 1:] = ref + rng.normal(0.0, sd, (cell, cell, 2))
+                blk = lab[i * cell:(i + 1) * cell, cols_]
+                blk[...] = patch
                 h = math.radians(hue)
-                blk[:, cell // 2:, 1] += WASH_DE * math.cos(h)
-                blk[:, cell // 2:, 2] += WASH_DE * math.sin(h)
+                dab = np.array([math.cos(h), math.sin(h)], np.float32)
+                blk[:, cell // 2:, 1:] += WASH_DE * dab
+                blk[..., 1:][touch] += (STRIP_TOUCH_DE - WASH_DE) * dab
         if look.view == "original":
             return lab
         if look.view in ("expected", "departs"):
             look = Look(view="boost", k=look.k)
-        clip = np.zeros(lab.shape[:2], bool)
         return self.draw(Look(**{**asdict(look), "hatch": True}), lab, clip, None)
 
     def summary(self) -> dict:

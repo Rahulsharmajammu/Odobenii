@@ -2,6 +2,7 @@
 
 Synthetic prints encode their author's assumptions; these tests pin behaviour, and the real-capture gate (TODO.md)
 decides whether it serves."""
+import cv2
 import numpy as np
 import pytest
 
@@ -119,14 +120,46 @@ def test_every_view_draws_any_region(view, space):
         an.picture(lk, W + 5, 0, 10, 10, 10, 10)
 
 
-def test_strip_shows_the_wash_in_the_boost():
+def test_strip_from_the_print_itself():
+    """The strip's columns are windows of the print at each tone; tones the print lacks are hatched; the right half of
+    each cell carries the wash."""
     an, _ = analyse()
     s = an.strip(engine.Look(view="boost"))
     cell = s.shape[0] // len(engine.STRIP_HUES)
     assert s.shape == (cell * len(engine.STRIP_HUES), cell * len(engine.STRIP_TONES), 3)
-    left = s[:cell, :cell // 2, 1:].mean((0, 1))
-    right = s[:cell, cell // 2:cell, 1:].mean((0, 1))
-    assert np.linalg.norm(right - left) > 3.0      # 1.3 ΔE x 4, less noise
+    wins = an._strip_windows(2 * cell)
+    assert wins[0] is None and wins[-1] is None          # the scene has no surface at L* 15 or 93
+    used = [j for j, w in enumerate(wins) if w is not None]
+    assert len(used) >= 4
+    for j in used:
+        blk = s[:cell, j * cell:(j + 1) * cell, 1:]
+        left, right = blk[:, : cell // 2].mean((0, 1)), blk[:, cell // 2:].mean((0, 1))
+        assert np.linalg.norm(right - left) > 3.0          # 1.3 ΔE x 4, less the residual
+        y0, x0 = wins[j]
+        assert abs(an.lab[y0:y0 + 2 * cell, x0:x0 + 2 * cell, 0].mean() - engine.STRIP_TONES[j]) <= engine.STRIP_TONE_TOL
+    hatched = s[:, :cell]                                  # stripes in the hatched first column
+    assert hatched[..., 0].std() > 5.0
+
+
+def test_strip_shows_the_capture_s_blotches():
+    """Low-frequency colour blotches in an unpainted print show in the strip, as they do in the boost. White noise at
+    the measured pixel noise could not show them: shift differences cancel them out of that measure."""
+    L, _ = synth.scene(H, W, 0)
+    rng = np.random.default_rng(9)
+    field = cv2.GaussianBlur(rng.normal(0, 1, (H, W, 2)).astype(np.float32), (0, 0), 25)
+    field /= field.std()                                   # about 1 ΔE per axis, in soft blotches
+    clean = synth.lab_print(L, 1, 0.35)
+    blotchy = clean.copy()
+    blotchy[..., 1:] += field
+    drawn = []
+    for lab in (clean, blotchy):
+        an, _ = analyse(lab=lab)
+        s = an.strip(engine.Look(view="boost"))
+        cell = s.shape[0] // len(engine.STRIP_HUES)
+        lefts = [s[:cell, j * cell:j * cell + cell // 2, 1:].reshape(-1, 2).mean(0)
+                 for j, w in enumerate(an._strip_windows(2 * cell)) if w is not None]
+        drawn.append(np.mean([np.hypot(*v) for v in lefts]))   # the unwashed halves' drawn colour
+    assert drawn[1] > 1.5 * drawn[0], drawn
 
 
 def test_look_checks_its_values():

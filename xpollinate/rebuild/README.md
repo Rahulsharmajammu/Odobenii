@@ -17,6 +17,8 @@ The plan that came out of it is `../../TODO.md`. This folder holds the reasoning
 > - **§10:** the Woodii module's note moved to Woodii; a stretch on Woodii's stacks stays a to-do.
 > - **§11:** the gate passed on real test captures (23 Nov); a known issue (low-frequency false colour); the app is
 >   renamed Odobenii.
+> - **§12:** your answers to the divergence check (`04-divergence.md`): the strip from the print itself; the departure
+>   picture stays.
 
 > **Read this first: limits of everything here.**
 > - **No real capture of any print was available.** Every number comes from synthetic test images that the agents

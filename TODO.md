@@ -66,20 +66,22 @@ The design came from synthetic test images. The gate on your real test captures 
       `odobenii/app/static/logo.svg` (a PNG works too: say which and I will point the page at it).
 - [ ] **Which colour spaces and emphases stay.** The plan keeps density, red-green and yellow-blue only if one showed
       a marked faint wash that balanced CIELAB missed. Your call, from what you saw at the gate.
-- [ ] **The low-frequency false colour** (the known issue, below): was it a smooth gradient across the frame, or
-      blotches? A gradient could be removed by the light term (step 1, not built); blotches cannot be told from a
-      faint wash.
 
 **From the divergence check** (25 Nov, `xpollinate/rebuild/04-divergence.md`): where the build differs from the review
-with no decision of yours behind it. Proposals, each your call:
-- [ ] the strip drawn from this capture's own residual, not white noise: white noise overstates how visible a thin wash
-      is, and cannot show the low-frequency noise you saw;
-- [ ] "Where colour departs" in density as an option: in CIELAB it is less sensitive over dark tones;
-- [ ] a lone box used only if its correction exceeds the capture's scatter, as the review specified;
-- [ ] T0 and the other developer settings behind a switch, now that the gate has passed;
-- [ ] the file's hash, its name and the evidence used (boxes or none) in records and exported pictures;
-- [ ] a colour-deficiency check of "Where colour departs" (a simulation on the gate captures);
-- [ ] whether "Where colour departs" earns its place beside the boost and the stretch (the review's criterion iii).
+with no decision of yours behind it. Your answers of 25 Nov:
+- [x] **The strip from the print's own surface**, not white noise (your "good to try"). Done: each column is a patch of
+      the print at that tone where the reference holds, so it carries the capture's noise, texture and blotches; the
+      review's small clear touch is added; tones with no clean surface are hatched.
+- [x] **The departure picture earns its place** (the review's criterion iii): it was useful. It stays.
+- [x] **The light term:** not the remedy, since the false colour was blotches.
+- [x] **T0 and the developer settings stay visible; the records stay as they are** (your word).
+- [ ] **"Where colour departs" in density as an option**, for washes over dark tones (your "hm": open).
+- [ ] **Boxes as checks.** Boxes already do part of the paper border's work: with boxes, the edge term is fitted on
+      them, not on the print, and they anchor the reference. What they cannot do is test it, since a box that sets the
+      reference cannot also check it. A box could be marked "check": kept out of the fit, judged like the print, and
+      named if it shows colour. Proposed.
+- [ ] **A lone box** used only if its correction exceeds the capture's scatter, as the review specified. Proposed.
+- [ ] **A colour-deficiency check** of "Where colour departs": kept as a to-do (your word).
 
 ## The gate: passed on your test captures (23 Nov)
 
@@ -109,6 +111,9 @@ with no decision of yours behind it. Proposals, each your call:
    (below). **Passed.**
 5. **A wrong reference is visible.** Shown a dozen pictures, one made with a deliberately wrong reference, people pick
    the wrong one better than chance. **Passed.**
+
+And the review's criterion (iii), asked after the gate: the departure picture was useful beside the boost and the
+stretch, so it stays (your answer of 25 Nov).
 
 **The setup check.** The unpainted print's capture also checks the capture setup. Repeat it whenever the camera,
 lights or profile change. If its departure picture shows colour, departure pictures from that setup are not to be
@@ -156,8 +161,8 @@ on 23 Nov.
      - T = max(T0, 3σ), with σ from shift-difference noise by tone plus an edge term. The edge term is fitted on the
        places the reference holds as unpainted, so paint's own edges can still raise it;
      - faded in from T to 2T. T0 is 2 ΔE, as it passed the gate.
-   - **The check sheet:** the expected-unpainted picture ×4 (hatched where the reference is guessing), the strip, and
-     the words.
+   - **The check sheet:** the expected-unpainted picture ×4 (hatched where the reference is guessing), the strip (from
+     the print's own surface at each tone, since 25 Nov), and the words.
    - [x] The line-up check (pass criterion 5): passed at the gate.
 2. [x] **Single view**, as the web app rather than a Tk window, through the gate:
    - folders or files in, export of the picture shown, and batch runs;
@@ -202,8 +207,10 @@ tell them apart by colour alone.
 - **The app says so:** in the Check tab's list of what the pictures cannot show, and under the picture.
 - **The reminder:** every picture is labelled a visualisation, not a measurement. Odobenii is a way to see quickly how
   paint is distributed, not a quantitative tool.
-- **A possible remedy, not built:** if the false colour is a smooth gradient across the frame (from the light or the
-  lens), the light term of step 1 would remove it. Blotchy noise has no such remedy.
+- **It is blotches** (your answer of 25 Nov), not a gradient across the frame, so the light term would not remove it,
+  and no picture can tell blotches from a faint wash by colour alone.
+- **The strip now carries them:** its patches come from the print itself, so it shows how a thin wash compares with
+  this capture's own blotches at each tone.
 
 ## Not now
 
