@@ -32,11 +32,12 @@ The plan that came out of it is `../../TODO.md`. This folder holds the reasoning
 1. **`02-synthesis.md`**, sections 4 (the design) and 8 (what the red team left standing). Each idea is tagged
    with the report it came from. **[coordinator]** marks ideas that appear only in the synthesis, and
    **[Amended, B#]** marks fixes adopted after the final red-team pass.
-2. **`03-author-answers.md`**: your answers to the plan's four questions and two later notes, and what they change.
+2. **`03-author-answers.md`**: your answers to the plan's four questions and your later notes, and what they change.
    Where they conflict with the synthesis, they win.
-3. **`00-precommit.md`**: the coordinator's own answer, written before any agent started. Section 6 of the
+3. **`04-divergence.md`**: how Odobenii, as built and through the gate, diverges from the synthesis (25 Nov).
+4. **`00-precommit.md`**: the coordinator's own answer, written before any agent started. Section 6 of the
    synthesis diffs against it.
-4. **`reports/`**: every report, saved verbatim.
+5. **`reports/`**: every report, saved verbatim.
 
 | Report | What it is |
 |---|---|
@@ -53,7 +54,7 @@ The plan that came out of it is `../../TODO.md`. This folder holds the reasoning
 | 11 merge | Perception, revised against conservation |
 | 12 red team, final | Seams the synthesis created, and a scorecard |
 
-5. **`01-design.md`**: who was asked what, what was withheld, and what happened during the run.
+6. **`01-design.md`**: who was asked what, what was withheld, and what happened during the run.
 
 ## The findings that changed the answer most
 

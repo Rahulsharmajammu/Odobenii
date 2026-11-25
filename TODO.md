@@ -70,6 +70,17 @@ The design came from synthetic test images. The gate on your real test captures 
       blotches? A gradient could be removed by the light term (step 1, not built); blotches cannot be told from a
       faint wash.
 
+**From the divergence check** (25 Nov, `xpollinate/rebuild/04-divergence.md`): where the build differs from the review
+with no decision of yours behind it. Proposals, each your call:
+- [ ] the strip drawn from this capture's own residual, not white noise: white noise overstates how visible a thin wash
+      is, and cannot show the low-frequency noise you saw;
+- [ ] "Where colour departs" in density as an option: in CIELAB it is less sensitive over dark tones;
+- [ ] a lone box used only if its correction exceeds the capture's scatter, as the review specified;
+- [ ] T0 and the other developer settings behind a switch, now that the gate has passed;
+- [ ] the file's hash, its name and the evidence used (boxes or none) in records and exported pictures;
+- [ ] a colour-deficiency check of "Where colour departs" (a simulation on the gate captures);
+- [ ] whether "Where colour departs" earns its place beside the boost and the stretch (the review's criterion iii).
+
 ## The gate: passed on your test captures (23 Nov)
 
 - [x] One print known to be unpainted, of the Van Der Zee kind.
