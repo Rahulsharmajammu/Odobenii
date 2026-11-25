@@ -217,13 +217,6 @@ def create_app(session_dir) -> Flask:
             raise SessionError(str(exc)) from exc
         return Response(data, mimetype="image/png")
 
-    @app.get("/api/strip")
-    def strip():
-        space = request.args.get("screen", "srgb")
-        if space not in SCREEN_SPACES:
-            raise SessionError("screen must be srgb or p3")
-        return Response(session.strip(look_from(request.args), space), mimetype="image/png")
-
     # -- files out --------------------------------------------------------------------------------------------------
     def edge_from(d):
         e = d.get("edge")

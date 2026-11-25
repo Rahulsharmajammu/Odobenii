@@ -133,11 +133,6 @@ label.file input { position: absolute; width: 1px; height: 1px; opacity: 0; poin
 .bx.unused .tag, .bx.unused .note { color: var(--warn); }
 .bx .note { color: var(--muted); }
 
-.stripwrap { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 2px 6px; align-items: center; }
-.stripwrap img { width: 100%; image-rendering: pixelated; border-radius: 4px; display: block; background: var(--well); }
-.stripwrap .hues { display: grid; font-size: 0.7rem; color: var(--muted); text-align: right; height: 100%; }
-.stripwrap .hues span { display: flex; align-items: center; justify-content: flex-end; }
-.stripwrap .tones { grid-column: 2; display: flex; justify-content: space-between; font: 0.66rem var(--font-mono); color: var(--muted); }
 .words { margin: 0; padding-left: 1.1em; font-size: 0.82rem; }
 .words li { margin-bottom: 4px; }
 
@@ -219,7 +214,7 @@ body.stopped > :not(#stopped) { display: none !important; }
     <h3 id="hs1">Reading files</h3>
     <div class="field"><span>Files with no colour-space information are read as</span>
       <select id="defSpace"><option>sRGB</option><option>Adobe RGB</option><option>ProPhoto RGB</option></select></div>
-    <p class="hint">Files with an ICC profile are read through it. 16-bit ProPhoto TIFF from your raw converter is best: at 8 bits, rounding alone moves colour by up to about 0.65 ΔE, against about 1.3 ΔE for a faint wash. 32-bit float TIFFs are not read (Woodii: <span class="mono">--data uint16</span>).</p>
+    <p class="hint">Files with an ICC profile are read through it. 16-bit ProPhoto TIFF from your raw converter is best: at 8 bits, rounding alone can show as faint colour in the boost. 32-bit float TIFFs are not read (Woodii: <span class="mono">--data uint16</span>).</p>
   </section>
   <section aria-labelledby="hs2">
     <h3 id="hs2">Judged tones</h3>
@@ -229,9 +224,9 @@ body.stopped > :not(#stopped) { display: none !important; }
   </section>
   <section aria-labelledby="hs3">
     <h3 id="hs3">For the test captures <span class="xp" title="Developer settings: change them only while testing on the gate's captures">gate</span></h3>
-    <div class="field"><span>Departure floor T0 (ΔE)</span><input id="t0" type="number" min="0.5" max="10" step="0.1"></div>
+    <div class="field"><span>Departure floor T0 (ΔE within the photograph)</span><input id="t0" type="number" min="0.5" max="10" step="0.1"></div>
     <div class="field"><span>Analysis size (long edge, px)</span><input id="anaEdge" type="number" min="800" max="6000" step="100"></div>
-    <p class="hint">T0 is the smallest departure "Where colour departs" draws; measured noise can only raise it, never the paint. Pictures are drawn from the full photograph when you zoom in.</p>
+    <p class="hint">T0 is the smallest departure "Where colour departs" draws: a colour difference within this photograph, between a place and the print's own tone at the same lightness, not an absolute colour difference. Measured noise and sharp changes in lightness can raise it; the paint's colour cannot. Pictures are drawn from the full photograph when you zoom in.</p>
     <div class="row"><button type="button" class="primary" id="btnSaveSettings">Apply</button></div>
   </section>
   <section aria-labelledby="hs4">
@@ -241,7 +236,7 @@ body.stopped > :not(#stopped) { display: none !important; }
   </section>
   <section aria-labelledby="hs5">
     <h3 id="hs5">About</h3>
-    <p class="hint">Odobenii <span id="ver"></span>, the handpaint visualiser. It runs on this computer; photographs stay here. It is a way to see quickly how paint is distributed, not a quantitative tool: it shows where colour departs from a print's own tone, with no areas, counts or statistics, no claim to colorimetric accuracy, and never a claim that a place is unpainted.</p>
+    <p class="hint">Odobenii <span id="ver"></span>, the handpaint visualiser. It runs on this computer; photographs stay here. It is a way to see quickly how paint is distributed, not a quantitative tool: it shows where colour departs from a print's own tone within the same photograph, with no areas, counts or statistics, no claim to colorimetric accuracy, and never a claim that a place is unpainted.</p>
     <p class="hint">Named for the walrus (<i>Odobenus</i>), a monochromat: Odobenii looks at monochrome prints and photographs with a paint layer on top.</p>
   </section>
 </div>
@@ -278,7 +273,7 @@ body.stopped > :not(#stopped) { display: none !important; }
 
     <!-- 2 Look -->
     <section class="step" data-pane="look" aria-labelledby="hl1" hidden>
-      <h2 id="hl1">Decorrelation stretch <span class="xp" title="Built and tested on synthetic prints, not yet on real captures">untested</span></h2>
+      <h2 id="hl1">Decorrelation stretch</h2>
       <div class="choice"><span class="lbl">Colour space</span>
         <div class="seg" id="segSpace" role="group" aria-label="Colour space">
           <button type="button" data-v="lab" title="Departures as they look: equal steps of colour difference (ΔE)">CIELAB</button>
@@ -313,34 +308,30 @@ body.stopped > :not(#stopped) { display: none !important; }
       <div class="boxlist" id="boxList" aria-label="Unpainted boxes"></div>
       <div class="row"><button type="button" class="small" id="btnCropClear">Whole frame</button><button type="button" class="small" id="btnBoxClear">Remove all boxes</button></div>
       <details class="explain"><summary>When to box</summary>
-        <p class="hint">Only places you have examined on the object and know are unpainted, at the tones where the boosted picture looks wrong: colour opposite to paint you can see, following one band of tone. Boxes that disagree with the others at the same tones are not used. Boxes correct the reference and set the stretch's statistics; they never show a place is unpainted.</p>
+        <p class="hint">Only places you have examined on the object and know are unpainted, on the image itself (not the margin or the mount), at the tones where the boosted picture looks wrong: colour opposite to paint you can see, following one band of tone. Draw two or more, in different parts of the print, at the same tones: a box is used only where a box elsewhere covers its tones and agrees with it. Boxes outside the print area, or too small to judge, are not used. Boxes correct the reference and set the stretch's statistics; they never show a place is unpainted.</p>
       </details>
     </section>
 
     <!-- 3 Check -->
     <section class="step" data-pane="check" aria-labelledby="hc1" hidden>
-      <h2 id="hc1">The strip</h2>
-      <p class="hint">A thin wash (about 1.3 ΔE, a faint one) and a small clear touch, set into patches of this print itself at each tone, where the reference holds: the capture's own noise, texture and blotches are in them. Drawn as the picture you are looking at draws. In each cell the right half carries the wash, and its dot the touch. A column is hatched where the print has no clean, even surface at that tone. Where you cannot see the wash here, a wash that thin would not show in the picture either.</p>
-      <div class="stripwrap">
-        <div class="hues" id="stripHues"></div>
-        <img id="strip" alt="The strip: a thin wash in this capture's noise, rows of hues, columns of tones">
-        <div class="tones" id="stripTones"></div>
-      </div>
+      <h2 id="hc1">Differences within the photograph</h2>
+      <p class="hint">The boost, the stretch and "Where colour departs" compare colours within this one photograph: each place against the print's own tone at the same lightness, as this capture recorded both. A departure, and T0 in Settings, are such internal differences, not absolute colour measurements. They need a capture that is even across the frame, not one that is colorimetrically exact, and they do not carry from one photograph to another.</p>
+      <p class="hint">The print's own tone is read from most places at each lightness, so it assumes that, at each tone, most of the print is unpainted. The next two sections show where that can fail.</p>
     </section>
     <section class="step" data-pane="check" aria-labelledby="hc2" hidden>
       <h2 id="hc2">The expected-unpainted picture</h2>
       <p class="hint">The print as the tool assumes it unpainted, its colour ×4. It should look like the print's own tone: colour that changes smoothly with lightness, with no forms or washes in it. If a face or a sky shows here in a colour of its own, the reference has taken in paint: box unpainted areas at those tones.</p>
       <div class="row"><button type="button" id="btnShowExpected">Show it (4)</button><button type="button" id="btnCompareExpected">Beside the boost</button></div>
-      <p class="hint warntext" id="guessHint" hidden>Some tones have too few places to judge: they are hatched in this picture, and the reference is guessing there.</p>
+      <p class="hint warntext" id="guessHint" hidden>Some tones have too few places to judge: the reference is guessing there, so they are hatched in this picture and in "Where colour departs".</p>
     </section>
     <section class="step" data-pane="check" aria-labelledby="hc3" hidden>
       <h2 id="hc3">What the pictures cannot show</h2>
       <ul class="words">
-        <li><b>Blank does not mean unpainted.</b> A wash fainter than the strip shows, or matched to the print's tone, leaves nothing to see.</li>
-        <li>Neutral or tone-matched media never show: graphite, grey retouching, black spotting, white gouache, varnish.</li>
+        <li><b>Blank does not mean unpainted.</b> A faint wash, or one matched to the print's tone, can leave nothing to see.</li>
+        <li>Media matched to the print's tone never show. Neutral media (graphite, grey retouching, black spotting, white gouache, varnish) show only where the print's own tone is not neutral, as a shift towards grey that can look like a cool wash.</li>
         <li>Colour that is not paint shows like paint: foxing, stains, silver mirroring, uneven toning. Telling them apart is for you, at the object.</li>
-        <li>A broad wash over most of the print at some tone can enter the reference. Its sign: colour opposite to paint you can see, following one band of tone. Box unpainted areas at those tones.</li>
-        <li><b>Known issue: low-frequency noise shows as false colour.</b> Broad, soft patches or gradients of colour in the boost and the stretch can be noise in the capture, not paint; a faint wash can look the same. Compare with the photograph and the object.</li>
+        <li>A broad wash over most of the print at some tone can enter the reference. Its sign: colour opposite to paint you can see, following one band of tone. Box unpainted areas at those tones. A wash over the whole print leaves no sign at all: it is taken as the print's own tone.</li>
+        <li><b>Known issue: broad, soft patches of colour.</b> In the boost and the stretch they can come from the capture (its light, lens or noise) or from the print itself (uneven toning, local yellowing, mat burn), and a faint wash looks the same. No picture can tell them apart: look at the photograph, and at the object where you can.</li>
       </ul>
     </section>
 
@@ -406,7 +397,7 @@ body.stopped > :not(#stopped) { display: none !important; }
       <span id="viewDesc"></span>
       <span class="keys">Keys: 1–5 pictures · F flip · W wide · Esc stop a tool</span>
     </div>
-    <p class="note" id="viewNote">The boost and the stretches draw the print's own tone as neutral grey and exaggerate how colour departs from it. Their hue is the direction of departure from the print's own tone, not the paint's own colour. Odobenii is a way to see quickly how paint is distributed, not a quantitative tool: nothing here is a measurement, broad soft patches of colour can be noise, and blank does not mean unpainted.</p>
+    <p class="note" id="viewNote">The boost and the stretches draw the print's own tone as neutral grey and exaggerate how colour departs from it. Every departure is a colour difference within this photograph, not an absolute colour. Their hue is the direction of departure from the print's own tone, not the paint's own colour. Odobenii is a way to see quickly how paint is distributed, not a quantitative tool: nothing here is a measurement, broad soft patches of colour need not be paint, and blank does not mean unpainted.</p>
   </section>
 </div>
 

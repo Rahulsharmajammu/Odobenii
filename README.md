@@ -1,5 +1,5 @@
 # Odobenii
-A quick tool to visualise colour applied to monochrome photographs, initially developed for the Van Der Zee applied media project at The Metropolitan Museum of Art. The repository keeps its first name, handpaint_visualiser.
+A quick tool to visualise colour applied to monochrome photographs, initially developed for the Van Der Zee applied media project at The Metropolitan Museum of Art. The repository was first called handpaint_visualiser.
 
 Named for the walrus (*Odobenus*), a monochromat: Odobenii looks at monochrome prints and photographs with a paint layer on top.
 
@@ -27,20 +27,22 @@ Open a folder of photographs (16-bit ProPhoto TIFF from your raw converter is be
    - Three emphases: balanced, red-green and yellow-blue.
    - Three guards, on by default and each with a switch, so a plain stretch can be compared: the print's own tone is removed first; the statistics come from the unpainted print (or your boxes); no direction gains more than twice another.
 4. **Expected unpainted ×4:** the tool's assumption about this print, exaggerated. It should show the print's own tone and no forms.
-5. **Where colour departs:** drawn bright on a dimmed print (so colour-deficient viewers see it), from a threshold that measured noise can raise but the paint cannot.
+5. **Where colour departs:** drawn bright on a dimmed print (so colour-deficient viewers see it), from a threshold that measured noise and sharp changes in lightness can raise, but the paint's colour cannot. The threshold is a colour difference within the photograph, not an absolute colour (below).
 
 "The print's own tone" is a smooth curve of colour against lightness, fitted per print to votes of places with a high-breakdown fit, so local paint cannot become the reference.
 
+**Differences within the photograph, not absolute colour.** The boost, the stretch and "Where colour departs" compare each place with the print's own tone at the same lightness, within one photograph, as the capture recorded both. Their ΔE (T0 in Settings, for instance) is that internal, relative difference, not an absolute colour measurement. It needs a capture that is even across the frame, not one that is colorimetrically exact, and it does not carry from one photograph to another. The print's own tone is read from most places at each lightness, which assumes that, at each tone, most of the print is unpainted.
+
 The other tabs:
-- **Look:** draw the print area, and box areas you have examined on the object and know are unpainted. Boxes are cross-checked, and a box that disagrees with the others is not used.
-- **Check:** the strip, a thin wash and a small clear touch set into patches of the print itself at each tone (so its noise and blotches are in them), and what the pictures cannot show.
+- **Look:** draw the print area, and box areas you have examined on the object and know are unpainted, on the image rather than the margin or the mount. Draw two or more, in different parts of the print, at the same tones: a box is used only where a box elsewhere covers its tones and agrees with it. Boxes outside the print area, or too small to judge, are not used.
+- **Check:** what the expected-unpainted picture should look like, and what the pictures cannot show.
 - **Export:** the picture shown as a PNG with its words printed under it, or a batch run over a folder (no boxes are used in batch runs).
 
 Compare puts two pictures side by side, panned and zoomed together, or one at a time (F flips).
 
 **Known issues:**
-- **Low-frequency noise shows as false colour.** Soft blotches of colour in the boost and the stretch can be noise in the capture, not paint, and a faint wash can look the same. Found at the gate (23 Nov). The strip shows how a thin wash compares with this capture's own blotches. Compare with the photograph and the object.
-- **A broad wash can enter the reference.** Where a wash covers most of the print at some tone, unpainted areas at that tone may show in the opposite colour, following one band of tone. Box unpainted areas at those tones. It passed the gate's test (23 Nov), but stays possible.
+- **Broad, soft patches of colour.** In the boost and the stretch they can come from the capture (its light, lens or noise) or from the print itself (uneven toning, local yellowing, mat burn), and a faint wash looks the same. Found at the gate (23 Nov). No picture can tell them apart: look at the photograph, and at the object where you can.
+- **A broad wash can enter the reference.** Where a wash covers most of the print at some tone, unpainted areas at that tone may show in the opposite colour, following one band of tone. Box unpainted areas at those tones. It passed the gate's test (23 Nov), but stays possible. A wash over the whole print leaves no sign at all: it is taken as the print's own tone.
 
 Tests: `python -m pytest tests` (needs pytest and tifffile).
 

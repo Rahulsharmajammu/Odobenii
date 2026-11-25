@@ -249,11 +249,6 @@ class Session:
         lab = an.picture(look, *region, ow, oh)
         return pictures.png(colour.lab_to_screen(lab, space), space)
 
-    def strip(self, look: engine.Look, space: str) -> bytes:
-        with self.lock:
-            an = self._need()
-        return pictures.strip_png(an, look, space)
-
     def export(self, look: engine.Look, folder: str, edge: Optional[int]) -> str:
         with self.lock:
             an, path = self._need(), self.path

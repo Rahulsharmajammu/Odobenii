@@ -1,5 +1,0 @@
-/home/user/xpw/6d8ad6/work/figures.py:48: UserWarning: Conversion from CIE-LAB, via XYZ to sRGB color space resulted in 2971 negative Z values that have been clipped to zero
-  return (np.clip(color.lab2rgb(lab2), 0, 1) * 255).astype(np.uint8)
-/home/user/xpw/6d8ad6/work/figures.py:48: UserWarning: Conversion from CIE-LAB, via XYZ to sRGB color space resulted in 3860 negative Z values that have been clipped to zero
-  return (np.clip(color.lab2rgb(lab2), 0, 1) * 255).astype(np.uint8)
-figures written

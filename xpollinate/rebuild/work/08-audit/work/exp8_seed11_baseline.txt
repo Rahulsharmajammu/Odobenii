@@ -1,6 +1,0 @@
-seed 11, PNG                vis raw      vis LRC           A1           A5
-B_warm_untinted           nan/ 0.00    nan/ 0.00    nan/ 0.00    nan/ 0.00
-C_warm_blue_wash          0.0/ 0.00    0.0/ 0.00   17.7/ 0.00   10.4/ 0.00
-D_warm_sky_painted        0.0/ 0.00    0.0/ 1.68  100.0/ 0.00  100.0/ 0.00
-E_warm_small_touches     80.5/ 0.00   71.7/ 0.00   97.5/ 0.00   97.5/ 0.00
-F_warm_strong_pink        0.0/ 0.00    1.4/ 0.00  100.0/ 0.00  100.0/ 0.00

@@ -76,8 +76,6 @@ def test_flow(env):
         assert Image.open(io.BytesIO(r.data)).size == (240, 180)
     assert call("get", "/api/view?view=boost&x=0&y=0&w=480&h=360&ow=99999&oh=10").status_code == 400
     assert call("get", "/api/view?view=nope&x=0&y=0&w=480&h=360&ow=10&oh=10").status_code == 400
-    r = call("get", "/api/strip?view=stretch&k=4&screen=p3")
-    assert r.status_code == 200 and Image.open(io.BytesIO(r.data)).size[0] > 100
     r = call("post", "/api/boxes", {"boxes": [[400, 10, 40, 40], [300, 10, 40, 40]]})
     assert [b["used"] for b in r.get_json()["state"]["image"]["boxes"]] == [True, True]
     r = call("post", "/api/crop", {"box": [10, 10, 460, 340]})
